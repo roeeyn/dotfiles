@@ -2,7 +2,7 @@
 tap 'homebrew/cask-fonts'
 
 ##### FONTS #####
-ask 'font-fira-code'
+cask 'font-fira-code'
 
 ##### PERSONAL #####
 cask '1password'

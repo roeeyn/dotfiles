@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-echo "Ahuevoo prrrroooooooooooo"
+echo "Linking the files..."
 # Symlink dot/* into home directory as hidden files
 for f in $(ls -d ~/.dotfiles/dot/*); do ln -sfn $f ~/.$(basename $f); done
 

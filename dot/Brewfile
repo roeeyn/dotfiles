@@ -1,1 +1,48 @@
-brew 'lolcat'
+##### PREFLIGHT ########
+tap 'homebrew/cask-fonts'
+
+##### FONTS #####
+ask 'font-fira-code'
+
+##### PERSONAL #####
+cask '1password'
+brew 'ack'
+cask 'adobe-creative-cloud'
+cask 'alfred'
+cask 'betterzip'
+brew 'curl', link: true
+cask 'datagrip'
+cask 'docker'
+cask 'discord'
+brew 'ffmpeg'
+cask 'firefox-developer-edition'
+cask 'figma'
+cask 'franz'
+brew 'git'
+cask 'google-chrome'
+brew 'htop'
+cask 'istat-menus' # Actual Version ^6
+cask 'iterm2'
+cask 'itsycal' # Config 'E, MMM d HH:mm'
+brew 'kubectl'
+cask 'minikube'
+cask 'ngrok'
+brew 'node'
+cask 'notion'
+brew 'python3'
+cask 'qlcolorcode'
+cask 'qlimagesize'
+cask 'qlmarkdown'
+cask 'qlstephen'
+cask 'qlvideo'
+cask 'quicklook-json'
+cask 'quicklookase'
+brew 'speedtest-cli'
+cask 'spotify'
+brew 'tmux'
+brew 'vim'
+brew 'zsh'
+
+###### KONFIO ####
+cask 'tunnelblick'
+cask 'awscli'

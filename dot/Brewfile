@@ -25,7 +25,7 @@ cask 'istat-menus' # Actual Version ^6
 cask 'iterm2'
 cask 'itsycal' # Config 'E, MMM d HH:mm'
 brew 'kubectl'
-cask 'minikube'
+brew 'minikube'
 cask 'ngrok'
 brew 'node'
 cask 'notion'
@@ -45,4 +45,4 @@ brew 'zsh'
 
 ###### KONFIO ####
 cask 'tunnelblick'
-cask 'awscli'
+brew 'awscli'

@@ -1,5 +1,6 @@
 ##### PREFLIGHT ########
 tap 'homebrew/cask-fonts'
+tap 'homebrew/cask-versions'
 
 ##### FONTS #####
 cask 'font-fira-code'
@@ -41,6 +42,7 @@ brew 'speedtest-cli'
 cask 'spotify'
 brew 'tmux'
 brew 'vim'
+brew 'visual-studio-code'
 brew 'zsh'
 
 ###### KONFIO ####

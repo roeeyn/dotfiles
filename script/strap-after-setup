@@ -23,7 +23,7 @@ else
 fi
 
 echo "Installing rogit"
-pip install rogit
+pip3 install rogit
 
 
 echo "Removing attributes from QuickLook libraries"

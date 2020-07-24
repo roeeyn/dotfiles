@@ -106,7 +106,7 @@ export SPACESHIP_CHAR_SYMBOL="🍺➜ "
 export SPACESHIP_TIME_SHOW="true"
 export SPACESHIP_EXIT_CODE_SHOW="true"
 
-export WORKON_HOME="~/VirtualEnvs"
+export LANG=en_US.UTF-8
 set -o vi
 
 alias gnp="git --no-pager"
@@ -114,6 +114,20 @@ alias gnpb="git --no-pager branch"
 alias gnps="git --no-pager stash list"
 alias rgi=rogit
 alias rgim="rogit -m"
+alias ktl=kubectl
 
-export PATH=~/Library/Python/3.7/bin:$PATH
+# Para el flutter
 export PATH="$PATH:$HOME/Documents/flutter/bin"
+
+# MMada de KLI de konfio
+. /usr/local/lib/python3.8/site-packages/kli/autocomplete.sh
+
+# For virtualenvwrapper
+export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
+export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"
+export PATH="/usr/local/bin:usr/local/share/python:$PATH"
+export WORKON_HOME="~/VirtualEnvs"
+source /Users/roeeyn/Library/Python/3.8/bin/virtualenvwrapper.sh
+
+export BYOBU_PREFIX=/usr/local
+export PATH=${PATH}:/.cargo/bin

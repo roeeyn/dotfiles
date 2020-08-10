@@ -14,6 +14,7 @@ cask 'alfred'
 cask 'betterzip'
 brew 'byobu'
 brew 'curl', link: true
+brew 'cmatrix'
 cask 'datagrip'
 cask 'docker'
 cask 'discord'
@@ -45,7 +46,7 @@ cask 'spotify'
 brew 'tmux'
 brew 'tree'
 brew 'vim'
-brew 'visual-studio-code'
+cask 'visual-studio-code'
 brew 'zsh'
 
 ###### KONFIO ####

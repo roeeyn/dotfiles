@@ -129,5 +129,8 @@ export PATH="/usr/local/bin:usr/local/share/python:$PATH"
 export WORKON_HOME="~/VirtualEnvs"
 source /Users/roeeyn/Library/Python/3.8/bin/virtualenvwrapper.sh
 
+# For ruby stuff
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
 export BYOBU_PREFIX=/usr/local
 export PATH=${PATH}:/.cargo/bin

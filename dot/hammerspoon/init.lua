@@ -10,6 +10,7 @@ appKeys = {
   n = "Notion",
   s = "Spotify",
   t = "iTerm",
+  x = "Firefox Developer Edition",
 }
 -- Bind appKeys
 for key, app in pairs(appKeys)

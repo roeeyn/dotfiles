@@ -3,6 +3,7 @@ hyper = {"cmd","alt"}
 -- Keybindings for launching apps
 appKeys = {
   c = "Google Chrome",
+  d = "Finder",
   e = "Emacs",
   f = "Franz",
   k = "Calendar",

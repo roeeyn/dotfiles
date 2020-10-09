@@ -1,6 +1,7 @@
 ##### PREFLIGHT ########
 tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
+tap 'heroku/brew'
 
 ##### FONTS #####
 cask 'font-fira-code'

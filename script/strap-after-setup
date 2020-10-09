@@ -6,10 +6,6 @@ set -e
 echo "Installing rogit"
 pip3 install rogit
 
-
-echo "Removing attributes from QuickLook libraries"
-xattr -d -r com.apple.quarantine ~/Library/QuickLook
-
 if test -f $HOME/.ssh/id_rsa.pub; then
     pbcopy < ~/.ssh/id_rsa.pub
     echo "Detected ssh key, copied to clipboard"

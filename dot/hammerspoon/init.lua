@@ -14,11 +14,13 @@ appKeys = {
   f = "Franz",
   k = "Calendar",
   p = "Postman",
-  n = "Notion",
   s = "Spotify",
   t = "iTerm",
+  v = "Visual Studio Code",
   x = "Firefox Developer Edition",
 }
+
+hs.hotkey.bind({"cmd", "alt", "shift"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
 -- Bind appKeys
 for key, app in pairs(appKeys)

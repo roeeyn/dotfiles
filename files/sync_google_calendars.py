@@ -41,10 +41,10 @@ parsed_shared_calendars = {
 all_calendars = {**parsed_shared_calendars, **PERSONAL_CALENDARS}
 
 for calendar_name, calendar_url in all_calendars.items():
-    os.system(f"/usr/local/bin/wget -O $HOME/org/{calendar_name}.ics {calendar_url}")
+    os.system(f"/usr/local/bin/wget -O $HOME/org/calendars/{calendar_name}.ics {calendar_url}")
     os.system(
-        f"/usr/local/bin/ical2orgpy $HOME/org/{calendar_name}.ics $HOME/org/{calendar_name}_ical.org"
+        f"/usr/local/bin/ical2orgpy $HOME/org/calendars/{calendar_name}.ics $HOME/org/calendars/{calendar_name}_ical.org"
     )
-    os.system(f"rm $HOME/org/{calendar_name}.ics")
+    os.system(f"rm $HOME/org/calendars/{calendar_name}.ics")
 
 # notify("Sync Finished", "Calendar sync finished succesfully")

@@ -5,6 +5,7 @@ set -e
 
 echo "Installing rogit"
 pip3 install rogit
+pip3 install wakatime
 
 if test -f $HOME/.ssh/id_rsa.pub; then
     pbcopy < ~/.ssh/id_rsa.pub

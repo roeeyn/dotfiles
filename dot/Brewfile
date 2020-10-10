@@ -5,6 +5,7 @@ tap 'heroku/brew'
 
 ##### FONTS #####
 cask 'font-fira-code'
+cask 'font-source-code-pro'
 
 ##### PERSONAL #####
 brew 'ack'

@@ -117,27 +117,30 @@ alias rgim="rogit -m"
 alias ktl=kubectl
 
 # Para el flutter
-export PATH="$PATH:$HOME/Documents/flutter/bin"
+# export PATH="$PATH:$HOME/Documents/flutter/bin"
 
 # MMada de KLI de konfio
-. /usr/local/lib/python3.8/site-packages/kli/autocomplete.sh
+# . /usr/local/lib/python3.8/site-packages/kli/autocomplete.sh
+
+# For pyenv
+export PATH="$(pyenv root)/shims:/usr/local/bin:/usr/bin:/bin"
 
 # For virtualenvwrapper
-export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
-export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"
-export PATH="/usr/local/bin:usr/local/share/python:$PATH"
-export WORKON_HOME="~/VirtualEnvs"
-source /Users/roeeyn/Library/Python/3.8/bin/virtualenvwrapper.sh
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+# export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
+# export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"
+# export PATH="/usr/local/bin:usr/local/share/python:$PATH"
+# export WORKON_HOME="~/VirtualEnvs"
+# source /Users/roeeyn/Library/Python/3.8/bin/virtualenvwrapper.sh
+# export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 
 # For ruby stuff
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/Users/roeeyn/.gem/ruby/2.7.0/bin:$PATH"
 
-export BYOBU_PREFIX=/usr/local
-export PATH=${PATH}:/.cargo/bin
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-export PATH="/usr/local/opt/scala@2.12/bin:$PATH"
+# export BYOBU_PREFIX=/usr/local
+# export PATH=${PATH}:/.cargo/bin
+# if command -v pyenv 1>/dev/null 2>&1; then
+#   eval "$(pyenv init -)"
+# fi
+# export PATH="/usr/local/opt/scala@2.12/bin:$PATH"

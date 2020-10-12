@@ -5,6 +5,7 @@ tap 'heroku/brew'
 
 ##### FONTS #####
 cask 'font-fira-code'
+cask 'font-source-code-pro'
 
 ##### PERSONAL #####
 brew 'ack'
@@ -58,6 +59,7 @@ cask 'bloodhound'
 cask 'datagrip'
 cask 'discord'
 cask 'docker'
+cask 'emacs'
 cask 'figma'
 cask 'firefox-developer-edition'
 cask 'folx'

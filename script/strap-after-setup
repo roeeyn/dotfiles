@@ -6,6 +6,14 @@ set -e
 echo "Installing rogit"
 pip3 install rogit
 pip3 install wakatime
+pip3 install black
+pip3 install importmagic epc
+pip3 install pycurl wfuzz
+
+echo "Downloading driver adapter"
+# Driver SKU 40873
+# https://www.ugreen.com/pages/download
+wget http://download608.mediafire.com/g32hlz2xd8bg/igf2nklnr41o669/AX88179+Driver.rar -o ~/Desktop/driver_adapter.rar
 
 if test -f $HOME/.ssh/id_rsa.pub; then
     pbcopy < ~/.ssh/id_rsa.pub

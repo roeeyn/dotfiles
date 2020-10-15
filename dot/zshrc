@@ -125,6 +125,11 @@ alias ktl=kubectl
 # For pyenv
 export PATH="$(pyenv root)/shims:/usr/local/bin:/usr/bin:/bin"
 
+# For pyenv virtual env
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
 # For virtualenvwrapper
 # export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
 # export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"

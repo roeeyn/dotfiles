@@ -123,7 +123,7 @@ alias ktl=kubectl
 # . /usr/local/lib/python3.8/site-packages/kli/autocomplete.sh
 
 # For pyenv
-export PATH="$(pyenv root)/shims:/usr/local/bin:/usr/bin:/bin"
+export PATH="$(pyenv root)/shims:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 # For pyenv virtual env
 eval "$(pyenv init -)"
@@ -138,6 +138,16 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # source /Users/roeeyn/Library/Python/3.8/bin/virtualenvwrapper.sh
 # export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
+# For openssl error inside psycopg2 installation
+# https://stackoverflow.com/a/62931654/7916568
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"
+
+# For john stuff
+export PATH="$PATH:/usr/local/share/john"
+
+# For ping and another brew commands
+# export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 
 # For ruby stuff
 export PATH="/usr/local/opt/ruby/bin:$PATH"

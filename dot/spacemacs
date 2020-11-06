@@ -37,6 +37,7 @@ values."
      go
      ;; ruby
      lua
+     debug
      csv
      yaml
      ;; tern
@@ -384,7 +385,7 @@ you should place your code here."
   (setq org-pomodoro-long-break-sound-args "-volume 0.3")
   (setq org-pomodoro-short-break-sound-args "-volume 0.3")
   (setq org-pomodoro-ticking-sound-args "-volume 0.3")
-  (setq-default flycheck-scalastylerc "/Users/roeeyn/.dotfiles/files/scalastyle_config.xml")
+  ;; (setq-default flycheck-scalastylerc "/Users/roeeyn/.dotfiles/files/scalastyle_config.xml")
   (setq org-html-validation-link nil)
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
   ;; Trigger a refresh of vc-modeline  on some magit functions

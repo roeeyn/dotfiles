@@ -3,12 +3,15 @@ set -e
 
 # After brew installed goes here!
 
-echo "Installing rogit"
+echo "Installing Python dependencies"
 pip3 install rogit
 pip3 install wakatime
 pip3 install black
 pip3 install importmagic epc
 pip3 install pycurl wfuzz
+
+echo "Installing NPM global dependencies"
+npm i -g prettier
 
 echo "Downloading driver adapter"
 # Driver SKU 40873

@@ -32,13 +32,18 @@ values."
    dotspacemacs-configuration-layers
    '(sql
      react
-     (typescript :variables typescript-backend 'tide)
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-fmt-tool 'prettier
+                 typescript-linter 'eslint
+                 typescript-backend 'tide)
      ;; elm
      go
      ;; ruby
      lua
      debug
      csv
+     c-c++
      yaml
      ;; tern
      emoji
@@ -373,14 +378,17 @@ you should place your code here."
     (setq css-indent-offset n) ; css-mode
     )
   (my-setup-indent 2)
-  (setq org-todo-keywords '((sequence "TODO" "PROGRESS" "BLOCKED" "|" "DONE" "DELEGATED" "CANCELLED")))
+  (setq org-todo-keywords '((sequence "TODO" "PROGRESS" "BLOCKED" "RECURRING" "|" "DONE" "DELEGATED" "CANCELLED")))
   (setq org-todo-keyword-faces '(("PROGRESS" . "#55ACDA")
+                                 ("RECURRING" . "#C0C0C0")
                                  ("BLOCKED" . "#CC0000")))
   (setq web-mode-enable-auto-closing t)
   (setq org-pomodoro-length 35)
   (setq alert-default-style 'osx-notifier)
   (setq alert-fade-time 8)
   (org-wild-notifier-mode)
+  ;; (exec-path-from-shell-initialize)
+  ;; (setq org-wild-notifier-keyword-whitelist '("TODO" "RECURRING"))
   (setq org-pomodoro-finished-sound-args "-volume 0.3")
   (setq org-pomodoro-long-break-sound-args "-volume 0.3")
   (setq org-pomodoro-short-break-sound-args "-volume 0.3")
@@ -389,13 +397,14 @@ you should place your code here."
   (setq org-html-validation-link nil)
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
   ;; Trigger a refresh of vc-modeline  on some magit functions
-  (with-eval-after-load 'magit
-    (defun refresh-vc-state (&rest r) (message "%S" (current-buffer))(vc-refresh-state))
-    (advice-add 'magit-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-checkout")))
-    (advice-add 'magit-branch-create :after 'refresh-vc-state '((name . "magit-refresh-on-branch-create")))
-    (advice-add 'magit-branch-and-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-checkout-and-branch")))
-    (advice-add 'magit-branch-or-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-branch-or-checkout"))))
+  ;; (with-eval-after-load 'magit
+  ;;   (defun refresh-vc-state (&rest r) (message "%S" (current-buffer))(vc-refresh-state))
+  ;;   (advice-add 'magit-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-checkout")))
+  ;;   (advice-add 'magit-branch-create :after 'refresh-vc-state '((name . "magit-refresh-on-branch-create")))
+  ;;   (advice-add 'magit-branch-and-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-checkout-and-branch")))
+  ;;   (advice-add 'magit-branch-or-checkout :after 'refresh-vc-state '((name . "magit-refresh-on-branch-or-checkout"))))
   )
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables

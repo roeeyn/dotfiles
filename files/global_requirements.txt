@@ -17,7 +17,7 @@ future==0.18.2
 ical2orgpy==0.3.0
 icalendar==4.0.6
 importmagic==0.1.7
-Jinja2==2.10
+Jinja2==2.10.1
 jmespath==0.10.0
 kli @ git+ssh://git@git.konfio.mx/platform/kli.git@35f473f7dce15b1af9b0cffcefcdd5210b862039
 MarkupSafe==1.1.1

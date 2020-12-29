@@ -9,7 +9,7 @@ Install:andUse("UnsplashRandom")
 -- Keybindings for launching apps
 appKeys = {
     c = "Google Chrome",
-    d = "Finder",
+    d = "DataGrip",
     e = "Emacs",
     f = "Franz",
     k = "Calendar",

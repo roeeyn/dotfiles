@@ -30,33 +30,33 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(sql
-     react
-     (typescript :variables
-                 typescript-fmt-on-save t
-                 typescript-fmt-tool 'prettier
-                 typescript-linter 'eslint
-                 typescript-backend 'tide)
-     ;; elm
-     go
-     ;; ruby
-     lua
-     debug
-     csv
+   '(
+
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
+     ;; <M-m f e R> (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
+     auto-completion
+     better-defaults
      c-c++
-     yaml
-     ;; tern
+     csv
+     debug
+     (docker :variables
+             docker-dockerfile-backend 'lsp)
+     (elixir :variables
+             elixir-backend 'alchemist)
+     ;; elm
+     emacs-lisp
      emoji
-     (node :variables node-add-modules-path t)
-     (vue :variables
-          vue-backend 'lsp)
+     git
+     go
+     helm
      (html :variables
            less-enable-lsp t
            scss-enable-lsp t
            html-enable-lsp t
            css-enable-lsp t)
-     multiple-cursors
-     (wakatime :variables wakatime-api-key "d06ce6b3-064c-438f-88fa-199f32f70b69")
      (javascript :variables
                  js2-basic-offset 2
                  js-indent-level 2
@@ -65,40 +65,49 @@ values."
                  javascript-backend 'lsp
                  javascript-fmt-on-save t
                  javascript-import-tool 'import-js)
+     (json :variables
+           json-fmt-tool 'prettier
+           json-backend 'lsp
+           json-fmt-on-save t)
+     lua
+     (markdown :variables markdown-live-preview-engine 'vmd)
+     multiple-cursors
+     (node :variables node-add-modules-path t)
+     org
      prettier
-     rust
      (python :variables
              python-formatter 'black
-             python-backend 'anaconda
+             python-backend 'lsp
+             python-lsp-server 'pyright
              python-format-on-save t
-             python-sort-imports-on-save t
+             ;; python-sort-imports-on-save t
              python-test-runner 'pytest)
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     helm
+     react
+     ;; ruby
+     rust
      ;; (scala :variables
-            ;; scala-auto-start-backend t
-            ;; scala-backend 'scala-metals)
-     auto-completion
-     (terraform :variables terraform-auto-format-on-save t)
-     better-defaults
-     (docker :variables
-             docker-dockerfile-backend 'lsp)
-     emacs-lisp
-     git
-     (markdown :variables markdown-live-preview-engine 'vmd)
-     org
+     ;; scala-auto-start-backend t
+     ;; scala-backend 'scala-metals)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
      spell-checking
+     sql
      syntax-checking
+     (terraform :variables terraform-auto-format-on-save t)
+     ;; tern
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-fmt-tool 'prettier
+                 typescript-linter 'eslint
+                 typescript-backend 'tide)
      (version-control :variables
                       version-control-diff-side 'left
                       version-control-global-margin t)
+     (vue :variables
+          vue-backend 'lsp)
+     (wakatime :variables wakatime-api-key "d06ce6b3-064c-438f-88fa-199f32f70b69")
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -393,6 +402,11 @@ you should place your code here."
   (setq org-pomodoro-long-break-sound-args "-volume 0.3")
   (setq org-pomodoro-short-break-sound-args "-volume 0.3")
   (setq org-pomodoro-ticking-sound-args "-volume 0.3")
+  (when (string= system-type "darwin")
+    (setq dired-use-ls-dired t
+          insert-directory-program "/usr/local/bin/gls"
+          dired-listing-switches "-aBhl --group-directories-first"))
+
   ;; (setq-default flycheck-scalastylerc "/Users/roeeyn/.dotfiles/files/scalastyle_config.xml")
   (setq org-html-validation-link nil)
   (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
@@ -444,7 +458,7 @@ This function is called at the very end of Spacemacs initialization."
    '("~/org/uvm.org" "~/org/calendars/work_ical.org" "~/org/calendars/personal_ical.org" "~/org/calendars/pandas_course_ical.org" "~/org/calendars/mlh_ical.org" "~/org/bujo.org"))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(sqlup-mode sql-indent web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc coffee-mode toml-mode racer flycheck-rust cargo rust-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit git-commit with-editor transient company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+   '(ob-elixir helm-gtags ggtags flycheck-credo dap-mode posframe bui counsel-gtags counsel swiper ivy alchemist elixir-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc coffee-mode toml-mode racer flycheck-rust cargo rust-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic unfill smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim mmm-mode markdown-toc markdown-mode magit-gitflow magit-popup htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit git-commit with-editor transient company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired f evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

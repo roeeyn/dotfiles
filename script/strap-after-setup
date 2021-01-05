@@ -9,6 +9,7 @@ pip3 install wakatime
 pip3 install black flake8 autoflake isort
 pip3 install importmagic epc
 pip3 install pycurl wfuzz
+pip3 install ical2orgpy
 
 echo "Installing NPM global dependencies"
 npm i -g prettier vscode-css-languageserver-bin vscode-html-languageserver-bin vscode-json-languageserver pyright dockerfile-language-server-nodejs

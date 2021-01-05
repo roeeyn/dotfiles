@@ -5,12 +5,12 @@
 import os
 
 SHARED_CALENDARS = {
-    "mlh": "https://calendar.google.com/calendar/embed?src=majorleaguehacking.com_pr3njjh4ok0pi93jfqm51jg2g0%40group.calendar.google.com&ctz=America%2FMexico_City",
-    "pandas_course": "https://calendar.google.com/calendar/embed?src=c_qi9d6gdtjubr40rgojl1hq7qtg%40group.calendar.google.com&ctz=America%2FMexico_City",
+    # "mlh": "https://calendar.google.com/calendar/embed?src=majorleaguehacking.com_pr3njjh4ok0pi93jfqm51jg2g0%40group.calendar.google.com&ctz=America%2FMexico_City",
+    # "pandas_course": "https://calendar.google.com/calendar/embed?src=c_qi9d6gdtjubr40rgojl1hq7qtg%40group.calendar.google.com&ctz=America%2FMexico_City",
 }
 
 PERSONAL_CALENDARS = {
-    "work": "https://calendar.google.com/calendar/ical/rodrigo.medina%40konfio.mx/private-ec56fe24e10affc07caf2f2db064f57c/basic.ics",
+    # "work": "https://calendar.google.com/calendar/ical/rodrigo.medina%40konfio.mx/private-ec56fe24e10affc07caf2f2db064f57c/basic.ics",
     "personal": "https://calendar.google.com/calendar/ical/rodrigo.medina.neri%40gmail.com/private-e2c461d0c1fb1764cebf5966d2db5835/basic.ics",
 }
 
@@ -41,7 +41,9 @@ parsed_shared_calendars = {
 all_calendars = {**parsed_shared_calendars, **PERSONAL_CALENDARS}
 
 for calendar_name, calendar_url in all_calendars.items():
-    os.system(f"/usr/local/bin/wget -O $HOME/org/calendars/{calendar_name}.ics {calendar_url}")
+    os.system(
+        f"/usr/local/bin/wget -O $HOME/org/calendars/{calendar_name}.ics {calendar_url}"
+    )
     os.system(
         f"/usr/local/bin/ical2orgpy $HOME/org/calendars/{calendar_name}.ics $HOME/org/calendars/{calendar_name}_ical.org"
     )

@@ -8,12 +8,13 @@ Install:andUse("UnsplashRandom")
 
 -- Keybindings for launching apps
 appKeys = {
+    a = "Slack",
     c = "Google Chrome",
     d = "DataGrip",
     e = "Emacs",
     f = "Franz",
-    k = "Calendar",
     l = "Telegram",
+    m = "Spark",
     p = "Postman",
     s = "Spotify",
     t = "iTerm",

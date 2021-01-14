@@ -2,6 +2,7 @@
 tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
 tap 'heroku/brew'
+tap 'mas-cli/tap'
 
 ##### FONTS #####
 cask 'font-fira-code'

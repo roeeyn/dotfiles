@@ -7,7 +7,7 @@ tap 'heroku/brew'
 cask 'font-fira-code'
 cask 'font-source-code-pro'
 
-##### PERSONAL #####
+##### FORMULAES #####
 brew 'ack'
 brew 'ag'
 brew 'awscli'
@@ -56,6 +56,8 @@ brew 'tree'
 brew 'vim'
 brew 'wget'
 brew 'zsh'
+
+######## CASK ########
 cask '1password'
 cask 'adobe-creative-cloud'
 cask 'adoptopenjdk'
@@ -72,7 +74,7 @@ cask 'emacs'
 cask 'figma'
 cask 'firefox-developer-edition'
 cask 'folx'
-cask 'franz'
+# cask 'franz'
 cask 'freecad'
 cask 'ghidra'
 cask 'google-backup-and-sync'
@@ -89,7 +91,9 @@ cask 'ngrok'
 cask 'nordvpn'
 cask 'postman'
 cask 'sip'
+cask 'slack'
 cask 'spotify'
+cask 'telegram'
 cask 'tunnelblick'
 cask 'virtualbox'
 cask 'virtualbox-extension-pack'
@@ -99,3 +103,6 @@ cask 'wireshark'
 cask 'xquartz'
 cask 'zoom'
 
+####### Mac Application Store #########
+mas 'Keynote', id: 409183694
+mas 'Spark – Email App by Readdle', id: 1176895641 

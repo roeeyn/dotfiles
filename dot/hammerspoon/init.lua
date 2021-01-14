@@ -13,6 +13,7 @@ appKeys = {
     e = "Emacs",
     f = "Franz",
     k = "Calendar",
+    l = "Telegram",
     p = "Postman",
     s = "Spotify",
     t = "iTerm",

@@ -3,6 +3,7 @@ tap 'homebrew/cask-fonts'
 tap 'homebrew/cask-versions'
 tap 'heroku/brew'
 tap 'mas-cli/tap'
+# tap 'dart-lang/dart'
 
 ##### FONTS #####
 cask 'font-fira-code'
@@ -17,6 +18,7 @@ brew 'cmatrix'
 brew 'coreutils'
 brew 'ctop'
 brew 'curl', link: true
+# brew 'dart'
 brew 'dive'
 brew 'exiftool'
 brew 'ffmpeg'
@@ -39,11 +41,13 @@ brew 'netcat'
 brew 'nmap'
 brew 'node'
 brew 'pngcheck'
+brew 'postgresql'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
 # brew 'pyenv-virtualenvwrapper'
 brew 'python3'
 brew 'ruby'
+# brew 'rust'
 brew 'rustup-init'
 brew 'rust-analyzer'
 brew 'socat'
@@ -63,7 +67,9 @@ cask '1password'
 cask 'adobe-creative-cloud'
 cask 'adoptopenjdk'
 cask 'alfred'
+# cask 'android-studio'
 cask 'angry-ip-scanner'
+cask 'anki'
 cask 'balenaetcher'
 cask 'betterzip'
 cask 'bloodhound'
@@ -91,6 +97,7 @@ cask 'mongodb-compass'
 cask 'ngrok'
 cask 'nordvpn'
 cask 'postman'
+cask 'qlmarkdown'
 cask 'sip'
 cask 'slack'
 cask 'spotify'
@@ -106,4 +113,8 @@ cask 'zoom'
 
 ####### Mac Application Store #########
 mas 'Keynote', id: 409183694
+mas 'Presentify - Screen Annotation', id: 1507246666
 mas 'Spark – Email App by Readdle', id: 1176895641 
+mas 'GIPHY Capture. The GIF Maker', id: 668208984
+# mas 'Xcode', id: 497799835
+

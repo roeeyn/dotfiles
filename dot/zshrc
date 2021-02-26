@@ -116,6 +116,8 @@ alias rgi=rogit
 alias rgim="rogit -m"
 alias ktl=kubectl
 alias dsr="docker stop $(docker ps | awk '{print $1}' | grep -v CONTAINER)"
+alias hcr="heroku container:release web -a"
+alias hcp="heroku container:push web -a"
 
 # Para el flutter
 # export PATH="$PATH:$HOME/Documents/flutter/bin"
@@ -141,8 +143,8 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # For openssl error inside psycopg2 installation
 # https://stackoverflow.com/a/62931654/7916568
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
+# export LDFLAGS="-L/usr/local/opt/openssl/lib"
+# export CPPFLAGS="-I/usr/local/opt/openssl/include"
 
 # For john stuff
 export PATH="$PATH:/usr/local/share/john"

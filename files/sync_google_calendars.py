@@ -45,7 +45,7 @@ for calendar_name, calendar_url in all_calendars.items():
         f"/usr/local/bin/wget -O $HOME/org/calendars/{calendar_name}.ics {calendar_url}"
     )
     os.system(
-        f"/usr/local/bin/ical2orgpy $HOME/org/calendars/{calendar_name}.ics $HOME/org/calendars/{calendar_name}_ical.org"
+        f"/usr/local/bin/ical2orgpy $HOME/org/calendars/{calendar_name}.ics $HOME/org/calendars/{calendar_name}.org"
     )
     os.system(f"rm $HOME/org/calendars/{calendar_name}.ics")
 

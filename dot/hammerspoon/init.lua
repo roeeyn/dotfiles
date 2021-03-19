@@ -12,15 +12,10 @@ appKeys = {
     c = "Google Chrome",
     d = "DataGrip",
     e = "Emacs",
-    -- f = "Franz",
-    l = "Telegram",
     m = "Spark",
     p = "Postman",
-    s = "Spotify",
     t = "iTerm",
     v = "Visual Studio Code",
-    w = "WhatsApp",
-    x = "Firefox Developer Edition"
 }
 
 Install:andUse(

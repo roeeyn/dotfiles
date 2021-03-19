@@ -4,15 +4,10 @@ set -e
 # After brew installed goes here!
 
 echo "Installing Python dependencies"
-pip3 install rogit
-pip3 install wakatime
-pip3 install black flake8 autoflake isort
-pip3 install importmagic epc
-pip3 install pycurl wfuzz
-pip3 install ical2orgpy
+pip3 install rogit wakatime black flake8 autoflake isort importmagic epc ical2orgpy
 
 echo "Installing NPM global dependencies"
-npm i -g prettier vscode-css-languageserver-bin vscode-html-languageserver-bin vscode-json-languageserver pyright dockerfile-language-server-nodejs import-js tern
+npm i -g pyright dockerfile-language-server-nodejs
 
 echo "Downloading driver adapter"
 # Driver SKU 40873

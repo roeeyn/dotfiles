@@ -103,7 +103,7 @@ This function should only modify configuration layer settings."
                       version-control-diff-side 'left
                       version-control-global-margin t)
      (vue :variables
-          vue-backend 'lsp)
+          vue-backend 'vls)
      (wakatime :variables wakatime-api-key "d06ce6b3-064c-438f-88fa-199f32f70b69")
      yaml
      )
@@ -614,7 +614,7 @@ before packages are loaded."
   ;; ;; NOTIFICATION CONFIGURATION
   (setq alert-default-style 'osx-notifier)
   (setq alert-fade-time 8)
-  (org-wild-notifier-mode) 
+  ;; (org-wild-notifier-mode)
 
   ;; WEB EXTRA CONFIGURATION
   (setq web-mode-enable-auto-closing t)
@@ -627,6 +627,11 @@ before packages are loaded."
 
   ;; ORG DEFAULT CAPTURE CONFIGURATION
   (setq org-default-notes-file (concat org-directory "/bujo.org"))
+
+  ;; START ORG CALENDAR ON MONDAY
+  (setq org-agenda-start-on-weekday 1)
+  (setq calendar-week-start-day 1)
+
 
   ) ;; END OF USER CONFIGURATION
 
@@ -644,7 +649,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
-   '("~/org/lyft.org" "~/org/calendars/personal.org" "~/org/bujo.org" "~/org/uvm.org"))
+   '("~/org/calendars/personal.org" "~/org/bujo.org" "~/org/uvm.org"))
  '(org-capture-templates
    '(("l" "Lyft entry" entry
       (file+headline "~/org/lyft.org" "Capture")

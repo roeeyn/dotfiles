@@ -52,6 +52,7 @@ brew 'tfenv'
 brew 'the_silver_searcher'
 brew 'tmux'
 brew 'tree'
+brew 'urlview'
 brew 'vim'
 brew 'wget'
 brew 'zsh'
@@ -63,6 +64,7 @@ cask 'datagrip'
 cask 'docker'
 cask 'emacs'
 cask 'figma'
+cask 'font-hack-nerd-font'
 cask 'google-backup-and-sync'
 cask 'google-chrome'
 cask 'hammerspoon'
@@ -75,5 +77,5 @@ cask 'vlc'
 
 ####### Mac Application Store #########
 mas 'Keynote', id: 409183694
-mas 'Spark – Email App by Readdle', id: 1176895641 
+mas 'Spark – Email App by Readdle', id: 1176895641
 

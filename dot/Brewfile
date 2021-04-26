@@ -9,6 +9,8 @@ cask 'font-source-code-pro'
 
 ##### FORMULAES #####
 brew 'ack'
+brew 'awscli'
+brew 'aws-okta'
 brew 'coreutils'
 brew 'ctop'
 brew 'curl', link: true
@@ -24,6 +26,7 @@ brew 'lua'
 brew 'ncdu'
 brew 'node'
 brew 'postgresql'
+brew 'pre-commit'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
 brew 'python3'

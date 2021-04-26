@@ -1,8 +1,100 @@
-syntax enable
-set tabstop=4
-set shiftwidth=4
+" Needed for cool ayu colors
+set termguicolors
+
+" Is how many columns of whitespace a tab keypress or a backspace keypress is worth
+set tabstop=2 softtabstop=2
+
+" How many columns of whitespace a level of identation is worth
+set shiftwidth=2
+
+" Use spaces instead of \t
 set expandtab
+
+" The cursor is moved onto the window with 'scrolloff' screen lines around it
+set scrolloff=8
+
+" Set line numbers
 set number
+
+" Set relative line numbers
 set relativenumber
+
+" Enable the syntax highlighting
+syntax enable
+
+" Enable auto indenting in files
 filetype indent on
+
+" Enable auto indent (for unknown files)
 set autoindent
+
+" Enable smart indent (for unknown files)
+set smartindent
+
+" Set normal backspace behaviour
+set backspace=indent,eol,start
+
+" PLUGINS
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'cometsong/CommentFrame.vim'
+Plug 'jaredgorski/spacecamp'
+
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'neoclide/coc.nvim'
+
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+
+Plug 'w0rp/ale'
+
+Plug 'frazrepo/vim-rainbow'
+Plug 'Yggdroot/indentLine'
+Plug 'pangloss/vim-javascript'
+Plug 'mattn/emmet-vim'
+
+call plug#end()
+
+let g:ale_fixers = {
+ \ 'javascript': ['eslint']
+ \ }
+
+let g:ale_fix_on_save = 1
+
+let g:rainbow_active = 1
+colorscheme spacecamp
+
+" IndentLine {{
+" let g:indentLine_char = '|'
+" let g:indentLine_first_char = '|'
+" let g:indentLine_showFirstIndentLevel = 1
+" let g:indentLine_setColors = 0
+" }}
+
+"------------------------------------------------------------------------------"
+"                               Coc plugin config                              "
+"------------------------------------------------------------------------------"
+
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c

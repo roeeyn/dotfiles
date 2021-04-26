@@ -73,6 +73,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'stsewd/fzf-checkout.vim'
 
 " Color scheme
 Plug 'flrnd/candid.vim'

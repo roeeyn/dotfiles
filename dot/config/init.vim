@@ -78,6 +78,9 @@ Plug 'stsewd/fzf-checkout.vim'
 " Color scheme
 Plug 'flrnd/candid.vim'
 
+" Markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
 call plug#end()
 
 colorscheme candid

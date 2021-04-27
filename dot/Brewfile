@@ -7,6 +7,7 @@ tap 'mas-cli/tap'
 
 ##### FONTS #####
 cask 'font-fira-code'
+cask 'font-hack-nerd-font'
 cask 'font-source-code-pro'
 
 ##### FORMULAES #####
@@ -64,6 +65,7 @@ brew 'tfenv'
 brew 'the_silver_searcher'
 brew 'tmux'
 brew 'tree'
+brew 'urlview'
 brew 'vim'
 brew 'wget'
 brew 'zsh'

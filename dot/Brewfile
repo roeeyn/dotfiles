@@ -5,6 +5,7 @@ tap 'mas-cli/tap'
 
 ##### FONTS #####
 cask 'font-fira-code'
+cask 'font-hack-nerd-font'
 cask 'font-source-code-pro'
 
 ##### FORMULAES #####

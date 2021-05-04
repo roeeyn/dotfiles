@@ -2,6 +2,9 @@
 set encoding=utf-8
 " let g:airline_powerline_fonts = 1
 
+" Reads changes from external events
+set autoread
+
 " Needed for cool ayu colors
 set termguicolors
 
@@ -37,6 +40,15 @@ set smartindent
 
 " Set normal backspace behaviour
 set backspace=indent,eol,start
+
+
+"------------------------------------------------------------------------------"
+"                                  Key mapping                                 "
+"------------------------------------------------------------------------------"
+
+let mapleader = " "
+nnoremap <leader>ff :Telescope find_files<CR>
+nnoremap <leader>fg :Telescope git_files<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -86,5 +98,8 @@ call plug#end()
 colorscheme candid
 set background=dark
 
+let g:kite_supported_languages = ['*']
+
 lua require'lspconfig'.tsserver.setup{}
+lua require'lspconfig'.pyright.setup{}
 

@@ -111,13 +111,43 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 
 call plug#end()
 
+colorscheme candid
+set background=dark
+
+" let g:deoplete#enable_at_startup = 1
+
+" Fix files with prettier, and then ESLint.
+let b:ale_fixers = ['prettier', 'eslint']
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+let g:ale_on_save = 1
+let g:ale_set_loc_list = 1
+let g:ale_set_quickfix = 0
+
+let g:ale_linters = {
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint']
+      \}
+
+" ESLint --fix is so slow to run it as part of the fixers, so I do this using a precommit hook or something else
+let g:ale_fixers = {
+      \   'markdown'  : ['prettier'],
+      \   'javascript': ['prettier'],
+      \   'typescript': ['prettier'],
+      \   'css'       : ['prettier'],
+      \   'json'      : ['prettier'],
+      \   'scss'      : ['prettier'],
+      \   'less'      : ['prettier'],
+      \   'yaml'      : ['prettier'],
+      \   'graphql'   : ['prettier'],
+      \   'html'      : ['prettier']
+      \}
+
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
       \ 'guifgs': ['darkturquoise','deeppink1', 'dodgerblue1', 'orange1', 'limegreen', 'firebrick1']
       \}
-
-colorscheme candid
-set background=dark
 
 set rtp+=~/tabnine-vim
 

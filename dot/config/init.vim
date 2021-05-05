@@ -2,7 +2,6 @@
 set encoding=utf-8
 " let g:airline_powerline_fonts = 1
 
-
 " Reads changes from external events
 set autoread
 
@@ -103,6 +102,7 @@ Plug 'flrnd/candid.vim'
 
 " Comment
 Plug 'terrortylor/nvim-comment'
+
 " Linting and fixig
 Plug 'dense-analysis/ale'
 

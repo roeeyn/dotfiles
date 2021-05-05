@@ -36,21 +36,6 @@ hs.hotkey.bind(
     end
 )
 
-hs.hotkey.bind(
-    hyper,
-    "b",
-    function()
-        hs.notify.new(
-            {
-                title = "Battery",
-                autoWithdraw = false,
-                informativeText = "Charged: " ..
-                    hs.battery.percentage() .. "%\nRemaining Time: " .. hs.battery.timeRemaining() .. " min"
-            }
-        ):send()
-    end
-)
-
 -- Bind appKeys
 for key, app in pairs(appKeys) do
     hs.hotkey.bind(

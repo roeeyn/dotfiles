@@ -103,6 +103,8 @@ Plug 'flrnd/candid.vim'
 
 " Comment
 Plug 'terrortylor/nvim-comment'
+" Linting and fixig
+Plug 'dense-analysis/ale'
 
 " Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}

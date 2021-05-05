@@ -106,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/opt/homebrew/bin:$PATH"
 
 export SPACESHIP_CHAR_SYMBOL="🍺➜ "
-export SPACESHIP_TIME_SHOW="true"
+# export SPACESHIP_TIME_SHOW="true"
 export SPACESHIP_EXIT_CODE_SHOW="true"
 
 export LANG=en_US.UTF-8
@@ -179,3 +179,6 @@ if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

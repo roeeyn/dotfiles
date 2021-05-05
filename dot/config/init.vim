@@ -2,6 +2,7 @@
 set encoding=utf-8
 " let g:airline_powerline_fonts = 1
 
+
 " Reads changes from external events
 set autoread
 
@@ -49,6 +50,12 @@ set backspace=indent,eol,start
 let mapleader = " "
 nnoremap <leader>ff :Telescope find_files<CR>
 nnoremap <leader>fg :Telescope git_files<CR>
+nnoremap <leader>;; :CommentToggle<CR>
+nnoremap <leader>cy yypk :CommentToggle<CR>j
+nnoremap <leader>wh  <C-W>h
+nnoremap <leader>wl  <C-W>l
+nnoremap <leader>wj  <C-W>j
+nnoremap <leader>wk  <C-W>k
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -61,7 +68,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'cometsong/CommentFrame.vim'
 
 " Colored parenthesis
-Plug 'frazrepo/vim-rainbow'
+Plug 'luochen1990/rainbow'
 
 " Thin vertical lines at each indetation
 Plug 'Yggdroot/indentLine'
@@ -94,16 +101,25 @@ Plug 'vim-airline/vim-airline'
 " Color scheme
 Plug 'flrnd/candid.vim'
 
+" Comment
+Plug 'terrortylor/nvim-comment'
+
 " Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 call plug#end()
 
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_conf = {
+      \ 'guifgs': ['darkturquoise','deeppink1', 'dodgerblue1', 'orange1', 'limegreen', 'firebrick1']
+      \}
+
 colorscheme candid
 set background=dark
 
-let g:kite_supported_languages = ['*']
+set rtp+=~/tabnine-vim
 
 lua require'lspconfig'.tsserver.setup{}
 lua require'lspconfig'.pyright.setup{}
+lua require'nvim_comment'.setup()
 

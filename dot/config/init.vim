@@ -96,9 +96,6 @@ Plug 'flrnd/candid.vim'
 " Linting and fixig
 Plug 'dense-analysis/ale'
 
-" Auto completion plugin (intended use for nvim)
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
 " Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -138,6 +135,8 @@ let g:ale_fixers = {
       \}
 
 let g:kite_supported_languages = ['*']
+
+set rtp+=~/tabnine-vim
 
 lua require'lspconfig'.tsserver.setup{}
 lua require'lspconfig'.pyright.setup{}

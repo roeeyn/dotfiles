@@ -51,6 +51,7 @@ nnoremap <leader>ff :Telescope find_files<CR>
 nnoremap <leader>fg :Telescope git_files<CR>
 nnoremap <leader>;; :CommentToggle<CR>
 nnoremap <leader>cy yypk :CommentToggle<CR>j
+nnoremap <leader>bd :bd<CR>
 nnoremap <leader>wh  <C-W>h
 nnoremap <leader>wl  <C-W>l
 nnoremap <leader>wj  <C-W>j

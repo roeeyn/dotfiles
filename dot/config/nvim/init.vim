@@ -45,6 +45,7 @@ set smartindent
 " Set normal backspace behaviour
 set backspace=indent,eol,start
 
+
 "------------------------------------------------------------------------------"
 "                                  Key mapping                                 "
 "------------------------------------------------------------------------------"
@@ -52,6 +53,8 @@ set backspace=indent,eol,start
 let mapleader = " "
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope git_files<CR>
+nnoremap <leader>fed <cmd>e ~/.config/nvim/init.vim<CR>
+nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>;; <cmd>CommentToggle<CR>
 nnoremap <leader>bb <cmd>Buffers<CR>
 nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
@@ -62,7 +65,9 @@ nnoremap <leader>wk <C-W>k
 nnoremap <leader>bd <cmd>bd<CR>
 nnoremap <leader>wo <C-W>o
 nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-nnoremap <leader><Tab> <cmd>bp<CR>
+nnoremap <leader>bp <cmd>bp<CR>
+nnoremap <leader>bn <cmd>bn<CR>
+nnoremap <leader>= <cmd>Format<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -130,7 +135,16 @@ lua require'formatter'.setup{
   \      return {
   \         exe = "clang-format",
   \         args = {"", vim.api.nvim_buf_get_name(0), ""},
-  \         stdin = true 
+  \         stdin = false 
+  \      }
+  \    end
+  \  },
+  \  python = {
+  \    function()
+  \      return {
+  \         exe = "black",
+  \         args = {"", vim.api.nvim_buf_get_name(0), ""},
+  \         stdin = false
   \      }
   \    end
   \  }

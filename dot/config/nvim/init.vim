@@ -2,6 +2,10 @@
 set encoding=utf-8
 " let g:airline_powerline_fonts = 1
 
+" Move to unerscore words
+" :h iskeyworkd, :h word
+set iskeyword-=_
+
 " Reads changes from external events
 set autoread
 
@@ -46,17 +50,25 @@ set backspace=indent,eol,start
 "------------------------------------------------------------------------------"
 
 let mapleader = " "
-nnoremap <leader>ff :Telescope find_files<CR>
-nnoremap <leader>fg :Telescope git_files<CR>
-nnoremap <leader>;; :CommentToggle<CR>
-nnoremap <leader>cy yypk :CommentToggle<CR>j
-nnoremap <leader>wh  <C-W>h
-nnoremap <leader>wl  <C-W>l
-nnoremap <leader>wj  <C-W>j
-nnoremap <leader>wk  <C-W>k
+nnoremap <leader>ff <cmd>Telescope find_files<CR>
+nnoremap <leader>fg <cmd>Telescope git_files<CR>
+nnoremap <leader>;; <cmd>CommentToggle<CR>
+nnoremap <leader>bb <cmd>Buffers<CR>
+nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
+nnoremap <leader>wh <C-W>h
+nnoremap <leader>wl <C-W>l
+nnoremap <leader>wj <C-W>j
+nnoremap <leader>wk <C-W>k
+nnoremap <leader>bd <cmd>bd<CR>
+nnoremap <leader>wo <C-W>o
+nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <leader><Tab> <cmd>bp<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
+
+" Formatter
+Plug 'mhartington/formatter.nvim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -102,46 +114,28 @@ Plug 'flrnd/candid.vim'
 " Comment
 Plug 'terrortylor/nvim-comment'
 
-" Linting and fixig
-Plug 'dense-analysis/ale'
-
 " Markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 call plug#end()
 
 colorscheme candid
 set background=dark
 
-" let g:deoplete#enable_at_startup = 1
-
-" Fix files with prettier, and then ESLint.
-let b:ale_fixers = ['prettier', 'eslint']
-
-" Set this variable to 1 to fix files when you save them.
-let g:ale_fix_on_save = 1
-let g:ale_on_save = 1
-let g:ale_set_loc_list = 1
-let g:ale_set_quickfix = 0
-
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint']
-      \}
-
-" ESLint --fix is so slow to run it as part of the fixers, so I do this using a precommit hook or something else
-let g:ale_fixers = {
-      \   'markdown'  : ['prettier'],
-      \   'javascript': ['prettier'],
-      \   'typescript': ['prettier'],
-      \   'css'       : ['prettier'],
-      \   'json'      : ['prettier'],
-      \   'scss'      : ['prettier'],
-      \   'less'      : ['prettier'],
-      \   'yaml'      : ['prettier'],
-      \   'graphql'   : ['prettier'],
-      \   'html'      : ['prettier']
-      \}
+lua require'formatter'.setup{
+  \logging = true,
+  \filetype = {
+  \  proto = {
+  \    function()
+  \      return {
+  \         exe = "clang-format",
+  \         args = {"", vim.api.nvim_buf_get_name(0), ""},
+  \         stdin = true 
+  \      }
+  \    end
+  \  }
+  \}
+\}
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
@@ -151,5 +145,20 @@ let g:rainbow_conf = {
 set rtp+=~/tabnine-vim
 
 lua require'lspconfig'.tsserver.setup{}
-lua require'lspconfig'.pyright.setup{}
 lua require'nvim_comment'.setup()
+lua require'lspconfig'.pyright.setup{
+      \settings = {
+      \python = {
+      \venv_path = '~/.pyenv/versions'
+      \}
+      \}
+    \}
+lua  require'lspconfig'.jsonls.setup {
+    \ commands = {
+    \ Format = {
+    \ function()
+    \ vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+    \ end
+    \ }
+    \ }
+    \ }

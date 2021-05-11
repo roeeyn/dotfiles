@@ -88,6 +88,9 @@ Plug 'luochen1990/rainbow'
 " Thin vertical lines at each indetation
 Plug 'Yggdroot/indentLine'
 
+" Wakatime
+Plug 'wakatime/vim-wakatime'
+
 " Emmet integration
 Plug 'mattn/emmet-vim'
 

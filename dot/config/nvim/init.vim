@@ -18,6 +18,9 @@ set tabstop=2 softtabstop=2
 " How many columns of whitespace a level of identation is worth
 set shiftwidth=2
 
+" Change sizes for python files
+autocmd Filetype python setlocal ts=4 sw=4 sts=4
+
 " Use spaces instead of \t
 set expandtab
 
@@ -53,6 +56,7 @@ set backspace=indent,eol,start
 let mapleader = " "
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope git_files<CR>
+nnoremap <leader>fs <cmd>w<CR>
 nnoremap <leader>fed <cmd>e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>;; <cmd>CommentToggle<CR>
@@ -67,7 +71,7 @@ nnoremap <leader>wo <C-W>o
 nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <leader>bp <cmd>bp<CR>
 nnoremap <leader>bn <cmd>bn<CR>
-nnoremap <leader>= <cmd>Format<CR>
+nnoremap <leader>= <cmd>FormatWrite<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')

@@ -3,7 +3,6 @@ set encoding=utf-8
 " let g:airline_powerline_fonts = 1
 
 " Move to unerscore words
-" :h iskeyworkd, :h word
 set iskeyword-=_
 
 " Reads changes from external events
@@ -48,19 +47,25 @@ set smartindent
 " Set normal backspace behaviour
 set backspace=indent,eol,start
 
+" Ignore folders in search
+set wildignore=*/node_modules/*,*/target/*,*/tmp/*,*/venv/*
+
 
 "------------------------------------------------------------------------------"
 "                                  Key mapping                                 "
 "------------------------------------------------------------------------------"
 
 let mapleader = " "
+xnoremap <leader>y "+y<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope git_files<CR>
+nnoremap <leader>f/ <cmd>Telescope grep_string<CR>
 nnoremap <leader>fs <cmd>w<CR>
 nnoremap <leader>fed <cmd>e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>;; <cmd>CommentToggle<CR>
 nnoremap <leader>bb <cmd>Buffers<CR>
+nnoremap <leader>qq <cmd>q<CR>
 nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
 nnoremap <leader>wh <C-W>h
 nnoremap <leader>wl <C-W>l
@@ -157,6 +162,8 @@ lua require'formatter'.setup{
   \  }
   \}
 \}
+
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {

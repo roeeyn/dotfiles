@@ -50,6 +50,10 @@ set backspace=indent,eol,start
 " Ignore folders in search
 set wildignore=*/node_modules/*,*/target/*,*/tmp/*,*/venv/*
 
+" Highlight trailing spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 
 "------------------------------------------------------------------------------"
 "                                  Key mapping                                 "
@@ -59,7 +63,7 @@ let mapleader = " "
 xnoremap <leader>y "+y<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope git_files<CR>
-nnoremap <leader>f/ <cmd>Telescope grep_string<CR>
+nnoremap <leader>f/ <cmd>Telescope live_grep<CR>
 nnoremap <leader>fs <cmd>w<CR>
 nnoremap <leader>fed <cmd>e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
@@ -74,12 +78,18 @@ nnoremap <leader>wk <C-W>k
 nnoremap <leader>bd <cmd>bd<CR>
 nnoremap <leader>wo <C-W>o
 nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <leader>ec <cmd>lclose<CR>
 nnoremap <leader>bp <cmd>bp<CR>
 nnoremap <leader>bn <cmd>bn<CR>
 nnoremap <leader>= <cmd>FormatWrite<CR>
+nnoremap <leader>dp <cmd>Pydocstring<CR>
+nnoremap <leader>pt <cmd>Vexplore<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
+
+" Pydoc
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 
 " Formatter
 Plug 'mhartington/formatter.nvim'
@@ -142,6 +152,24 @@ set background=dark
 lua require'formatter'.setup{
   \logging = true,
   \filetype = {
+  \  typescript = {
+  \    function()
+  \      return {
+  \         exe = "prettier",
+  \         args = {"--stdin-filepath ", vim.api.nvim_buf_get_name(0), ""},
+  \         stdin = true
+  \      }
+  \    end
+  \  },
+  \  typescriptreact = {
+  \    function()
+  \      return {
+  \         exe = "prettier",
+  \         args = {"--stdin-filepath ", vim.api.nvim_buf_get_name(0), ""},
+  \         stdin = true
+  \      }
+  \    end
+  \  },
   \  proto = {
   \    function()
   \      return {
@@ -163,6 +191,7 @@ lua require'formatter'.setup{
   \}
 \}
 
+let g:pydocstring_formatter = 'google'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle

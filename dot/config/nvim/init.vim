@@ -79,11 +79,17 @@ nnoremap <leader>bd <cmd>bd<CR>
 nnoremap <leader>wo <C-W>o
 nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <leader>ec <cmd>lclose<CR>
+nnoremap <leader>en <cmd>lnext<CR>
+nnoremap <leader>ep <cmd>lprevious<CR>
 nnoremap <leader>bp <cmd>bp<CR>
 nnoremap <leader>bn <cmd>bn<CR>
 nnoremap <leader>= <cmd>FormatWrite<CR>
 nnoremap <leader>dp <cmd>Pydocstring<CR>
 nnoremap <leader>pt <cmd>Vexplore<CR>
+nnoremap <leader>co <cmd>copen<CR>
+nnoremap <leader>cc <cmd>cclose<CR>
+nnoremap <leader>cn <cmd>cnext<CR>
+nnoremap <leader>cp <cmd>cprevious<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -201,6 +207,18 @@ let g:rainbow_conf = {
 
 set rtp+=~/tabnine-vim
 
+lua require('telescope').setup {
+  \defaults = {
+  \  mappings = {
+  \    n = {
+  \      ["<C-q>"] = require('telescope.actions').smart_send_to_qflist
+  \    },
+  \    i = {
+  \      ["<C-q>"] = require('telescope.actions').smart_send_to_qflist
+  \    },
+  \  }
+  \}
+\}
 lua require'lspconfig'.tsserver.setup{}
 lua require'nvim_comment'.setup()
 lua require'lspconfig'.pyright.setup{

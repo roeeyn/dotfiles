@@ -174,7 +174,6 @@ lua require'formatter'.setup{
 \}
 
 let g:pydocstring_formatter = 'google'
-
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle

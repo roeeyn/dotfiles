@@ -90,6 +90,9 @@ nnoremap <leader>co <cmd>copen<CR>
 nnoremap <leader>cc <cmd>cclose<CR>
 nnoremap <leader>cn <cmd>cnext<CR>
 nnoremap <leader>cp <cmd>cprevious<CR>
+nnoremap <leader>is <cmd>%! isort --profile black %<CR>
+nnoremap <leader>ir <cmd>:%! autoflake -i --remove-all-unused-imports --remove-unused-variables %<CR>
+
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -150,6 +153,9 @@ Plug 'terrortylor/nvim-comment'
 " Markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
+" isort Python
+Plug 'fisadev/vim-isort'
+
 call plug#end()
 
 colorscheme candid
@@ -197,6 +203,7 @@ lua require'formatter'.setup{
   \}
 \}
 
+let g:vim_isort_python_version = 'python3'
 let g:pydocstring_formatter = 'google'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 

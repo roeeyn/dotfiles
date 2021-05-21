@@ -94,6 +94,8 @@ nnoremap <leader>cn <cmd>cnext<CR>
 nnoremap <leader>cp <cmd>cprevious<CR>
 nnoremap <leader>is <cmd>%! isort --profile black %<CR>
 nnoremap <leader>ir <cmd>:%! autoflake -i --remove-all-unused-imports --remove-unused-variables %<CR>
+" WIP: For the deletion of the current element in the quickfix list
+nnoremap <leader>cd <cmd>call setqflist(getqflist()[:get(getqflist({'idx': 1}), 'idx', 0)-2] + getqflist()[get(getqflist({'idx': 1}), 'idx', 0):])<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')

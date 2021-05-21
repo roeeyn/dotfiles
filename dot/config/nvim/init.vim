@@ -1,3 +1,5 @@
+set path+=**
+
 " Needed settings for font issues (Telescope)
 set encoding=utf-8
 " let g:airline_powerline_fonts = 1
@@ -157,85 +159,14 @@ call plug#end()
 colorscheme candid
 set background=dark
 
-lua require'formatter'.setup{
-  \logging = true,
-  \filetype = {
-  \  typescript = {
-  \    function()
-  \      return {
-  \         exe = "prettier",
-  \         args = {"--stdin-filepath ", vim.api.nvim_buf_get_name(0), ""},
-  \         stdin = true
-  \      }
-  \    end
-  \  },
-  \  typescriptreact = {
-  \    function()
-  \      return {
-  \         exe = "prettier",
-  \         args = {"--stdin-filepath ", vim.api.nvim_buf_get_name(0), ""},
-  \         stdin = true
-  \      }
-  \    end
-  \  },
-  \  proto = {
-  \    function()
-  \      return {
-  \         exe = "clang-format",
-  \         args = {"", vim.api.nvim_buf_get_name(0), ""},
-  \         stdin = false
-  \      }
-  \    end
-  \  },
-  \  python = {
-  \    function()
-  \      return {
-  \         exe = "black",
-  \         args = {"", vim.api.nvim_buf_get_name(0), ""},
-  \         stdin = false
-  \      }
-  \    end
-  \  }
-  \}
-\}
-
 let g:pydocstring_formatter = 'google'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
-      \ 'guifgs': ['darkturquoise','deeppink1', 'dodgerblue1', 'orange1', 'limegreen', 'firebrick1']
-      \}
+  \ 'guifgs': ['darkturquoise','deeppink1', 'dodgerblue1', 'orange1', 'limegreen', 'firebrick1']
+\}
+
+lua require('roeeyn')
 
 set rtp+=~/tabnine-vim
-
-lua require('telescope').setup {
-  \defaults = {
-  \  mappings = {
-  \    n = {
-  \      ["<C-q>"] = require('telescope.actions').smart_send_to_qflist
-  \    },
-  \    i = {
-  \      ["<C-q>"] = require('telescope.actions').smart_send_to_qflist
-  \    },
-  \  }
-  \}
-\}
-lua require'lspconfig'.tsserver.setup{}
-lua require'nvim_comment'.setup()
-lua require'lspconfig'.pyright.setup{
-      \settings = {
-      \python = {
-      \venv_path = '~/.pyenv/versions'
-      \}
-      \}
-    \}
-lua  require'lspconfig'.jsonls.setup {
-    \ commands = {
-    \ Format = {
-    \ function()
-    \ vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-    \ end
-    \ }
-    \ }
-    \ }

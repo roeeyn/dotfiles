@@ -96,9 +96,15 @@ nnoremap <leader>is <cmd>%! isort --profile black %<CR>
 nnoremap <leader>ir <cmd>:%! autoflake -i --remove-all-unused-imports --remove-unused-variables %<CR>
 " WIP: For the deletion of the current element in the quickfix list
 nnoremap <leader>cd <cmd>call setqflist(getqflist()[:get(getqflist({'idx': 1}), 'idx', 0)-2] + getqflist()[get(getqflist({'idx': 1}), 'idx', 0):])<CR>
+nmap <leader>tu <Plug>BujoChecknormal
+nmap <leader>ta <Plug>BujoAddnormal
+nmap <leader>to <cmd>Todo<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
+
+" Vim Todo
+Plug 'vuciv/vim-bujo'
 
 " Pydoc
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
@@ -163,6 +169,7 @@ set background=dark
 
 let g:pydocstring_formatter = 'google'
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {

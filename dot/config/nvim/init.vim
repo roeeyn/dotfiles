@@ -4,6 +4,9 @@ set path+=**
 set encoding=utf-8
 " let g:airline_powerline_fonts = 1
 
+" Cursor line
+set cursorline
+
 " Move to unerscore words
 set iskeyword-=_
 
@@ -133,6 +136,7 @@ Plug 'mattn/emmet-vim'
 
 " Nice Syntax Highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/playground'
 
 " Nvim lsp configurations
 Plug 'neovim/nvim-lspconfig'
@@ -154,7 +158,7 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'vim-airline/vim-airline'
 
 " Color scheme
-Plug 'flrnd/candid.vim'
+Plug 'folke/tokyonight.nvim'
 
 " Comment
 Plug 'terrortylor/nvim-comment'
@@ -167,16 +171,21 @@ Plug 'fisadev/vim-isort'
 
 call plug#end()
 
-colorscheme candid
-set background=dark
+let g:tokyonight_italic_functions = 1
+" fg_gutter -> line numbers color
+" dark5 -> current line number color
+let g:tokyonight_colors = {'dark5' : '#93d8d9', 'fg_gutter':'#555f8b'}
+colorscheme tokyonight
 
 let g:pydocstring_formatter = 'google'
+
 let g:ycm_autoclose_preview_window_after_insertion = 1
+
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
-  \ 'guifgs': ['darkturquoise','deeppink1', 'dodgerblue1', 'orange1', 'limegreen', 'firebrick1']
+  \'guifgs': ['darkturquoise','deeppink1', 'dodgerblue1', 'orange1', 'limegreen', 'firebrick1']
 \}
 
 lua require('roeeyn')

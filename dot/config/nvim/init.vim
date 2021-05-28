@@ -155,7 +155,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'stsewd/fzf-checkout.vim'
 
 " Nice bottom line
-Plug 'vim-airline/vim-airline'
+Plug 'hoob3rt/lualine.nvim'
 
 " Color scheme
 Plug 'folke/tokyonight.nvim'

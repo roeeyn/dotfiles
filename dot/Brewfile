@@ -23,6 +23,7 @@ brew 'curl', link: true
 # brew 'dart'
 brew 'dive'
 brew 'exiftool'
+brew 'exploitdb'
 brew 'fd'
 brew 'ffmpeg'
 brew 'gdb'

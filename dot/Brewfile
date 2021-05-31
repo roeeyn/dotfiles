@@ -20,6 +20,7 @@ brew 'ctop'
 brew 'curl', link: true
 brew 'dive'
 brew 'exiftool'
+brew 'exploitdb'
 brew 'fd'
 brew 'ffmpeg'
 brew 'gh'

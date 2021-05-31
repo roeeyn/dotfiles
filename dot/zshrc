@@ -180,5 +180,8 @@ if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+# Python venv automatic activation
+eval "$(aactivator init)"
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

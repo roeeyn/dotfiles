@@ -37,6 +37,14 @@ require'formatter'.setup{
             }
          end
       },
+      rust = {
+         function()
+            return {
+               exe = "rustfmt",  args = {"", vim.api.nvim_buf_get_name(0), ""},
+               stdin = false
+            }
+         end
+      },
       python = {
          function()
             return {

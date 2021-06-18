@@ -1,3 +1,4 @@
+
 require("telescope").setup {
     defaults = {
         mappings = {
@@ -6,4 +7,3 @@ require("telescope").setup {
         }
     }
 }
-

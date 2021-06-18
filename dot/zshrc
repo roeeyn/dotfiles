@@ -149,6 +149,7 @@ export PATH="/usr/local/bin:usr/local/share/python:$PATH"
 
 # For john stuff
 export PATH="$PATH:/usr/local/share/john"
+export PATH="$PATH:/opt/homebrew/share/john"
 
 # For ping and another brew commands
 export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
@@ -182,6 +183,9 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Python venv automatic activation
 eval "$(aactivator init)"
+
+# Blue Box IP
+export BBIP="10.0.0.3"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

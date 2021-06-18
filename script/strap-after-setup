@@ -4,7 +4,7 @@ set -e
 # After brew installed goes here!
 
 echo "Installing Python dependencies"
-pip3 install rogit wakatime black flake8 autoflake isort importmagic epc ical2orgpy
+pip3 install rogit wakatime black flake8 autoflake isort importmagic epc ical2orgpy pynvim
 
 echo "Installing NPM global dependencies"
 npm i -g pyright dockerfile-language-server-nodejs

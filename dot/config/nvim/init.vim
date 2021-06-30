@@ -80,6 +80,8 @@ nnoremap <leader>wh <C-W>h
 nnoremap <leader>wl <C-W>l
 nnoremap <leader>wj <C-W>j
 nnoremap <leader>wk <C-W>k
+nnoremap <leader>w] <cmd>vertical resize +10<CR>
+nnoremap <leader>w[ <cmd>vertical resize -10<CR>
 nnoremap <leader>bd <cmd>bd<CR>
 nnoremap <leader>wo <C-W>o
 nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>

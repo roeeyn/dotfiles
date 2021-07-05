@@ -186,14 +186,10 @@ if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 
 # Java 8
 # export JAVA_HOME=$JAVA_HOME_8
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Python venv automatic activation
 eval "$(aactivator init)"
 
-# Blue Box IP
-export BBIP="10.0.0.3"
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

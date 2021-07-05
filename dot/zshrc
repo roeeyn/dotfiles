@@ -121,6 +121,7 @@ alias ktl=kubectl
 alias dsr="docker stop $(docker ps | awk '{print $1}' | grep -v CONTAINER)"
 alias hcr="heroku container:release web -a"
 alias hcp="heroku container:push web -a"
+alias sayv="say -v Paulina"
 
 # Para el flutter
 # export PATH="$PATH:$HOME/Documents/flutter/bin"

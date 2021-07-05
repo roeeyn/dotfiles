@@ -9,6 +9,7 @@ require('lspconfig').pyright.setup {
     settings = {python = {venv_path = '~/.pyenv/versions'}}
 }
 require('lspconfig').rust_analyzer.setup {on_attach = on_attach}
+require'lspconfig'.svelte.setup {on_attach = on_attach}
 require('lspconfig').jsonls.setup {
     on_attach = on_attach,
     commands = {

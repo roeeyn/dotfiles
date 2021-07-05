@@ -118,7 +118,15 @@ alias gnps="git --no-pager stash list"
 alias rgi=rogit
 alias rgim="rogit -m"
 alias dsr="docker stop $(docker ps | awk '{print $1}' | grep -v CONTAINER)"
+alias hcr="heroku container:release web -a"
+alias hcp="heroku container:push web -a"
 alias sayv="say -v Paulina"
+
+# Para el flutter
+# export PATH="$PATH:$HOME/Documents/flutter/bin"
+
+# MMada de KLI de konfio
+# . /usr/local/lib/python3.8/site-packages/kli/autocomplete.sh
 
 # For FZF
 if type rg &> /dev/null; then
@@ -179,14 +187,9 @@ if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 # Java 8
 # export JAVA_HOME=$JAVA_HOME_8
 
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
 # Python venv automatic activation
 eval "$(aactivator init)"
 
-# Blue Box IP
-export BBIP="10.0.0.3"
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"

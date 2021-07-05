@@ -174,8 +174,6 @@ Plug 'fisadev/vim-isort'
 call plug#end()
 
 let g:tokyonight_italic_functions = 1
-" fg_gutter -> line numbers color
-" dark5 -> current line number color
 let g:tokyonight_colors = {'dark5' : '#93d8d9', 'fg_gutter':'#555f8b'}
 colorscheme tokyonight
 
@@ -189,6 +187,9 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 let g:rainbow_conf = {
   \'guifgs': ['darkturquoise','deeppink1', 'dodgerblue1', 'orange1', 'limegreen', 'firebrick1']
 \}
+
+lua vim.o.foldmethod = 'expr'
+lua vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
 lua require('roeeyn')
 

@@ -4,6 +4,9 @@ tap 'homebrew/cask-versions'
 tap 'heroku/brew'
 tap 'mas-cli/tap'
 
+### Special for fonts
+brew 'svn'
+
 ##### FONTS #####
 cask 'font-fira-code'
 cask 'font-hack-nerd-font'
@@ -54,7 +57,6 @@ brew 'rust-analyzer'
 brew 'socat'
 brew 'speedtest-cli'
 brew 'sqlmap'
-brew 'svn'
 brew 'terraform-ls'
 brew 'tfenv'
 brew 'tmux'

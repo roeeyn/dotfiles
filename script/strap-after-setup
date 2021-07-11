@@ -4,7 +4,7 @@ set -e
 # After brew installed goes here!
 
 echo "Installing Python dependencies..."
-pip3 install rogit wakatime black
+pip3 install rogit wakatime black aactivator
 
 echo "Installing NPM global dependencies..."
 npm i -g prettier
@@ -36,9 +36,10 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-    git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 
     ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
 else
     echo "Detected oh my zsh installation... skipping it"
 fi

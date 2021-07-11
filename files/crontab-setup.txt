@@ -1,6 +1,0 @@
-crontab -e
-
-# For executing this script every 15 min
-*/15 * * * * ~/sync_google_calendars.py >/dev/null 2>&1
-
-crontab -l

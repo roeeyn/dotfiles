@@ -6,3 +6,6 @@ for f in $(ls -d ~/.dotfiles/dot/*); do ln -sf $f ~/.$(basename $f); done
 
 # Symlink files/* into home directory as regular files
 for f in $(ls -d ~/.dotfiles/files/*); do ln -sf $f ~/$(basename $f); done
+
+echo "Installing rosetta..."
+sudo softwareupdate --install-rosetta

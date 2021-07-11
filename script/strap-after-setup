@@ -4,7 +4,7 @@ set -e
 # After brew installed goes here!
 
 echo "Installing Python dependencies..."
-pip3 install rogit wakatime black
+pip3 install rogit wakatime black aactivator
 
 echo "Installing NPM global dependencies..."
 npm i -g prettier

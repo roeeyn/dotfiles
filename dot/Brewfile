@@ -89,7 +89,7 @@ cask 'hammerspoon'
 cask 'istat-menus' # Actual Version ^6
 cask 'iterm2'
 cask 'little-snitch'
-cask 'metasploit'
+# cask 'metasploit' # Failing due to 404
 cask 'micro-snitch'
 cask 'mongodb-compass'
 cask 'ngrok'

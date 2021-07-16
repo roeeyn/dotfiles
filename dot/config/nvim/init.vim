@@ -90,7 +90,7 @@ nnoremap <leader>en <cmd>lnext<CR>
 nnoremap <leader>ep <cmd>lprevious<CR>
 nnoremap <leader>bp <cmd>bp<CR>
 nnoremap <leader>bn <cmd>bn<CR>
-nnoremap <leader>- <cmd>FormatWrite<CR>
+nnoremap <leader>0 <cmd>FormatWrite<CR>
 nnoremap <leader>dp <cmd>Pydocstring<CR>
 nnoremap <leader>pt <cmd>Vexplore<CR>
 nnoremap <leader>co <cmd>copen<CR>

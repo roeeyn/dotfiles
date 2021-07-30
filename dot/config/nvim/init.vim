@@ -104,6 +104,9 @@ nnoremap <leader>cd <cmd>call setqflist(getqflist()[:get(getqflist({'idx': 1}), 
 nmap <leader>tu <Plug>BujoChecknormal
 nmap <leader>ta <Plug>BujoAddnormal
 nmap <leader>to <cmd>Todo<CR>
+nmap <leader>tc <cmd>tabnew<CR>
+nmap <leader>tn <cmd>tabnext<CR>
+nmap <leader>tp <cmd>tabprevious<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -190,6 +193,7 @@ let g:rainbow_conf = {
 
 lua vim.o.foldmethod = 'expr'
 lua vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+set nofoldenable
 
 lua require('roeeyn')
 

@@ -106,7 +106,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/opt/homebrew/bin:$PATH"
 
 export SPACESHIP_CHAR_SYMBOL="🍺➜ "
-# export SPACESHIP_TIME_SHOW="true"
+export SPACESHIP_TIME_SHOW="true"
 export SPACESHIP_EXIT_CODE_SHOW="true"
 
 export LANG=en_US.UTF-8

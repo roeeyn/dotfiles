@@ -3,16 +3,11 @@ set -e
 
 # After brew installed goes here!
 
-echo "Installing Python dependencies"
-pip3 install rogit wakatime black flake8 autoflake isort importmagic epc ical2orgpy pynvim
+echo "Installing Python dependencies..."
+pip3 install rogit wakatime black aactivator pynvim
 
-echo "Installing NPM global dependencies"
-npm i -g pyright dockerfile-language-server-nodejs
-
-echo "Downloading driver adapter"
-# Driver SKU 40873
-# https://www.ugreen.com/pages/download
-wget http://download608.mediafire.com/g32hlz2xd8bg/igf2nklnr41o669/AX88179+Driver.rar -o ~/Desktop/driver_adapter.rar
+echo "Installing NPM global dependencies..."
+npm i -g prettier
 
 if test -f $HOME/.ssh/id_rsa.pub; then
     pbcopy < ~/.ssh/id_rsa.pub
@@ -32,19 +27,23 @@ fi
 
 ## Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    echo "Installing oh my zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    omz update
+    echo "Installing oh my zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &
 
     git clone https://github.com/zsh-users/zsh-docker.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-docker
 
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-    git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
 
     ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
 else
     echo "Detected oh my zsh installation... skipping it"
 fi

@@ -122,17 +122,9 @@ alias hcr="heroku container:release web -a"
 alias hcp="heroku container:push web -a"
 alias sayv="say -v Paulina"
 
-# Para el flutter
-# export PATH="$PATH:$HOME/Documents/flutter/bin"
-
-# MMada de KLI de konfio
-# . /usr/local/lib/python3.8/site-packages/kli/autocomplete.sh
-
 # For FZF
 if type rg &> /dev/null; then
-  # export FZF_DEFAULT_COMMAND='ag'
   export FZF_DEFAULT_COMMAND='rg --files'
-  # export FZF_DEFAULT_OPTS='-m --height 50% --border'
 fi
 
 # For pyenv
@@ -147,17 +139,11 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
 export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"
 export PATH="/usr/local/bin:usr/local/share/python:$PATH"
-# export WORKON_HOME="~/VirtualEnvs"
-# source /Users/roeeyn/Library/Python/3.8/bin/virtualenvwrapper.sh
-# export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-
-# For openssl error inside psycopg2 installation
-# https://stackoverflow.com/a/62931654/7916568
-# export LDFLAGS="-L/usr/local/opt/openssl/lib"
-# export CPPFLAGS="-I/usr/local/opt/openssl/include"
 
 # For john stuff
+## For intel processor
 export PATH="$PATH:/usr/local/share/john"
+## For M1 processor
 export PATH="$PATH:/opt/homebrew/share/john"
 
 # For ping and another brew commands
@@ -167,25 +153,14 @@ export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/Users/roeeyn/.gem/ruby/2.7.0/bin:$PATH"
 
-# export BYOBU_PREFIX=/usr/local
-# export PATH=${PATH}:/.cargo/bin
-# if command -v pyenv 1>/dev/null 2>&1; then
-#   eval "$(pyenv init -)"
-# fi
-# export PATH="/usr/local/opt/scala@2.12/bin:$PATH"
-
 # The next line updates PATH for the Google Cloud SDK.
 # source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 # source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
-
-# For java 8
-# export JAVA_HOME_8=$(/usr/libexec/java_home -v1.8)
-
-# Java 8
-# export JAVA_HOME=$JAVA_HOME_8
 
 # Python venv automatic activation
 eval "$(aactivator init)"

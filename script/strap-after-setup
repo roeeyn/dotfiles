@@ -7,7 +7,7 @@ echo "Installing Python dependencies..."
 pip3 install rogit wakatime black aactivator
 
 echo "Installing NPM global dependencies..."
-npm i -g prettier
+npm i -g prettier pyright
 
 if test -f $HOME/.ssh/id_rsa.pub; then
     pbcopy < ~/.ssh/id_rsa.pub

@@ -7,5 +7,8 @@ for f in $(ls -d ~/.dotfiles/dot/*); do ln -sf $f ~/.$(basename $f); done
 # Symlink files/* into home directory as regular files
 for f in $(ls -d ~/.dotfiles/files/*); do ln -sf $f ~/$(basename $f); done
 
+# Symlink bin/* into local binaries as regular binaries
+for f in $(ls -d ~/.dotfiles/bin/*); do ln -sf $f /usr/local/bin/$(basename $f); done
+
 echo "Installing rosetta..."
 sudo softwareupdate --install-rosetta

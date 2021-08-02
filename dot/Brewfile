@@ -26,6 +26,9 @@ brew 'ffmpeg'
 brew 'gh'
 brew 'git'
 brew 'go'
+brew 'gobuster'
+brew 'gotop'
+brew 'heroku'
 brew 'htop'
 brew 'inetutils'
 brew 'john-jumbo'
@@ -66,6 +69,9 @@ cask 'angry-ip-scanner'
 cask 'anki'
 cask 'balenaetcher'
 cask 'betterzip'
+cask 'bloodhound'
+cask 'burp-suite'
+cask 'captin'
 cask 'datagrip'
 cask 'docker'
 cask 'figma'
@@ -92,5 +98,13 @@ cask 'vlc'
 ####### Mac Application Store #########
 mas 'Keynote', id: 409183694
 mas 'Presentify - Screen Annotation', id: 1507246666
-mas 'Spark – Email App by Readdle', id: 1176895641 
+mas 'Spark – Email App by Readdle', id: 1176895641
 mas 'GIPHY Capture. The GIF Maker', id: 668208984
+
+####### LUXOR #######
+brew 'automake'
+brew 'berkeley-db@4'
+brew 'boost'
+brew 'miniupnpc'
+cask 'linear-linear'
+

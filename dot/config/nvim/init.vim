@@ -92,7 +92,7 @@ nnoremap <leader>bp <cmd>bp<CR>
 nnoremap <leader>bn <cmd>bn<CR>
 nnoremap <leader>0 <cmd>FormatWrite<CR>
 nnoremap <leader>dp <cmd>Pydocstring<CR>
-nnoremap <leader>pt <cmd>Vexplore<CR>
+nnoremap <leader>pt <cmd>NvimTreeToggle<CR>
 nnoremap <leader>co <cmd>copen<CR>
 nnoremap <leader>cc <cmd>cclose<CR>
 nnoremap <leader>cn <cmd>cnext<CR>
@@ -107,6 +107,7 @@ nmap <leader>to <cmd>Todo<CR>
 nmap <leader>tc <cmd>tabnew<CR>
 nmap <leader>tn <cmd>tabnext<CR>
 nmap <leader>tp <cmd>tabprevious<CR>
+nmap <leader>tx <cmd>tabclose<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -148,6 +149,7 @@ Plug 'neovim/nvim-lspconfig'
 
 " File Icons
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 
 " Telescope Dependencies
 Plug 'nvim-lua/popup.nvim'

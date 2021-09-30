@@ -1,2 +1,4 @@
 .DS_Store
 logs/
+firebase-tools.json
+update-notifier-firebase-tools.json

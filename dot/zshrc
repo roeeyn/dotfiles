@@ -169,5 +169,7 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # Python venv automatic activation
 eval "$(aactivator init)"
 
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

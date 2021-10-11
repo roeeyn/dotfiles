@@ -96,6 +96,7 @@ nnoremap <leader>bn <cmd>bn<CR>
 nnoremap <leader>0 <cmd>FormatWrite<CR>
 nnoremap <leader>dp <cmd>Pydocstring<CR>
 nnoremap <leader>pt <cmd>NvimTreeToggle<CR>
+nnoremap <leader>pp oprint('*'*20)<esc>yypkoprint()
 nnoremap <leader>co <cmd>copen<CR>
 nnoremap <leader>cc <cmd>cclose<CR>
 nnoremap <leader>cn <cmd>cnext<CR>

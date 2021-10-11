@@ -19,7 +19,7 @@ appKeys = {
     s = "Spotify",
     t = "iTerm",
     v = "Visual Studio Code",
-    w = "Whatsapp",
+    w = "WhatsApp",
     x = "Firefox Developer Edition"
 }
 

@@ -16,8 +16,11 @@ appKeys = {
     l = "Telegram",
     m = "Spark",
     p = "Postman",
+    s = "Spotify",
     t = "iTerm",
     v = "Visual Studio Code",
+    w = "Whatsapp",
+    x = "Firefox Developer Edition"
 }
 
 Install:andUse(

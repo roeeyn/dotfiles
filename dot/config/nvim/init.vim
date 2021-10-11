@@ -176,6 +176,12 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " isort Python
 Plug 'fisadev/vim-isort'
 
+" zoom
+Plug 'dhruvasagar/vim-zoom'
+
+" git gutter
+Plug 'airblade/vim-gitgutter'
+
 call plug#end()
 
 let g:tokyonight_italic_functions = 1
@@ -196,6 +202,9 @@ let g:rainbow_conf = {
 lua vim.o.foldmethod = 'expr'
 lua vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 set nofoldenable
+
+" Gitgutter to catches the changes faster
+set updatetime=100
 
 lua require('roeeyn')
 

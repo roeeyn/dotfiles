@@ -1,6 +1,7 @@
 require("roeeyn.lsp")
 require("roeeyn.telescope")
 require("roeeyn.nvim_comment")
+require("roeeyn.nvim_tree")
 require("roeeyn.formatter")
 require("roeeyn.lualine")
 require("roeeyn.treesitter")

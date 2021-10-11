@@ -85,3 +85,4 @@ require'formatter'.setup {
         }
     }
 }
+

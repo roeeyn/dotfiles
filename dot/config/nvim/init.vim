@@ -73,6 +73,9 @@ nnoremap <leader>fs <cmd>w<CR>
 nnoremap <leader>fed <cmd>e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>;; <cmd>CommentToggle<CR>
+nnoremap <leader>gs <cmd>G<CR>
+nnoremap <leader>gc <cmd>G commit<CR>
+nnoremap <leader>gp <cmd>G push<CR>
 nnoremap <leader>bb <cmd>Buffers<CR>
 nnoremap <leader>qq <cmd>q<CR>
 nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
@@ -177,6 +180,12 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " isort Python
 Plug 'fisadev/vim-isort'
 
+" zoom
+Plug 'dhruvasagar/vim-zoom'
+
+" git gutter
+Plug 'airblade/vim-gitgutter'
+
 call plug#end()
 
 let g:tokyonight_italic_functions = 1
@@ -197,6 +206,9 @@ let g:rainbow_conf = {
 lua vim.o.foldmethod = 'expr'
 lua vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 set nofoldenable
+
+" Gitgutter to catches the changes faster
+set updatetime=100
 
 lua require('roeeyn')
 

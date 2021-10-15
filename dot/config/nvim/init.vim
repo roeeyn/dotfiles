@@ -78,6 +78,7 @@ nnoremap <leader>gc <cmd>G commit<CR>
 nnoremap <leader>gp <cmd>G push<CR>
 nnoremap <leader>gt <cmd>Telescope git_status<CR>
 nnoremap <leader>bb <cmd>Telescope buffers<CR>
+nnoremap <leader>wq <cmd>wq<CR>
 nnoremap <leader>qq <cmd>q<CR>
 nnoremap <leader>q1 <cmd>q!<CR>
 nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j

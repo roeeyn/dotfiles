@@ -76,8 +76,11 @@ nnoremap <leader>;; <cmd>CommentToggle<CR>
 nnoremap <leader>gs <cmd>G<CR>
 nnoremap <leader>gc <cmd>G commit<CR>
 nnoremap <leader>gp <cmd>G push<CR>
-nnoremap <leader>bb <cmd>Buffers<CR>
+nnoremap <leader>gt <cmd>Telescope git_status<CR>
+nnoremap <leader>bb <cmd>Telescope buffers<CR>
+nnoremap <leader>wq <cmd>wq<CR>
 nnoremap <leader>qq <cmd>q<CR>
+nnoremap <leader>q1 <cmd>q!<CR>
 nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
 nnoremap <leader>wh <C-W>h
 nnoremap <leader>wl <C-W>l

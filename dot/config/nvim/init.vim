@@ -88,7 +88,7 @@ nnoremap <leader>wj <C-W>j
 nnoremap <leader>wk <C-W>k
 nnoremap <leader>wp <cmd>vertical resize +10<CR>
 nnoremap <leader>wo <cmd>vertical resize -10<CR>
-nnoremap <leader>bd <cmd>bd<CR>
+nnoremap <leader>bd <cmd>Bdelete<CR>
 nnoremap <leader>wo <C-W>o
 nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 nnoremap <leader>ec <cmd>lclose<CR>
@@ -134,9 +134,6 @@ Plug 'junegunn/fzf.vim'
 
 " Nice comment frames
 Plug 'cometsong/CommentFrame.vim'
-
-" Colored parenthesis
-Plug 'luochen1990/rainbow'
 
 " Thin vertical lines at each indetation
 Plug 'Yggdroot/indentLine'
@@ -189,6 +186,9 @@ Plug 'dhruvasagar/vim-zoom'
 " git gutter
 Plug 'airblade/vim-gitgutter'
 
+" Buffer delete
+Plug 'famiu/bufdelete.nvim'
+
 call plug#end()
 
 let g:tokyonight_italic_functions = 1
@@ -200,11 +200,6 @@ let g:pydocstring_formatter = 'google'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
-
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_conf = {
-  \'guifgs': ['darkturquoise','deeppink1', 'dodgerblue1', 'orange1', 'limegreen', 'firebrick1']
-\}
 
 lua vim.o.foldmethod = 'expr'
 lua vim.o.foldexpr = 'nvim_treesitter#foldexpr()'

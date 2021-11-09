@@ -189,6 +189,9 @@ Plug 'airblade/vim-gitgutter'
 " Buffer delete
 Plug 'famiu/bufdelete.nvim'
 
+" GitHub Copilot
+Plug 'github/copilot.vim'
+
 call plug#end()
 
 let g:tokyonight_italic_functions = 1
@@ -210,5 +213,5 @@ set updatetime=100
 
 lua require('roeeyn')
 
-set rtp+=~/tabnine-vim
+" set rtp+=~/tabnine-vim
 

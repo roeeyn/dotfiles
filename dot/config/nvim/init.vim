@@ -77,6 +77,10 @@ nnoremap <leader>gs <cmd>G<CR>
 nnoremap <leader>gc <cmd>G commit<CR>
 nnoremap <leader>gp <cmd>G push<CR>
 nnoremap <leader>gt <cmd>Telescope git_status<CR>
+nnoremap <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <leader>gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>bb <cmd>Telescope buffers<CR>
 nnoremap <leader>wq <cmd>wq<CR>
 nnoremap <leader>qq <cmd>q<CR>
@@ -90,7 +94,8 @@ nnoremap <leader>wp <cmd>vertical resize +10<CR>
 nnoremap <leader>wo <cmd>vertical resize -10<CR>
 nnoremap <leader>bd <cmd>Bdelete<CR>
 nnoremap <leader>wo <C-W>o
-nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <leader>eo <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <leader>ec <cmd>lclose<CR>
 nnoremap <leader>en <cmd>lnext<CR>
 nnoremap <leader>ep <cmd>lprevious<CR>
@@ -104,6 +109,9 @@ nnoremap <leader>co <cmd>copen<CR>
 nnoremap <leader>cc <cmd>cclose<CR>
 nnoremap <leader>cn <cmd>cnext<CR>
 nnoremap <leader>cp <cmd>cprevious<CR>
+nnoremap <leader>ct <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>cs <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>cR <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>is <cmd>%! isort --profile black %<CR>
 nnoremap <leader>ir <cmd>:%! autoflake -i --remove-all-unused-imports --remove-unused-variables %<CR>
 " WIP: For the deletion of the current element in the quickfix list

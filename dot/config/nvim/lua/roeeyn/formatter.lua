@@ -85,11 +85,11 @@ require'formatter'.setup {
                 }
             end
         },
-        python = {
+        xpython = {
             function()
                 return {
-                    exe = "black",
-                    args = {"", vim.api.nvim_buf_get_name(0), ""},
+                    exe = "autopep8",
+                    args = {"-i ", vim.api.nvim_buf_get_name(0), ""},
                     stdin = false
                 }
             end

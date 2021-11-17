@@ -68,7 +68,8 @@ let mapleader = " "
 xnoremap <leader>y "+y<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope git_files<CR>
-nnoremap <leader>f/ <cmd>Telescope live_grep<CR>
+nnoremap <leader>f/ <cmd>Telescope current_buffer_fuzzy_find<CR>
+nnoremap <leader>p/ <cmd>Telescope live_grep<CR>
 nnoremap <leader>fs <cmd>w<CR>
 nnoremap <leader>fed <cmd>e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
@@ -78,9 +79,9 @@ nnoremap <leader>gc <cmd>G commit<CR>
 nnoremap <leader>gp <cmd>G push<CR>
 nnoremap <leader>gt <cmd>Telescope git_status<CR>
 nnoremap <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <leader>gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <leader>gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <leader>gd <cmd>Telescope lsp_definitions<CR>
+nnoremap <leader>gi <cmd>Telescope lsp_implementations<CR>
+nnoremap <leader>gr <cmd>Telescope lsp_references<CR>
 nnoremap <leader>bb <cmd>Telescope buffers<CR>
 nnoremap <leader>wq <cmd>wq<CR>
 nnoremap <leader>qq <cmd>q<CR>
@@ -94,7 +95,7 @@ nnoremap <leader>wp <cmd>vertical resize +10<CR>
 nnoremap <leader>wo <cmd>vertical resize -10<CR>
 nnoremap <leader>bd <cmd>Bdelete<CR>
 nnoremap <leader>wo <C-W>o
-nnoremap <leader>eo <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <leader>eo <cmd>Telescope lsp_document_diagnostics<CR>
 nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <leader>ec <cmd>lclose<CR>
 nnoremap <leader>en <cmd>lnext<CR>
@@ -103,6 +104,7 @@ nnoremap <leader>bp <cmd>bp<CR>
 nnoremap <leader>bn <cmd>bn<CR>
 nnoremap <leader>0 <cmd>FormatWrite<CR>
 nnoremap <leader>dp <cmd>Pydocstring<CR>
+nnoremap <leader>pf <cmd>NvimTreeFindFile<CR>
 nnoremap <leader>pt <cmd>NvimTreeToggle<CR>
 nnoremap <leader>pp oprint('*'*20)<esc>yypkoprint()
 nnoremap <leader>co <cmd>copen<CR>
@@ -116,13 +118,13 @@ nnoremap <leader>is <cmd>%! isort --profile black %<CR>
 nnoremap <leader>ir <cmd>:%! autoflake -i --remove-all-unused-imports --remove-unused-variables %<CR>
 " WIP: For the deletion of the current element in the quickfix list
 nnoremap <leader>cd <cmd>call setqflist(getqflist()[:get(getqflist({'idx': 1}), 'idx', 0)-2] + getqflist()[get(getqflist({'idx': 1}), 'idx', 0):])<CR>
-nmap <leader>tu <Plug>BujoChecknormal
-nmap <leader>ta <Plug>BujoAddnormal
-nmap <leader>to <cmd>Todo<CR>
-nmap <leader>tc <cmd>tabnew<CR>
-nmap <leader>tn <cmd>tabnext<CR>
-nmap <leader>tp <cmd>tabprevious<CR>
-nmap <leader>tx <cmd>tabclose<CR>
+nnoremap <leader>tu <Plug>BujoChecknormal
+nnoremap <leader>ta <Plug>BujoAddnormal
+nnoremap <leader>to <cmd>Todo<CR>
+nnoremap <leader>tc <cmd>tabnew<CR>
+nnoremap <leader>tn <cmd>tabnext<CR>
+nnoremap <leader>tp <cmd>tabprevious<CR>
+nnoremap <leader>tx <cmd>tabclose<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')

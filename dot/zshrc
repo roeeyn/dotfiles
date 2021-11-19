@@ -118,8 +118,8 @@ set -o vi
 alias gnp='git --no-pager'
 alias gnpb='git --no-pager branch'
 alias gnps='git --no-pager stash list'
-alias gbd='git branch -d $(git --no-pager branch | fzf)'
-alias gbD='git branch -D $(git --no-pager branch | fzf)'
+alias gbd='git branch -d $(git --no-pager branch | fzf --height 80% --border --layout reverse)'
+alias gbD='git branch -D $(git --no-pager branch | fzf --height 80% --border --layout reverse)'
 alias rgi=rogit
 alias rgim='rogit -m'
 alias dsr='docker stop $(docker ps | awk '\''{print $1}'\'' | grep -v CONTAINER)'
@@ -131,6 +131,8 @@ alias sayv='say -v Paulina'
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
 fi
+
+
 
 # For virtualenvwrapper
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"

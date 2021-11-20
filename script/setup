@@ -1,14 +1,15 @@
 #!/bin/bash
 set -e
 echo "Linking the files..."
+
 # Symlink dot/* into home directory as hidden files
-for f in $(ls -d ~/.dotfiles/dot/*); do ln -sf $f ~/.$(basename $f); done
+stow ~/.dotfiles/dot/ --target=$HOME
 
 # Symlink files/* into home directory as regular files
-for f in $(ls -d ~/.dotfiles/files/*); do ln -sf $f ~/$(basename $f); done
+stow ~/.dotfiles/files/ --target=$HOME
 
 # Symlink bin/* into local binaries as regular binaries
-for f in $(ls -d ~/.dotfiles/bin/*); do ln -sf $f /usr/local/bin/$(basename $f); done
+stow ~/.dotfiles/bin/ --target=/usr/local/bin/
 
 echo "Installing rosetta..."
 sudo softwareupdate --install-rosetta

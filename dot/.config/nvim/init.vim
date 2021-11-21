@@ -126,6 +126,8 @@ nnoremap <leader>tc <cmd>tabnew<CR>
 nnoremap <leader>tn <cmd>tabnext<CR>
 nnoremap <leader>tp <cmd>tabprevious<CR>
 nnoremap <leader>tx <cmd>tabclose<CR>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')

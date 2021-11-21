@@ -65,69 +65,71 @@ match ExtraWhitespace /\s\+$/
 "------------------------------------------------------------------------------"
 
 let mapleader = " "
-xnoremap <leader>y "+y<CR>
+nnoremap <leader>0 <cmd>FormatWrite<CR>
+nnoremap <leader>;; <cmd>CommentToggle<CR>
+nnoremap <leader>bb <cmd>Telescope buffers<CR>
+nnoremap <leader>bd <cmd>Bdelete<CR>
+nnoremap <leader>bn <cmd>bn<CR>
+nnoremap <leader>bp <cmd>bp<CR>
+nnoremap <leader>cR <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>cc <cmd>cclose<CR>
+nnoremap <leader>cn <cmd>cnext<CR>
+nnoremap <leader>co <cmd>copen<CR>
+nnoremap <leader>cp <cmd>cprevious<CR>
+nnoremap <leader>cs <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <leader>ct <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
+nnoremap <leader>dp <cmd>Pydocstring<CR>
+nnoremap <leader>eO <cmd>Telescope lsp_workspace_diagnostics<CR>
+nnoremap <leader>ec <cmd>lclose<CR>
+nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <leader>en <cmd>lnext<CR>
+nnoremap <leader>eo <cmd>Telescope lsp_document_diagnostics<CR>
+nnoremap <leader>ep <cmd>lprevious<CR>
+nnoremap <leader>f/ <cmd>Telescope current_buffer_fuzzy_find<CR>
+nnoremap <leader>fed <cmd>e ~/.dotfiles/dot/.config/nvim/init.vim<CR>
+nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope git_files<CR>
-nnoremap <leader>f/ <cmd>Telescope current_buffer_fuzzy_find<CR>
-nnoremap <leader>p/ <cmd>Telescope live_grep<CR>
 nnoremap <leader>fs <cmd>w<CR>
-nnoremap <leader>fed <cmd>e ~/.config/nvim/init.vim<CR>
-nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
-nnoremap <leader>;; <cmd>CommentToggle<CR>
-nnoremap <leader>gs <cmd>G<CR>
-nnoremap <leader>gc <cmd>G commit<CR>
-nnoremap <leader>gp <cmd>G push<CR>
-nnoremap <leader>gt <cmd>Telescope git_status<CR>
 nnoremap <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <leader>gd <cmd>Telescope lsp_definitions<CR>
 nnoremap <leader>gi <cmd>Telescope lsp_implementations<CR>
 nnoremap <leader>gr <cmd>Telescope lsp_references<CR>
-nnoremap <leader>bb <cmd>Telescope buffers<CR>
-nnoremap <leader>wq <cmd>wq<CR>
-nnoremap <leader>qq <cmd>q<CR>
-nnoremap <leader>q1 <cmd>q!<CR>
-nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
-nnoremap <leader>wh <C-W>h
-nnoremap <leader>wl <C-W>l
-nnoremap <leader>wj <C-W>j
-nnoremap <leader>wk <C-W>k
-nnoremap <leader>wp <cmd>vertical resize +10<CR>
-nnoremap <leader>wo <cmd>vertical resize -10<CR>
-nnoremap <leader>bd <cmd>Bdelete<CR>
-nnoremap <leader>wo <C-W>o
-nnoremap <leader>eo <cmd>Telescope lsp_document_diagnostics<CR>
-nnoremap <leader>eO <cmd>Telescope lsp_workspace_diagnostics<CR>
-nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-nnoremap <leader>ec <cmd>lclose<CR>
-nnoremap <leader>en <cmd>lnext<CR>
-nnoremap <leader>ep <cmd>lprevious<CR>
-nnoremap <leader>bp <cmd>bp<CR>
-nnoremap <leader>bn <cmd>bn<CR>
-nnoremap <leader>0 <cmd>FormatWrite<CR>
-nnoremap <leader>dp <cmd>Pydocstring<CR>
-nnoremap <leader>pf <cmd>NvimTreeFindFile<CR>
-nnoremap <leader>pt <cmd>NvimTreeToggle<CR>
-nnoremap <leader>pp oprint('*'*20)<esc>yypkoprint()
-nnoremap <leader>co <cmd>copen<CR>
-nnoremap <leader>cc <cmd>cclose<CR>
-nnoremap <leader>cn <cmd>cnext<CR>
-nnoremap <leader>cp <cmd>cprevious<CR>
-nnoremap <leader>ct <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <leader>cs <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <leader>cR <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <leader>is <cmd>%! isort --profile black %<CR>
+nnoremap <leader>gs <cmd>G<CR>
+nnoremap <leader>gt <cmd>Telescope git_status<CR>
+nnoremap <leader>ha <cmd>lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>hj <cmd>lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>hk <cmd>lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>hl <cmd>lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>h; <cmd>lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <leader>ho <cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <leader>ir <cmd>:%! autoflake -i --remove-all-unused-imports --remove-unused-variables %<CR>
-" WIP: For the deletion of the current element in the quickfix list
-nnoremap <leader>cd <cmd>call setqflist(getqflist()[:get(getqflist({'idx': 1}), 'idx', 0)-2] + getqflist()[get(getqflist({'idx': 1}), 'idx', 0):])<CR>
-nnoremap <leader>tu <Plug>BujoChecknormal
+nnoremap <leader>is <cmd>%! isort --profile black %<CR>
+nnoremap <leader>p/ <cmd>Telescope live_grep<CR>
+nnoremap <leader>pf <cmd>NvimTreeFindFile<CR>
+nnoremap <leader>pp oprint('*'*20)<esc>yypkoprint()
+nnoremap <leader>pt <cmd>NvimTreeToggle<CR>
+nnoremap <leader>q1 <cmd>q!<CR>
+nnoremap <leader>qq <cmd>q<CR>
 nnoremap <leader>ta <Plug>BujoAddnormal
-nnoremap <leader>to <cmd>Todo<CR>
 nnoremap <leader>tc <cmd>tabnew<CR>
 nnoremap <leader>tn <cmd>tabnext<CR>
+nnoremap <leader>to <cmd>Todo<CR>
 nnoremap <leader>tp <cmd>tabprevious<CR>
+nnoremap <leader>tu <Plug>BujoChecknormal
 nnoremap <leader>tx <cmd>tabclose<CR>
+nnoremap <leader>wh <C-W>h
+nnoremap <leader>wj <C-W>j
+nnoremap <leader>wk <C-W>k
+nnoremap <leader>wl <C-W>l
+nnoremap <leader>wo <C-W>o
+nnoremap <leader>wo <cmd>vertical resize -10<CR>
+nnoremap <leader>wp <cmd>vertical resize +10<CR>
+nnoremap <leader>wq <cmd>wq<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+xnoremap <leader>y "+y<CR>
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
@@ -204,6 +206,9 @@ Plug 'famiu/bufdelete.nvim'
 
 " GitHub Copilot
 Plug 'github/copilot.vim'
+
+" Harpoon
+Plug 'ThePrimeagen/harpoon'
 
 call plug#end()
 

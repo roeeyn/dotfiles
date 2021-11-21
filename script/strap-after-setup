@@ -4,10 +4,10 @@ set -e
 # After brew installed goes here!
 
 echo "Installing Python dependencies..."
-pip3 install rogit wakatime black aactivator pynvim
+pip3 install rogit wakatime black aactivator pynvim ansible-lint[community,yamllint]
 
 echo "Installing NPM global dependencies..."
-npm i -g prettier pyright
+npm i -g prettier pyright bash-language-server ansible-language-server
 
 if test -f $HOME/.ssh/id_rsa.pub; then
     pbcopy < ~/.ssh/id_rsa.pub

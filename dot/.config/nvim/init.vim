@@ -96,6 +96,7 @@ nnoremap <leader>wo <cmd>vertical resize -10<CR>
 nnoremap <leader>bd <cmd>Bdelete<CR>
 nnoremap <leader>wo <C-W>o
 nnoremap <leader>eo <cmd>Telescope lsp_document_diagnostics<CR>
+nnoremap <leader>eO <cmd>Telescope lsp_workspace_diagnostics<CR>
 nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 nnoremap <leader>ec <cmd>lclose<CR>
 nnoremap <leader>en <cmd>lnext<CR>

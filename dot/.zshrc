@@ -136,6 +136,9 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
 fi
 
+# For dotfiles scripts
+export PATH="/Users/roeeyn/.local/bin:$PATH"
+
 # For virtualenvwrapper
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
 export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"

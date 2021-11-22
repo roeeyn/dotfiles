@@ -120,6 +120,7 @@ alias gnpb='git --no-pager branch'
 alias gnps='git --no-pager stash list'
 alias gbd='git branch -d $(git --no-pager branch | fzf --height 80% --border --layout reverse)'
 alias gbD='git branch -D $(git --no-pager branch | fzf --height 80% --border --layout reverse)'
+alias gwl='git worktree list'
 alias rgi=rogit
 alias rgim='rogit -m'
 alias dsr='docker stop $(docker ps | awk '\''{print $1}'\'' | grep -v CONTAINER)'

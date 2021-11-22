@@ -3,6 +3,8 @@ local function on_attach()
     -- "Big Tech" "Cash Money" Johnson
 end
 
+require'lspconfig'.ansiblels.setup{on_attach=on_attach}
+require'lspconfig'.bashls.setup{on_attach=on_attach}
 require('lspconfig').tsserver.setup {on_attach = on_attach}
 require('lspconfig').pyright.setup {
     on_attach = on_attach,

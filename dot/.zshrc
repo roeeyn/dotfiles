@@ -115,16 +115,17 @@ export PATH="/opt/homebrew/bin:$PATH"
 export LANG=en_US.UTF-8
 set -o vi
 
-alias gnp="git --no-pager"
-alias gnpb="git --no-pager branch"
-alias gnps="git --no-pager stash list"
+alias gnp='git --no-pager'
+alias gnpb='git --no-pager branch'
+alias gnps='git --no-pager stash list'
+alias gbd='git branch -d $(git --no-pager branch | fzf --height 80% --border --layout reverse)'
+alias gbD='git branch -D $(git --no-pager branch | fzf --height 80% --border --layout reverse)'
 alias rgi=rogit
-alias rgim="rogit -m"
-alias ktl=kubectl
-alias dsr="docker stop $(docker ps | awk '{print $1}' | grep -v CONTAINER)"
-alias hcr="heroku container:release web -a"
-alias hcp="heroku container:push web -a"
-alias sayv="say -v Paulina"
+alias rgim='rogit -m'
+alias dsr='docker stop $(docker ps | awk '\''{print $1}'\'' | grep -v CONTAINER)'
+alias hcr='heroku container:release web -a'
+alias hcp='heroku container:push web -a'
+alias sayv='say -v Paulina'
 
 # Tmux sessionizer
 bindkey -s ^f "tmux-sessionizer -c\n"

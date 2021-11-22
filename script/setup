@@ -8,8 +8,5 @@ stow dot/ --target=$HOME
 # Symlink files/* into home directory as regular files
 stow files/ --target=$HOME
 
-# Symlink bin/* into local binaries as regular binaries
-stow bin/ --target=/usr/local/bin/
-
 echo "Installing rosetta..."
 sudo softwareupdate --install-rosetta

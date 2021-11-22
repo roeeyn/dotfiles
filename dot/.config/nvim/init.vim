@@ -97,8 +97,9 @@ nnoremap <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <leader>gd <cmd>Telescope lsp_definitions<CR>
 nnoremap <leader>gi <cmd>Telescope lsp_implementations<CR>
 nnoremap <leader>gr <cmd>Telescope lsp_references<CR>
-nnoremap <leader>gs <cmd>G<CR>
+nnoremap <leader>gs <cmd>G<CR>4j
 nnoremap <leader>gt <cmd>Telescope git_status<CR>
+nnoremap <leader>gw <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
 nnoremap <leader>ha <cmd>lua require("harpoon.mark").add_file()<CR>
 nnoremap <leader>hj <cmd>lua require("harpoon.ui").nav_file(1)<CR>
 nnoremap <leader>hk <cmd>lua require("harpoon.ui").nav_file(2)<CR>
@@ -124,7 +125,7 @@ nnoremap <leader>wh <C-W>h
 nnoremap <leader>wj <C-W>j
 nnoremap <leader>wk <C-W>k
 nnoremap <leader>wl <C-W>l
-nnoremap <leader>wo <C-W>o
+nnoremap <leader>wO <C-W>o
 nnoremap <leader>wo <cmd>vertical resize -10<CR>
 nnoremap <leader>wp <cmd>vertical resize +10<CR>
 nnoremap <leader>wq <cmd>wq<CR>
@@ -210,6 +211,9 @@ Plug 'github/copilot.vim'
 
 " Harpoon
 Plug 'ThePrimeagen/harpoon'
+
+" Git Worktrees
+Plug 'ThePrimeagen/git-worktree.nvim'
 
 call plug#end()
 

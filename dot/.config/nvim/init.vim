@@ -96,6 +96,7 @@ nnoremap <leader>fs <cmd>w<CR>
 nnoremap <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <leader>gd <cmd>Telescope lsp_definitions<CR>
 nnoremap <leader>gi <cmd>Telescope lsp_implementations<CR>
+nnoremap <leader>gp <cmd>G push<CR>
 nnoremap <leader>gr <cmd>Telescope lsp_references<CR>
 nnoremap <leader>gs <cmd>G<CR>4j
 nnoremap <leader>gt <cmd>Telescope git_status<CR>

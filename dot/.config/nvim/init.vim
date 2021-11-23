@@ -88,7 +88,7 @@ nnoremap <leader>en <cmd>lnext<CR>
 nnoremap <leader>eo <cmd>Telescope lsp_document_diagnostics<CR>
 nnoremap <leader>ep <cmd>lprevious<CR>
 nnoremap <leader>f/ <cmd>Telescope current_buffer_fuzzy_find<CR>
-nnoremap <leader>fed <cmd>e ~/.dotfiles/dot/.config/nvim/init.vim<CR>
+nnoremap <leader>fed <cmd>e ~/.dotfiles<CR>
 nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope git_files<CR>
@@ -96,6 +96,7 @@ nnoremap <leader>fs <cmd>w<CR>
 nnoremap <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <leader>gd <cmd>Telescope lsp_definitions<CR>
 nnoremap <leader>gi <cmd>Telescope lsp_implementations<CR>
+nnoremap <leader>gp <cmd>G push<CR>
 nnoremap <leader>gr <cmd>Telescope lsp_references<CR>
 nnoremap <leader>gs <cmd>G<CR>4j
 nnoremap <leader>gt <cmd>Telescope git_status<CR>

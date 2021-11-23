@@ -88,7 +88,7 @@ nnoremap <leader>en <cmd>lnext<CR>
 nnoremap <leader>eo <cmd>Telescope lsp_document_diagnostics<CR>
 nnoremap <leader>ep <cmd>lprevious<CR>
 nnoremap <leader>f/ <cmd>Telescope current_buffer_fuzzy_find<CR>
-nnoremap <leader>fed <cmd>e ~/.dotfiles/dot/.config/nvim/init.vim<CR>
+nnoremap <leader>fed <cmd>e ~/.dotfiles<CR>
 nnoremap <leader>fer <cmd>source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope git_files<CR>

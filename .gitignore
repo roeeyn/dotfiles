@@ -3,3 +3,8 @@ logs/
 firebase-tools.json
 update-notifier-firebase-tools.json
 github-copilot/
+id_ed25519
+id_ed25519.pub
+ansible_password.txt
+known_hosts
+known_hosts.old

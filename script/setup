@@ -2,6 +2,13 @@
 set -e
 echo "Linking the files..."
 
+# SSH config
+ansible-vault decrypt --vault-password-file ~/.dotfiles/master/ansible_password.txt --output id_ed25519.pub id_ed25519.pub.enc
+ansible-vault decrypt --vault-password-file ~/.dotfiles/master/ansible_password.txt --output id_ed25519 id_ed25519.enc
+
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_ed25519
+
 # Symlink dot/* into home directory as hidden files
 stow dot/ --target=$HOME
 

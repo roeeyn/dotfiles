@@ -9,22 +9,6 @@ pip3 install rogit wakatime black aactivator pynvim ansible-lint[community,yamll
 echo "Installing NPM global dependencies..."
 npm i -g prettier pyright bash-language-server ansible-language-server
 
-if test -f $HOME/.ssh/id_rsa.pub; then
-    pbcopy < ~/.ssh/id_rsa.pub
-    echo "Detected ssh key, copied to clipboard"
-else
-    echo "Generating SSH key"
-    ssh-keygen -t rsa -b 4096 -C "rodrigo.medina.neri@gmail.com"
-    eval "$(ssh-agent -s)"
-    echo "Host *
-    AddKeysToAgent yes
-    UseKeychain yes
-    IdentityFile ~/.ssh/id_rsa" > ~/.ssh/config
-    ssh-add -K ~/.ssh/id_rsa
-    pbcopy < ~/.ssh/id_rsa.pub
-    echo "Finished, SSH key copied to clipboard"
-fi
-
 ## Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "Installing oh my zsh..."
@@ -44,7 +28,6 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 
     # Intall TabNine
     git clone --depth 1 https://github.com/codota/tabnine-vim ~/tabnine-vim
-
 
     # Installing powerlevel10k
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k

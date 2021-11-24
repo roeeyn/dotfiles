@@ -3,6 +3,7 @@
 ## Create a new key
 ```shell
 # Every option with default
+# The email here needs to be the MAIN email in GitHub
 gpg --full-generate-key
 
 # Show the gpg keys

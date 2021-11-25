@@ -11,25 +11,30 @@ npm i -g prettier pyright bash-language-server ansible-language-server
 
 ## Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    echo "Installing oh my zsh..."
     # Oh My Zsh installing script
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &
+    echo "Installing oh my zsh..."
+    curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
     # OMZ plugins
+    echo "Installing oh my zsh plugins..."
     git clone https://github.com/zsh-users/zsh-docker.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-docker
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
     # Tmux package manager
+    echo "Installing tmux package manager..."
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
     # Install Plug (Vim package manager)
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    echo "Installing Plug (Vim package manager)..."
+    curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | sh
 
     # Intall TabNine
+    echo "Installing TabNine..."
     git clone --depth 1 https://github.com/codota/tabnine-vim ~/tabnine-vim
 
     # Installing powerlevel10k
+    echo "Installing powerlevel10k..."
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 else

@@ -154,10 +154,6 @@ export PATH="$PATH:/opt/homebrew/share/john"
 # For ping and another brew commands
 export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
 
-# For ruby stuff
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/Users/roeeyn/.gem/ruby/2.7.0/bin:$PATH"
-
 # The next line updates PATH for the Google Cloud SDK.
 source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
@@ -182,6 +178,10 @@ export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-2.7.2
+
+# For ruby stuff
+if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+fi
+

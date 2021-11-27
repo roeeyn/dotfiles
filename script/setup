@@ -10,6 +10,7 @@ eval "$(ssh-agent -s)"
 ssh-add -K ~/.ssh/id_ed25519
 
 # Symlink dot/* into home directory as hidden files
+rm ~/.zshrc || echo "Skipping deleting original zshrc"
 stow dot/ --target=$HOME
 
 # Symlink files/* into home directory as regular files

@@ -1,7 +1,7 @@
 require'formatter'.setup {
     logging = true,
     filetype = {
-        javascriptreact = {
+        xjavascriptreact = {
             function()
                 return {
                     exe = "prettier",
@@ -12,7 +12,7 @@ require'formatter'.setup {
                 }
             end
         },
-        markdown = {
+        xmarkdown = {
             function()
                 return {
                     exe = "prettier",
@@ -23,7 +23,7 @@ require'formatter'.setup {
                 }
             end
         },
-        html = {
+        xhtml = {
             function()
                 return {
                     exe = "prettier",
@@ -34,7 +34,18 @@ require'formatter'.setup {
                 }
             end
         },
-        svelte = {
+        xsvelte = {
+            function()
+                return {
+                    exe = "prettier",
+                    args = {
+                        "--stdin-filepath ", vim.api.nvim_buf_get_name(0), " --plugin prettier-plugin-svelte"
+                    },
+                    stdin = true
+                }
+            end
+        },
+        xjavascript = {
             function()
                 return {
                     exe = "prettier",
@@ -45,7 +56,7 @@ require'formatter'.setup {
                 }
             end
         },
-        javascript = {
+        xjson = {
             function()
                 return {
                     exe = "prettier",
@@ -56,7 +67,7 @@ require'formatter'.setup {
                 }
             end
         },
-        json = {
+        xtypescript = {
             function()
                 return {
                     exe = "prettier",
@@ -67,18 +78,7 @@ require'formatter'.setup {
                 }
             end
         },
-        typescript = {
-            function()
-                return {
-                    exe = "prettier",
-                    args = {
-                        "--stdin-filepath ", vim.api.nvim_buf_get_name(0), ""
-                    },
-                    stdin = true
-                }
-            end
-        },
-        typescriptreact = {
+        xtypescriptreact = {
             function()
                 return {
                     exe = "prettier",

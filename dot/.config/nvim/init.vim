@@ -210,6 +210,9 @@ Plug 'famiu/bufdelete.nvim'
 " GitHub Copilot
 Plug 'github/copilot.vim'
 
+" Prettier
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+
 " Harpoon
 Plug 'ThePrimeagen/harpoon'
 
@@ -217,6 +220,11 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'ThePrimeagen/git-worktree.nvim'
 
 call plug#end()
+
+" Prettier Settings
+let g:prettier#quickfix_enabled = 0
+let g:prettier#autoformat_require_pragma = 0
+au BufWritePre *.css,*.svelte,*.pcss,*.html,*.ts,*.js,*.json PrettierAsync
 
 let g:tokyonight_italic_functions = 1
 let g:tokyonight_colors = {'dark5' : '#93d8d9', 'fg_gutter':'#555f8b'}

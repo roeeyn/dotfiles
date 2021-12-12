@@ -2,15 +2,9 @@
 set -e
 echo "Linking the files..."
 
-# SSH config
-ansible-vault decrypt --vault-password-file ~/.dotfiles/master/ansible_password.txt --output id_ed25519.pub id_ed25519.pub.enc
-ansible-vault decrypt --vault-password-file ~/.dotfiles/master/ansible_password.txt --output id_ed25519 id_ed25519.enc
+brew install stow
 
-eval "$(ssh-agent -s)"
-ssh-add -K ~/.ssh/id_ed25519
-
-# Symlink dot/* into home directory as hidden files
-rm ~/.zshrc || echo "Skipping deleting original zshrc"
+rm ~/.zshrc || echo 'Not zshrc found, continuing...'
 stow dot/ --target=$HOME
 
 # Symlink files/* into home directory as regular files

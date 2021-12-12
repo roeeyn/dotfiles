@@ -9,6 +9,16 @@ pip3 install rogit wakatime black aactivator pynvim ansible-lint[community,yamll
 echo "Installing NPM global dependencies..."
 npm i -g prettier pyright bash-language-server ansible-language-server
 
+# SSH config
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519.pub ~/.dotfiles/dot/.ssh/id_ed25519.pub.enc
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519 ~/.dotfiles/dot/.ssh/id_ed25519.enc
+
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_ed25519
+
+# Symlink again the .ssh files
+stow dot/ --target=$HOME
+
 ## Install Oh My Zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     # Oh My Zsh installing script

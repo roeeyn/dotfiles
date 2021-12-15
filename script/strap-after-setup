@@ -9,12 +9,33 @@ pip3 install rogit wakatime black aactivator pynvim ansible-lint[community,yamll
 echo "Installing NPM global dependencies..."
 npm i -g prettier pyright bash-language-server ansible-language-server
 
-# SSH config
+# Decrypting keys
+echo 'Decrypting vault passwords...'
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519.pub ~/.dotfiles/dot/.ssh/id_ed25519.pub.enc
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519 ~/.dotfiles/dot/.ssh/id_ed25519.enc
 
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.gnupg/pgp_secret.txt ~/.dotfiles/dot/.gnupg/pgp_secret.txt.enc
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.gnupg/pgp_public.txt ~/.dotfiles/dot/.gnupg/pgp_public.txt.enc
+
+# SSH config
+echo "Configuring ssh keys..."
 eval "$(ssh-agent -s)"
 ssh-add -K ~/.ssh/id_ed25519
+
+
+echo 'Trying GPG installation...'
+gpg_key_id='5250FBF353121688'
+if ! gpg --list-secret-keys --keyid-format=long | rg $gpg_key_id &>/dev/null; then
+  echo 'Installing GPG key...'
+  gpg --import ~/.dotfiles/dot/.gnupg/pgp_public.txt
+  gpg --import ~/.dotfiles/dot/.gnupg/pgp_secret.txt
+  gpg --list-secret-keys
+  gpg --list-secret-keys --keyid-format=long
+  git config --global user.signingkey $gpg_key_id
+  git config --global commit.gpgsign true
+else
+  echo 'GPG key already installed, skipping...'
+fi
 
 # Symlink again the .ssh files
 stow dot/ --target=$HOME

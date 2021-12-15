@@ -7,7 +7,7 @@ echo "Installing Python dependencies..."
 pip3 install rogit wakatime black aactivator pynvim ansible-lint[community,yamllint]
 
 echo "Installing NPM global dependencies..."
-npm i -g prettier pyright bash-language-server ansible-language-server typescript typescript-language-server
+npm i -g prettier pyright bash-language-server ansible-language-server typescript typescript-language-server dockerfile-language-server-nodejs
 
 # Decrypting keys
 echo 'Decrypting vault passwords...'

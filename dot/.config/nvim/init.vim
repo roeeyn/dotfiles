@@ -69,6 +69,7 @@ nnoremap <leader>0 <cmd>FormatWrite<CR>
 nnoremap <leader>;; <cmd>CommentToggle<CR>
 nnoremap <leader>bb <cmd>Telescope buffers<CR>
 nnoremap <leader>bd <cmd>Bdelete<CR>
+nnoremap <leader>bx <cmd>bd<CR>
 nnoremap <leader>bl <C-^>
 nnoremap <leader>bn <cmd>bn<CR>
 nnoremap <leader>bp <cmd>bp<CR>

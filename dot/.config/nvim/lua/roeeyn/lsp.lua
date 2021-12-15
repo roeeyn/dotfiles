@@ -4,6 +4,7 @@ local function on_attach()
 end
 
 require'lspconfig'.ansiblels.setup{on_attach=on_attach}
+require'lspconfig'.dockerls.setup{on_attach=on_attach}
 require'lspconfig'.bashls.setup{on_attach=on_attach}
 require('lspconfig').tsserver.setup {on_attach = on_attach}
 require('lspconfig').pyright.setup {

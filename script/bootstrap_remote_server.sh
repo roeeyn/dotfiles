@@ -21,6 +21,7 @@ sleep 10
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Adding the tmux config
+# If you see erros with tmux yank, you may want to instal xsel
 curl -fLo ~/.tmux.conf https://raw.githubusercontent.com/roeeyn/dotfiles/master/dot/.tmux.conf
 
 # Installing oh my zsh

@@ -5,6 +5,11 @@ end
 
 require'lspconfig'.ansiblels.setup{on_attach=on_attach}
 require'lspconfig'.dockerls.setup{on_attach=on_attach}
+require'lspconfig'.elixirls.setup{
+    -- Unix (Install from here -> https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#elixirls)
+    on_attach = on_attach,
+    cmd = { "~/.local/bin/elixir-ls/language_server.sh" };
+}
 require'lspconfig'.bashls.setup{on_attach=on_attach}
 require('lspconfig').tsserver.setup {on_attach = on_attach}
 require('lspconfig').pyright.setup {

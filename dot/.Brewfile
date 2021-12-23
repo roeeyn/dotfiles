@@ -22,6 +22,7 @@ brew 'coreutils'
 brew 'ctop'
 brew 'curl', link: true
 brew 'dive'
+brew 'elixir'
 brew 'exiftool'
 brew 'exploitdb'
 brew 'fd'

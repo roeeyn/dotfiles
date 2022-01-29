@@ -108,8 +108,6 @@ nnoremap <leader>hk <cmd>lua require("harpoon.ui").nav_file(2)<CR>
 nnoremap <leader>hl <cmd>lua require("harpoon.ui").nav_file(3)<CR>
 nnoremap <leader>h; <cmd>lua require("harpoon.ui").nav_file(4)<CR>
 nnoremap <leader>ho <cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <leader>ir <cmd>:%! autoflake -i --remove-all-unused-imports --remove-unused-variables %<CR>
-nnoremap <leader>is <cmd>%! isort --profile black %<CR>
 nnoremap <leader>p/ <cmd>Telescope live_grep<CR>
 nnoremap <leader>pf <cmd>NvimTreeFindFile<CR>
 nnoremap <leader>pp oprint('*'*20)<esc>yypkoprint()
@@ -138,15 +136,6 @@ xnoremap <leader>y "+y<CR>
 " PLUGINS
 call plug#begin('~/.vim/plugged')
 
-" Vim Todo
-Plug 'vuciv/vim-bujo'
-
-" Pydoc
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
-
-" Formatter
-Plug 'mhartington/formatter.nvim'
-
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -159,9 +148,6 @@ Plug 'Yggdroot/indentLine'
 
 " Wakatime
 Plug 'wakatime/vim-wakatime'
-
-" Emmet integration
-Plug 'mattn/emmet-vim'
 
 " Nice Syntax Highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -193,15 +179,6 @@ Plug 'folke/tokyonight.nvim'
 " Comment
 Plug 'terrortylor/nvim-comment'
 
-" Markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-
-" isort Python
-Plug 'fisadev/vim-isort'
-
-" zoom
-Plug 'dhruvasagar/vim-zoom'
-
 " git gutter
 Plug 'airblade/vim-gitgutter'
 
@@ -211,9 +188,6 @@ Plug 'famiu/bufdelete.nvim'
 " GitHub Copilot
 Plug 'github/copilot.vim'
 
-" Prettier
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-
 " Harpoon
 Plug 'ThePrimeagen/harpoon'
 
@@ -222,23 +196,11 @@ Plug 'ThePrimeagen/git-worktree.nvim'
 
 call plug#end()
 
-" Prettier Settings
-let g:prettier#config#parser = 'babylon'
-let g:prettier#quickfix_enabled = 0
-let g:prettier#autoformat_require_pragma = 0
-au BufWritePre *.css,*.svelte,*.pcss,*.html,*.ts,*.js,*.json PrettierAsync
-let g:prettier#config#single_quote = 'true'
-let g:prettier#config#trailing_comma = 'all'
-
 let g:tokyonight_italic_functions = 1
 let g:tokyonight_colors = {'dark5' : '#93d8d9', 'fg_gutter':'#555f8b'}
 colorscheme tokyonight
 
-let g:pydocstring_formatter = 'google'
-
 let g:ycm_autoclose_preview_window_after_insertion = 1
-
-let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
 lua vim.o.foldmethod = 'expr'
 lua vim.o.foldexpr = 'nvim_treesitter#foldexpr()'

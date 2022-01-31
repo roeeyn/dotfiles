@@ -77,6 +77,7 @@ brew 'tree'
 brew 'urlview'
 brew 'vim'
 brew 'wget'
+brew 'youtube-dl'
 brew 'zsh'
 
 ######## CASK ########

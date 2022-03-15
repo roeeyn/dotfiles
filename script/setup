@@ -11,4 +11,4 @@ stow dot/ --target=$HOME
 stow files/ --target=$HOME
 
 echo "Installing rosetta..."
-sudo softwareupdate --install-rosetta
+# sudo softwareupdate --install-rosetta

@@ -117,7 +117,7 @@ cask 'postman'
 cask 'qlmarkdown'
 cask 'removebg'
 # cask 'sip'
-cask 'slack'
+# cask 'slack'
 cask 'spotify'
 cask 'telegram'
 cask 'tor-browser'
@@ -131,9 +131,9 @@ cask 'zoom'
 
 ####### Mac Application Store #########
 mas 'Keynote', id: 409183694
-mas 'Presentify - Screen Annotation', id: 1507246666
-mas 'Spark – Email App by Readdle', id: 1176895641
-mas 'GIPHY Capture. The GIF Maker', id: 668208984
+# mas 'Presentify - Screen Annotation', id: 1507246666
+# mas 'Spark – Email App by Readdle', id: 1176895641
+# mas 'GIPHY Capture. The GIF Maker', id: 668208984
 
 ####### LUXOR #######
 brew 'automake'

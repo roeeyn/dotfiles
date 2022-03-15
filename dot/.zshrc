@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/roeeyn/.oh-my-zsh"
+export ZSH="/Users/rodrigom/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -141,11 +141,11 @@ if type rg &> /dev/null; then
 fi
 
 # For dotfiles scripts
-export PATH="/Users/roeeyn/.local/bin:$PATH"
+export PATH="/Users/rodrigom/.local/bin:$PATH"
 
 # For virtualenvwrapper
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
-export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"
+export PATH="/Users/rodrigom/Library/Python/3.8/bin:$PATH"
 export PATH="/usr/local/bin:usr/local/share/python:$PATH"
 
 # For john stuff
@@ -158,8 +158,8 @@ export PATH="$PATH:/opt/homebrew/share/john"
 export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+# source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+# source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 

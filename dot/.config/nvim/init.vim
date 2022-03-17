@@ -81,10 +81,9 @@ nnoremap <leader>cp <cmd>cprevious<CR>
 nnoremap <leader>cs <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>ct <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
-nnoremap <leader>dp <cmd>Pydocstring<CR>
 nnoremap <leader>eO <cmd>Telescope lsp_workspace_diagnostics<CR>
 nnoremap <leader>ec <cmd>lclose<CR>
-nnoremap <leader>el <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <leader>el <cmd>lua vim.diagnostic.get()<CR>
 nnoremap <leader>en <cmd>lnext<CR>
 nnoremap <leader>eo <cmd>Telescope lsp_document_diagnostics<CR>
 nnoremap <leader>ep <cmd>lprevious<CR>
@@ -194,7 +193,12 @@ Plug 'ThePrimeagen/harpoon'
 " Git Worktrees
 Plug 'ThePrimeagen/git-worktree.nvim'
 
+" Documentation Generator
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+
 call plug#end()
+
+let g:doge_doc_standard_python = 'google'
 
 let g:tokyonight_italic_functions = 1
 let g:tokyonight_colors = {'dark5' : '#93d8d9', 'fg_gutter':'#555f8b'}

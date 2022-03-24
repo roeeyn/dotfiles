@@ -81,6 +81,25 @@ nnoremap <leader>cp <cmd>cprevious<CR>
 nnoremap <leader>cs <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>ct <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
+
+nnoremap <leader>dwh <cmd>lua require'dap.ui.widgets'.hover()<CR>
+nnoremap <leader>dws <cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>
+nnoremap <leader>db <cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <leader>dso <cmd>lua require'dap'.step_out()<CR>
+nnoremap <leader>dsi <cmd>lua require'dap'.step_into()<CR>
+nnoremap <leader>dsv <cmd>lua require'dap'.step_over()<CR>
+nnoremap <leader>dst <cmd>lua require'dap'.stop()<CR>
+nnoremap <leader>dc <cmd>lua require'dap'.continue()<CR>
+nnoremap <leader>dsu <cmd>lua require'dap'.up()<CR>
+nnoremap <leader>dsd <cmd>lua require'dap'.down()<CR>
+" nnoremap <leader>drl <cmd>lua require'dap'.run_last()<CR>
+nnoremap <leader>dr <cmd>lua require'dap'.repl.open({}, 'vsplit')<CR><C-w>l
+nnoremap <leader>dtc <cmd>Telescope dap commands<CR>
+nnoremap <leader>dtf <cmd>Telescope dap configurations<CR>
+nnoremap <leader>dtb <cmd>Telescope dap list_breakpoints<CR>
+nnoremap <leader>dtv <cmd>Telescope dap variables<CR>
+nnoremap <leader>dtf <cmd>Telescope dap frames<CR>
+
 nnoremap <leader>eO <cmd>lua require('telescope.builtin').diagnostics{}<CR>
 nnoremap <leader>ec <cmd>lclose<CR>
 nnoremap <leader>el <cmd>lua vim.diagnostic.open_float()<CR>
@@ -196,6 +215,13 @@ Plug 'ThePrimeagen/git-worktree.nvim'
 " Documentation Generator
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
+" Debugger
+Plug 'mfussenegger/nvim-dap'
+Plug 'mfussenegger/nvim-dap-python'
+Plug 'nvim-telescope/telescope-dap.nvim'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'rcarriga/nvim-dap-ui'
+
 call plug#end()
 
 let g:doge_doc_standard_python = 'google'
@@ -205,8 +231,6 @@ let g:tokyonight_italic_functions = 1
 let g:tokyonight_colors = {'dark5' : '#93d8d9', 'fg_gutter':'#555f8b'}
 colorscheme tokyonight
 
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
 lua vim.o.foldmethod = 'expr'
 lua vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 set nofoldenable
@@ -215,6 +239,4 @@ set nofoldenable
 set updatetime=100
 
 lua require('roeeyn')
-
-" set rtp+=~/tabnine-vim
 

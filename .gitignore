@@ -28,3 +28,10 @@ trustdb.gpg
 
 # local share
 dot/.local/share/nvim/
+
+# local applications
+dot/.config/gh/
+dot/.config/exercism/
+
+# local state
+dot/.local/state/

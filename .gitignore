@@ -32,6 +32,7 @@ dot/.local/share/nvim/
 # local applications
 dot/.config/gh/
 dot/.config/exercism/
+dot/.config/pip/
 
 # local state
 dot/.local/state/

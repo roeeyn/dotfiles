@@ -4,6 +4,9 @@ set path+=**
 set encoding=utf-8
 " let g:airline_powerline_fonts = 1
 
+" Column limit 120
+set colorcolumn=120
+
 " Cursor line
 set cursorline
 

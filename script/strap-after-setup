@@ -24,6 +24,8 @@ ssh-add -K ~/.ssh/id_ed25519
 
 
 echo 'Trying GPG installation...'
+# Remember to kill the gpg-agent so the new pinentry can work
+# gpgconf --kill gpg-agent
 gpg_key_id='5250FBF353121688'
 if ! gpg --list-secret-keys --keyid-format=long | rg $gpg_key_id &>/dev/null; then
   echo 'Installing GPG key...'

@@ -4,6 +4,9 @@ set path+=**
 set encoding=utf-8
 " let g:airline_powerline_fonts = 1
 
+" Column limit 120
+set colorcolumn=120
+
 " Cursor line
 set cursorline
 
@@ -99,6 +102,7 @@ nnoremap <leader>dtf <cmd>Telescope dap configurations<CR>
 nnoremap <leader>dtb <cmd>Telescope dap list_breakpoints<CR>
 nnoremap <leader>dtv <cmd>Telescope dap variables<CR>
 nnoremap <leader>dtf <cmd>Telescope dap frames<CR>
+nnoremap <leader>dut <cmd>lua require'dapui'.toggle()<CR>
 
 nnoremap <leader>eO <cmd>lua require('telescope.builtin').diagnostics{}<CR>
 nnoremap <leader>ec <cmd>lclose<CR>

@@ -143,6 +143,10 @@ nnoremap <leader>to <cmd>Todo<CR>
 nnoremap <leader>tp <cmd>tabprevious<CR>
 nnoremap <leader>tu <Plug>BujoChecknormal
 nnoremap <leader>tx <cmd>tabclose<CR>
+nnoremap <leader>ua <cmd>TestSuite<CR>
+nnoremap <leader>uf <cmd>TestFile<CR>
+nnoremap <leader>ul <cmd>TestLast<CR>
+nnoremap <leader>ut <cmd>TestNearest<CR>
 nnoremap <leader>wh <C-W>h
 nnoremap <leader>wj <C-W>j
 nnoremap <leader>wk <C-W>k
@@ -219,6 +223,9 @@ Plug 'ThePrimeagen/git-worktree.nvim'
 " Documentation Generator
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
+" Unit testing
+Plug 'vim-test/vim-test'
+
 " Debugger
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
@@ -230,6 +237,9 @@ call plug#end()
 
 let g:doge_doc_standard_python = 'google'
 let g:doge_comment_jump_modes = ['n', 's']
+
+let test#strategy = "neovim"
+let test#neovim#term_position = "vert botright"
 
 let g:tokyonight_italic_functions = 1
 let g:tokyonight_colors = {'dark5' : '#93d8d9', 'fg_gutter':'#555f8b'}

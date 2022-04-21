@@ -31,6 +31,7 @@ dot/.local/share/nvim/
 
 # local applications
 dot/.config/gh/
+dot/.config/htop/
 dot/.config/exercism/
 dot/.config/pip/
 

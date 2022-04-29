@@ -6,8 +6,14 @@ require("telescope").setup {
     },
     defaults = {
         mappings = {
-            n = {["<C-q>"] = require("telescope.actions").smart_send_to_qflist},
-            i = {["<C-q>"] = require("telescope.actions").smart_send_to_qflist}
+           n = {
+              ["<C-q>"] = require("telescope.actions").smart_send_to_qflist,
+              ["<C-x>"] = require("telescope.actions").delete_buffer,
+            },
+            i = {
+              ["<C-q>"] = require("telescope.actions").smart_send_to_qflist,
+              ["<C-x>"] = require("telescope.actions").delete_buffer,
+            }
         }
     }
 }

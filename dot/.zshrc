@@ -140,6 +140,9 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
 fi
 
+# Enable history in IEX through Erlang(OTP)
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 # For dotfiles scripts
 export PATH="/Users/roeeyn/.local/bin:$PATH"
 

@@ -30,9 +30,11 @@ trustdb.gpg
 dot/.local/share/nvim/
 
 # local applications
+dot/.config/configstore/
 dot/.config/gcloud/
 dot/.config/gh/
 dot/.config/exercism/
+dot/.config/flutter/
 dot/.config/pip/
 
 # local state

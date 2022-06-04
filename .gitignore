@@ -39,3 +39,4 @@ dot/.config/pip/
 
 # local state
 dot/.local/state/
+dot/.local/share/

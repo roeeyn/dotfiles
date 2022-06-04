@@ -40,3 +40,9 @@ dot/.config/pip/
 # local state
 dot/.local/state/
 dot/.local/share/
+
+# local files
+files/go/bin/
+!files/go/bin/.gitkeep
+files/go/pkg/
+

@@ -11,6 +11,7 @@ require'lspconfig'.elixirls.setup{
     cmd = { "/Users/roeeyn/.local/bin/elixir-ls/language_server.sh" };
 }
 require'lspconfig'.bashls.setup{on_attach=on_attach}
+require'lspconfig'.gopls.setup{on_attach=on_attach}
 require('lspconfig').tsserver.setup {on_attach = on_attach}
 require('lspconfig').pyright.setup {
     on_attach = on_attach,

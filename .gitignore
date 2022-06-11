@@ -18,6 +18,9 @@ known_hosts.old
 # Ansible password
 ansible_password.txt
 
+# Judge0 Token
+.judge0-uploader.yaml
+
 # GPG configuration
 private-keys-v1.d
 pgp_public.txt

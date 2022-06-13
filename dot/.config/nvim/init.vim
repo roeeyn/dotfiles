@@ -63,6 +63,18 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
+" Adding comment string for elixir types
+" when you enter a (new) buffer
+augroup set-commentstring-ag
+autocmd!
+autocmd BufEnter *.ex,*.exs :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
+" when you've changed the name of a file opened in a buffer, the file type may have changed
+autocmd BufFilePost *.ex,*.exs :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")
+augroup END
+
+" Show quotes in JSON
+set conceallevel=0
+
 "------------------------------------------------------------------------------"
 "                                  Key mapping                                 "
 "------------------------------------------------------------------------------"
@@ -85,6 +97,7 @@ nnoremap <leader>cs <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <leader>ct <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>cy yypk <cmd>CommentToggle<CR>j
 
+nnoremap <leader>do <cmd>DogeGenerate<CR>
 nnoremap <leader>dwh <cmd>lua require'dap.ui.widgets'.hover()<CR>
 nnoremap <leader>dws <cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>
 nnoremap <leader>db <cmd>lua require'dap'.toggle_breakpoint()<CR>
@@ -166,6 +179,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" Emmet
+Plug 'mattn/emmet-vim'
+
 " Nice comment frames
 Plug 'cometsong/CommentFrame.vim'
 
@@ -225,6 +241,12 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 " Unit testing
 Plug 'vim-test/vim-test'
+
+" Flutter
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 
 " Debugger
 Plug 'mfussenegger/nvim-dap'

@@ -140,8 +140,15 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
 fi
 
+# Enable history in IEX through Erlang(OTP)
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 # For dotfiles scripts
 export PATH="/Users/rodrigom/.local/bin:$PATH"
+
+# For golang
+export GOPATH="/Users/roeeyn/go"
+export PATH="$GOPATH/bin:$PATH"
 
 # For virtualenvwrapper
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"

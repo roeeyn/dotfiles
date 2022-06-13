@@ -18,6 +18,9 @@ known_hosts.old
 # Ansible password
 ansible_password.txt
 
+# Judge0 Token
+.judge0-uploader.yaml
+
 # GPG configuration
 private-keys-v1.d
 pgp_public.txt
@@ -35,7 +38,15 @@ dot/.config/gcloud/
 dot/.config/gh/
 dot/.config/htop/
 dot/.config/exercism/
+dot/.config/flutter/
 dot/.config/pip/
 
 # local state
 dot/.local/state/
+dot/.local/share/
+
+# local files
+files/go/bin/
+!files/go/bin/.gitkeep
+files/go/pkg/
+

@@ -30,6 +30,8 @@ trustdb.gpg
 dot/.local/share/nvim/
 
 # local applications
+dot/.config/configstore/
+dot/.config/gcloud/
 dot/.config/gh/
 dot/.config/htop/
 dot/.config/exercism/

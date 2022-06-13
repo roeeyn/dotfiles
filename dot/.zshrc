@@ -188,3 +188,4 @@ if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
   export PATH=`gem environment gemdir`/bin:$PATH
 fi
 
+eval "$(/Users/rodrigom/src/idl/idldev-tool/bin/idldev init -)"

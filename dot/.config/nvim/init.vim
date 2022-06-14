@@ -186,7 +186,7 @@ Plug 'mattn/emmet-vim'
 Plug 'cometsong/CommentFrame.vim'
 
 " Thin vertical lines at each indetation
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Wakatime
 Plug 'wakatime/vim-wakatime'

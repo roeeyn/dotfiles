@@ -182,6 +182,10 @@ Plug 'junegunn/fzf.vim'
 " Emmet
 Plug 'mattn/emmet-vim'
 
+" Folding improvement
+Plug 'kevinhwang91/promise-async'
+Plug 'kevinhwang91/nvim-ufo'
+
 " Nice comment frames
 Plug 'cometsong/CommentFrame.vim'
 
@@ -266,10 +270,6 @@ let test#neovim#term_position = "vert botright"
 let g:tokyonight_italic_functions = 1
 let g:tokyonight_colors = {'dark5' : '#93d8d9', 'fg_gutter':'#555f8b'}
 colorscheme tokyonight
-
-lua vim.o.foldmethod = 'expr'
-lua vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-set nofoldenable
 
 " Gitgutter to catches the changes faster
 set updatetime=100

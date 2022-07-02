@@ -138,6 +138,7 @@ nnoremap <leader>gs <cmd>G<CR>4j
 nnoremap <leader>gt <cmd>Telescope git_status<CR>
 nnoremap <leader>gw <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
 nnoremap <leader>ha <cmd>lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>hf <cmd>Telescope help_tags<CR>
 nnoremap <leader>hj <cmd>lua require("harpoon.ui").nav_file(1)<CR>
 nnoremap <leader>hk <cmd>lua require("harpoon.ui").nav_file(2)<CR>
 nnoremap <leader>hl <cmd>lua require("harpoon.ui").nav_file(3)<CR>

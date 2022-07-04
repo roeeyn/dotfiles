@@ -108,6 +108,7 @@ cask 'ghidra'
 cask 'google-cloud-sdk'
 cask 'google-drive'
 cask 'hammerspoon'
+cask 'http-toolkit'
 cask 'istat-menus' # Actual Version ^6
 cask 'iterm2'
 cask 'little-snitch'

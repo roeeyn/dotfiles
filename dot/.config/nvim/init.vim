@@ -279,5 +279,7 @@ colorscheme tokyonight
 " Gitgutter to catches the changes faster
 set updatetime=100
 
+set winbar=%=%m\ %f
+
 lua require('roeeyn')
 

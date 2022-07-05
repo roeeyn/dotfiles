@@ -6,7 +6,7 @@ require("telescope").setup {
     },
     defaults = {
         mappings = {
-           n = {
+            n = {
               ["<C-q>"] = require("telescope.actions").smart_send_to_qflist,
               ["<C-x>"] = require("telescope.actions").delete_buffer,
             },
@@ -18,5 +18,6 @@ require("telescope").setup {
     }
 }
 
+require("telescope").load_extension("harpoon")
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("dap")

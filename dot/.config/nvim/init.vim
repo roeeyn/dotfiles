@@ -139,11 +139,15 @@ nnoremap <leader>gt <cmd>Telescope git_status<CR>
 nnoremap <leader>gw <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
 nnoremap <leader>ha <cmd>lua require("harpoon.mark").add_file()<CR>
 nnoremap <leader>hf <cmd>Telescope help_tags<CR>
+nnoremap <leader>hh <cmd>lua require('telescope').extensions.harpoon.marks({attach_mappings=function(_, map) map('i', '<c-d>', require('telescope.actions').preview_scrolling_down) return true end})<CR>
 nnoremap <leader>hj <cmd>lua require("harpoon.ui").nav_file(1)<CR>
 nnoremap <leader>hk <cmd>lua require("harpoon.ui").nav_file(2)<CR>
 nnoremap <leader>hl <cmd>lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>hn <cmd>lua require("harpoon.ui").nav_next()<CR>
 nnoremap <leader>h; <cmd>lua require("harpoon.ui").nav_file(4)<CR>
 nnoremap <leader>ho <cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>hp <cmd>lua require("harpoon.ui").nav_prev()<CR>
+nnoremap <leader>kf <cmd>Telescope keymaps<CR>
 nnoremap <leader>p/ <cmd>Telescope live_grep<CR>
 nnoremap <leader>pf <cmd>NvimTreeFindFile<CR>
 nnoremap <leader>pp oprint('*'*20)<esc>yypkoprint()

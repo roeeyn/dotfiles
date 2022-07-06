@@ -28,5 +28,29 @@ vim.opt.softtabstop = 2
 -- How many columns of whitespace a level of identation is worth
 vim.opt.shiftwidth = 2
 
+-- Use spaces instead of \t
+vim.opt.expandtab = true
+
+-- The cursor is moved onto the window with 'scrolloff' screen lines around it
+vim.opt.scrolloff = 8
+
+-- Set line numbers
+vim.opt.number = true
+
+-- Set relative line numbers
+vim.opt.relativenumber = true
+
+-- Ignore folders in searche
+vim.opt.wildignore = '*/node_modules/*,*/target/*,*/tmp/*,*/venv/*'
+
+-- Highlight trailing spaces
+vim.cmd([[
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+]])
+
+-- Show quotes in JSON
+vim.opt.conceallevel = 0
 
 print('holi')

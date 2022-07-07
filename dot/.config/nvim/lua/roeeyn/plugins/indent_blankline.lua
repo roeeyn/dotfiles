@@ -1,3 +1,7 @@
+----------------------------------------------------------------------
+--                    Indent Line Configuration                     --
+----------------------------------------------------------------------
+
 -- TODO: Improve the indent line -> https://github.com/lukas-reineke/indent-blankline.nvim
 require("indent_blankline").setup {
     -- for example, context is off by default, use this to turn it on

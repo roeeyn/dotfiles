@@ -1,3 +1,6 @@
+----------------------------------------------------------------------
+--                List of all the keymaps registered                --
+----------------------------------------------------------------------
 vim.g.mapleader = " "
 
 local function map(mode, shortcut, command)

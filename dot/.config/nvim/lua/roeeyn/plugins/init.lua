@@ -1,3 +1,7 @@
+----------------------------------------------------------------------
+--              List of all the plugins customization               --
+----------------------------------------------------------------------
+
 -- require("roeeyn.plugins.dap") -- TODO: Add this plugin
 require('roeeyn.plugins.indent_blankline')
 require('roeeyn.plugins.lualine')

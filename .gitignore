@@ -50,3 +50,5 @@ files/go/bin/
 !files/go/bin/.gitkeep
 files/go/pkg/
 
+# Packer
+packer_compiled.lua

@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
-function map(mode, shortcut, command)
+local function map(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, {
     noremap = true,
     -- TODO: Verify if this is ok
@@ -8,15 +8,15 @@ function map(mode, shortcut, command)
   })
 end
 
-function nmap(shortcut, command)
+local function nmap(shortcut, command)
   map('n', shortcut, command)
 end
 
-function vmap(shortcut, command)
+local function vmap(shortcut, command)
   map('v', shortcut, command)
 end
 
-function xmap(shortcut, command)
+local function xmap(shortcut, command)
   map('x', shortcut, command)
 end
 
@@ -144,6 +144,3 @@ vmap('K', ":m '<-2<CR>gv=gv")
 
 -- Yanking in visual mode to clipboard
 xmap('<leader>y', '"+y<CR>')
-
-
-print('mappings listos')

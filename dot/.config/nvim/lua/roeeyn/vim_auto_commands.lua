@@ -6,7 +6,6 @@ vim.api.nvim_create_autocmd('FileType', {
             vim.bo.tabstop = 4
             vim.bo.shiftwidth = 4
             vim.bo.softtabstop = 4
-            print('estamos vivos perros')
         end)
     end
 })
@@ -39,5 +38,3 @@ vim.cmd([[
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
 ]])
-
-print('hey')

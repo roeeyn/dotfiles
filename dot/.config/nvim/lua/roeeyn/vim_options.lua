@@ -56,4 +56,6 @@ vim.opt.conceallevel = 0
 -- Gitgutter to catch the changes faster
 vim.opt.updatetime = 100
 
-print('holi')
+-- DoGe Global parameters
+vim.g.doge_doc_standard_python = 'google'
+vim.g.doge_comment_jump_modes = {'n', 's'}

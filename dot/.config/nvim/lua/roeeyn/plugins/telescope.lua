@@ -1,3 +1,4 @@
+-- Telescope
 require("telescope").setup {
     pickers = {
       find_files = {
@@ -19,5 +20,4 @@ require("telescope").setup {
 }
 
 require("telescope").load_extension("harpoon")
-require("telescope").load_extension("git_worktree")
-require("telescope").load_extension("dap")
+-- require("telescope").load_extension("dap") -- TODO: Add dap plugin

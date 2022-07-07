@@ -92,7 +92,7 @@ nmap('<leader>ep', '<cmd>lprevious<cr>')
 
 -- Neovim Config
 nmap('<leader>fed', '<cmd>e ~/.dotfiles<cr>')
-nmap('<leader>fer', '<cmd>lua package.loaded["vim_options"] = nil<cr><cmd>luafile ~/.config/nvim/init.lua<cr>')
+nmap('<leader>fer', '<cmd>lua package.loaded["plugins"] = nil<cr><cmd>luafile ~/.config/nvim/init.lua<cr>')
 
 -- Fugitive
 nmap('<leader>gp', '<cmd>G push<cr>')
@@ -103,8 +103,7 @@ nmap('<leader>gw', '<cmd>lua require("telescope").extensions.git_worktree.git_wo
 
 -- Harpoon
 nmap('<leader>ha', '<cmd>lua require("harpoon.mark").add_file()<cr>')
-nmap('<leader>hh',
-  '<cmd>lua require("telescope").extensions.harpoon.marks({attach_mappings=function(_, map) map("i", "<c-d>", require("telescope.actions").preview_scrolling_down) return true end})<cr>')
+nmap('<leader>hh', '<cmd>lua require("roeeyn.plugins.harpoon").open_harpoon_telescope()<cr>')
 nmap('<leader>hj', '<cmd>lua require("harpoon.ui").nav_file(1)<cr>')
 nmap('<leader>hk', '<cmd>lua require("harpoon.ui").nav_file(2)<cr>')
 nmap('<leader>hl', '<cmd>lua require("harpoon.ui").nav_file(3)<cr>')

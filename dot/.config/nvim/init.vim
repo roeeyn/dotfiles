@@ -279,5 +279,12 @@ colorscheme tokyonight
 " Gitgutter to catches the changes faster
 set updatetime=100
 
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=250}
+augroup END
+
+set winbar=%=%m\ %f
+
 lua require('roeeyn')
 

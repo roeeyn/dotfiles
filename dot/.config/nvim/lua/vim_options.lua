@@ -53,4 +53,7 @@ match ExtraWhitespace /\s\+$/
 -- Show quotes in JSON
 vim.opt.conceallevel = 0
 
+-- Gitgutter to catch the changes faster
+vim.opt.updatetime = 100
+
 print('holi')

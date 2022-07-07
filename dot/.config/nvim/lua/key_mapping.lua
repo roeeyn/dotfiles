@@ -20,9 +20,6 @@ function xmap(shortcut, command)
   map('x', shortcut, command)
 end
 
--- Commenting
-nmap('<leader>;;', '<cmd>CommentToggle<cr>')
-
 -- Buffers
 nmap('<leader>bb', '<cmd>Telescope buffers<cr>')
 nmap('<leader>bd', '<cmd>Bdelete<cr>')

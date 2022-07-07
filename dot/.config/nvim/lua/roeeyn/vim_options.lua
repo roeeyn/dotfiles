@@ -45,9 +45,9 @@ vim.opt.wildignore = '*/node_modules/*,*/target/*,*/tmp/*,*/venv/*'
 
 -- Highlight trailing spaces
 vim.cmd([[
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+  highlight ExtraWhitespace ctermbg=red guibg=red
+  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+  match ExtraWhitespace /\s\+$/
 ]])
 
 -- Show quotes in JSON
@@ -59,3 +59,6 @@ vim.opt.updatetime = 100
 -- DoGe Global parameters
 vim.g.doge_doc_standard_python = 'google'
 vim.g.doge_comment_jump_modes = {'n', 's'}
+
+-- Winbar Config (Top right with modifier)
+vim.opt.winbar = '%=%m %f'

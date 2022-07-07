@@ -115,6 +115,9 @@ export PATH="/opt/homebrew/bin:$PATH"
 export LANG=en_US.UTF-8
 set -o vi
 
+# This removes from history the commands starting with a space
+setopt HIST_IGNORE_SPACE
+
 alias gnp='git --no-pager'
 alias gnpb='git --no-pager branch'
 alias gnps='git --no-pager stash list'
@@ -194,4 +197,3 @@ if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
   export PATH=/opt/homebrew/opt/ruby/bin:$PATH
   export PATH=`gem environment gemdir`/bin:$PATH
 fi
-

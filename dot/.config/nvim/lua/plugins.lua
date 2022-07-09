@@ -162,6 +162,6 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 
-  print('Plugins loaded')
+  print('Plugins loaded from Packer')
 
 end)

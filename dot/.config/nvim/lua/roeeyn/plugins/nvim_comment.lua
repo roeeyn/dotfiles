@@ -1,5 +1,5 @@
 -- Nvim Comment
 require('nvim_comment').setup({
-  line_mapping = "<leader>;;",
-  operator_mapping = "<leader>;;",
+  line_mapping = "<leader>l;",
+  operator_mapping = "<leader>;",
 })

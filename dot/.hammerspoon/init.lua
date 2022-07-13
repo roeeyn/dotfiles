@@ -1,4 +1,4 @@
-hyper = {"cmd", "alt"}
+local hyper = {"cmd", "alt"}
 
 hs.loadSpoon("SpoonInstall")
 spoon.SpoonInstall.use_syncinstall = true
@@ -7,7 +7,7 @@ Install = spoon.SpoonInstall
 Install:andUse("UnsplashRandom")
 
 -- Keybindings for launching apps
-appKeys = {
+local appKeys = {
     a = "Slack",
     c = "Google Chrome",
     d = "DataGrip",

@@ -1,11 +1,8 @@
 -- Nvim UFO (Folding)
 
-vim.wo.foldcolumn = '1'
-vim.wo.foldlevel = 99 -- feel free to decrease the value
-vim.wo.foldenable = false
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99 -- feel free to decrease the value
+vim.o.foldlevelstart = -1
+vim.o.foldenable = true
 
-require('ufo').setup({
-    provider_selector = function(bufnr, filetype)
-        return {'treesitter', 'indent'}
-    end
-})
+require('ufo').setup()

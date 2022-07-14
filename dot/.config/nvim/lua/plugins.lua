@@ -131,7 +131,8 @@ return require('packer').startup(function(use)
     ft = { "markdown" },
   }
 
-
+  -- use "/Users/rodrigom/src/nvim-wakatime-worktree"
+  use "roeeyn/nvim-wakatime-worktree"
 
   --[[
   -- MISSING PLUGINS TO CONFIGURE:

@@ -5,7 +5,12 @@ require("telescope").setup {
         hidden = true
       },
       live_grep = {
-        hidden = true
+        ---@diagnostic disable-next-line: unused-local
+        additional_args = function (opts)
+          return {
+            "--hidden",
+          }
+        end
       },
     },
     defaults = {

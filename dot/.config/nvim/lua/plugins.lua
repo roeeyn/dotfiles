@@ -134,6 +134,7 @@ return require('packer').startup(function(use)
   ----------------------------------------------------------------------
   --                        Local plugins WIP                         --
   ----------------------------------------------------------------------
+
   -- use "/Users/rodrigom/src/nvim-wakatime-worktree"
   use "roeeyn/nvim-wakatime-worktree"
 

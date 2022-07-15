@@ -131,6 +131,10 @@ return require('packer').startup(function(use)
     ft = { "markdown" },
   }
 
+
+    -- Flutter
+    use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
+
   ----------------------------------------------------------------------
   --                        Local plugins WIP                         --
   ----------------------------------------------------------------------
@@ -145,12 +149,6 @@ return require('packer').startup(function(use)
 
     " Git integration
     Plug 'stsewd/fzf-checkout.vim'
-
-    " Flutter
-    Plug 'dart-lang/dart-vim-plugin'
-    Plug 'thosakwe/vim-flutter'
-    Plug 'natebosch/vim-lsc'
-    Plug 'natebosch/vim-lsc-dart'
 
     " Debugger
     Plug 'mfussenegger/nvim-dap'

@@ -127,6 +127,7 @@ alias gb='git branch | fzf'
 alias gba='git branch -a | fzf'
 alias gwl='git worktree list'
 alias gwa='git worktree add'
+alias gwp='git worktree prune'
 alias rgi=rogit
 alias rgim='rogit -m'
 alias dsr='docker stop $(docker ps | awk '\''{print $1}'\'' | grep -v CONTAINER)'

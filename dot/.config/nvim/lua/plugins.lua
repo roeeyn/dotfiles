@@ -131,6 +131,11 @@ return require('packer').startup(function(use)
     ft = { "markdown" },
   }
 
+  ----------------------------------------------------------------------
+  --                        Local plugins WIP                         --
+  ----------------------------------------------------------------------
+
+  use "/Users/roeeyn/src/nvim-wakatime-worktree"
 
 
   --[[

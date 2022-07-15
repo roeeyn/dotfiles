@@ -4,25 +4,58 @@ local function on_attach()
     -- "Big Tech" "Cash Money" Johnson
 end
 
-require'lspconfig'.ansiblels.setup{on_attach=on_attach}
-require'lspconfig'.dockerls.setup{on_attach=on_attach}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+
+require'lspconfig'.ansiblels.setup{
+  on_attach=on_attach,
+  capabilities=capabilities,
+}
+require'lspconfig'.dockerls.setup{
+  on_attach=on_attach,
+  capabilities=capabilities,
+}
 require'lspconfig'.elixirls.setup{
     -- Unix (Install from here -> https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#elixirls)
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = { "/Users/roeeyn/.local/bin/elixir-ls/language_server.sh" };
 }
-require'lspconfig'.bashls.setup{on_attach=on_attach}
-require'lspconfig'.gopls.setup{on_attach=on_attach}
-require('lspconfig').tsserver.setup {on_attach = on_attach}
+require'lspconfig'.bashls.setup{
+  on_attach=on_attach,
+  capabilities=capabilities,
+}
+require'lspconfig'.gopls.setup{
+  on_attach=on_attach,
+  capabilities=capabilities,
+}
+require('lspconfig').tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 require('lspconfig').pyright.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {python = {venv_path = '~/.pyenv/versions'}}
 }
-require('lspconfig').rust_analyzer.setup {on_attach = on_attach}
-require('lspconfig').html.setup {on_attach = on_attach}
-require'lspconfig'.svelte.setup {on_attach = on_attach}
+require('lspconfig').rust_analyzer.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+require('lspconfig').html.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+require'lspconfig'.svelte.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 require('lspconfig').jsonls.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     commands = {
         Format = {
             function()
@@ -32,6 +65,8 @@ require('lspconfig').jsonls.setup {
     }
 }
 require'lspconfig'.sumneko_lua.setup {
+  on_attach=on_attach,
+  capabilities=capabilities,
   settings = {
     Lua = {
       runtime = {
@@ -40,7 +75,7 @@ require'lspconfig'.sumneko_lua.setup {
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = {'vim', 'hs', 'spoon'},
       },
       workspace = {
         -- Make the server aware of Neovim runtime files

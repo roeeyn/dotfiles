@@ -3,7 +3,15 @@ require("telescope").setup {
     pickers = {
       find_files = {
         hidden = true
-      }
+      },
+      live_grep = {
+        ---@diagnostic disable-next-line: unused-local
+        additional_args = function (opts)
+          return {
+            "--hidden",
+          }
+        end
+      },
     },
     defaults = {
         mappings = {

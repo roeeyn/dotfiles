@@ -73,14 +73,17 @@ nmap('<leader>dtv', '<cmd>Telescope dap variables<cr>')
 nmap('<leader>dtf', '<cmd>Telescope dap frames<cr>')
 nmap('<leader>eO', '<cmd>lua require("telescope.builtin").diagnostics{}<cr>')
 nmap('<leader>f/', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
+nmap('<leader>fc', '<cmd>Telescope commands<cr>')
 nmap('<leader>ff', '<cmd>Telescope find_files<cr>')
 nmap('<leader>fg', '<cmd>Telescope git_files<cr>')
+nmap('<leader>fk', '<cmd>Telescope keymaps<cr>')
+nmap('<leader>fl', '<cmd>Telescope flutter commands<cr>')
+nmap('<leader>ft', '<cmd>Telescope builtin<cr>')
 nmap('<leader>gd', '<cmd>Telescope lsp_definitions<cr>')
 nmap('<leader>gi', '<cmd>Telescope lsp_implementations<cr>')
 nmap('<leader>gr', '<cmd>Telescope lsp_references<cr>')
 nmap('<leader>gt', '<cmd>Telescope git_status<cr>')
 nmap('<leader>hf', '<cmd>Telescope help_tags<cr>')
-nmap('<leader>kf', '<cmd>Telescope keymaps<cr>')
 nmap('<leader>p/', '<cmd>Telescope live_grep<cr>')
 
 -- Errors
@@ -93,6 +96,9 @@ nmap('<leader>ep', '<cmd>lprevious<cr>')
 -- Neovim Config
 nmap('<leader>fed', '<cmd>e ~/.dotfiles<cr>')
 nmap('<leader>fer', '<cmd>lua package.loaded["plugins"] = nil<cr><cmd>luafile ~/.config/nvim/init.lua<cr>')
+
+-- Flutter
+nmap('<leader>fo', '<cmd>FlutterOutlineToggle<cr>')
 
 -- Fugitive
 nmap('<leader>gp', '<cmd>G push<cr>')

@@ -130,9 +130,16 @@ nmap('<leader>pt', '<cmd>NvimTreeToggle<cr>')
 nmap('<leader>pp', 'oprint("*"*20)<esc>yypkoprint()')
 
 -- Tabs
+nmap('<leader>t1', '<cmd>tabnext 1<cr>')
+nmap('<leader>t2', '<cmd>tabnext 2<cr>')
+nmap('<leader>t3', '<cmd>tabnext 3<cr>')
+nmap('<leader>t4', '<cmd>tabnext 4<cr>')
+nmap('<leader>t5', '<cmd>tabnext 5<cr>')
 nmap('<leader>tc', '<cmd>tabnew<cr>')
 nmap('<leader>tn', '<cmd>tabnext<cr>')
 nmap('<leader>tp', '<cmd>tabprevious<cr>')
+nmap('<leader>to', '<cmd>tabo<cr>')
+nmap('<leader>tl', '<cmd>tabl<cr>')
 nmap('<leader>tx', '<cmd>tabclose<cr>')
 
 -- Testing

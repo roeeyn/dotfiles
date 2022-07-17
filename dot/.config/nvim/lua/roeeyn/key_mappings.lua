@@ -23,6 +23,10 @@ local function xmap(shortcut, command)
   map('x', shortcut, command)
 end
 
+local function tmap(shortcut, command)
+  map('t', shortcut, command)
+end
+
 -- Buffers
 nmap('<leader>bb', '<cmd>Telescope buffers<cr>')
 nmap('<leader>bd', '<cmd>Bdelete<cr>')
@@ -136,6 +140,9 @@ nmap('<leader>ua', '<cmd>TestSuite<cr>')
 nmap('<leader>uf', '<cmd>TestFile<cr>')
 nmap('<leader>ul', '<cmd>TestLast<cr>')
 nmap('<leader>ut', '<cmd>TestNearest<cr>')
+
+-- Terminal
+tmap('<esc>', '<C-\\><C-n>')
 
 -- Windows
 nmap('<leader>wh', '<C-W>h')

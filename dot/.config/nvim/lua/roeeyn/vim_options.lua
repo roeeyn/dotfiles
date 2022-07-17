@@ -62,3 +62,6 @@ vim.g.doge_comment_jump_modes = {'n', 's'}
 
 -- Winbar Config (Top right with modifier)
 vim.opt.winbar = '%=%m %f'
+
+-- Split vertically to the right
+vim.opt.splitright = true

@@ -99,7 +99,7 @@ nmap('<leader>ep', '<cmd>lprevious<cr>')
 
 -- Neovim Config
 nmap('<leader>fed', '<cmd>e ~/.dotfiles<cr>')
-nmap('<leader>fer', '<cmd>lua package.loaded["plugins"] = nil<cr><cmd>luafile ~/.config/nvim/init.lua<cr>')
+nmap('<leader>fer', '<cmd>lua require("roeeyn").reload_config()<cr>')
 
 -- Flutter
 nmap('<leader>fo', '<cmd>FlutterOutlineToggle<cr>')

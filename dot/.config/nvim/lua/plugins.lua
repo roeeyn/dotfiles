@@ -142,6 +142,9 @@ return require('packer').startup(function(use)
   -- use "/Users/rodrigom/src/nvim-wakatime-worktree"
   use "roeeyn/nvim-wakatime-worktree"
 
+  -- use "/Users/roeeyn/src/lua-tab-labeler/master"
+  use "roeeyn/luatab-labeler"
+
   --[[
   -- MISSING PLUGINS TO CONFIGURE:
     " Emmet

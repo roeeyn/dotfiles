@@ -3,6 +3,7 @@
 ----------------------------------------------------------------------
 
 -- require("roeeyn.plugins.dap") -- TODO: Add this plugin
+require('roeeyn.plugins.luatab')
 require('roeeyn.plugins.indent_blankline')
 require('roeeyn.plugins.treesitter')
 require('roeeyn.plugins.lualine')

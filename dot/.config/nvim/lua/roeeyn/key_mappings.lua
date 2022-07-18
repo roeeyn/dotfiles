@@ -23,6 +23,10 @@ local function xmap(shortcut, command)
   map('x', shortcut, command)
 end
 
+local function tmap(shortcut, command)
+  map('t', shortcut, command)
+end
+
 -- Buffers
 nmap('<leader>bb', '<cmd>Telescope buffers<cr>')
 nmap('<leader>bd', '<cmd>Bdelete<cr>')
@@ -95,7 +99,7 @@ nmap('<leader>ep', '<cmd>lprevious<cr>')
 
 -- Neovim Config
 nmap('<leader>fed', '<cmd>e ~/.dotfiles<cr>')
-nmap('<leader>fer', '<cmd>lua package.loaded["plugins"] = nil<cr><cmd>luafile ~/.config/nvim/init.lua<cr>')
+nmap('<leader>fer', '<cmd>lua require("roeeyn").reload_config()<cr>')
 
 -- Flutter
 nmap('<leader>fo', '<cmd>FlutterOutlineToggle<cr>')
@@ -126,9 +130,16 @@ nmap('<leader>pt', '<cmd>NvimTreeToggle<cr>')
 nmap('<leader>pp', 'oprint("*"*20)<esc>yypkoprint()')
 
 -- Tabs
+nmap('<leader>t1', '<cmd>tabnext 1<cr>')
+nmap('<leader>t2', '<cmd>tabnext 2<cr>')
+nmap('<leader>t3', '<cmd>tabnext 3<cr>')
+nmap('<leader>t4', '<cmd>tabnext 4<cr>')
+nmap('<leader>t5', '<cmd>tabnext 5<cr>')
 nmap('<leader>tc', '<cmd>tabnew<cr>')
 nmap('<leader>tn', '<cmd>tabnext<cr>')
 nmap('<leader>tp', '<cmd>tabprevious<cr>')
+nmap('<leader>to', '<cmd>tabo<cr>')
+nmap('<leader>tl', '<cmd>tabl<cr>')
 nmap('<leader>tx', '<cmd>tabclose<cr>')
 
 -- Testing
@@ -136,6 +147,9 @@ nmap('<leader>ua', '<cmd>TestSuite<cr>')
 nmap('<leader>uf', '<cmd>TestFile<cr>')
 nmap('<leader>ul', '<cmd>TestLast<cr>')
 nmap('<leader>ut', '<cmd>TestNearest<cr>')
+
+-- Terminal
+tmap('<esc>', '<C-\\><C-n>')
 
 -- Windows
 nmap('<leader>wh', '<C-W>h')

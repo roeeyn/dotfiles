@@ -105,11 +105,17 @@ nmap('<leader>fer', '<cmd>lua require("roeeyn").reload_config()<cr>')
 nmap('<leader>fo', '<cmd>FlutterOutlineToggle<cr>')
 
 -- Fugitive
-nmap('<leader>gp', '<cmd>G push<cr>')
 nmap('<leader>gs', '<cmd>G<cr>4j')
+nmap('<leader>gP', '<cmd>G push<cr>')
 
 -- Git Worktrees
 nmap('<leader>gw', '<cmd>lua require("telescope").extensions.git_worktree.git_worktrees()<cr>')
+
+-- Git Gutter
+nmap('<leader>go', '<cmd>GitGutterPreviewHunk<cr>')
+nmap('<leader>gn', '<cmd>GitGutterNextHunk<cr>')
+nmap('<leader>gp', '<cmd>GitGutterPrevHunk<cr>')
+nmap('<leader>gD', '<cmd>GitGutterDiffOrig<cr>')
 
 -- Harpoon
 nmap('<leader>ha', '<cmd>lua require("harpoon.mark").add_file()<cr>')

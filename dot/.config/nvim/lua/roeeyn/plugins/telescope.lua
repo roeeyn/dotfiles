@@ -1,31 +1,31 @@
 -- Telescope
-require("telescope").setup {
-    pickers = {
-      find_files = {
-        hidden = true
-      },
-      live_grep = {
-        ---@diagnostic disable-next-line: unused-local
-        additional_args = function (opts)
-          return {
-            "--hidden",
-          }
-        end
-      },
-    },
-    defaults = {
-        mappings = {
-            n = {
-              ["<C-q>"] = require("telescope.actions").smart_send_to_qflist,
-              ["<C-x>"] = require("telescope.actions").delete_buffer,
-            },
-            i = {
-              ["<C-q>"] = require("telescope.actions").smart_send_to_qflist,
-              ["<C-x>"] = require("telescope.actions").delete_buffer,
-            }
-        }
-    }
-}
+require("telescope").setup({
+	pickers = {
+		find_files = {
+			hidden = true,
+		},
+		live_grep = {
+			---@diagnostic disable-next-line: unused-local
+			additional_args = function(opts)
+				return {
+					"--hidden",
+				}
+			end,
+		},
+	},
+	defaults = {
+		mappings = {
+			n = {
+				["<C-q>"] = require("telescope.actions").smart_send_to_qflist,
+				["<C-x>"] = require("telescope.actions").delete_buffer,
+			},
+			i = {
+				["<C-q>"] = require("telescope.actions").smart_send_to_qflist,
+				["<C-x>"] = require("telescope.actions").delete_buffer,
+			},
+		},
+	},
+})
 
 require("telescope").load_extension("harpoon")
 -- require("telescope").load_extension("dap") -- TODO: Add dap plugin

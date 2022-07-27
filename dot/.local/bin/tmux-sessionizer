@@ -31,4 +31,3 @@ if [ -z "$TMUX" ]; then
 else
   tmux switch-client -t "$session_name"
 fi
-

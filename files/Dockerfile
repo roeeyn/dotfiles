@@ -6,4 +6,3 @@ RUN yes | unminimize
 RUN apt update -y
 RUN apt upgrade -y
 RUN apt install curl git zsh -y
-

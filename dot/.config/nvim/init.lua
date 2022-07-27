@@ -3,3 +3,5 @@
 ----------------------------------------------------------------------
 require('plugins')
 require('roeeyn')
+
+vim.g.copilot_enabled = false

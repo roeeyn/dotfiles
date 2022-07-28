@@ -51,9 +51,11 @@ nmap("<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 
 -- Quickfix
 nmap("<leader>cc", "<cmd>cclose<cr>")
+nmap("<leader>cg", "<cmd>cc<cr>")
 nmap("<leader>cn", "<cmd>cnext<cr>")
 nmap("<leader>co", "<cmd>copen<cr>")
 nmap("<leader>cp", "<cmd>cprevious<cr>")
+nmap("<leader>cx", "<cmd>lua vim.fn.setqflist({})<cr>")
 
 -- Documentation
 nmap("<leader>do", "<cmd>DogeGenerate<cr>")

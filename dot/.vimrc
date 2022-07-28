@@ -33,4 +33,3 @@ set smartindent
 
 " Set normal backspace behaviour
 set backspace=indent,eol,start
-

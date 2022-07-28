@@ -18,7 +18,7 @@ trap finish EXIT
 hash gdate 2>/dev/null
 USE_GNU_DATE=$?
 function datef {
-    if [[ $USE_GNU_DATE == "0" ]]; then 
+    if [[ $USE_GNU_DATE == "0" ]]; then
         gdate "$@"
     else
         date "$@"
@@ -58,4 +58,3 @@ while [ true ]; do
     printf "\r\e%s" $STOPWATCH
     sleep 0.03
 done
-

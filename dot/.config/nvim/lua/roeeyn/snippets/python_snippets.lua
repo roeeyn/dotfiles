@@ -33,7 +33,7 @@ ls.add_snippets("python", {
 		"sfprint",
 		fmt(
 			[[
-    print("{}":{})
+    print("{}:", {})
   ]],
 			{
 				i(1),

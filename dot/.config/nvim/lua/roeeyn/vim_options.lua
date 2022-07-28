@@ -68,3 +68,4 @@ vim.opt.splitright = true
 
 -- Snippets
 vim.g.snippets = "luasnip"
+vim.opt.completeopt = { "menu", "menuone", "noselect" }

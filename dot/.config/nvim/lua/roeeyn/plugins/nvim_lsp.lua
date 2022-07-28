@@ -4,11 +4,13 @@ local function on_attach()
 	-- "Big Tech" "Cash Money" Johnson
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.foldingRange = {
+local folding_capabilities = vim.lsp.protocol.make_client_capabilities()
+folding_capabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,
 	lineFoldingOnly = true,
 }
+
+local capabilities = require("cmp_nvim_lsp").update_capabilities(folding_capabilities)
 
 require("lspconfig").ansiblels.setup({
 	on_attach = on_attach,

@@ -65,3 +65,6 @@ vim.opt.winbar = "%=%m %f"
 
 -- Split vertically to the right
 vim.opt.splitright = true
+
+-- Snippets
+vim.g.snippets = "luasnip"

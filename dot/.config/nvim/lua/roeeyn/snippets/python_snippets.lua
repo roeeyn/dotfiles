@@ -35,8 +35,10 @@ ls.add_snippets("python", {
 			[[
     print("{}":{})
   ]],
-			i(1),
-			rep(1)
+			{
+				i(1),
+				rep(1),
+			}
 		)
 	),
 	s(

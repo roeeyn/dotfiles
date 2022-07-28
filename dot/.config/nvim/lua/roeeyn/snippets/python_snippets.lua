@@ -45,6 +45,27 @@ ls.add_snippets("python", {
 			}
 		)
 	),
+	s(
+		"def",
+		fmt(
+			[[
+    def {}({}){}:
+      pass
+  ]],
+			{
+				i(1),
+				i(2),
+				c(3, {
+					t(""),
+					t(" -> None"),
+					t(" -> int | None"),
+					t(" -> str"),
+					t(" -> str | None"),
+					t(" -> Any"),
+				}),
+			}
+		)
+	),
 }, {
 	key = "python",
 })

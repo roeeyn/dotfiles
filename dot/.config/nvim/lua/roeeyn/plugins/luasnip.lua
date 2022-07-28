@@ -47,5 +47,3 @@ vim.keymap.set("i", "<C-l>", function()
 end)
 
 vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/roeeyn/snippets/init.lua<CR>")
-
-print("simonaaa")

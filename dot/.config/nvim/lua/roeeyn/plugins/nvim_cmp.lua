@@ -50,7 +50,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "luasnip" }, -- For luasnip users.
 	}, {
-		{ name = "buffer" },
+		{ name = "buffer", keyword_length = 5 },
 	}),
 })
 
@@ -67,7 +67,7 @@ cmp.setup.filetype("gitcommit", {
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = "buffer" },
+		{ name = "buffer", keyword_length = 3 },
 	},
 })
 
@@ -77,6 +77,6 @@ cmp.setup.cmdline(":", {
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {
-		{ name = "cmdline" },
+		{ name = "cmdline", keyword_length = 3 },
 	}),
 })

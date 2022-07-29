@@ -30,6 +30,18 @@ local t = ls.text_node
 
 ls.add_snippets("python", {
 	s(
+		"sfprint",
+		fmt(
+			[[
+    print("{}:", {})
+  ]],
+			{
+				i(1),
+				rep(1),
+			}
+		)
+	),
+	s(
 		"fprint",
 		fmt(
 			[[
@@ -50,7 +62,7 @@ ls.add_snippets("python", {
 		fmt(
 			[[
     def {}({}){}:
-      pass
+        pass
   ]],
 			{
 				i(1),
@@ -63,6 +75,21 @@ ls.add_snippets("python", {
 					t(" -> str | None"),
 					t(" -> Any"),
 				}),
+			}
+		)
+	),
+	s(
+		"try",
+		fmt(
+			[[
+    try:
+        pass
+
+    except {}:
+        pass
+  ]],
+			{
+				i(1),
 			}
 		)
 	),

@@ -8,6 +8,8 @@ local ls = require("luasnip")
 -- s(<trigger>, <nodes>)
 local s = ls.snippet
 
+local sn = ls.snippet_node
+
 -- This is a format node
 -- It takes a format string, and a list of nodes
 -- fmt(<fmt_string>, {...nodes})
@@ -68,12 +70,16 @@ ls.add_snippets("python", {
 				i(1),
 				c(2, { i(2), t("self") }),
 				c(3, {
-					t(""),
 					t(" -> None"),
+					t(" -> int"),
 					t(" -> int | None"),
 					t(" -> str"),
 					t(" -> str | None"),
 					t(" -> Any"),
+					sn(3, {
+						t(" -> "),
+						i(1),
+					}),
 				}),
 			}
 		)
@@ -96,7 +102,7 @@ ls.add_snippets("python", {
 
 
     {}.INSTANCE = {}(
-      logger=logging.getLogger(__name__),
+        logger=logging.getLogger(__name__),
     )
 
   ]],

@@ -45,12 +45,17 @@ nmap("<leader>cR", "<cmd>lua vim.lsp.buf.rename()<cr>")
 nmap("<leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
 nmap("<leader>ct", "<cmd>lua vim.lsp.buf.hover()<cr>")
 nmap("<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
+nmap("<leader>da", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+nmap("<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+nmap("<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 
 -- Quickfix
 nmap("<leader>cc", "<cmd>cclose<cr>")
+nmap("<leader>cg", "<cmd>cc<cr>")
 nmap("<leader>cn", "<cmd>cnext<cr>")
 nmap("<leader>co", "<cmd>copen<cr>")
 nmap("<leader>cp", "<cmd>cprevious<cr>")
+nmap("<leader>cx", "<cmd>lua vim.fn.setqflist({})<cr>")
 
 -- Documentation
 nmap("<leader>do", "<cmd>DogeGenerate<cr>")
@@ -86,6 +91,7 @@ nmap("<leader>ft", "<cmd>Telescope builtin<cr>")
 nmap("<leader>gd", "<cmd>Telescope lsp_definitions<cr>")
 nmap("<leader>gi", "<cmd>Telescope lsp_implementations<cr>")
 nmap("<leader>gr", "<cmd>Telescope lsp_references<cr>")
+nmap("<leader>gT", "<cmd>Telescope lsp_type_definitions<cr>")
 nmap("<leader>gt", "<cmd>Telescope git_status<cr>")
 nmap("<leader>hf", "<cmd>Telescope help_tags<cr>")
 nmap("<leader>p/", "<cmd>Telescope live_grep<cr>")
@@ -116,6 +122,7 @@ nmap("<leader>go", "<cmd>GitGutterPreviewHunk<cr>")
 nmap("<leader>gn", "<cmd>GitGutterNextHunk<cr>")
 nmap("<leader>gp", "<cmd>GitGutterPrevHunk<cr>")
 nmap("<leader>gD", "<cmd>GitGutterDiffOrig<cr>")
+nmap("<leader>gx", "<cmd>GitGutterUndoHunk<cr>")
 
 -- Harpoon
 nmap("<leader>ha", '<cmd>lua require("harpoon.mark").add_file()<cr>')

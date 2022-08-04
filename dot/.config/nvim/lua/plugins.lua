@@ -147,6 +147,13 @@ return require("packer").startup(function(use)
 	use("L3MON4D3/LuaSnip")
 	use("saadparwaiz1/cmp_luasnip")
 
+	-- Debugger
+	use("mfussenegger/nvim-dap")
+	use("rcarriga/nvim-dap-ui")
+	use("theHamsta/nvim-dap-virtual-text")
+	use("mfussenegger/nvim-dap-python")
+	use("nvim-telescope/telescope-dap.nvim")
+
 	----------------------------------------------------------------------
 	--                        Local plugins WIP                         --
 	----------------------------------------------------------------------
@@ -165,12 +172,6 @@ return require("packer").startup(function(use)
     " Git integration
     Plug 'stsewd/fzf-checkout.vim'
 
-    " Debugger
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'mfussenegger/nvim-dap-python'
-    Plug 'nvim-telescope/telescope-dap.nvim'
-    Plug 'theHamsta/nvim-dap-virtual-text'
-    Plug 'rcarriga/nvim-dap-ui'
   --]]
 
 	-- Automatically set up your configuration after cloning packer.nvim

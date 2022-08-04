@@ -59,6 +59,7 @@
     nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     node_version          # node.js version
+    yarn_version          # Yarn version
     go_version            # go version (https://golang.org)
     rust_version          # rustc version (https://www.rust-lang.org)
     # dotnet_version        # .NET version (https://dotnet.microsoft.com)
@@ -96,12 +97,13 @@
     disk_usage            # disk usage
     ram                   # free RAM
     # swap                  # used swap
-    todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
-    timewarrior             # timewarrior tracking status (https://timewarrior.net/)
-    taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
+    # todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
+    # timewarrior             # timewarrior tracking status (https://timewarrior.net/)
+    # taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     # time                    # current time
     # =========================[ Line #2 ]=========================
     newline
+    vi_mode                 # Vi mode
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
     # proxy                 # system-wide http/https/ftp proxy
@@ -227,6 +229,8 @@
     .git
     .hg
     .node-version
+    .nvmrc
+    .yarnrc.yml
     .python-version
     .go-version
     .ruby-version
@@ -916,12 +920,12 @@
   # Pyenv color.
   typeset -g POWERLEVEL9K_PYENV_FOREGROUND=37
   # Hide python version if it doesn't come from one of these sources.
-  typeset -g POWERLEVEL9K_PYENV_SOURCES=(shell local global)
+  typeset -g POWERLEVEL9K_PYENV_SOURCES=(shell local global virtualenv)
   # If set to false, hide python version if it's the same as global:
   # $(pyenv version-name) == $(pyenv global).
-  typeset -g POWERLEVEL9K_PYENV_PROMPT_ALWAYS_SHOW=true
+  typeset -g POWERLEVEL9K_PYENV_PROMPT_ALWAYS_SHOW=false
   # If set to false, hide python version if it's equal to "system".
-  typeset -g POWERLEVEL9K_PYENV_SHOW_SYSTEM=false
+  typeset -g POWERLEVEL9K_PYENV_SHOW_SYSTEM=true
 
   # Pyenv segment format. The following parameters are available within the expansion.
   #
@@ -1535,6 +1539,16 @@
   typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=
   # Custom prefix.
   # typeset -g POWERLEVEL9K_TIME_PREFIX='%fat '
+
+  ##############################[ yarn_version: current yarn version ]############################
+  function prompt_yarn_version() {
+    local yarn_version=$(yarn --version 2>/dev/null)
+    [[ -z "${yarn_version}" ]] && return
+
+    p10k segment -f blue -i '' -t "${yarn_version}"
+  }
+
+  typeset -g POWERLEVEL9K_YARN_VERSION_SHOW_ON_COMMAND='yarn'
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or

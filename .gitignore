@@ -40,6 +40,7 @@ dot/.config/htop/
 dot/.config/exercism/
 dot/.config/flutter/
 dot/.config/pip/
+dot/.config/yarn/
 
 # local state
 dot/.local/state/

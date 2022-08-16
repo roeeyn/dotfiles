@@ -84,6 +84,7 @@ brew 'youtube-dl'
 brew 'zsh'
 
 ######## CASK ########
+cask '1password'
 cask 'adobe-creative-cloud'
 cask 'alfred'
 cask 'android-file-transfer'
@@ -106,7 +107,7 @@ cask 'firefox-developer-edition'
 cask 'flutter'
 cask 'folx'
 cask 'ghidra'
-# cask 'google-chrome'
+cask 'google-chrome'
 cask 'google-cloud-sdk'
 cask 'google-drive'
 cask 'hammerspoon'
@@ -114,7 +115,7 @@ cask 'http-toolkit'
 cask 'istat-menus' # Actual Version ^6
 cask 'iterm2'
 cask 'little-snitch'
-# cask 'metasploit' # Failing due to 404
+cask 'metasploit' # Failing due to 404
 cask 'micro-snitch'
 cask 'mongodb-compass'
 cask 'ngrok'
@@ -143,10 +144,3 @@ mas 'Keynote', id: 409183694
 mas 'Presentify - Screen Annotation', id: 1507246666
 mas 'Spark – Email App by Readdle', id: 1176895641
 mas 'GIPHY Capture. The GIF Maker', id: 668208984
-
-####### LUXOR #######
-brew 'automake'
-brew 'berkeley-db@4'
-brew 'boost'
-brew 'miniupnpc'
-cask 'linear-linear'

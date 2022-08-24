@@ -13,6 +13,9 @@ end
 return require("packer").startup(function(use)
 	-- My plugins here
 
+	-- REPL for any languages
+	use("metakirby5/codi.vim")
+
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
@@ -147,11 +150,15 @@ return require("packer").startup(function(use)
 	})
 
 	-- Completion
-	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-git")
 	use("hrsh7th/cmp-cmdline")
+	use("hrsh7th/cmp-git")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lua")
+	use("hrsh7th/cmp-path")
+	use("hrsh7th/cmp-calc")
+	use("hrsh7th/cmp-emoji")
+	use("ray-x/cmp-treesitter")
 	use("hrsh7th/nvim-cmp")
 
 	-- Snippets

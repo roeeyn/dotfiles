@@ -67,9 +67,8 @@ return require("packer").startup(function(use)
 	-- Documentation Generator
 	use({
 		"kkoomen/vim-doge",
-		run = function()
-			vim.fn["doge#install()"](0)
-		end,
+		-- run = ':call doge#install()',
+		run = "npm i --no-save && npm run build:binary:unix",
 	})
 
 	-- Git integration
@@ -134,6 +133,18 @@ return require("packer").startup(function(use)
 
 	-- Flutter
 	use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
+
+	-- Spacemacs like key
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
 
 	-- Completion
 	use("hrsh7th/cmp-nvim-lsp")

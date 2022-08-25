@@ -21,4 +21,6 @@ function M.reload_config()
 	vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end
 
+require("impatient")
+
 return M

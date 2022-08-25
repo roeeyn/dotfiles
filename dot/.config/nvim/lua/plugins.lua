@@ -13,6 +13,9 @@ end
 return require("packer").startup(function(use)
 	-- My plugins here
 
+	-- Optimization Plugin
+	use("lewis6991/impatient.nvim")
+
 	-- Nice LSP loader indicator
 	use("j-hui/fidget.nvim")
 

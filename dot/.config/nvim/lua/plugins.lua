@@ -12,7 +12,12 @@ end
 
 return require("packer").startup(function(use)
 	-- My plugins here
-	use("rhysd/git-messenger.vim")
+
+	-- Quick pick for specifi number jumps :34
+	use("nacro90/numb.nvim")
+
+	-- Quick startup with lazyloaded filetype
+	use("nathom/filetype.nvim")
 
 	-- Clipboard/yank history
 	use({
@@ -57,6 +62,10 @@ return require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+	use("nvim-treesitter/playground")
+
+	-- Nvim treesitter context
+	use("nvim-treesitter/nvim-treesitter-context")
 
 	-- Lualine for nice statusline in the bottom
 	use({
@@ -101,6 +110,7 @@ return require("packer").startup(function(use)
 	-- Git integration
 	-- :0Gclog to see revision of the file
 	use("tpope/vim-fugitive")
+	use("rhysd/git-messenger.vim")
 	use({
 		"ruifm/gitlinker.nvim",
 		requires = "nvim-lua/plenary.nvim",

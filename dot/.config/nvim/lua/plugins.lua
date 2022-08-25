@@ -79,6 +79,14 @@ return require("packer").startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 
+	-- Nice dashboard
+	use({
+		"goolord/alpha-nvim",
+		config = function()
+			require("roeeyn.plugins.alpha").setup()
+		end,
+	})
+
 	-- Project viewer in the side
 	use({
 		"kyazdani42/nvim-tree.lua",

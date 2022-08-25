@@ -13,6 +13,9 @@ end
 return require("packer").startup(function(use)
 	-- My plugins here
 
+	-- Close (and rename) automatically tags
+	use("windwp/nvim-ts-autotag")
+
 	-- Quick pick for specifi number jumps :34
 	use("nacro90/numb.nvim")
 
@@ -63,6 +66,9 @@ return require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 	use("nvim-treesitter/playground")
+
+	-- Incrementally select code using treesitter
+	use("RRethy/nvim-treesitter-textsubjects")
 
 	-- Nvim treesitter context
 	use("nvim-treesitter/nvim-treesitter-context")

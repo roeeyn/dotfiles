@@ -13,6 +13,26 @@ end
 return require("packer").startup(function(use)
 	-- My plugins here
 
+	-- Clipboard/yank history
+	use({
+		"AckslD/nvim-neoclip.lua",
+		requires = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("neoclip").setup()
+		end,
+	})
+
+	-- Package json info
+	use({
+		"vuki656/package-info.nvim",
+		requires = "MunifTanjim/nui.nvim",
+	})
+
+	-- Optimization Plugin
+	use("lewis6991/impatient.nvim")
+
 	-- Nice LSP loader indicator
 	use("j-hui/fidget.nvim")
 
@@ -80,6 +100,10 @@ return require("packer").startup(function(use)
 	-- Git integration
 	-- :0Gclog to see revision of the file
 	use("tpope/vim-fugitive")
+	use({
+		"ruifm/gitlinker.nvim",
+		requires = "nvim-lua/plenary.nvim",
+	})
 
 	-- Nice buffer deletion without closing the window
 	use("famiu/bufdelete.nvim")

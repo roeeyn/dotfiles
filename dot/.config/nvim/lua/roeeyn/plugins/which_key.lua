@@ -12,4 +12,10 @@ wk.register({
 		s = { "<cmd>CodiSelect<cr>", "Select filetype" },
 		o = { "<cmd>Codi!!<cr>", "Open File in REPL" },
 	},
+	g = {
+		y = { "Create GitHub Permalink" },
+	},
+	y = {
+		h = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank history" },
+	},
 }, { prefix = "<leader>" })

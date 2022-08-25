@@ -11,7 +11,7 @@ wk.register({
 	},
 	f = {
 		name = "File", -- optional group name
-		f = { "<cmd>Telescope frecency workspace=CWD<cr>", "Find file using frecency" },
+		f = { "<cmd>Telescope find_files", "Find file" },
 		s = { "Save current buffer" }, -- just a label. don't create any mapping
 		["/"] = "Fuzzy search in current buffer", -- same as above
 	},

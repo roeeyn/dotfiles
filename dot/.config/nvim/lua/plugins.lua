@@ -13,6 +13,9 @@ end
 return require("packer").startup(function(use)
 	-- My plugins here
 
+	-- Nice LSP loader indicator
+	use("j-hui/fidget.nvim")
+
 	-- REPL for any languages
 	use("metakirby5/codi.vim")
 

@@ -164,6 +164,8 @@ return require("packer").startup(function(use)
 		},
 	})
 
+	use("nvim-telescope/telescope-media-files.nvim")
+
 	-- Nice folding based on treesitter
 	use({
 		"kevinhwang91/nvim-ufo",
@@ -212,6 +214,15 @@ return require("packer").startup(function(use)
 	use("hrsh7th/cmp-emoji")
 	use("ray-x/cmp-treesitter")
 	use("hrsh7th/nvim-cmp")
+
+	use({
+		"tzachar/cmp-tabnine",
+		run = "./install.sh",
+		requires = "hrsh7th/nvim-cmp",
+	})
+
+	-- Nice icons for cmp window
+	use("onsails/lspkind.nvim")
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip")

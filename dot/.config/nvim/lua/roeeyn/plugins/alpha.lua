@@ -7,7 +7,10 @@ function M.setup()
 	end
 
 	local dashboard = require("alpha.themes.dashboard")
-	dashboard.section.header.val = {
+
+	local current_path = vim.fn.getcwd()
+
+	local lyft_header = {
 		[[  ############                                       #################            ]],
 		[[  ############                                    #######################         ]],
 		[[  ############                                  ###########################       ]],
@@ -31,6 +34,13 @@ function M.setup()
 		[[                   ####################                                           ]],
 		[[                   ################                                               ]],
 	}
+
+	local personal_header = {}
+	if current_path:find("roeeyn") then
+		dashboard.section.header.val = personal_header
+	else
+		dashboard.section.header.val = lyft_header
+	end
 
 	dashboard.section.buttons.val = {
 		dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),

@@ -165,6 +165,7 @@ return require("packer").startup(function(use)
 	})
 
 	use("nvim-telescope/telescope-media-files.nvim")
+	use("nvim-telescope/telescope-symbols.nvim")
 
 	-- Frecuent and recent files prioritized in telescope
 	use({

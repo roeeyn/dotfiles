@@ -15,4 +15,7 @@ wk.register({
 	g = {
 		y = { "Create GitHub Permalink" },
 	},
+	y = {
+		h = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank history" },
+	},
 }, { prefix = "<leader>" })

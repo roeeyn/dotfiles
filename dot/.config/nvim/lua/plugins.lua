@@ -13,6 +13,23 @@ end
 return require("packer").startup(function(use)
 	-- My plugins here
 
+	-- Clipboard/yank history
+	use({
+		"AckslD/nvim-neoclip.lua",
+		requires = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("neoclip").setup()
+		end,
+	})
+
+	-- Package json info
+	use({
+		"vuki656/package-info.nvim",
+		requires = "MunifTanjim/nui.nvim",
+	})
+
 	-- Optimization Plugin
 	use("lewis6991/impatient.nvim")
 

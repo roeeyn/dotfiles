@@ -20,3 +20,6 @@ require("roeeyn.plugins.nvim_cmp")
 require("roeeyn.plugins.luasnip")
 require("roeeyn.plugins.dap")
 require("roeeyn.plugins.which_key")
+
+require("impatient")
+require("package-info").setup()

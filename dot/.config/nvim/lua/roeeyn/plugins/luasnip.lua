@@ -27,6 +27,8 @@ ls.config.set_config({
 	},
 })
 
+require("luasnip/loaders/from_vscode").load()
+
 -- Completion
 vim.keymap.set("i", "<C-k>", function()
 	if ls.expand_or_jumpable() then
@@ -45,5 +47,3 @@ vim.keymap.set("i", "<C-l>", function()
 		ls.change_choice(1)
 	end
 end)
-
-vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/roeeyn/snippets/init.lua<CR>")

@@ -4,9 +4,9 @@ wk.register({
 	c = {
 		name = "Code",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Diagnostics Action" },
+		d = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go To Declaration" },
 		s = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature help" },
 		t = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Info" },
-		D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go To Declaration" },
 		R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename definition" },
 	},
 	f = {

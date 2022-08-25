@@ -166,6 +166,15 @@ return require("packer").startup(function(use)
 
 	use("nvim-telescope/telescope-media-files.nvim")
 
+	-- Frecuent and recent files prioritized in telescope
+	use({
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function()
+			require("telescope").load_extension("frecency")
+		end,
+		requires = { "tami5/sqlite.lua" },
+	})
+
 	-- Nice folding based on treesitter
 	use({
 		"kevinhwang91/nvim-ufo",

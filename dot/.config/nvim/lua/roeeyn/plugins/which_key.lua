@@ -3,6 +3,7 @@ local wk = require("which-key")
 wk.register({
 	f = {
 		name = "File", -- optional group name
+		f = { "<cmd>Telescope frecency workspace=CWD<cr>", "Find file using frecency" },
 		s = { "Save current buffer" }, -- just a label. don't create any mapping
 		["/"] = "Fuzzy search in current buffer", -- same as above
 	},

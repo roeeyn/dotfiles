@@ -80,6 +80,10 @@ return require("packer").startup(function(use)
 	-- Git integration
 	-- :0Gclog to see revision of the file
 	use("tpope/vim-fugitive")
+	use({
+		"ruifm/gitlinker.nvim",
+		requires = "nvim-lua/plenary.nvim",
+	})
 
 	-- Nice buffer deletion without closing the window
 	use("famiu/bufdelete.nvim")

@@ -12,4 +12,7 @@ wk.register({
 		s = { "<cmd>CodiSelect<cr>", "Select filetype" },
 		o = { "<cmd>Codi!!<cr>", "Open File in REPL" },
 	},
+	g = {
+		y = { "Create GitHub Permalink" },
+	},
 }, { prefix = "<leader>" })

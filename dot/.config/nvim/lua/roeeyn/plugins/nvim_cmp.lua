@@ -45,10 +45,14 @@ cmp.setup({
 		}),
 	}),
 	sources = cmp.config.sources({
-		{ name = "nvim_lua" },
-		{ name = "nvim_lsp" },
-		{ name = "path" },
+		{ name = "calc" },
+		{ name = "emoji" },
 		{ name = "luasnip" }, -- For luasnip users.
+		{ name = "nvim_lsp" },
+		{ name = "nvim_lua" },
+		{ name = "path" },
+		{ name = "spell" },
+		{ name = "treesitter" },
 	}, {
 		{ name = "buffer", keyword_length = 5 },
 	}),

@@ -56,7 +56,11 @@ vim.opt.conceallevel = 0
 -- Gitgutter to catch the changes faster
 vim.opt.updatetime = 100
 
+-- Timeout for whichkey to trigger
+vim.opt.timeoutlen = 600
+
 -- DoGe Global parameters
+vim.g.doge_enable_mappings = 0
 vim.g.doge_doc_standard_python = "google"
 vim.g.doge_comment_jump_modes = { "n", "s" }
 

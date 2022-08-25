@@ -13,6 +13,12 @@ end
 return require("packer").startup(function(use)
 	-- My plugins here
 
+	-- Nice LSP loader indicator
+	use("j-hui/fidget.nvim")
+
+	-- REPL for any languages
+	use("metakirby5/codi.vim")
+
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
@@ -67,9 +73,8 @@ return require("packer").startup(function(use)
 	-- Documentation Generator
 	use({
 		"kkoomen/vim-doge",
-		run = function()
-			vim.fn["doge#install()"](0)
-		end,
+		-- run = ':call doge#install()',
+		run = "npm i --no-save && npm run build:binary:unix",
 	})
 
 	-- Git integration
@@ -135,12 +140,28 @@ return require("packer").startup(function(use)
 	-- Flutter
 	use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
 
+	-- Spacemacs like key
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
+
 	-- Completion
-	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-git")
 	use("hrsh7th/cmp-cmdline")
+	use("hrsh7th/cmp-git")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lua")
+	use("hrsh7th/cmp-path")
+	use("hrsh7th/cmp-calc")
+	use("hrsh7th/cmp-emoji")
+	use("ray-x/cmp-treesitter")
 	use("hrsh7th/nvim-cmp")
 
 	-- Snippets

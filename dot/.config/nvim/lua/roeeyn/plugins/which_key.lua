@@ -13,6 +13,14 @@ wk.register({
 		o = { "<cmd>Codi!!<cr>", "Open File in REPL" },
 	},
 	g = {
+		name = "Git/GitHub",
+		b = { "<cmd>G blame<cr>", "Git blame" },
+		D = { "Diff Hunk" },
+		m = { "See Git Message" },
+		n = { "Next Hunk" },
+		o = { "Preview Hunk" },
+		p = { "Previous Hunk" },
+		x = { "Undo Hunk" },
 		y = { "Create GitHub Permalink" },
 	},
 	y = {

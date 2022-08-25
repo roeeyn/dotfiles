@@ -12,6 +12,7 @@ end
 
 return require("packer").startup(function(use)
 	-- My plugins here
+	use("rhysd/git-messenger.vim")
 
 	-- Clipboard/yank history
 	use({

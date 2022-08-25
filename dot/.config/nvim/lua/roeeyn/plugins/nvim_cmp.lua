@@ -65,7 +65,6 @@ cmp.setup({
 	}),
 	sources = cmp.config.sources({
 		{ name = "calc" },
-		{ name = "cmp_tabnine" },
 		{ name = "emoji" },
 		{ name = "luasnip" }, -- For luasnip users.
 		{ name = "nvim_lsp" },
@@ -73,6 +72,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "spell" },
 		{ name = "treesitter" },
+		{ name = "cmp_tabnine" },
 	}, {
 		{ name = "buffer", keyword_length = 5 },
 	}),

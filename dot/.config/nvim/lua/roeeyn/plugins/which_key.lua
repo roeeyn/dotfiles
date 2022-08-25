@@ -1,6 +1,14 @@
 local wk = require("which-key")
 
 wk.register({
+	c = {
+		name = "Code",
+		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Diagnostics Action" },
+		s = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature help" },
+		t = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Info" },
+		D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Go To Declaration" },
+		R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename definition" },
+	},
 	f = {
 		name = "File", -- optional group name
 		f = { "<cmd>Telescope frecency workspace=CWD<cr>", "Find file using frecency" },
@@ -23,6 +31,10 @@ wk.register({
 		p = { "Previous Hunk" },
 		x = { "Undo Hunk" },
 		y = { "Create GitHub Permalink" },
+	},
+	w = {
+		name = "Window",
+		T = { "<cmd>Twilight<cr>", "Toggle Twilight" },
 	},
 	y = {
 		h = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "Yank history" },

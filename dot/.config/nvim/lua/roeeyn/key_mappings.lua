@@ -41,11 +41,6 @@ nmap("<leader>qq", "<cmd>q<cr>")
 nmap("<leader>wq", "<cmd>wq<cr>")
 
 -- Coding
-nmap("<leader>cR", "<cmd>lua vim.lsp.buf.rename()<cr>")
-nmap("<leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-nmap("<leader>ct", "<cmd>lua vim.lsp.buf.hover()<cr>")
-nmap("<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-nmap("<leader>da", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 nmap("<leader>dn", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 nmap("<leader>dp", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
 

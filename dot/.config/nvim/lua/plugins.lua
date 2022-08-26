@@ -13,6 +13,61 @@ end
 return require("packer").startup(function(use)
 	-- My plugins here
 
+	-- Focus helper
+	use({
+		"folke/twilight.nvim",
+		config = function()
+			require("twilight").setup({
+				dimming = {
+					alpha = 0.25, -- amount of dimming
+					-- we try to get the foreground from the highlight groups or fallback color
+					-- color = { "Normal", "#ffffff" },
+					inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+				},
+				context = 10, -- amount of lines we will try to show around the current line
+				treesitter = true, -- use treesitter when available for the filetype
+				-- treesitter is used to automatically expand the visible text,
+				-- but you can further control the types of nodes that should always be fully expanded
+				expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+					"function",
+					"method",
+					"table",
+					"if_statement",
+				},
+				exclude = {}, -- exclude these filetypes
+			})
+		end,
+	})
+
+	-- Close (and rename) automatically tags
+	use("windwp/nvim-ts-autotag")
+
+	-- Quick pick for specifi number jumps :34
+	use("nacro90/numb.nvim")
+
+	-- Quick startup with lazyloaded filetype
+	use("nathom/filetype.nvim")
+
+	-- Clipboard/yank history
+	use({
+		"AckslD/nvim-neoclip.lua",
+		requires = {
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		config = function()
+			require("neoclip").setup()
+		end,
+	})
+
+	-- Package json info
+	use({
+		"vuki656/package-info.nvim",
+		requires = "MunifTanjim/nui.nvim",
+	})
+
+	-- Optimization Plugin
+	use("lewis6991/impatient.nvim")
+
 	-- Nice LSP loader indicator
 	use("j-hui/fidget.nvim")
 
@@ -36,11 +91,26 @@ return require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+	use("nvim-treesitter/playground")
+
+	-- Incrementally select code using treesitter
+	use("RRethy/nvim-treesitter-textsubjects")
+
+	-- Nvim treesitter context
+	use("nvim-treesitter/nvim-treesitter-context")
 
 	-- Lualine for nice statusline in the bottom
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
+
+	-- Nice dashboard
+	use({
+		"goolord/alpha-nvim",
+		config = function()
+			require("roeeyn.plugins.alpha").setup()
+		end,
 	})
 
 	-- Project viewer in the side
@@ -80,6 +150,11 @@ return require("packer").startup(function(use)
 	-- Git integration
 	-- :0Gclog to see revision of the file
 	use("tpope/vim-fugitive")
+	use("rhysd/git-messenger.vim")
+	use({
+		"ruifm/gitlinker.nvim",
+		requires = "nvim-lua/plenary.nvim",
+	})
 
 	-- Nice buffer deletion without closing the window
 	use("famiu/bufdelete.nvim")
@@ -114,6 +189,9 @@ return require("packer").startup(function(use)
 			{ "nvim-treesitter/nvim-treesitter", opt = true },
 		},
 	})
+
+	use("nvim-telescope/telescope-media-files.nvim")
+	use("nvim-telescope/telescope-symbols.nvim")
 
 	-- Nice folding based on treesitter
 	use({
@@ -163,6 +241,15 @@ return require("packer").startup(function(use)
 	use("hrsh7th/cmp-emoji")
 	use("ray-x/cmp-treesitter")
 	use("hrsh7th/nvim-cmp")
+
+	use({
+		"tzachar/cmp-tabnine",
+		run = "./install.sh",
+		requires = "hrsh7th/nvim-cmp",
+	})
+
+	-- Nice icons for cmp window
+	use("onsails/lspkind.nvim")
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip")

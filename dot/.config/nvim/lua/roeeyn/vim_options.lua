@@ -43,13 +43,6 @@ vim.opt.relativenumber = true
 -- Ignore folders in searche
 vim.opt.wildignore = "*/node_modules/*,*/target/*,*/tmp/*,*/venv/*"
 
--- Highlight trailing spaces
-vim.cmd([[
-  highlight ExtraWhitespace ctermbg=red guibg=red
-  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-  match ExtraWhitespace /\s\+$/
-]])
-
 -- Show quotes in JSON
 vim.opt.conceallevel = 0
 

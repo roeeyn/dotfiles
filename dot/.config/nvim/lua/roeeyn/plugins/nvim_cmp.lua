@@ -11,6 +11,25 @@ cmp.setup({
 			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
 		end,
 	},
+	formatting = {
+		format = function(entry, vim_item)
+			-- fancy icons and a name of kind
+			vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+
+			-- set a name for each source
+			vim_item.menu = ({
+				buffer = "[Buffer]",
+				nvim_lsp = "[LSP]",
+				nvim_lua = "[Lua]",
+				cmp_tabnine = "[TabNine]",
+				path = "[Path]",
+				spell = "[Spell]",
+				calc = "[Calc]",
+				emoji = "[Emoji]",
+			})[entry.source.name]
+			return vim_item
+		end,
+	},
 	window = {
 		-- completion = cmp.config.window.bordered(),
 		-- documentation = cmp.config.window.bordered(),
@@ -53,6 +72,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "spell" },
 		{ name = "treesitter" },
+		{ name = "cmp_tabnine" },
 	}, {
 		{ name = "buffer", keyword_length = 5 },
 	}),

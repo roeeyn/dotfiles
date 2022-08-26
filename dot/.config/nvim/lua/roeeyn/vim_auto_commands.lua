@@ -10,6 +10,34 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- Clearing red for empty spaces in scratch
+local empty_spaces_ag = vim.api.nvim_create_augroup("allowed-empty-spaces", { clear = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = empty_spaces_ag,
+	pattern = "",
+	callback = function()
+		-- Highlight trailing spaces
+		vim.cmd([[
+      highlight ExtraWhitespace ctermbg=red guibg=red
+      autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+      match ExtraWhitespace /\s\+$/
+    ]])
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = empty_spaces_ag,
+	pattern = "{}",
+	callback = function()
+		-- Disable Highlighting of trailing spaces
+		vim.cmd([[
+      highlight clear ExtraWhitespace
+      autocmd ColorScheme * highlight clear ExtraWhitespace
+    ]])
+	end,
+})
+
 -- Adding comment string for elixir patterns
 local set_comment_string_ag = vim.api.nvim_create_augroup("set-commentstring-ag", { clear = true })
 

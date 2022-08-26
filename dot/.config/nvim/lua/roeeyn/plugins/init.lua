@@ -23,3 +23,4 @@ require("roeeyn.plugins.which_key")
 
 require("impatient")
 require("package-info").setup()
+require("numb").setup()

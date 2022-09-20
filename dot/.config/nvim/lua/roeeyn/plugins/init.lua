@@ -22,5 +22,7 @@ require("roeeyn.plugins.dap")
 require("roeeyn.plugins.which_key")
 
 require("impatient")
-require("package-info").setup()
+require("package-info").setup({
+	package_manager = "npm",
+})
 require("numb").setup()

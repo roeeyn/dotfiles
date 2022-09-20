@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	group = empty_spaces_ag,
-	pattern = "{}",
+	pattern = { "{}", "terminal" },
 	callback = function()
 		-- Disable Highlighting of trailing spaces
 		vim.cmd([[

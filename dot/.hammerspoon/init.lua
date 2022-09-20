@@ -4,7 +4,7 @@ hs.loadSpoon("SpoonInstall")
 spoon.SpoonInstall.use_syncinstall = true
 Install = spoon.SpoonInstall
 
-Install:andUse("UnsplashRandom")
+Install:andUse("UnsplashZ")
 
 -- Keybindings for launching apps
 local appKeys = {

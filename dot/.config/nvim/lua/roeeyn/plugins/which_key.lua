@@ -9,6 +9,16 @@ wk.register({
 		t = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover Info" },
 		R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename definition" },
 	},
+	d = {
+		b = { "[Debug] Toggle Breakpoint" },
+		c = { "[Debug] Start/Continue" },
+		h = { "<cmd>lua require'dap.ui.widgets'.hover()<cr>", "[Debug] Hover" },
+		n = { "[Diag] Go Next" },
+		o = { "[DoGe] Generate docs" },
+		p = { "[Diag] Go Prev" },
+		r = { "[Debug] Open REPL" },
+		u = { "<cmd>lua require'dapui'.()<CR>", "[Debug] Toggle UI" },
+	},
 	f = {
 		name = "File", -- optional group name
 		f = { "<cmd>Telescope find_files<cr>", "Find file" },

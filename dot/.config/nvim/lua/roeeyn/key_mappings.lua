@@ -56,8 +56,6 @@ nmap("<leader>cx", "<cmd>lua vim.fn.setqflist({})<cr>")
 nmap("<leader>do", "<cmd>DogeGenerate<cr>")
 
 -- Debugger
-nmap("<leader>dwh", '<cmd>lua require"dap.ui.widgets".hover()<cr>')
-nmap("<leader>dws", '<cmd>lua local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes)<cr>')
 nmap("<leader>db", '<cmd>lua require"dap".toggle_breakpoint()<cr>')
 nmap("<leader>dso", '<cmd>lua require"dap".step_out()<cr>')
 nmap("<leader>dsi", '<cmd>lua require"dap".step_into()<cr>')
@@ -67,7 +65,6 @@ nmap("<leader>dc", '<cmd>lua require"dap".continue()<cr>')
 nmap("<leader>dsu", '<cmd>lua require"dap".up()<cr>')
 nmap("<leader>dsd", '<cmd>lua require"dap".down()<cr>')
 nmap("<leader>dr", '<cmd>lua require"dap".repl.open({}, "vsplit")<CR><C-w>l')
-nmap("<leader>dut", '<cmd>lua require"dapui".toggle()<CR>')
 
 -- Telescope
 nmap("<leader>dtc", "<cmd>Telescope dap commands<cr>")

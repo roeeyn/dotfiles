@@ -99,6 +99,13 @@ return require("packer").startup(function(use)
 	-- Nvim treesitter context
 	use("nvim-treesitter/nvim-treesitter-context")
 
+	use({
+		"kyazdani42/nvim-web-devicons",
+		config = function()
+			require("nvim-web-devicons").setup()
+		end,
+	})
+
 	-- Lualine for nice statusline in the bottom
 	use({
 		"nvim-lualine/lualine.nvim",

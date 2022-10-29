@@ -110,8 +110,6 @@ source $ZSH/oh-my-zsh.sh
 #####################################################
 
 # For homebrew
-export PATH="/opt/homebrew/bin:$PATH"
-
 export LANG=en_US.UTF-8
 set -o vi
 
@@ -195,6 +193,10 @@ fi
 
 # For ping and another brew commands
 export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
+#
+# For n (node version manager)
+export N_PREFIX="/Users/roeeyn/"
+export PATH="/Users/roeeyn/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

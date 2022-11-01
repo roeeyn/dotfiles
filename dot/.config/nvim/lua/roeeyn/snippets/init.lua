@@ -4,6 +4,7 @@
 
 require("roeeyn.snippets.python_snippets")
 require("roeeyn.snippets.lua_snippets")
+require("roeeyn.snippets.js_snippets")
 
 local ls = require("luasnip")
 --

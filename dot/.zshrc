@@ -110,8 +110,6 @@ source $ZSH/oh-my-zsh.sh
 #####################################################
 
 # For homebrew
-export PATH="/opt/homebrew/bin:$PATH"
-
 export LANG=en_US.UTF-8
 set -o vi
 
@@ -154,19 +152,11 @@ export PATH="/Users/rodrigom/.local/bin:$PATH"
 export GOPATH="/Users/roeeyn/go"
 export PATH="$GOPATH/bin:$PATH"
 
-# For virtualenvwrapper
-export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
-export PATH="/Users/rodrigom/Library/Python/3.8/bin:$PATH"
-export PATH="/usr/local/bin:usr/local/share/python:$PATH"
-
 # For john stuff
 ## For intel processor
 export PATH="$PATH:/usr/local/share/john"
 ## For M1 processor
 export PATH="$PATH:/opt/homebrew/share/john"
-
-# For ping and another brew commands
-export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 # source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
@@ -174,7 +164,16 @@ export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
 
 if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
 
-export OPENSSL_ROOT_DIR="$(brew --prefix openssl)"
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+
+# For ruby stuff
+if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+fi
+
+# For ping and another brew commands
+export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
 
 # For pyenv
 eval "$(pyenv init -)"
@@ -188,15 +187,17 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # Python venv automatic activation
 eval "$(aactivator init)"
 
-export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+# For virtualenvwrapper
+export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
+export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"
+export PATH="/usr/local/bin:usr/local/share/python:$PATH"
+
+export OPENSSL_ROOT_DIR="$(brew --prefix openssl)"
+
+#
+# For n (node version manager)
+export N_PREFIX="/Users/roeeyn/"
+export PATH="/Users/roeeyn/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# For ruby stuff
-if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
-  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
-  export PATH=`gem environment gemdir`/bin:$PATH
-fi
-
-eval "$(/Users/rodrigom/src/idl/idldev-tool/bin/idldev init -)"

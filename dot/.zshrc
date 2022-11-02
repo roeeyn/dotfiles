@@ -199,5 +199,7 @@ export OPENSSL_ROOT_DIR="$(brew --prefix openssl)"
 export N_PREFIX="/Users/roeeyn/"
 export PATH="/Users/roeeyn/bin:$PATH"
 
+eval "$(/Users/rodrigom/src/idl/idldev-tool/bin/idldev init -)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -280,14 +280,14 @@ return require("packer").startup(function(use)
 	use("roeeyn/luatab-labeler")
 
 	--[[
-  -- MISSING PLUGINS TO CONFIGURE:
-    " Emmet
-    Plug 'mattn/emmet-vim'
+	-- MISSING PLUGINS TO CONFIGURE:
+	" Emmet
+	Plug 'mattn/emmet-vim'
 
-    " Git integration
-    Plug 'stsewd/fzf-checkout.vim'
+	" Git integration
+	Plug 'stsewd/fzf-checkout.vim'
 
-  --]]
+	--]]
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

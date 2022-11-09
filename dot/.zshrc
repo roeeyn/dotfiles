@@ -1,9 +1,5 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# Profiling
+# zmodload zsh/zprof
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -15,7 +11,7 @@ export ZSH="/Users/rodrigom/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -75,7 +71,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting docker yarn)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -149,7 +145,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 export PATH="/Users/rodrigom/.local/bin:$PATH"
 
 # For golang
-export GOPATH="/Users/roeeyn/go"
+export GOPATH="/Users/rodrigom/go"
 export PATH="$GOPATH/bin:$PATH"
 
 # For john stuff
@@ -189,17 +185,26 @@ eval "$(aactivator init)"
 
 # For virtualenvwrapper
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
-export PATH="/Users/roeeyn/Library/Python/3.8/bin:$PATH"
+export PATH="/Users/rodrigom/Library/Python/3.8/bin:$PATH"
 export PATH="/usr/local/bin:usr/local/share/python:$PATH"
 
 export OPENSSL_ROOT_DIR="$(brew --prefix openssl)"
 
 #
 # For n (node version manager)
-export N_PREFIX="/Users/roeeyn/"
-export PATH="/Users/roeeyn/bin:$PATH"
+export N_PREFIX="/Users/rodrigom/"
+export PATH="/Users/rodrigom/bin:$PATH"
 
 eval "$(/Users/rodrigom/src/idl/idldev-tool/bin/idldev init -)"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+### lyft_localdevtools_shell_rc start
+##DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+if [[ -f "/usr/local/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
+    source "/usr/local/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
+fi
+##lyft_localdevtools_shell_rc end
+
+eval "$(starship init zsh)"
+
+### Profiling
+# zprof

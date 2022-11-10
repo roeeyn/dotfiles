@@ -43,6 +43,8 @@ dot/.config/flutter/
 dot/.config/neofetch/
 dot/.config/pip/
 dot/.config/yarn/
+dot/.config/nvim/.luarc.json
+dot/.config/simple-update-notifier/
 
 # local state
 dot/.local/state/

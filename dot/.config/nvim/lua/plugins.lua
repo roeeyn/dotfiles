@@ -179,12 +179,6 @@ return require("packer").startup(function(use)
 	})
 
 	-- Great fuzzy finder
-	use({
-		"junegunn/fzf",
-		run = function()
-			vim.fn["fzf#install"](0)
-		end,
-	})
 	use("junegunn/fzf.vim")
 
 	-- Telescope Dependencies

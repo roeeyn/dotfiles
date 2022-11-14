@@ -4,6 +4,21 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# On slow systems, checking the cached .zcompdump file to see if it must be
+# regenerated adds a noticable delay to zsh startup.  This little hack restricts
+# it to once a day.  It should be pasted into your own completion file.
+#
+# The globbing is a little complicated here:
+# - '#q' is an explicit glob qualifier that makes globbing work within zsh's [[ ]] construct.
+# - 'N' makes the glob pattern evaluate to nothing when it doesn't match (rather than throw a globbing error)
+# - '.' matches "regular files"
+# - 'mh+24' matches files (or directories or whatever) that are older than 24 hours.
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/rodrigom/.oh-my-zsh"
 
@@ -27,7 +42,7 @@ export ZSH="/Users/rodrigom/.oh-my-zsh"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
 # DISABLE_UPDATE_PROMPT="true"
@@ -187,8 +202,6 @@ eval "$(aactivator init)"
 export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
 export PATH="/Users/rodrigom/Library/Python/3.8/bin:$PATH"
 export PATH="/usr/local/bin:usr/local/share/python:$PATH"
-
-export OPENSSL_ROOT_DIR="$(brew --prefix openssl)"
 
 #
 # For n (node version manager)

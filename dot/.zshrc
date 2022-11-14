@@ -26,7 +26,7 @@ export ZSH="/Users/rodrigom/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -120,9 +120,11 @@ source $ZSH/oh-my-zsh.sh
 ######## Aquí empieza el desvergue viejón! ##########
 #####################################################
 
-# For homebrew
 export LANG=en_US.UTF-8
 set -o vi
+
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # This removes from history the commands starting with a space
 setopt HIST_IGNORE_SPACE
@@ -137,11 +139,6 @@ alias gba='git branch -a | fzf'
 alias gwl='git worktree list'
 alias gwa='git worktree add'
 alias gwp='git worktree prune'
-alias rgi=rogit
-alias rgim='rogit -m'
-alias dsr='docker stop $(docker ps | awk '\''{print $1}'\'' | grep -v CONTAINER)'
-alias hcr='heroku container:release web -a'
-alias hcp='heroku container:push web -a'
 alias sayv='say -v Paulina'
 
 # Tmux sessionizer
@@ -163,33 +160,10 @@ export PATH="/Users/rodrigom/.local/bin:$PATH"
 export GOPATH="/Users/rodrigom/go"
 export PATH="$GOPATH/bin:$PATH"
 
-# For john stuff
-## For intel processor
-export PATH="$PATH:/usr/local/share/john"
-## For M1 processor
-export PATH="$PATH:/opt/homebrew/share/john"
-
-# The next line updates PATH for the Google Cloud SDK.
-# source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-# source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-
-if [ ! "$TMUX" = "" ]; then export TERM=xterm-256color; fi
-
-export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
-
-# For ruby stuff
-if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
-  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
-  export PATH=`gem environment gemdir`/bin:$PATH
-fi
-
-# For ping and another brew commands
-export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
-
 # For pyenv
-eval "$(pyenv init -)"
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$(pyenv root)/shims:/$(pyenv root)/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # For pyenv virtual env
 eval "$(pyenv virtualenv-init -)"
@@ -198,12 +172,6 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # Python venv automatic activation
 eval "$(aactivator init)"
 
-# For virtualenvwrapper
-export PATH="/usr/local/opt/python/libexec/bin:/usr/local/sbin:$PATH"
-export PATH="/Users/rodrigom/Library/Python/3.8/bin:$PATH"
-export PATH="/usr/local/bin:usr/local/share/python:$PATH"
-
-#
 # For n (node version manager)
 export N_PREFIX="/Users/rodrigom/"
 export PATH="/Users/rodrigom/bin:$PATH"

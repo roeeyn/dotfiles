@@ -2,9 +2,9 @@
 --              List of all the plugins customization               --
 ----------------------------------------------------------------------
 
+require("roeeyn.plugins.treesitter")
 require("roeeyn.plugins.luatab")
 require("roeeyn.plugins.indent_blankline")
-require("roeeyn.plugins.treesitter")
 require("roeeyn.plugins.lualine")
 require("roeeyn.plugins.fidget")
 require("roeeyn.plugins.gitlinker")
@@ -25,4 +25,3 @@ require("impatient")
 require("package-info").setup({
 	package_manager = "npm",
 })
-require("numb").setup()

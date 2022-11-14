@@ -1,5 +1,6 @@
 ##### PREFLIGHT ########
 tap 'homebrew/cask-fonts'
+tap 'homebrew/cask-versions'
 tap 'mas-cli/tap'
 
 ##### FONTS #####
@@ -29,11 +30,13 @@ brew 'pre-commit'
 brew 'pulseaudio'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
+brew 'python3'
 brew 'speedtest-cli'
 brew 'ripgrep'
 brew 'rustup-init'
 brew 'rust-analyzer' # IDE good experience for rust
 brew 'showkey' # Simple keystroke visualizer
+brew 'starship' # Nice terminal prompt
 brew 'speedtest-cli'
 brew 'stow'
 brew 'stylua'

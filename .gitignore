@@ -46,6 +46,9 @@ dot/.config/yarn/
 dot/.config/nvim/.luarc.json
 dot/.config/simple-update-notifier/
 
+# Lua RC
+.luarc.json
+
 # local state
 dot/.local/state/
 dot/.local/share/

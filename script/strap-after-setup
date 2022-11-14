@@ -3,12 +3,6 @@ set -e
 
 # After brew installed goes here!
 
-echo "Installing Python dependencies..."
-pip3 install rogit wakatime black aactivator pynvim ansible-lint[community,yamllint]
-
-echo "Installing NPM global dependencies..."
-npm i -g prettier pyright bash-language-server ansible-language-server typescript-language-server dockerfile-language-server-nodejs svelte-language-server vscode-langservers-extracted
-
 # Decrypting keys
 echo 'Decrypting vault passwords...'
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519.pub ~/.dotfiles/dot/.ssh/id_ed25519.pub.enc
@@ -50,7 +44,6 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 
     # OMZ plugins
     echo "Installing oh my zsh plugins..."
-    git clone https://github.com/zsh-users/zsh-docker.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-docker
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
@@ -58,17 +51,13 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "Installing tmux package manager..."
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-    # Install Plug (Vim package manager)
-    echo "Installing Plug (Vim package manager)..."
-    curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim | sh
-
     # Intall TabNine
     echo "Installing TabNine..."
     git clone --depth 1 https://github.com/codota/tabnine-vim ~/tabnine-vim
 
-    # Installing powerlevel10k
-    echo "Installing powerlevel10k..."
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    # Oh my zshrc will update the zshrc file
+    rm ~/.zshrc
+    stow dot/ --target=$HOME
 
 else
     echo "Detected oh my zsh installation... skipping it"

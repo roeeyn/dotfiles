@@ -32,38 +32,6 @@ hs.hotkey.bind({ "cmd", "shift" }, "V", function()
 	hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
 
--- Sizing windows
-local function resize_window(key)
-	local win = hs.window.focusedWindow()
-	local f = win:frame()
-	local screen = win:screen()
-	local max = screen:frame()
-
-	f.y = max.y
-	f.h = max.h
-
-	if key == "1" then
-		f.x = max.x
-		f.w = max.w / 2
-	elseif key == "2" then
-		f.x = max.x + (max.w / 2)
-		f.w = max.w / 2
-	elseif key == "0" then
-		f.x = max.x
-		f.w = max.w
-	end
-
-	win:setFrame(f)
-end
-
-local sizing_keys = { "0", "1", "2" }
-
-for _, value in ipairs(sizing_keys) do
-	hs.hotkey.bind(hyper, value, function()
-		resize_window(value)
-	end)
-end
-
 -- Bind appKeys
 for key, app in pairs(appKeys) do
 	hs.hotkey.bind(hyper, key, function()

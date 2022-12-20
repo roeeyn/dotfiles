@@ -4,21 +4,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# On slow systems, checking the cached .zcompdump file to see if it must be
-# regenerated adds a noticable delay to zsh startup.  This little hack restricts
-# it to once a day.  It should be pasted into your own completion file.
-#
-# The globbing is a little complicated here:
-# - '#q' is an explicit glob qualifier that makes globbing work within zsh's [[ ]] construct.
-# - 'N' makes the glob pattern evaluate to nothing when it doesn't match (rather than throw a globbing error)
-# - '.' matches "regular files"
-# - 'mh+24' matches files (or directories or whatever) that are older than 24 hours.
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/rodrigom/.oh-my-zsh"
 
@@ -42,7 +27,7 @@ ZSH_THEME="robbyrussell"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+# DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
 # DISABLE_UPDATE_PROMPT="true"
@@ -124,7 +109,7 @@ export LANG=en_US.UTF-8
 set -o vi
 
 # Set PATH, MANPATH, etc., for Homebrew.
-# eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # This removes from history the commands starting with a space
 setopt HIST_IGNORE_SPACE
@@ -160,32 +145,11 @@ export PATH="/Users/rodrigom/.local/bin:$PATH"
 export GOPATH="/Users/rodrigom/go"
 export PATH="$GOPATH/bin:$PATH"
 
-# For pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# For pyenv virtual env
-eval "$(pyenv virtualenv-init -)"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
 # Python venv automatic activation
 eval "$(aactivator init)"
 
-# For n (node version manager)
-export N_PREFIX="/Users/rodrigom/"
-export PATH="/Users/rodrigom/bin:$PATH"
-
-eval "$(/Users/rodrigom/src/idl/idldev-tool/bin/idldev init -)"
-
-### lyft_localdevtools_shell_rc start
-##DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-if [[ -f "/usr/local/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/usr/local/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
-fi
-##lyft_localdevtools_shell_rc end
-
+# Starting starship
 eval "$(starship init zsh)"
 
-### Profiling
+## Profiling
 # zprof

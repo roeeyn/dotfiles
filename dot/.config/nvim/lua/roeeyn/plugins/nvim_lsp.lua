@@ -4,6 +4,9 @@ local function on_attach()
 	-- "Big Tech" "Cash Money" Johnson
 end
 
+require("mason").setup()
+require("mason-lspconfig").setup()
+
 local folding_capabilities = vim.lsp.protocol.make_client_capabilities()
 folding_capabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,

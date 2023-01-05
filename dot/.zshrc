@@ -160,3 +160,5 @@ if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_r
     source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
 fi
 ### lyft_localdevtools_shell_rc end
+
+source /Users/rodrigom/.docker/init-zsh.sh || true # Added by Docker Desktop

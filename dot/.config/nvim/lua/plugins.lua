@@ -217,14 +217,14 @@ return require("packer").startup(function(use)
 		requires = "hrsh7th/nvim-cmp",
 	})
 
-  -- LSP, Dap, etc manager
-  use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-  }
+	-- LSP, Dap, etc manager
+	use({
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+	})
 
-  use 'mfussenegger/nvim-lint'
-  use 'mhartington/formatter.nvim'
+	use("mfussenegger/nvim-lint")
+	use("mhartington/formatter.nvim")
 
 	-- Nice icons for cmp window
 	use("onsails/lspkind.nvim")

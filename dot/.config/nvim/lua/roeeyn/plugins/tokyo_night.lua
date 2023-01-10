@@ -7,7 +7,7 @@ require("tokyonight").setup({
 		},
 	},
 	on_colors = function(colors)
-		colors.dark5 = "#93d8d9"
+		-- colors.dark5 = "#93d8d9"
 		colors.fg_gutter = "#555f8b"
 	end,
 })

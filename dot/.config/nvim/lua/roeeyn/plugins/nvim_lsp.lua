@@ -1,7 +1,12 @@
 -- LSP Configuration
-local function on_attach()
+--  This function gets run when an LSP connects to a particular buffer.
+local on_attach = function(_, bufnr)
 	-- TODO: TJ told me to do this and I should do it because he is Telescopic
 	-- "Big Tech" "Cash Money" Johnson
+	-- Create a command `:Format` local to the LSP buffer
+	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+		vim.lsp.buf.format()
+	end, { desc = "Format current buffer with LSP" })
 end
 
 local folding_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -12,81 +17,45 @@ folding_capabilities.textDocument.foldingRange = {
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities(folding_capabilities)
 
-require("lspconfig").ansiblels.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-require("lspconfig").dockerls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-require("lspconfig").elixirls.setup({
-	-- Unix (Install from here -> https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#elixirls)
-	on_attach = on_attach,
-	capabilities = capabilities,
-	cmd = { "/Users/roeeyn/.local/bin/elixir-ls/language_server.sh" },
-})
-require("lspconfig").bashls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-require("lspconfig").gopls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-require("lspconfig").tsserver.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-require("lspconfig").pyright.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = { python = { venv_path = "~/.pyenv/versions" } },
-})
-require("lspconfig").rust_analyzer.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-require("lspconfig").html.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-require("lspconfig").svelte.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
-require("lspconfig").jsonls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	commands = {
-		Format = {
-			function()
-				vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
-			end,
+local servers = {
+	ansiblels = {},
+	dockerls = {},
+	bashls = {},
+	-- gopls={},
+	tsserver = {},
+	pyright = {
+		python = {
+			venv_path = "~/.pyenv/versions",
 		},
 	},
-})
-require("lspconfig").sumneko_lua.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
+	rust_analyzer = {},
+	html = {},
+	svelte = {},
+	jsonls = {},
+	sumneko_lua = {
 		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-			},
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim", "hs", "spoon" },
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = {
-				enable = false,
-			},
+			workspace = { checkThirdParty = false },
+			telemetry = { enable = false },
 		},
 	},
+}
+
+-- Setup mason so it can manage external tooling
+require("mason").setup()
+
+-- Ensure the servers above are installed
+local mason_lspconfig = require("mason-lspconfig")
+
+mason_lspconfig.setup({
+	ensure_installed = vim.tbl_keys(servers),
+})
+
+mason_lspconfig.setup_handlers({
+	function(server_name)
+		require("lspconfig")[server_name].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = servers[server_name],
+		})
+	end,
 })

@@ -2,15 +2,19 @@
 --                List of plugins used within NeoVim                --
 ----------------------------------------------------------------------
 
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local is_bootstrap = false
 
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP =
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+	is_bootstrap = true
+	vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+	vim.cmd([[packadd packer.nvim]])
 end
 
-return require("packer").startup(function(use)
+require("packer").startup(function(use)
+	-- Packer can manage itself
+	use("wbthomason/packer.nvim")
+
 	-- My plugins here
 
 	-- Close (and rename) automatically tags
@@ -39,14 +43,8 @@ return require("packer").startup(function(use)
 	-- Optimization Plugin
 	use("lewis6991/impatient.nvim")
 
-	-- Nice LSP loader indicator
-	use("j-hui/fidget.nvim")
-
 	-- REPL for any languages
 	use("metakirby5/codi.vim")
-
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
 
 	-- Nice indentation lines
 	use("lukas-reineke/indent-blankline.nvim")
@@ -58,9 +56,11 @@ return require("packer").startup(function(use)
 	use("wakatime/vim-wakatime")
 
 	-- Nvim Treesitter for nice code traversal
-	use({
+	use({ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
+		run = function()
+			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+		end,
 	})
 	use("nvim-treesitter/playground")
 
@@ -112,6 +112,8 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
+
 	-- Commenting code easily
 	use("terrortylor/nvim-comment")
 
@@ -125,20 +127,21 @@ return require("packer").startup(function(use)
 	-- Git integration
 	-- :0Gclog to see revision of the file
 	use("tpope/vim-fugitive")
+	use("tpope/vim-rhubarb")
 	use("rhysd/git-messenger.vim")
 	use({
 		"ruifm/gitlinker.nvim",
 		requires = "nvim-lua/plenary.nvim",
 	})
 
-	-- Nice buffer deletion without closing the window
-	use("famiu/bufdelete.nvim")
-
 	-- GitHub Copilot
 	use("github/copilot.vim")
 
 	-- git gutter
 	use("airblade/vim-gitgutter")
+
+	-- Nice buffer deletion without closing the window
+	use("famiu/bufdelete.nvim")
 
 	-- Harpoon
 	use({
@@ -154,10 +157,11 @@ return require("packer").startup(function(use)
 		"nvim-telescope/telescope.nvim",
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope-fzy-native.nvim" },
-			{ "nvim-treesitter/nvim-treesitter", opt = true },
 		},
 	})
+
+	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 
 	use("nvim-telescope/telescope-media-files.nvim")
 	use("nvim-telescope/telescope-symbols.nvim")
@@ -172,7 +176,20 @@ return require("packer").startup(function(use)
 	})
 
 	-- LSP configuration
-	use("neovim/nvim-lspconfig")
+	use({ -- LSP Configuration & Plugins
+		"neovim/nvim-lspconfig",
+		requires = {
+			-- Automatically install LSPs to stdpath for neovim
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+
+			-- Useful status updates for LSP
+			"j-hui/fidget.nvim",
+
+			-- Additional lua configuration, makes nvim stuff amazing
+			"folke/neodev.nvim",
+		},
+	})
 
 	-- Markdown preview
 	use({
@@ -200,16 +217,23 @@ return require("packer").startup(function(use)
 	})
 
 	-- Completion
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-cmdline")
-	use("hrsh7th/cmp-git")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-nvim-lua")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-calc")
-	use("hrsh7th/cmp-emoji")
-	use("ray-x/cmp-treesitter")
-	use("hrsh7th/nvim-cmp")
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-git",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-calc",
+			"hrsh7th/cmp-emoji",
+			"ray-x/cmp-treesitter",
+			-- Snippets
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+		},
+	})
 
 	use({
 		"tzachar/cmp-tabnine",
@@ -220,10 +244,6 @@ return require("packer").startup(function(use)
 	-- Nice icons for cmp window
 	use("onsails/lspkind.nvim")
 
-	-- Snippets
-	use("L3MON4D3/LuaSnip")
-	use("saadparwaiz1/cmp_luasnip")
-
 	-- Debugger
 	use("mfussenegger/nvim-dap")
 	use("rcarriga/nvim-dap-ui")
@@ -231,31 +251,37 @@ return require("packer").startup(function(use)
 	use("mfussenegger/nvim-dap-python")
 	use("nvim-telescope/telescope-dap.nvim")
 
+	-- Nice tab
+	use({ "alvarosevilla95/luatab.nvim", requires = "kyazdani42/nvim-web-devicons" })
+
 	----------------------------------------------------------------------
 	--                        Local plugins WIP                         --
 	----------------------------------------------------------------------
 
-	-- use "/Users/rodrigom/src/nvim-wakatime-worktree"
-	use("roeeyn/nvim-wakatime-worktree")
+	-- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
+	local has_plugins, plugins = pcall(require, "custom.plugins")
+	if has_plugins then
+		plugins(use)
+	end
 
-	-- use "/Users/roeeyn/src/lua-tab-labeler/master"
-	use("roeeyn/luatab-labeler")
-
-	--[[
-  -- MISSING PLUGINS TO CONFIGURE:
-    " Emmet
-    Plug 'mattn/emmet-vim'
-
-    " Git integration
-    Plug 'stsewd/fzf-checkout.vim'
-
-  --]]
-
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if PACKER_BOOTSTRAP then
+	if is_bootstrap then
 		require("packer").sync()
 	end
 
 	print("Plugins loaded from Packer")
 end)
+
+-- When we are bootstrapping a configuration, it doesn't
+-- make sense to execute the rest of the init.lua.
+--
+-- You'll need to restart nvim, and then it will work.
+if is_bootstrap then
+	print("==================================")
+	print("    Plugins are being installed")
+	print("    Wait until Packer completes,")
+	print("       then restart nvim")
+	print("==================================")
+	return
+end
+
+require("roeeyn")

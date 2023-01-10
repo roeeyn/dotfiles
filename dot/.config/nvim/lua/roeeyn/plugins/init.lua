@@ -25,3 +25,6 @@ require("impatient")
 require("package-info").setup({
 	package_manager = "npm",
 })
+
+-- Setup neovim lua configuration
+require("neodev").setup()

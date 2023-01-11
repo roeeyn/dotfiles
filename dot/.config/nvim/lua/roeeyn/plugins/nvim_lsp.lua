@@ -9,9 +9,6 @@ local on_attach = function(_, bufnr)
 	end, { desc = "Format current buffer with LSP" })
 end
 
-require("mason").setup()
-require("mason-lspconfig").setup()
-
 local folding_capabilities = vim.lsp.protocol.make_client_capabilities()
 folding_capabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,

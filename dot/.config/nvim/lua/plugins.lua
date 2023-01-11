@@ -112,8 +112,6 @@ require("packer").startup(function(use)
 		end,
 	})
 
-	use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
-
 	-- Commenting code easily
 	use("terrortylor/nvim-comment")
 
@@ -240,15 +238,6 @@ require("packer").startup(function(use)
 		run = "./install.sh",
 		requires = "hrsh7th/nvim-cmp",
 	})
-
-	-- LSP, Dap, etc manager
-	use({
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-	})
-
-	use("mfussenegger/nvim-lint")
-	use("mhartington/formatter.nvim")
 
 	-- Nice icons for cmp window
 	use("onsails/lspkind.nvim")

@@ -1,14 +1,14 @@
 -- Needed settings for font issues (Telescope)
-vim.opt.encoding = "utf-8"
+vim.opt.encoding = 'utf-8'
 
 -- Column limit 120
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = '120'
 
 -- Cursor line
 vim.opt.cursorline = true
 
 -- Move to underscore words
-vim.opt.iskeyword = vim.opt.iskeyword - "_"
+vim.opt.iskeyword = vim.opt.iskeyword - '_'
 
 -- Reads changes from external events
 vim.opt.autoread = true
@@ -36,7 +36,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- Ignore folders in searche
-vim.opt.wildignore = "*/node_modules/*,*/target/*,*/tmp/*,*/venv/*"
+vim.opt.wildignore = '*/node_modules/*,*/target/*,*/tmp/*,*/venv/*'
 
 -- Show quotes in JSON
 vim.opt.conceallevel = 0
@@ -49,18 +49,18 @@ vim.opt.timeoutlen = 600
 
 -- DoGe Global parameters
 vim.g.doge_enable_mappings = 0
-vim.g.doge_doc_standard_python = "google"
-vim.g.doge_comment_jump_modes = { "n", "s" }
+vim.g.doge_doc_standard_python = 'google'
+vim.g.doge_comment_jump_modes = { 'n', 's' }
 
 -- Winbar Config (Top right with modifier)
-vim.opt.winbar = "%=%m %f"
+vim.opt.winbar = '%=%m %f'
 
 -- Split vertically to the right
 vim.opt.splitright = true
 
 -- Snippets
-vim.g.snippets = "luasnip"
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+vim.g.snippets = 'luasnip'
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 -- Copilot
 vim.g.copilot_enabled = false

@@ -2,11 +2,11 @@
 --                          Snippets Init                           --
 ----------------------------------------------------------------------
 
-require("roeeyn.snippets.python_snippets")
-require("roeeyn.snippets.lua_snippets")
-require("roeeyn.snippets.js_snippets")
+require 'roeeyn.snippets.python_snippets'
+require 'roeeyn.snippets.lua_snippets'
+require 'roeeyn.snippets.js_snippets'
 
-local ls = require("luasnip")
+local ls = require 'luasnip'
 --
 -- This is a snippet creator
 -- s(<trigger>, <nodes>)
@@ -18,14 +18,14 @@ local s = ls.snippet
 -- Function nodes always return a string to insert
 local f = ls.function_node
 
-ls.add_snippets("all", {
-	ls.parser.parse_snippet("qelv", "¡¡tú eres la mera vrg papirrin!!"),
-	s(
-		"curtime",
-		f(function()
-			return os.date("%D - %H:%M")
-		end)
-	),
+ls.add_snippets('all', {
+  ls.parser.parse_snippet('qelv', '¡¡tú eres la mera vrg papirrin!!'),
+  s(
+    'curtime',
+    f(function()
+      return os.date '%D - %H:%M'
+    end)
+  ),
 }, {
-	key = "all",
+  key = 'all',
 })

@@ -112,8 +112,6 @@ require("packer").startup(function(use)
 		end,
 	})
 
-	use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
-
 	-- Commenting code easily
 	use("terrortylor/nvim-comment")
 

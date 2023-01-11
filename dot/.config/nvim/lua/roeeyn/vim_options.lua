@@ -16,6 +16,16 @@ vim.opt.autoread = true
 -- Needed for cool colors
 vim.opt.termguicolors = true
 
+-- Is how many columns of whitespace a tab keypress or a backspace keypress is worth
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+
+-- How many columns of whitespace a level of identation is worth
+vim.opt.shiftwidth = 2
+
+-- Use spaces instead of \t
+vim.opt.expandtab = true
+
 -- The cursor is moved onto the window with 'scrolloff' screen lines around it
 vim.opt.scrolloff = 8
 

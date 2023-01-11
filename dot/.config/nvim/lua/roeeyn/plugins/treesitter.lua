@@ -1,5 +1,20 @@
 -- Treesitter configuration
 require("nvim-treesitter.configs").setup({
+	-- Add languages to be installed here that you want installed for treesitter
+	ensure_installed = {
+		"go",
+		"javascript",
+		"json",
+		"json5",
+		"jsonc",
+		"lua",
+		"python",
+		"rust",
+		"typescript",
+		"help",
+		"vim",
+	},
+
 	highlight = { enable = true },
 	-- indent = {enable = true}
 	autotag = {

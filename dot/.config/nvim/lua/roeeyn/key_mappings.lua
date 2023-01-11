@@ -2,6 +2,7 @@
 --                List of all the keymaps registered                --
 ----------------------------------------------------------------------
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 local function map(mode, shortcut, command)
 	vim.api.nvim_set_keymap(mode, shortcut, command, {

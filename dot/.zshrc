@@ -126,6 +126,10 @@ alias gwa='git worktree add'
 alias gwp='git worktree prune'
 alias sayv='say -v Paulina'
 
+# Lyft Only Aliases
+alias lvv='lyftvenv venv'
+alias lvs='lyftvenv status'
+
 # Tmux sessionizer
 bindkey -s ^f "tmux-sessionizer -c\n"
 bindkey -s ^o "tmux-sessionizer\n"

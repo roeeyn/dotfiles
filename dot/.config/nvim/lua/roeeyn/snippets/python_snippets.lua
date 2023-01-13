@@ -2,7 +2,7 @@
 --                         Python Snippets                          --
 ----------------------------------------------------------------------
 
-local ls = require("luasnip")
+local ls = require 'luasnip'
 
 -- This is a snippet creator
 -- s(<trigger>, <nodes>)
@@ -13,7 +13,7 @@ local sn = ls.snippet_node
 -- This is a format node
 -- It takes a format string, and a list of nodes
 -- fmt(<fmt_string>, {...nodes})
-local fmt = require("luasnip.extras.fmt").fmt
+local fmt = require('luasnip.extras.fmt').fmt
 
 -- This is an insert node
 -- it takes a position (like $1) and optionally some default text
@@ -22,7 +22,7 @@ local i = ls.insert_node
 
 -- Repeats a node
 -- rep(<position>)
-local rep = require("luasnip.extras").rep
+local rep = require('luasnip.extras').rep
 
 -- Give us a list of selections from a list
 local c = ls.choice_node
@@ -30,64 +30,64 @@ local c = ls.choice_node
 -- Set a text node
 local t = ls.text_node
 
-ls.add_snippets("python", {
-	s(
-		"sfprint",
-		fmt(
-			[[
+ls.add_snippets('python', {
+  s(
+    'sfprint',
+    fmt(
+      [[
     print("{}:", {})
   ]],
-			{
-				i(1),
-				rep(1),
-			}
-		)
-	),
-	s(
-		"fprint",
-		fmt(
-			[[
+      {
+        i(1),
+        rep(1),
+      }
+    )
+  ),
+  s(
+    'fprint',
+    fmt(
+      [[
     print("{}"*88)
     print("{}:", {})
     print("{}"*88)
   ]],
-			{
-				c(1, { t("*"), t("!"), t("/"), t("%") }),
-				i(2),
-				rep(2),
-				rep(1),
-			}
-		)
-	),
-	s(
-		"def",
-		fmt(
-			[[
+      {
+        c(1, { t '*', t '!', t '/', t '%' }),
+        i(2),
+        rep(2),
+        rep(1),
+      }
+    )
+  ),
+  s(
+    'def',
+    fmt(
+      [[
     def {}({}){}:
         pass
   ]],
-			{
-				i(1),
-				c(2, { i(2), t("self") }),
-				c(3, {
-					t(" -> None"),
-					t(" -> int"),
-					t(" -> int | None"),
-					t(" -> str"),
-					t(" -> str | None"),
-					t(" -> Any"),
-					sn(3, {
-						t(" -> "),
-						i(1),
-					}),
-				}),
-			}
-		)
-	),
-	s(
-		"handler",
-		fmt(
-			[[
+      {
+        i(1),
+        c(2, { i(2), t 'self' }),
+        c(3, {
+          t ' -> None',
+          t ' -> int',
+          t ' -> int | None',
+          t ' -> str',
+          t ' -> str | None',
+          t ' -> Any',
+          sn(3, {
+            t ' -> ',
+            i(1),
+          }),
+        }),
+      }
+    )
+  ),
+  s(
+    'handler',
+    fmt(
+      [[
     from __future__ import annotations
 
     {}
@@ -106,34 +106,34 @@ ls.add_snippets("python", {
     )
 
   ]],
-			{
-				c(1, { t("from lyft_logging import logging"), t("import logging") }),
-				c(2, {
-					t("from lyft_logging.logging import StructuredKeyValueAdapter as Logger"),
-					t("from logging import Logger"),
-				}),
-				i(3),
-				rep(3),
-				rep(3),
-				rep(3),
-			}
-		)
-	),
-	s(
-		"try",
-		fmt(
-			[[
+      {
+        c(1, { t 'from lyft_logging import logging', t 'import logging' }),
+        c(2, {
+          t 'from lyft_logging.logging import StructuredKeyValueAdapter as Logger',
+          t 'from logging import Logger',
+        }),
+        i(3),
+        rep(3),
+        rep(3),
+        rep(3),
+      }
+    )
+  ),
+  s(
+    'try',
+    fmt(
+      [[
     try:
         pass
 
     except {}:
         pass
   ]],
-			{
-				i(1),
-			}
-		)
-	),
+      {
+        i(1),
+      }
+    )
+  ),
 }, {
-	key = "python",
+  key = 'python',
 })

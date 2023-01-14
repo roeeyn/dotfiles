@@ -35,7 +35,7 @@ local servers = {
   sumneko_lua = {
     Lua = {
       diagnostics = {
-        globals = { 'hs', 'spoon' },
+        globals = { 'hs', 'spoon', 'vim' },
       },
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },

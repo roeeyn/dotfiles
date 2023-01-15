@@ -28,33 +28,10 @@ local function tmap(shortcut, command)
   map('t', shortcut, command)
 end
 
--- Buffers
-nmap('<leader>bb', '<cmd>Telescope buffers<cr>')
-nmap('<leader>bd', '<cmd>Bdelete<cr>')
-nmap('<leader>bx', '<cmd>bd<cr>')
-nmap('<leader>bl', '<C-^>')
-nmap('<leader>bn', '<cmd>bn<cr>')
-nmap('<leader>bp', '<cmd>bp<cr>')
-nmap('<leader>cy', 'yypk <cmd>CommentToggle<CR>j')
-nmap('<leader>fs', '<cmd>w<cr>')
+-- Misc
 nmap('<leader>q1', '<cmd>q!<cr>')
 nmap('<leader>qq', '<cmd>q<cr>')
 nmap('<leader>wq', '<cmd>wq<cr>')
-
--- Coding
-nmap('<leader>dn', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-nmap('<leader>dp', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-
--- Quickfix
-nmap('<leader>cc', '<cmd>cclose<cr>')
-nmap('<leader>cg', '<cmd>cc<cr>')
-nmap('<leader>cn', '<cmd>cnext<cr>')
-nmap('<leader>co', '<cmd>copen<cr>')
-nmap('<leader>cp', '<cmd>cprevious<cr>')
-nmap('<leader>cx', '<cmd>lua vim.fn.setqflist({})<cr>')
-
--- Documentation
-nmap('<leader>do', '<cmd>DogeGenerate<cr>')
 
 -- Debugger
 nmap('<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<cr>')
@@ -74,7 +51,6 @@ nmap('<leader>dtb', '<cmd>Telescope dap list_breakpoints<cr>')
 nmap('<leader>dtv', '<cmd>Telescope dap variables<cr>')
 nmap('<leader>dtf', '<cmd>Telescope dap frames<cr>')
 nmap('<leader>eO', '<cmd>lua require("telescope.builtin").diagnostics{}<cr>')
-nmap('<leader>f/', '<cmd>Telescope current_buffer_fuzzy_find<cr>')
 nmap('<leader>fc', '<cmd>Telescope commands<cr>')
 nmap('<leader>fg', '<cmd>Telescope git_files<cr>')
 nmap('<leader>fk', '<cmd>Telescope keymaps<cr>')
@@ -116,17 +92,6 @@ nmap('<leader>gp', '<cmd>GitGutterPrevHunk<cr>')
 nmap('<leader>gD', '<cmd>GitGutterDiffOrig<cr>')
 nmap('<leader>gx', '<cmd>GitGutterUndoHunk<cr>')
 
--- Harpoon
-nmap('<leader>ha', '<cmd>lua require("harpoon.mark").add_file()<cr>')
-nmap('<leader>hh', '<cmd>lua require("roeeyn.plugins.harpoon").open_harpoon_telescope()<cr>')
-nmap('<leader>hj', '<cmd>lua require("harpoon.ui").nav_file(1)<cr>')
-nmap('<leader>hk', '<cmd>lua require("harpoon.ui").nav_file(2)<cr>')
-nmap('<leader>hl', '<cmd>lua require("harpoon.ui").nav_file(3)<cr>')
-nmap('<leader>hn', '<cmd>lua require("harpoon.ui").nav_next()<cr>')
-nmap('<leader>h;', '<cmd>lua require("harpoon.ui").nav_file(4)<cr>')
-nmap('<leader>ho', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>')
-nmap('<leader>hp', '<cmd>lua require("harpoon.ui").nav_prev()<cr>')
-
 -- Nvim Tree
 nmap('<leader>pf', '<cmd>NvimTreeFindFile<cr>')
 nmap('<leader>pt', '<cmd>NvimTreeToggle<cr>')
@@ -146,12 +111,6 @@ nmap('<leader>tp', '<cmd>tabprevious<cr>')
 nmap('<leader>to', '<cmd>tabo<cr>')
 nmap('<leader>tl', '<cmd>tabl<cr>')
 nmap('<leader>tx', '<cmd>tabclose<cr>')
-
--- Testing
-nmap('<leader>ua', '<cmd>TestSuite<cr>')
-nmap('<leader>uf', '<cmd>TestFile<cr>')
-nmap('<leader>ul', '<cmd>TestLast<cr>')
-nmap('<leader>ut', '<cmd>TestNearest<cr>')
 
 -- Terminal
 tmap('<esc>', '<C-\\><C-n>')

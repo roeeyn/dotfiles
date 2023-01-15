@@ -1,29 +1,62 @@
 local wk = require 'which-key'
 
 wk.register({
+  b = {
+    name = 'Buffers',
+    b = { '<cmd>Telescope buffers<cr>', 'Telescope buffers' },
+    d = { '<cmd>Bdelete<cr>', 'Soft remove buffer' },
+    x = { '<cmd>bd<cr>', 'Hard remove buffer' },
+    l = { '<C-^>', 'Last buffer' },
+    n = { '<cmd>bn<cr>', 'Next Buffer' },
+    p = { '<cmd>bp<cr>', 'Previous buffer' },
+  },
   c = {
     name = 'Code',
-    a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Diagnostics Action' },
-    d = { '<cmd>lua vim.lsp.buf.declaration()<cr>', 'Go To Declaration' },
-    s = { '<cmd>lua vim.lsp.buf.signature_help()<cr>', 'Signature help' },
-    t = { '<cmd>lua vim.lsp.buf.hover()<cr>', 'Hover Info' },
-    R = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename definition' },
+    R = { '<cmd>lua vim.lsp.buf.rename()<cr>', '[LSP] Rename definition' },
+    a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', '[LSP] Diagn. Action' },
+    c = { '<cmd>cclose<cr>', '[Quickfix] Close' },
+    d = { '<cmd>lua vim.lsp.buf.declaration()<cr>', '[LSP] Go To Declaration' },
+    g = { '<cmd>cc<cr>', '[Quickfix] Go to current element' },
+    n = { '<cmd>cnext<cr>', '[Quickfix] Go to next element' },
+    o = { '<cmd>copen<cr>', '[Quickfix] Open quickfix list' },
+    p = { '<cmd>cprevious<cr>', '[Quickfix] Go to prev element' },
+    s = { '<cmd>lua vim.lsp.buf.signature_help()<cr>', '[LSP] Signature help' },
+    t = { '<cmd>lua vim.lsp.buf.hover()<cr>', '[LSP] Hover Info' },
+    x = { '<cmd>lua vim.fn.setqflist({})<cr>', '[Quickfix] Clear quickfix' },
+    y = { 'yypk <cmd>CommentToggle<CR>j', '[Misc] Duplicate and comment' },
   },
   d = {
+    name = 'Debug/Diag.',
     b = { '[Debug] Toggle Breakpoint' },
     c = { '[Debug] Start/Continue' },
     h = { "<cmd>lua require'dap.ui.widgets'.hover()<cr>", '[Debug] Hover' },
-    n = { '[Diag] Go Next' },
-    o = { '[DoGe] Generate docs' },
-    p = { '[Diag] Go Prev' },
+    n = { '<cmd>lua vim.diagnostic.goto_next()<cr>', '[Diag] Go Next' },
+    o = { '<cmd>DogeGenerate<cr>', '[DoGe] Generate docs' },
+    p = { '<cmd>lua vim.diagnostic.goto_prev()<cr>', '[Diag] Go Prev' },
     r = { '[Debug] Open REPL' },
     u = { "<cmd>lua require'dapui'.()<CR>", '[Debug] Toggle UI' },
   },
   f = {
     name = 'File', -- optional group name
     f = { '<cmd>Telescope find_files<cr>', 'Find file' },
-    s = { 'Save current buffer' }, -- just a label. don't create any mapping
-    ['/'] = 'Fuzzy search in current buffer', -- same as above
+    -- s = { 'Save current buffer' }, -- just a label. don't create any mapping
+    s = { '<cmd>w<cr>', 'Save current buffer' },
+    S = { '<cmd>wa<cr>', 'Save all buffers' },
+    -- ['/'] = 'Fuzzy search in current buffer', -- same as above
+    ['/'] = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Fuzzy search in current buffer' },
+  },
+  h = {
+    name = 'Harpoon',
+    a = { '<cmd>lua require("harpoon.mark").add_file()<cr>', 'Add file' },
+    h = { '<cmd>lua require("roeeyn.plugins.harpoon").open_harpoon_telescope()<cr>', 'Open Telescope Marks' },
+    j = { '<cmd>lua require("harpoon.ui").nav_file(1)<cr>', 'Go to mark 1' },
+    k = { '<cmd>lua require("harpoon.ui").nav_file(2)<cr>', 'Go to mark 2' },
+    l = { '<cmd>lua require("harpoon.ui").nav_file(3)<cr>', 'Go to mark 3' },
+    [';'] = { '<cmd>lua require("harpoon.ui").nav_file(4)<cr>', 'Go to mark 4' },
+    n = { '<cmd>lua require("harpoon.ui").nav_next()<cr>', 'Go to next mark' },
+    p = { '<cmd>lua require("harpoon.ui").nav_prev()<cr>', 'Go to prev mark' },
+    o = { '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>', 'Toggle quick menu' },
+    x = { '<cmd>lua require("harpoon.mark").clear_all()<cr>', 'Clear all marks' },
   },
   r = {
     name = 'REPL',
@@ -41,6 +74,13 @@ wk.register({
     p = { 'Previous Hunk' },
     x = { 'Undo Hunk' },
     y = { 'Create GitHub Permalink' },
+  },
+  u = {
+    name = 'Testing',
+    a = { '<cmd>TestSuite<cr>', 'Test all suite' },
+    f = { '<cmd>TestFile<cr>', 'Test file' },
+    l = { '<cmd>TestLast<cr>', 'Test last' },
+    t = { '<cmd>TestNearest<cr>', 'Test nearest' },
   },
   w = {
     name = 'Window',

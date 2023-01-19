@@ -13,3 +13,4 @@ require('tokyonight').setup {
 }
 
 vim.cmd [[colorscheme tokyonight]]
+vim.cmd [[hi CursorLineNr guifg=#5dccf5]]

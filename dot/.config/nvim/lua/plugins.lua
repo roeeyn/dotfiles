@@ -88,13 +88,8 @@ require('packer').startup(function(use)
     end,
   }
 
-  -- Project viewer in the side
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      { 'kyazdani42/nvim-web-devicons', opt = true },
-    },
-  }
+  -- File Browsing with Telescope
+  use { 'nvim-telescope/telescope-file-browser.nvim' }
 
   -- Awesome testing
   use 'vim-test/vim-test'

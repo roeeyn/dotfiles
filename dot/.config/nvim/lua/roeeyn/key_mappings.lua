@@ -92,9 +92,8 @@ nmap('<leader>gp', '<cmd>GitGutterPrevHunk<cr>')
 nmap('<leader>gD', '<cmd>GitGutterDiffOrig<cr>')
 nmap('<leader>gx', '<cmd>GitGutterUndoHunk<cr>')
 
--- Nvim Tree
-nmap('<leader>pf', '<cmd>NvimTreeFindFile<cr>')
-nmap('<leader>pt', '<cmd>NvimTreeToggle<cr>')
+-- File browsing
+nmap('<leader>pt', '<cmd>Telescope file_browser<cr>')
 
 -- Printing * for python
 nmap('<leader>pp', 'oprint("*"*20)<esc>yypkoprint()')

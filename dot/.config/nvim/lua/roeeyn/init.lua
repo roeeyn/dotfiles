@@ -8,17 +8,16 @@ require 'roeeyn.vim_options'
 require 'roeeyn.plugins'
 require 'roeeyn.snippets'
 
-local M = {}
-
-function M.reload_config()
-  for name, _ in pairs(package.loaded) do
-    if name:match '^roeeyn' and not name:match 'nvim-tree' then
-      package.loaded[name] = nil
-    end
-  end
-
-  dofile(vim.env.MYVIMRC)
-  vim.notify('Nvim configuration reloaded!', vim.log.levels.INFO)
+P = function(v)
+  print(vim.inspect(v))
+  return v
 end
 
-return M
+RELOAD = function(...)
+  return require('plenary.reload').reload_module(...)
+end
+
+R = function(name)
+  RELOAD(name)
+  return require(name)
+end

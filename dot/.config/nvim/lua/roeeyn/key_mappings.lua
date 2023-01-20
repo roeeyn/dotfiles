@@ -71,10 +71,6 @@ nmap('<leader>en', '<cmd>lnext<cr>')
 nmap('<leader>eo', '<cmd>lua require("telescope.builtin").diagnostics{bufnr=0}<cr>')
 nmap('<leader>ep', '<cmd>lprevious<cr>')
 
--- Neovim Config
-nmap('<leader>fed', '<cmd>e ~/.dotfiles<cr>')
-nmap('<leader>fer', '<cmd>lua require("roeeyn").reload_config()<cr>')
-
 -- Flutter
 nmap('<leader>fo', '<cmd>FlutterOutlineToggle<cr>')
 

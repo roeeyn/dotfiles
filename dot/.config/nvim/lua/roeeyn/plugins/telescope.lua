@@ -17,6 +17,11 @@ require('telescope').setup {
     media_files = {
       find_cmd = 'rg', -- find command (defaults to `fd`)
     },
+    file_browser = {
+      theme = 'ivy',
+      hijack_netrw = true,
+      hidden = true,
+    },
   },
   defaults = {
     mappings = {
@@ -35,4 +40,5 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 require('telescope').load_extension 'harpoon'
 require('telescope').load_extension 'dap'
+require('telescope').load_extension 'file_browser'
 require('telescope').load_extension 'media_files'

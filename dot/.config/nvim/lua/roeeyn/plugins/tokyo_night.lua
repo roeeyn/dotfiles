@@ -16,6 +16,9 @@ require('tokyonight').setup {
     hl.Visual = {
       bg = '#2f334d',
     }
+    hl.ColorColumn = {
+      bg = '#222436',
+    }
   end,
 }
 

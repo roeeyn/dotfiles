@@ -247,9 +247,13 @@ require('packer').startup(function(use)
   -- Nice tab
   use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' }
 
+  -- Luv docs
+  use 'nanotee/luv-vimdocs'
+
   ----------------------------------------------------------------------
   --                        Local plugins WIP                         --
   ----------------------------------------------------------------------
+  -- use '/Users/roeeyn/src/nvim-config-tutor'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')

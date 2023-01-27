@@ -7,7 +7,6 @@ require('tokyonight').setup {
     },
   },
   on_colors = function(colors)
-    -- colors.dark5 = "#93d8d9"
     colors.fg_gutter = '#555f8b'
   end,
   on_highlights = function(hl, c)
@@ -16,6 +15,9 @@ require('tokyonight').setup {
     }
     hl.Visual = {
       bg = '#2f334d',
+    }
+    hl.ColorColumn = {
+      bg = '#222436',
     }
   end,
 }

@@ -21,6 +21,7 @@ require('telescope').setup {
       theme = 'ivy',
       hijack_netrw = true,
       hidden = true,
+      path = '%:p:h',
     },
   },
   defaults = {

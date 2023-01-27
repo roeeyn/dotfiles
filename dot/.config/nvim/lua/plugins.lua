@@ -113,8 +113,8 @@ require('packer').startup(function(use)
   -- Documentation Generator
   use {
     'kkoomen/vim-doge',
-    -- run = ':call doge#install()',
-    run = 'npm i --no-save && npm run build:binary:unix',
+    run = ':call doge#install()',
+    -- run = 'npm i --no-save && npm run build:binary:unix',
   }
 
   -- Git integration

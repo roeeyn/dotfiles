@@ -3,6 +3,7 @@ local wk = require 'which-key'
 wk.register({
   b = {
     name = 'Buffers',
+    D = { '<cmd>%bd|e#|bd#<cr>', 'Close other buffers' },
     b = { '<cmd>Telescope buffers<cr>', 'Telescope buffers' },
     d = { '<cmd>Bdelete<cr>', 'Soft remove buffer' },
     x = { '<cmd>bd<cr>', 'Hard remove buffer' },

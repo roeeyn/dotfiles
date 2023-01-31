@@ -30,13 +30,13 @@ ls.config.set_config {
 require('luasnip/loaders/from_vscode').load()
 
 -- Completion
-vim.keymap.set('i', '<C-k>', function()
+vim.keymap.set('i', '<C-j>', function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
 end)
 
-vim.keymap.set('i', '<C-j>', function()
+vim.keymap.set('i', '<C-k>', function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end

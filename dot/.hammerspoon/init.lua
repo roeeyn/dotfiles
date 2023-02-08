@@ -11,8 +11,8 @@ local appKeys = {
   a = 'Slack',
   p = 'Postman',
   r = 'Arc',
-  s = 'Spotify',
   t = 'Alacritty',
+  x = 'Firefox Developer Edition',
 }
 
 Install:andUse('Caffeine', {

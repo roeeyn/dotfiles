@@ -43,6 +43,7 @@ vim.opt.conceallevel = 0
 
 -- Gitgutter to catch the changes faster
 vim.opt.updatetime = 100
+vim.g.gitgutter_map_keys = 0
 
 -- Timeout for whichkey to trigger
 vim.opt.timeoutlen = 600

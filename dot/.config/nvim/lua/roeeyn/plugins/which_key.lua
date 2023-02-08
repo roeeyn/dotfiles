@@ -21,6 +21,7 @@ wk.register({
     d = { '<cmd>lua vim.lsp.buf.declaration()<cr>', '[LSP] Go To Declaration' },
     f = { '[Comment] Frame one line' },
     g = { '<cmd>cc<cr>', '[Quickfix] Go to current element' },
+    l = { '<cmd>Telescope quickfix<cr>', '[Quickfix] List quickfix elements' },
     m = { '[Comment] Frame multiple lines' },
     n = { '<cmd>cnext<cr>', '[Quickfix] Go to next element' },
     o = { '<cmd>copen<cr>', '[Quickfix] Open quickfix list' },

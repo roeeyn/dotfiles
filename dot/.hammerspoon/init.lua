@@ -9,15 +9,9 @@ Install:andUse 'UnsplashZ'
 -- Keybindings for launching apps
 local appKeys = {
   a = 'Slack',
-  c = 'Visual Studio Code',
-  d = 'DataGrip',
-  l = 'Telegram',
-  m = 'Spark',
   p = 'Postman',
-  s = 'Spotify',
+  r = 'Arc',
   t = 'Alacritty',
-  v = 'Vivaldi',
-  w = 'WhatsApp',
   x = 'Firefox Developer Edition',
 }
 

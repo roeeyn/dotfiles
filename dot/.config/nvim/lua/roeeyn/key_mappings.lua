@@ -12,10 +12,6 @@ local function map(mode, shortcut, command)
   })
 end
 
-local function nmap(shortcut, command)
-  map('n', shortcut, command)
-end
-
 local function vmap(shortcut, command)
   map('v', shortcut, command)
 end
@@ -28,96 +24,8 @@ local function tmap(shortcut, command)
   map('t', shortcut, command)
 end
 
--- Misc
-nmap('<leader>q1', '<cmd>q!<cr>')
-nmap('<leader>qq', '<cmd>q<cr>')
-nmap('<leader>wq', '<cmd>wq<cr>')
-
--- Debugger
-nmap('<leader>db', '<cmd>lua require"dap".toggle_breakpoint()<cr>')
-nmap('<leader>dso', '<cmd>lua require"dap".step_out()<cr>')
-nmap('<leader>dsi', '<cmd>lua require"dap".step_into()<cr>')
-nmap('<leader>dsv', '<cmd>lua require"dap".step_over()<cr>')
-nmap('<leader>dst', '<cmd>lua require"dap".stop()<cr>')
-nmap('<leader>dc', '<cmd>lua require"dap".continue()<cr>')
-nmap('<leader>dsu', '<cmd>lua require"dap".up()<cr>')
-nmap('<leader>dsd', '<cmd>lua require"dap".down()<cr>')
-nmap('<leader>dr', '<cmd>lua require"dap".repl.open({}, "vsplit")<CR><C-w>l')
-
--- Telescope
-nmap('<leader>dtc', '<cmd>Telescope dap commands<cr>')
-nmap('<leader>dtf', '<cmd>Telescope dap configurations<cr>')
-nmap('<leader>dtb', '<cmd>Telescope dap list_breakpoints<cr>')
-nmap('<leader>dtv', '<cmd>Telescope dap variables<cr>')
-nmap('<leader>dtf', '<cmd>Telescope dap frames<cr>')
-nmap('<leader>eO', '<cmd>lua require("telescope.builtin").diagnostics{}<cr>')
-nmap('<leader>fc', '<cmd>Telescope commands<cr>')
-nmap('<leader>fg', '<cmd>Telescope git_files<cr>')
-nmap('<leader>fk', '<cmd>Telescope keymaps<cr>')
-nmap('<leader>fl', '<cmd>Telescope flutter commands<cr>')
-nmap('<leader>ft', '<cmd>Telescope builtin<cr>')
-nmap('<leader>gd', '<cmd>Telescope lsp_definitions<cr>')
-nmap('<leader>gi', '<cmd>Telescope lsp_implementations<cr>')
-nmap('<leader>gr', '<cmd>Telescope lsp_references<cr>')
-nmap('<leader>gT', '<cmd>Telescope lsp_type_definitions<cr>')
-nmap('<leader>gt', '<cmd>Telescope git_status<cr>')
-nmap('<leader>hf', '<cmd>Telescope help_tags<cr>')
-nmap('<leader>p/', '<cmd>Telescope live_grep<cr>')
-
--- Errors
-nmap('<leader>ec', '<cmd>lclose<cr>')
-nmap('<leader>el', '<cmd>lua vim.diagnostic.open_float()<cr>')
-nmap('<leader>en', '<cmd>lnext<cr>')
-nmap('<leader>eo', '<cmd>lua require("telescope.builtin").diagnostics{bufnr=0}<cr>')
-nmap('<leader>ep', '<cmd>lprevious<cr>')
-
--- Flutter
-nmap('<leader>fo', '<cmd>FlutterOutlineToggle<cr>')
-
--- Fugitive
-nmap('<leader>gs', '<cmd>G<cr>4j')
-nmap('<leader>gP', '<cmd>G push<cr>')
-
--- Git Worktrees
-nmap('<leader>gw', '<cmd>lua require("telescope").extensions.git_worktree.git_worktrees()<cr>')
-
--- Git Gutter
-nmap('<leader>go', '<cmd>GitGutterPreviewHunk<cr>')
-nmap('<leader>gn', '<cmd>GitGutterNextHunk<cr>')
-nmap('<leader>gp', '<cmd>GitGutterPrevHunk<cr>')
-nmap('<leader>gD', '<cmd>GitGutterDiffOrig<cr>')
-nmap('<leader>gx', '<cmd>GitGutterUndoHunk<cr>')
-
--- File browsing
-nmap('<leader>pt', '<cmd>Telescope file_browser<cr>')
-
--- Printing * for python
-nmap('<leader>pp', 'oprint("*"*20)<esc>yypkoprint()')
-
--- Tabs
-nmap('<leader>t1', '<cmd>tabnext 1<cr>')
-nmap('<leader>t2', '<cmd>tabnext 2<cr>')
-nmap('<leader>t3', '<cmd>tabnext 3<cr>')
-nmap('<leader>t4', '<cmd>tabnext 4<cr>')
-nmap('<leader>t5', '<cmd>tabnext 5<cr>')
-nmap('<leader>tc', '<cmd>tabnew<cr>')
-nmap('<leader>tn', '<cmd>tabnext<cr>')
-nmap('<leader>tp', '<cmd>tabprevious<cr>')
-nmap('<leader>to', '<cmd>tabo<cr>')
-nmap('<leader>tl', '<cmd>tabl<cr>')
-nmap('<leader>tx', '<cmd>tabclose<cr>')
-
 -- Terminal
 tmap('<esc>', '<C-\\><C-n>')
-
--- Windows
-nmap('<leader>wh', '<C-W>h')
-nmap('<leader>wj', '<C-W>j')
-nmap('<leader>wk', '<C-W>k')
-nmap('<leader>wl', '<C-W>l')
-nmap('<leader>wO', '<C-W>o')
-nmap('<leader>wo', '<cmd>vertical resize -10<cr>')
-nmap('<leader>wp', '<cmd>vertical resize +10<cr>')
 
 -- Moving lines up and down in visual mode
 vmap('J', ":m '>+1<CR>gv=gv")

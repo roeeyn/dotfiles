@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('FileType', {
   group = empty_spaces_ag,
-  pattern = { alpha_filetype, 'help', 'TelescopePrompt', 'TelescopeResults' },
+  pattern = { alpha_filetype, 'help', 'lspinfo', 'TelescopePrompt', 'TelescopeResults' },
   command = 'match none',
 })
 

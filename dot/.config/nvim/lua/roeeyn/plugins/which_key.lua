@@ -73,6 +73,7 @@ wk.register({
     h = { '<cmd>Telescope help_tags<cr>', '[Telescope] Find help tags' },
     k = { '<cmd>Telescope keymaps<cr>', '[Telescope] Find keymaps' },
     -- s = { 'Save current buffer' }, -- just a label. don't create any mapping
+    r = { '<cmd>Telescope resume<cr>', '[Telescope] Resume' },
     s = { '<cmd>w<cr>', '[File] Save current buffer' },
     S = { '<cmd>wa<cr>', '[File] Save all buffers' },
     t = { '<cmd>Telescope builtin<cr>', '[Telescope] builtin' },

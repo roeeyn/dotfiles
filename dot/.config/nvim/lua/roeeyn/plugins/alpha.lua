@@ -86,7 +86,7 @@ function M.setup()
   dashboard.section.header.opts.hl = 'Include'
   dashboard.section.buttons.opts.hl = 'Keyword'
 
-  dashboard.opts.opts.noautocmd = true
+  dashboard.config.opts.noautocmd = true
   alpha.setup(dashboard.opts)
 end
 

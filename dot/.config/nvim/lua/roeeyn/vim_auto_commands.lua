@@ -11,31 +11,27 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Clearing red for empty spaces in scratch
-local empty_spaces_ag = vim.api.nvim_create_augroup('allowed-empty-spaces', { clear = true })
+local empty_spaces_ag = vim.api.nvim_create_augroup('highlight-trailing-spaces', { clear = true })
+local alpha_filetype = 'dashboard'
 
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.cmd 'highlight ExtraWhitespace ctermbg=red guibg=red'
+
+vim.api.nvim_create_autocmd('FileType', {
   group = empty_spaces_ag,
-  pattern = '',
-  callback = function()
-    -- Highlight trailing spaces
-    vim.cmd [[
-      highlight ExtraWhitespace ctermbg=red guibg=red
-      autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-      match ExtraWhitespace /\s\+$/
-    ]]
-  end,
+  pattern = '*',
+  command = [[match ExtraWhitespace /\s\+$/]],
 })
 
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd('FileType', {
   group = empty_spaces_ag,
-  pattern = { '{}', 'terminal' },
-  callback = function()
-    -- Disable Highlighting of trailing spaces
-    vim.cmd [[
-      highlight clear ExtraWhitespace
-      autocmd ColorScheme * highlight clear ExtraWhitespace
-    ]]
-  end,
+  pattern = { alpha_filetype, 'help', 'TelescopePrompt', 'TelescopeResults' },
+  command = 'match none',
+})
+
+vim.api.nvim_create_autocmd('User', {
+  group = empty_spaces_ag,
+  pattern = 'AlphaReady',
+  command = 'set filetype=' .. alpha_filetype,
 })
 
 -- Adding comment string for elixir patterns
@@ -60,17 +56,20 @@ vim.api.nvim_create_autocmd('BufFilePost', {
 })
 
 -- Packer compile whenever plugins.lua is updated
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]]
+local packer_ag = vim.api.nvim_create_augroup('packer-user-config', { clear = true })
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = packer_ag,
+  pattern = 'plugins.lua',
+  command = 'source <afile> | PackerCompile',
+})
 
 -- Highlight Yanked text
-vim.cmd [[
-  augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=250}
-  augroup END
-]]
+local yank_ag = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = yank_ag,
+  callback = function()
+    vim.highlight.on_yank { timeout = 250, on_visual = true }
+  end,
+})

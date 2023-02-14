@@ -95,6 +95,7 @@ wk.register({
     o = { '<cmd>GitGutterPreviewHunk<cr>', '[Git] Preview Hunk' },
     p = { '<cmd>GitGutterPrevHunk<cr>', '[Git] Prev Hunk' },
     s = { '<cmd>G<cr>4j', '[Git] status' },
+    S = { '<cmd>G add --all<cr>', '[Git] stage all' },
     t = { '<cmd>Telescope git_status<cr>', '[Git] changed files' },
     x = { '<cmd>GitGutterUndoHunk<cr>', '[Git] Undo Hunk' },
     y = { '[GitHub] Create GitHub Permalink' },

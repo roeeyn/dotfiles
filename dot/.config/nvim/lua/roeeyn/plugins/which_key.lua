@@ -162,6 +162,7 @@ wk.register({
     o = { '<cmd>vertical resize -10<cr>', 'Resize window to the left' },
     p = { '<cmd>vertical resize +10<cr>', 'Resize window to the right' },
     q = { '<cmd>wq<cr>', 'Save and quit window' },
+    t = { '<cmd>tabe %<cr>', 'Edit current buffer in new tab' },
   },
   y = {
     name = 'Yank',

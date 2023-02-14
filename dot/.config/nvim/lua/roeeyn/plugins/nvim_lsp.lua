@@ -43,6 +43,14 @@ local servers = {
   },
 }
 
+-- Setup Formatter and Linter
+local null_ls = require 'null-ls'
+null_ls.setup {
+  sources = {
+    null_ls.builtins.formatting.stylua,
+  },
+}
+
 -- Setup mason so it can manage external tooling
 require('mason').setup()
 

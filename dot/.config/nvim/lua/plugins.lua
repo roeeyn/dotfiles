@@ -176,6 +176,9 @@ require('packer').startup(function(use)
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
 
+      -- For formatting and linting
+      'jose-elias-alvarez/null-ls.nvim',
+
       -- Useful status updates for LSP
       'j-hui/fidget.nvim',
 

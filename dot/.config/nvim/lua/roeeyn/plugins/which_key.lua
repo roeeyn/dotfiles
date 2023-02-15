@@ -148,9 +148,11 @@ wk.register({
   },
   u = {
     name = 'Testing',
+    A = { '<cmd>vsplit | term pytest<cr>', 'Run pytest globally' },
     a = { '<cmd>TestSuite<cr>', 'Test all suite' },
     f = { '<cmd>TestFile<cr>', 'Test file' },
     l = { '<cmd>TestLast<cr>', 'Test last' },
+    L = { '<cmd>vsplit | term pytest --lf<cr>', 'Test last failed' },
     t = { '<cmd>TestNearest<cr>', 'Test nearest' },
   },
   w = {

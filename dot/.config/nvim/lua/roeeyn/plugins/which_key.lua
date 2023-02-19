@@ -157,6 +157,7 @@ wk.register({
   },
   w = {
     name = 'Window',
+    c = { '<cmd>close<cr>', 'Close the current window' },
     h = { '<C-W>h', 'Move to left window' },
     j = { '<C-W>j', 'Move to bottom window' },
     k = { '<C-W>k', 'Move to above window' },
@@ -166,6 +167,7 @@ wk.register({
     p = { '<cmd>vertical resize +10<cr>', 'Resize window to the right' },
     q = { '<cmd>wq<cr>', 'Save and quit window' },
     t = { '<cmd>tabe %<cr>', 'Edit current buffer in new tab' },
+    ['0'] = { '<C-W>=', 'Resize windows equally' },
   },
   y = {
     name = 'Yank',

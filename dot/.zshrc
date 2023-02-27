@@ -168,4 +168,7 @@ if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_r
 fi
 ### lyft_localdevtools_shell_rc end
 
+# Added manually as instructed in idldev
+eval "$(/Users/rodrigom/src/idl/idldev-tool/bin/idldev init -)"
+
 source /Users/rodrigom/.docker/init-zsh.sh || true # Added by Docker Desktop

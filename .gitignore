@@ -33,6 +33,7 @@ trustdb.gpg
 dot/.local/share/nvim/
 
 # local applications
+dot/.config/biolab.si/
 dot/.config/configstore/
 dot/.config/gcloud/
 dot/.config/gh/

@@ -2,6 +2,7 @@
 --              List of all the plugins customization               --
 ----------------------------------------------------------------------
 
+require 'roeeyn.plugins.github_copilot'
 require 'roeeyn.plugins.treesitter'
 require 'roeeyn.plugins.luatab'
 require 'roeeyn.plugins.indent_blankline'

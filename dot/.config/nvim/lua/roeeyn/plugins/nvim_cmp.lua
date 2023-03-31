@@ -24,6 +24,7 @@ cmp.setup {
         -- ...
         return vim_item
       end,
+      symbol_map = { Copilot = '' },
     },
   },
   window = {
@@ -38,7 +39,7 @@ cmp.setup {
     ['<C-e>'] = cmp.mapping.abort(),
     ['<C-y>'] = cmp.mapping(
       cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Insert,
+        behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
       { 'i', 'c' }
@@ -61,16 +62,17 @@ cmp.setup {
   },
   sources = cmp.config.sources({
     { name = 'calc' },
-    { name = 'emoji' },
     { name = 'luasnip' }, -- For luasnip users.
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'path' },
+    { name = 'emoji' },
     { name = 'spell' },
     { name = 'treesitter' },
+    { name = 'copilot' },
     { name = 'cmp_tabnine' },
   }, {
-    { name = 'buffer', keyword_length = 5 },
+    { name = 'buffer', keyword_length = 3 },
   }),
 }
 

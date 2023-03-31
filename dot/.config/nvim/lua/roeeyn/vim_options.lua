@@ -63,9 +63,6 @@ vim.opt.splitright = true
 vim.g.snippets = 'luasnip'
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
--- Copilot
-vim.g.copilot_enabled = false
-
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true

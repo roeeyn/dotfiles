@@ -171,4 +171,12 @@ fi
 # Added manually as instructed in idldev
 eval "$(/Users/rodrigom/src/idl/idldev-tool/bin/idldev init -)"
 
-source /Users/rodrigom/.docker/init-zsh.sh || true # Added by Docker Desktop
+export PATH=/opt/homebrew/bin:$PATH
+
+
+### lyft_rd_shell_rc start
+### DO NOT REMOVE: automatically installed as part of Rancher Desktop setup
+if [[ -f /Users/rodrigom/.rd/shell_rc.sh ]]; then
+  source /Users/rodrigom/.rd/shell_rc.sh
+fi
+### lyft_rd_shell_rc end

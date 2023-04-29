@@ -30,3 +30,21 @@ gpg --armor --export 3AA5C34371567BD2
 ```shell
 git config --global commit.gpgsign true
 ```
+
+## Export Keys (New Key)
+
+### Export Public Key
+
+This command will export an ascii armored version of the public key:
+
+```bash
+gpg --output pgp_public.txt --armor --export username@email
+```
+
+### Export Secret Key
+
+This command will export an ascii armored version of the secret key:
+
+```bash
+gpg --output pgp_secret.txt --armor --export-secret-key username@email
+```

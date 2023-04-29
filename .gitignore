@@ -22,6 +22,7 @@ ansible_password.txt
 .judge0-uploader.yaml
 
 # GPG configuration
+dot/.gnupg/openpgp-revocs.d/
 private-keys-v1.d
 pgp_public.txt
 pgp_secret.txt

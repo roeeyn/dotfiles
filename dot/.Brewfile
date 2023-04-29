@@ -68,6 +68,7 @@ cask 'little-snitch'
 cask 'mongodb-compass'
 cask 'ngrok'
 cask 'nordvpn'
+cask 'obsidian'
 cask 'postman'
 cask 'qlmarkdown' # Quick look markdown
 cask 'vivaldi'

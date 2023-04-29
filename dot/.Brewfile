@@ -79,3 +79,4 @@ mas 'Keynote', id: 409183694
 mas 'Presentify - Screen Annotation', id: 1507246666
 mas 'Spark – Email App by Readdle', id: 1176895641
 mas 'GIPHY Capture. The GIF Maker', id: 668208984
+mas 'Magnet', id: 441258766

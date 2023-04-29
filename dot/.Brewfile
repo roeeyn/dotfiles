@@ -55,6 +55,7 @@ cask 'adobe-creative-cloud'
 cask 'alacritty' # Terminal
 cask 'alfred'
 cask 'android-file-transfer'
+cask 'arc'
 cask 'betterzip'
 cask 'centered'
 cask 'docker'

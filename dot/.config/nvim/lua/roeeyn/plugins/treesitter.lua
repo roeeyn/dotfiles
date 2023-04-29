@@ -8,10 +8,11 @@ require('nvim-treesitter.configs').setup {
     'json5',
     'jsonc',
     'lua',
+    'markdown',
+    'markdown_inline',
     'python',
     'rust',
     'typescript',
-    'help',
     'vim',
   },
 

@@ -27,7 +27,7 @@ ssh-add -K ~/.ssh/id_ed25519
 echo 'Trying GPG installation...'
 # Remember to kill the gpg-agent so the new pinentry can work
 # gpgconf --kill gpg-agent
-gpg_key_id='615B67D406A71EC5'
+gpg_key_id='8DE1821D5C3F5D18'
 if ! gpg --list-secret-keys --keyid-format=long | rg $gpg_key_id &>/dev/null; then
   echo 'Installing GPG key...'
   gpg --import ~/.dotfiles/dot/.gnupg/pgp_public.txt
@@ -57,10 +57,6 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     # Tmux package manager
     echo "Installing tmux package manager..."
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-    # Intall TabNine
-    echo "Installing TabNine..."
-    git clone --depth 1 https://github.com/codota/tabnine-vim ~/tabnine-vim
 
     # Oh my zshrc will update the zshrc file
     rm ~/.zshrc

@@ -17,10 +17,13 @@ brew 'dive' # Optimizer for docker images
 brew 'ffmpeg' # Great transformer for videos
 brew 'fzf' # Fuzzy finder
 brew 'gh'
+brew 'go'
+brew 'golangci-lint'
 brew 'gotop' # Top alternative
 brew 'gpg' # Keys to sign the commits
 brew 'htop'
 brew 'inetutils'
+brew 'jq'
 brew 'lua'
 brew 'lua-language-server'
 brew 'n'
@@ -31,6 +34,7 @@ brew 'pinentry-mac'
 brew 'postgresql@14'
 brew 'pre-commit'
 brew 'pulseaudio'
+brew 'pulumi'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
 brew 'python3'
@@ -73,6 +77,7 @@ cask 'nordvpn'
 cask 'obsidian'
 cask 'postman'
 cask 'qlmarkdown' # Quick look markdown
+cask 'robo-3t'
 cask 'visual-studio-code'
 cask 'vlc'
 

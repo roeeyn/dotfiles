@@ -7,6 +7,8 @@ tap 'mas-cli/tap'
 cask 'font-fira-code'
 
 ##### FORMULAES #####
+brew 'awscli'
+brew 'awsvault'
 brew 'bat' # cat preview but with highlight syntax
 brew 'cmatrix' # nice terminal matrix effect
 brew 'coreutils' # Core utils for GNU
@@ -14,6 +16,7 @@ brew 'ctop' # Command line monitoring for docker containers
 brew 'dive' # Optimizer for docker images
 brew 'ffmpeg' # Great transformer for videos
 brew 'fzf' # Fuzzy finder
+brew 'gh'
 brew 'gotop' # Top alternative
 brew 'gpg' # Keys to sign the commits
 brew 'htop'
@@ -57,7 +60,6 @@ cask 'alfred'
 cask 'android-file-transfer'
 cask 'arc'
 cask 'betterzip'
-cask 'centered'
 cask 'docker'
 cask 'font-hack-nerd-font'
 cask 'firefox-developer-edition'

@@ -10,6 +10,9 @@ pip3 install ansible
 echo 'Installing aactivator...'
 pip3 install aactivator
 
+echo 'Setting up Node LTS'
+n lts
+
 # Decrypting keys
 echo 'Decrypting vault passwords...'
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519.pub ~/.dotfiles/dot/.ssh/id_ed25519.pub.enc

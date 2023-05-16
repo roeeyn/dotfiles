@@ -71,7 +71,6 @@ cask 'nordvpn'
 cask 'obsidian'
 cask 'postman'
 cask 'qlmarkdown' # Quick look markdown
-cask 'vivaldi'
 cask 'visual-studio-code'
 cask 'vlc'
 

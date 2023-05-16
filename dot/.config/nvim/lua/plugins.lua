@@ -242,12 +242,6 @@ require('packer').startup(function(use)
     },
   }
 
-  use {
-    'tzachar/cmp-tabnine',
-    run = './install.sh',
-    requires = 'hrsh7th/nvim-cmp',
-  }
-
   -- Nice icons for cmp window
   use 'onsails/lspkind.nvim'
 

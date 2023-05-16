@@ -70,7 +70,6 @@ cmp.setup {
     { name = 'spell' },
     { name = 'treesitter' },
     { name = 'copilot' },
-    { name = 'cmp_tabnine' },
   }, {
     { name = 'buffer', keyword_length = 3 },
   }),

@@ -10,6 +10,9 @@ pip3 install ansible
 echo 'Installing aactivator...'
 pip3 install aactivator
 
+  echo 'Setting up Node LTS'
+  n lts
+
 # Decrypting keys
 echo 'Decrypting vault passwords...'
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519.pub ~/.dotfiles/dot/.ssh/id_ed25519.pub.enc
@@ -57,10 +60,6 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     # Tmux package manager
     echo "Installing tmux package manager..."
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-    # Intall TabNine
-    echo "Installing TabNine..."
-    git clone --depth 1 https://github.com/codota/tabnine-vim ~/tabnine-vim
 
     # Oh my zshrc will update the zshrc file
     rm ~/.zshrc

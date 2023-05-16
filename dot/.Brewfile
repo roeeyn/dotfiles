@@ -14,10 +14,14 @@ brew 'ctop' # Command line monitoring for docker containers
 brew 'dive' # Optimizer for docker images
 brew 'ffmpeg' # Great transformer for videos
 brew 'fzf' # Fuzzy finder
+brew 'gh'
+brew 'go'
+brew 'golangci-lint'
 brew 'gotop' # Top alternative
 brew 'gpg' # Keys to sign the commits
 brew 'htop'
 brew 'inetutils'
+brew 'jq'
 brew 'lua'
 brew 'lua-language-server'
 brew 'n'
@@ -57,7 +61,6 @@ cask 'alfred'
 cask 'android-file-transfer'
 cask 'arc'
 cask 'betterzip'
-cask 'centered'
 cask 'docker'
 cask 'font-hack-nerd-font'
 cask 'firefox-developer-edition'
@@ -71,7 +74,6 @@ cask 'nordvpn'
 cask 'obsidian'
 cask 'postman'
 cask 'qlmarkdown' # Quick look markdown
-cask 'vivaldi'
 cask 'visual-studio-code'
 cask 'vlc'
 

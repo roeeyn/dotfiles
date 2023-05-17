@@ -15,6 +15,7 @@ wk.register({
   },
   c = {
     name = 'Code',
+    ['0'] = {'<cmd>Format<cr>', '[Format] Buffer'},
     R = { '<cmd>lua vim.lsp.buf.rename()<cr>', '[LSP] Rename definition' },
     a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', '[LSP] Diagn. Action' },
     c = { '<cmd>cclose<cr>', '[Quickfix] Close' },

@@ -105,7 +105,7 @@ wk.register({
   h = {
     name = 'Harpoon',
     a = { '<cmd>lua require("harpoon.mark").add_file()<cr><cmd>lua print("Mark added to harpoon")<cr>', 'Add file' },
-    h = { '<cmd>lua require("roeeyn.plugins.harpoon").open_harpoon_telescope()<cr>', 'Open Telescope marks' },
+    f = { '<cmd>lua require("roeeyn.plugins.harpoon").open_harpoon_telescope()<cr>', 'Search in marks' },
     j = { '<cmd>lua require("harpoon.ui").nav_file(1)<cr>', 'Go to mark 1' },
     k = { '<cmd>lua require("harpoon.ui").nav_file(2)<cr>', 'Go to mark 2' },
     l = { '<cmd>lua require("harpoon.ui").nav_file(3)<cr>', 'Go to mark 3' },

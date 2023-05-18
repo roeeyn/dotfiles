@@ -15,7 +15,7 @@ wk.register({
   },
   c = {
     name = 'Code',
-    ['0'] = {'<cmd>Format<cr>', '[Format] Buffer'},
+    ['0'] = { '<cmd>Format<cr>', '[Format] Buffer' },
     R = { '<cmd>lua vim.lsp.buf.rename()<cr>', '[LSP] Rename definition' },
     a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', '[LSP] Diagn. Action' },
     c = { '<cmd>cclose<cr>', '[Quickfix] Close' },
@@ -126,7 +126,7 @@ wk.register({
   },
   p = {
     name = 'Project',
-    t = { '<cmd>Telescope file_browser<cr>', 'File browser' },
+    t = { '<cmd>NvimTreeToggle<cr>', 'File browser' },
     ['/'] = { '<cmd>Telescope live_grep<cr>', 'Live grep in whole project' },
   },
   r = {

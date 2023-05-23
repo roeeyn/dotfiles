@@ -146,7 +146,8 @@ export PATH="/Users/roeeyn/.local/bin:$PATH"
 
 # For golang
 export GOPATH="/Users/roeeyn/go"
-export PATH="$GOPATH/bin:$PATH"
+export GOTOOLDIR="$GOPATH/bin/"
+export PATH="$GOTOOLDIR:$PATH"
 
 # For pyenv
 export PYENV_ROOT="$HOME/.pyenv"

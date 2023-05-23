@@ -164,6 +164,17 @@ eval "$(aactivator init)"
 export N_PREFIX="/Users/roeeyn/"
 export PATH="/Users/roeeyn/bin:$PATH"
 
+#--------------------------------------------------------------------#
+#                            Start Kolors                            #
+#--------------------------------------------------------------------#
+
+export GOPRIVATE="github.com/10xLabs"
+export GOTOOLDIR="/Users/roeeyn/go/bin/"
+
+#--------------------------------------------------------------------#
+#                             End Kolors                             #
+#--------------------------------------------------------------------#
+
 # Starting starship
 eval "$(starship init zsh)"
 

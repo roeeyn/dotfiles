@@ -62,3 +62,6 @@ files/go/pkg/
 
 # Packer
 packer_compiled.lua
+
+# Kolors
+dot/.ssh/kolors*

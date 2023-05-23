@@ -53,6 +53,7 @@ brew 'tmux'
 brew 'tree'
 brew 'urlview' # because of tmux-urlview
 brew 'vim'
+brew 'watchexec'
 brew 'wget'
 brew 'youtube-dl'
 

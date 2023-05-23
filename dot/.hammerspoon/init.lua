@@ -9,6 +9,7 @@ Install:andUse 'UnsplashZ'
 -- Keybindings for launching apps
 local appKeys = {
   a = 'Slack',
+  o = 'Obsidian',
   p = 'Postman',
   r = 'Arc',
   t = 'Alacritty',

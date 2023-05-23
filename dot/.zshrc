@@ -170,7 +170,6 @@ export PATH="/Users/roeeyn/bin:$PATH"
 #--------------------------------------------------------------------#
 
 export GOPRIVATE="github.com/10xLabs"
-export GOTOOLDIR="/Users/roeeyn/go/bin/"
 
 #--------------------------------------------------------------------#
 #                             End Kolors                             #

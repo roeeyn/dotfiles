@@ -1,3 +1,7 @@
+-- Nvim Tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Needed settings for font issues (Telescope)
 vim.opt.encoding = 'utf-8'
 

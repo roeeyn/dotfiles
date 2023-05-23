@@ -1,0 +1,14 @@
+[user]
+	name = Rodrigo Medina
+	email = rodrigo.medina.neri@gmail.com
+	signingkey = 8DE1821D5C3F5D18
+[github]
+	user = roeeyn
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
+[commit]
+	gpgsign = true
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/

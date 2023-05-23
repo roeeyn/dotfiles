@@ -80,6 +80,12 @@ require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   }
 
+  -- File browser
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+  }
+
   -- Nice dashboard
   use {
     'goolord/alpha-nvim',
@@ -87,9 +93,6 @@ require('packer').startup(function(use)
       require('roeeyn.plugins.alpha').setup()
     end,
   }
-
-  -- File Browsing with Telescope
-  use { 'nvim-telescope/telescope-file-browser.nvim' }
 
   -- Awesome testing
   use 'vim-test/vim-test'

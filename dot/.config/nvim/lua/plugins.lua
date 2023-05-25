@@ -17,6 +17,8 @@ require('packer').startup(function(use)
 
   -- My plugins here
 
+  use 'windwp/nvim-ts-autotag'
+
   -- Quick startup with lazyloaded filetype
   use 'nathom/filetype.nvim'
 

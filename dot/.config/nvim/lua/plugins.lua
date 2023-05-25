@@ -17,9 +17,6 @@ require('packer').startup(function(use)
 
   -- My plugins here
 
-  -- Close (and rename) automatically tags
-  use 'windwp/nvim-ts-autotag'
-
   -- Quick startup with lazyloaded filetype
   use 'nathom/filetype.nvim'
 
@@ -42,9 +39,6 @@ require('packer').startup(function(use)
 
   -- Optimization Plugin
   use 'lewis6991/impatient.nvim'
-
-  -- REPL for any languages
-  use 'metakirby5/codi.vim'
 
   -- Nice indentation lines
   use 'lukas-reineke/indent-blankline.nvim'

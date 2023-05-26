@@ -170,6 +170,12 @@ export PATH="/Users/roeeyn/bin:$PATH"
 #--------------------------------------------------------------------#
 
 export GOPRIVATE="github.com/10xLabs"
+export AWS_VAULT_BACKEND=keychain
+
+# Only create the AWS VAULT context if this is not already present
+if [[ -z "${AWS_VAULT}" ]]; then
+  exec aws-vault exec kolors-stag -d 48h -- zsh
+fi
 
 #--------------------------------------------------------------------#
 #                             End Kolors                             #

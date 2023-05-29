@@ -3,6 +3,8 @@ require('telescope').setup {
   pickers = {
     find_files = {
       hidden = true,
+      no_ignore = true,
+      no_ignore_parent = true,
     },
     live_grep = {
       ---@diagnostic disable-next-line: unused-local
@@ -19,6 +21,10 @@ require('telescope').setup {
     },
   },
   defaults = {
+    dynamic_preview_title = true,
+    file_ignore_patterns = {
+      '^vendor/',
+    },
     mappings = {
       n = {
         ['<C-q>'] = require('telescope.actions').smart_send_to_qflist,

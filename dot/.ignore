@@ -66,5 +66,11 @@ files/go/pkg/
 # Packer
 packer_compiled.lua
 
-# Kolors
+# Kolors Config
 dot/.ssh/kolors*
+
+#################### KOLORS IGNORE PATTERNS ####################
+!Makefile
+!*.env
+vendor/
+################################################################

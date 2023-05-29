@@ -4,6 +4,7 @@
 
 require 'roeeyn.plugins.github_copilot'
 require 'roeeyn.plugins.nvim_tree'
+require 'roeeyn.plugins.filetype'
 require 'roeeyn.plugins.treesitter'
 require 'roeeyn.plugins.luatab'
 require 'roeeyn.plugins.indent_blankline'

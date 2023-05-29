@@ -1,3 +1,71 @@
 .git/
 node_modules/
-vendor/
+
+# Macos files
+.DS_Store
+
+# Firebase files
+logs/
+firebase-tools.json
+update-notifier-firebase-tools.json
+
+# Copilot configuration
+github-copilot/
+
+# SSH files
+id_ed25519
+id_ed25519.pub
+known_hosts
+known_hosts.old
+
+# Ansible password
+ansible_password.txt
+
+# Judge0 Token
+.judge0-uploader.yaml
+
+# GPG configuration
+dot/.gnupg/openpgp-revocs.d/
+private-keys-v1.d
+pgp_public.txt
+pgp_secret.txt
+pubring.kbx
+pubring.kbx~
+trustdb.gpg
+
+# local share
+dot/.local/share/nvim/
+
+# local applications
+dot/.config/biolab.si/
+dot/.config/configstore/
+dot/.config/gcloud/
+dot/.config/gh/
+dot/.config/htop/
+dot/.config/exercism/
+dot/.config/flipperdevices.com/
+dot/.config/flutter/
+dot/.config/neofetch/
+dot/.config/pip/
+dot/.config/yarn/
+dot/.config/nvim/.luarc.json
+dot/.config/simple-update-notifier/
+
+# Lua RC
+.luarc.json
+
+# local state
+dot/.local/state/
+dot/.local/share/
+
+# local files
+files/go/bin/
+!files/go/bin/.gitkeep
+files/go/pkg/
+
+# Packer
+packer_compiled.lua
+
+# Kolors
+dot/.ssh/kolors*
+endor/

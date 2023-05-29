@@ -20,9 +20,6 @@ require('packer').startup(function(use)
   -- Close (and rename) automatically tags
   use 'windwp/nvim-ts-autotag'
 
-  -- Quick startup with lazyloaded filetype
-  use 'nathom/filetype.nvim'
-
   -- Clipboard/yank history
   use {
     'AckslD/nvim-neoclip.lua',

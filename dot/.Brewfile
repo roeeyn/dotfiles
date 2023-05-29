@@ -14,6 +14,7 @@ brew 'cmatrix' # nice terminal matrix effect
 brew 'coreutils' # Core utils for GNU
 brew 'ctop' # Command line monitoring for docker containers
 brew 'dive' # Optimizer for docker images
+brew 'fd'
 brew 'ffmpeg' # Great transformer for videos
 brew 'fzf' # Fuzzy finder
 brew 'gh'

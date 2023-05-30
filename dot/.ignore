@@ -72,5 +72,7 @@ dot/.ssh/kolors*
 #################### KOLORS IGNORE PATTERNS ####################
 !Makefile
 !*.env
+!go.work
 vendor/
+!command.json
 ################################################################

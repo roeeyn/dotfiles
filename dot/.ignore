@@ -75,4 +75,5 @@ dot/.ssh/kolors*
 !go.work
 vendor/
 !command.json
+!sam_env.json
 ################################################################

@@ -19,6 +19,7 @@ require('telescope').setup {
     },
   },
   defaults = {
+    dynamic_preview_title = true,
     mappings = {
       n = {
         ['<C-q>'] = require('telescope.actions').smart_send_to_qflist,

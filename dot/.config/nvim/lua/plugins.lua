@@ -16,11 +16,18 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- My plugins here
+  -- Test Coverage
+  use {
+    'andythigpen/nvim-coverage',
+    requires = 'nvim-lua/plenary.nvim',
+    -- Optional: needed for PHP when using the cobertura parser
+    rocks = { 'lua-xmlreader' },
+    config = function()
+      require('coverage').setup()
+    end,
+  }
 
   use 'windwp/nvim-ts-autotag'
-
-  -- Quick startup with lazyloaded filetype
-  use 'nathom/filetype.nvim'
 
   -- Clipboard/yank history
   use {

@@ -151,6 +151,8 @@ wk.register({
     name = 'Testing',
     A = { '<cmd>vsplit | term pytest<cr>', 'Run pytest globally' },
     a = { '<cmd>TestSuite<cr>', 'Test all suite' },
+    c = { '<cmd>CoverageToggle<cr>', 'Toggle coverage line' },
+    C = { '<cmd>CoverageSummary<cr>', 'Toggle coverage line' },
     f = { '<cmd>TestFile<cr>', 'Test file' },
     l = { '<cmd>TestLast<cr>', 'Test last' },
     L = { '<cmd>vsplit | term pytest --lf<cr>', 'Test last failed' },

@@ -67,5 +67,5 @@ files/go/pkg/
 packer_compiled.lua
 
 #################### NO IGNORE PATTERNS ####################
-venodr/
+vendor/
 ############################################################

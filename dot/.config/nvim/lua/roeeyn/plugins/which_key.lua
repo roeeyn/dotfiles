@@ -71,6 +71,7 @@ wk.register({
   f = {
     name = 'File/Find', -- optional group name
     f = { '<cmd>Telescope find_files<cr>', '[Telescope] Find file' },
+    g = { '<cmd>Telescope grep_string<cr>', '[Telescope] Grep string' },
     h = { '<cmd>Telescope help_tags<cr>', '[Telescope] Find help tags' },
     k = { '<cmd>Telescope keymaps<cr>', '[Telescope] Find keymaps' },
     -- s = { 'Save current buffer' }, -- just a label. don't create any mapping

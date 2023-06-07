@@ -136,7 +136,7 @@ if type rg &> /dev/null; then
 fi
 
 # EDITOR variable for gh and git
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # Enable history in IEX through Erlang(OTP)
 export ERL_AFLAGS="-kernel shell_history enabled"

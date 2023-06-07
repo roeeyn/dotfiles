@@ -71,6 +71,7 @@ wk.register({
   f = {
     name = 'File/Find', -- optional group name
     f = { '<cmd>Telescope find_files<cr>', '[Telescope] Find file' },
+    g = { '<cmd>Telescope grep_string<cr>', '[Telescope] Grep string' },
     h = { '<cmd>Telescope help_tags<cr>', '[Telescope] Find help tags' },
     k = { '<cmd>Telescope keymaps<cr>', '[Telescope] Find keymaps' },
     -- s = { 'Save current buffer' }, -- just a label. don't create any mapping
@@ -152,7 +153,7 @@ wk.register({
     A = { '<cmd>vsplit | term pytest<cr>', 'Run pytest globally' },
     a = { '<cmd>TestSuite<cr>', 'Test all suite' },
     c = { '<cmd>CoverageToggle<cr>', 'Toggle coverage line' },
-    C = { '<cmd>CoverageSummary<cr>', 'Toggle coverage line' },
+    C = { '<cmd>CoverageSummary<cr>', 'Coverage popup' },
     f = { '<cmd>TestFile<cr>', 'Test file' },
     l = { '<cmd>TestLast<cr>', 'Test last' },
     L = { '<cmd>vsplit | term pytest --lf<cr>', 'Test last failed' },

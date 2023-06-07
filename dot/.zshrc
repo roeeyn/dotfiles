@@ -136,7 +136,7 @@ if type rg &> /dev/null; then
 fi
 
 # EDITOR variable for gh and git
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # Enable history in IEX through Erlang(OTP)
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -170,12 +170,6 @@ export PATH="/Users/roeeyn/bin:$PATH"
 #--------------------------------------------------------------------#
 
 export GOPRIVATE="github.com/10xLabs"
-export AWS_VAULT_BACKEND=keychain
-
-# Only create the AWS VAULT context if this is not already present
-if [[ -z "${AWS_VAULT}" ]]; then
-  exec aws-vault exec kolors-stag --duration=48h -- zsh
-fi
 
 #--------------------------------------------------------------------#
 #                             End Kolors                             #

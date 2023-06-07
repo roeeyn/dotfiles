@@ -27,7 +27,6 @@ require('packer').startup(function(use)
     end,
   }
 
-  -- Close (and rename) automatically tags
   use 'windwp/nvim-ts-autotag'
 
   -- Clipboard/yank history
@@ -49,9 +48,6 @@ require('packer').startup(function(use)
 
   -- Optimization Plugin
   use 'lewis6991/impatient.nvim'
-
-  -- REPL for any languages
-  use 'metakirby5/codi.vim'
 
   -- Nice indentation lines
   use 'lukas-reineke/indent-blankline.nvim'

@@ -51,7 +51,7 @@ ls.add_snippets('all', {
 ls.add_snippets('gitcommit', {
   s(
     'conv',
-    fmt('{}{}: {}', {
+    fmt('{}{}{}: {}', {
       c(1, {
         t 'feat',
         t 'fix',
@@ -73,7 +73,11 @@ ls.add_snippets('gitcommit', {
         }),
         t '',
       }),
-      i(3, 'your Commit'),
+      c(3, {
+        t '!',
+        t '',
+      }),
+      i(4, 'your Commit'),
     })
   ),
 }, {

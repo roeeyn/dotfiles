@@ -47,6 +47,7 @@ dot/.config/pip/
 dot/.config/yarn/
 dot/.config/nvim/.luarc.json
 dot/.config/simple-update-notifier/
+dot/.config/SmartSetMasterErgo (Mac)/
 
 # Lua RC
 .luarc.json

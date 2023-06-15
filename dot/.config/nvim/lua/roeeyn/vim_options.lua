@@ -21,11 +21,11 @@ vim.opt.autoread = true
 vim.opt.termguicolors = true
 
 -- Is how many columns of whitespace a tab keypress or a backspace keypress is worth
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
 
 -- How many columns of whitespace a level of identation is worth
-vim.opt.shiftwidth = 2
+vim.opt.shiftwidth = 4
 
 -- Use spaces instead of \t
 vim.opt.expandtab = true

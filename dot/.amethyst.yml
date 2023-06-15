@@ -17,21 +17,21 @@
 layouts:
   - tall
   - fullscreen
-  # - tall-right
+  - tall-right
   - wide
-  # - two-pane
-  # - middle-wide
+  - two-pane
+  - middle-wide
   # - 3column-left
-  # - 3column-middle
+  - 3column-middle
   # - 3column-right
   # - 4column-left
-  # - 4column-right
+  - 4column-right
   - column
   # - row
   # - floating
   # - widescreen-tall
   # - widescreen-tall-right
-  # - bsp
+  - bsp
 
 # First mod (default option + shift).
 mod1:
@@ -110,12 +110,12 @@ decrease-main:
 # Focus the next window in the list going counter-clockwise.
 focus-ccw:
   mod: mod1
-  key: j
+  key: k
 
 # Focus the next window in the list going clockwise.
 focus-cw:
   mod: mod1
-  key: k
+  key: j
 
 # Focus the main window in the list.
 focus-main:
@@ -185,12 +185,12 @@ select-wide-layout:
 # Select fullscreen layout
 select-fullscreen-layout:
   mod: mod1
-  key: d
-
-# Select column layout
-select-column-layout:
-  mod: mod1
   key: f
+
+# Select two-pane layout
+select-two-pane-layout:
+  mod: mod1
+  key: d
 
 # Move the currently focused window to the space to the left.
 throw-space-left:

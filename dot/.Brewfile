@@ -59,6 +59,7 @@ cask '1password'
 cask 'adobe-creative-cloud'
 cask 'alacritty' # Terminal
 cask 'alfred'
+cask 'amethyst'
 cask 'android-file-transfer'
 cask 'arc'
 cask 'betterzip'

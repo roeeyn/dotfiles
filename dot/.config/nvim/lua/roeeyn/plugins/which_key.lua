@@ -171,6 +171,7 @@ wk.register({
         o = { '<cmd>vertical resize -10<cr>', 'Resize window to the left' },
         p = { '<cmd>vertical resize +10<cr>', 'Resize window to the right' },
         q = { '<cmd>wq<cr>', 'Save and quit window' },
+        r = { '<cmd>execute "vertical resize " . (&columns * 30 / 100)<cr>', 'Resize window to 30%' },
         t = { '<cmd>tabe %<cr>', 'Edit current buffer in new tab' },
         ['0'] = { '<C-W>=', 'Resize windows equally' },
     },

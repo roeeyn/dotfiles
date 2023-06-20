@@ -177,20 +177,20 @@ select-tall-layout:
   mod: mod1
   key: a
 
-# Select wide layout
-select-wide-layout:
+# Select 3 column middle
+select-3column-middle:
   mod: mod1
   key: s
-
-# Select fullscreen layout
-select-fullscreen-layout:
-  mod: mod1
-  key: f
 
 # Select two-pane layout
 select-two-pane-layout:
   mod: mod1
   key: d
+
+# Select fullscreen layout
+select-fullscreen-layout:
+  mod: mod1
+  key: f
 
 # Move the currently focused window to the space to the left.
 throw-space-left:

@@ -15,23 +15,23 @@
 
 # layouts - Ordered list of layouts to use by layout key (default tall, wide, fullscreen, and column).
 layouts:
-  - tall
   - fullscreen
-  - tall-right
-  - wide
   - two-pane
+  # - 3column-middle
+  # - tall
+  # - tall-right
+  # - wide
   - middle-wide
   # - 3column-left
-  - 3column-middle
   # - 3column-right
   # - 4column-left
-  - 4column-right
-  - column
+  # - 4column-right
+  # - column
   # - row
   # - floating
   # - widescreen-tall
   # - widescreen-tall-right
-  - bsp
+  # - bsp
 
 # First mod (default option + shift).
 mod1:
@@ -144,13 +144,13 @@ swap-screen-cw:
 
 # Swap the position of the currently focused window with the next window in the list going counter-clockwise.
 swap-ccw:
-  mod: mod2
-  key: j
+  mod: mod1
+  key: left
 
 # Swap the position of the currently focused window with the next window in the list going clockwise.
 swap-cw:
-  mod: mod2
-  key: k
+  mod: mod1
+  key: right
 
 # Swap the position of the currently focused window with the main window in the list.
 swap-main:
@@ -172,13 +172,18 @@ swap-main:
 #   mod: mod1
 #   key: i
 
+# Select wide layout (to be able to override the f*ckin default)
+select-wide-layout:
+  mod: mod2
+  key: x
+
 # Select tall layout
 select-tall-layout:
   mod: mod1
   key: a
 
-# Select 3 column middle
-select-3column-middle:
+# Select 3 column middle layout
+select-middle-wide-layout:
   mod: mod1
   key: s
 

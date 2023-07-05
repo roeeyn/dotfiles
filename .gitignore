@@ -55,6 +55,7 @@ dot/.config/SmartSetMasterErgo (Mac)/
 # local state
 dot/.local/state/
 dot/.local/share/
+dot/.local/bin/hs
 
 # local files
 files/go/bin/

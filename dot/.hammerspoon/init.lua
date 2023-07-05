@@ -4,7 +4,13 @@ hs.loadSpoon 'SpoonInstall'
 spoon.SpoonInstall.use_syncinstall = true
 Install = spoon.SpoonInstall
 
-Install:andUse 'UnsplashZ'
+Install:andUse('RandomBackground', {
+    loglevel = 'debug',
+    config = {
+        unsplash_api_key = os.getenv 'UNSPLASH_API_KEY',
+    },
+    start = true,
+})
 
 -- Keybindings for launching apps
 local appKeys = {

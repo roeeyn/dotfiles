@@ -52,6 +52,9 @@ dot/.config/SmartSetMasterErgo (Mac)/
 # Lua RC
 .luarc.json
 
+# Unsplash API Key
+.unsplash_api_key
+
 # local state
 dot/.local/state/
 dot/.local/share/

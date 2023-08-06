@@ -50,6 +50,13 @@ hs.hotkey.bind({ 'cmd', 'shift' }, 'V', function()
     hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
 
+Install:andUse('FocusHighlight', {
+    config = {
+        color = '#FFF200',
+    },
+    start = true,
+})
+
 -- Bind appKeys
 for key, app in pairs(appKeys) do
     hs.hotkey.bind(hyper, key, function()

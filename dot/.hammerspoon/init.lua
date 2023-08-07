@@ -46,13 +46,6 @@ Install:andUse('Caffeine', {
 Caffeine = spoon.Caffeine
 Caffeine:setState(true)
 
-Install:andUse('FocusHighlight', {
-    config = {
-        color = '#FFF200',
-    },
-    start = true,
-})
-
 hs.hotkey.bind({ 'cmd', 'shift' }, 'V', function()
     hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)

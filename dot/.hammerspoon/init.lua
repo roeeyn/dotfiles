@@ -16,10 +16,7 @@ local function read_api_key(file_path)
     return content:gsub('%s+$', '') -- remove trailing spaces
 end
 
--- TODO: set a better place for this
-local api_key = read_api_key './Spoons/RandomBackground.spoon/.unsplash_api_key'
-
-print('Unsplash API Key: ' .. api_key)
+local api_key = read_api_key(os.getenv 'HOME' .. '/.unsplash_api_key')
 
 Install:andUse('RandomBackground', {
     loglevel = 'debug',
@@ -59,6 +56,13 @@ Install:andUse('FocusHighlight', {
 hs.hotkey.bind({ 'cmd', 'shift' }, 'V', function()
     hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
+
+Install:andUse('FocusHighlight', {
+    config = {
+        color = '#FFF200',
+    },
+    start = true,
+})
 
 -- Bind appKeys
 for key, app in pairs(appKeys) do

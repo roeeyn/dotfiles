@@ -1,33 +1,12 @@
 #!/bin/bash
 
-session=$(find ~ ~/src ~/playground ~/Desktop -mindepth 1 -maxdepth 1 -type d | fzf)
-session_name=$(basename "$session" | tr . _)
+directory=$(find ~ ~/src ~/playground ~/Desktop -mindepth 1 -maxdepth 1 -type d | fzf)
+tab_name=$(basename "$directory" | tr . _)
 
-session_type=''
-
-if ! tmux has-session -t "$session_name" 2> /dev/null; then
-  # Get the c flag
-  while getopts "c" opt; do
-    case $opt in
-      c)
-        # If the c flag exists, we set the type to 'code'
-        session_type='code'
-        ;;
-    esac
-  done
-
-  # If session type is empty
-  if [ -z "$session_type" ]; then
-    tmux new-session -s "$session_name" -c "$session" -d
-  else
-    tmux new-session -s "$session_name" -c "$session" -d -n "code"
-    tmux new-window -t "$session_name": -c "$session" -n "test"
-  fi
-
-fi
-
-if [ -z "$TMUX" ]; then
-  tmux attach
+# NOTE: We're assuming there's already a zellij session running. It starts automatically at ~/.zshrc
+# -w flag in rg match for the exact word
+if (zellij action query-tab-names | rg -w $tab_name) 1> /dev/null 2> /dev/null; then
+    zellij action go-to-tab-name "$tab_name"
 else
-  tmux switch-client -t "$session_name"
+    zellij action new-tab -c $directory -n $tab_name -l "default"
 fi

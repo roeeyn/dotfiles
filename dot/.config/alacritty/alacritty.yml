@@ -24,7 +24,7 @@ env:
   #TERM: alacritty
   TERM: xterm-256color
 
-#window:
+window:
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. Both lines and columns
@@ -101,6 +101,7 @@ env:
   # Commonly supported values are `dark` and `light`. Set this to `None` to use
   # the default theme variant.
   #decorations_theme_variant: None
+  option_as_alt: Both
 
 #scrolling:
   # Maximum number of lines in the scrollback buffer.

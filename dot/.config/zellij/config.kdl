@@ -1,7 +1,7 @@
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP eg. when terminal window
 // with an active zellij session is closed
 // on_force_close "quit"
-on_force_close "detach"
+on_force_close "quit"
 
 // Send a request for a simplified ui (without arrow fonts) to plugins
 simplified_ui false

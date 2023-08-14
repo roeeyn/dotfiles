@@ -5,6 +5,7 @@
 require 'roeeyn.snippets.python_snippets'
 require 'roeeyn.snippets.lua_snippets'
 require 'roeeyn.snippets.js_snippets'
+require 'roeeyn.snippets.go_snippets'
 
 local ls = require 'luasnip'
 --
@@ -37,49 +38,49 @@ local t = ls.text_node
 local f = ls.function_node
 
 ls.add_snippets('all', {
-  ls.parser.parse_snippet('qelv', '¡¡tú eres la mera vrg papirrin!!'),
-  s(
-    'curtime',
-    f(function()
-      return os.date '%D - %H:%M'
-    end)
-  ),
+    ls.parser.parse_snippet('qelv', '¡¡tú eres la mera vrg papirrin!!'),
+    s(
+        'curtime',
+        f(function()
+            return os.date '%D - %H:%M'
+        end)
+    ),
 }, {
-  key = 'all',
+    key = 'all',
 })
 
 ls.add_snippets('gitcommit', {
-  s(
-    'conv',
-    fmt('{}{}{}: {}', {
-      c(1, {
-        t 'feat',
-        t 'fix',
-        t 'chore',
-        t 'docs',
-        t 'build',
-        t 'ci',
-        t 'perf',
-        t 'refactor',
-        t 'revert',
-        t 'style',
-        t 'test',
-      }),
-      c(2, {
-        sn(2, {
-          t '(',
-          i(1),
-          t ')',
-        }),
-        t '',
-      }),
-      c(3, {
-        t '!',
-        t '',
-      }),
-      i(4, 'your Commit'),
-    })
-  ),
+    s(
+        'conv',
+        fmt('{}{}{}: {}', {
+            c(1, {
+                t 'feat',
+                t 'fix',
+                t 'chore',
+                t 'docs',
+                t 'build',
+                t 'ci',
+                t 'perf',
+                t 'refactor',
+                t 'revert',
+                t 'style',
+                t 'test',
+            }),
+            c(2, {
+                sn(2, {
+                    t '(',
+                    i(1),
+                    t ')',
+                }),
+                t '',
+            }),
+            c(3, {
+                t '!',
+                t '',
+            }),
+            i(4, 'your Commit'),
+        })
+    ),
 }, {
-  key = 'gitcommit',
+    key = 'gitcommit',
 })

@@ -93,4 +93,17 @@ keybinds {
             }
         }
     }
+    normal {
+        bind "Ctrl e" {
+            Run "nvim" {
+                direction "Left"
+                close_on_exit true
+            }
+        }
+    }
+    tab {
+        bind "t" {
+            GoToTab 1;
+        }
+    }
 }

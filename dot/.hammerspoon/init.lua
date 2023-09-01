@@ -64,20 +64,6 @@ for key, app in pairs(appKeys) do
     end)
 end
 
--- Setup clipboard history tool
-Install:andUse('ClipboardTool', {
-    config = {
-        show_copied_alert = true,
-        show_in_menubar = false,
-    },
-    start = true,
-})
-
-ClipboardTool = spoon.ClipboardTool
-ClipboardTool:bindHotkeys {
-    toggle_clipboard = { { 'cmd', 'shift' }, 'space' },
-}
-
 -- FadeLogo is last to ensure that it confirms hammerspoon has fully loaded successfully
 Install:andUse('FadeLogo', {
     config = {

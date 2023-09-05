@@ -125,6 +125,7 @@ alias gwl='git worktree list'
 alias gwa='git worktree add'
 alias gwp='git worktree prune'
 alias sayv='say -v Paulina'
+alias lg='lazygit'
 
 # For FZF
 if type rg &> /dev/null; then

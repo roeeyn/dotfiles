@@ -60,6 +60,8 @@ dot/.config/raycast/
 dot/.local/state/
 dot/.local/share/
 dot/.local/bin/hs
+dot/.local/bin/pandoc-*
+dot/.local/lib/
 
 # local files
 files/go/bin/

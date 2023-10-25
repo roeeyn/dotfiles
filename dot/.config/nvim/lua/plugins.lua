@@ -27,6 +27,21 @@ require('packer').startup(function(use)
         end,
     }
 
+    use {
+        'stevearc/dressing.nvim',
+        config = function()
+            require('dressing').setup {
+                input = {
+                    enabled = true,
+                    start_in_insert = false,
+                },
+                select = {
+                    enabled = true,
+                },
+            }
+        end,
+    }
+
     use 'windwp/nvim-ts-autotag'
 
     -- Clipboard/yank history

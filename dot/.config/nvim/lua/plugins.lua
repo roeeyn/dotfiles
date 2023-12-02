@@ -16,17 +16,6 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- My plugins here
-    -- Test Coverage
-    use {
-        'andythigpen/nvim-coverage',
-        requires = 'nvim-lua/plenary.nvim',
-        -- Optional: needed for PHP when using the cobertura parser
-        rocks = { 'lua-xmlreader' },
-        config = function()
-            require('coverage').setup()
-        end,
-    }
-
     use {
         'stevearc/dressing.nvim',
         config = function()
@@ -169,9 +158,11 @@ require('packer').startup(function(use)
     use 'famiu/bufdelete.nvim'
 
     -- Harpoon
+    use 'nvim-lua/plenary.nvim' -- don't forget to add this one if you don't have it yet!
     use {
         'ThePrimeagen/harpoon',
-        requires = { 'nvim-lua/plenary.nvim' },
+        branch = 'harpoon2',
+        requires = { { 'nvim-lua/plenary.nvim' } },
     }
 
     -- Great fuzzy finder

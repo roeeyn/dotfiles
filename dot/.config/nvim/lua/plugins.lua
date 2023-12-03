@@ -158,7 +158,7 @@ require('packer').startup(function(use)
     use 'famiu/bufdelete.nvim'
 
     -- Harpoon
-    use 'nvim-lua/plenary.nvim' -- don't forget to add this one if you don't have it yet!
+    use 'nvim-lua/plenary.nvim'
     use {
         'ThePrimeagen/harpoon',
         branch = 'harpoon2',

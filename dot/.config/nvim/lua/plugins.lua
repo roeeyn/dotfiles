@@ -16,7 +16,6 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- My plugins here
-
     use {
         'stevearc/dressing.nvim',
         config = function()
@@ -159,9 +158,11 @@ require('packer').startup(function(use)
     use 'famiu/bufdelete.nvim'
 
     -- Harpoon
+    use 'nvim-lua/plenary.nvim'
     use {
         'ThePrimeagen/harpoon',
-        requires = { 'nvim-lua/plenary.nvim' },
+        branch = 'harpoon2',
+        requires = { { 'nvim-lua/plenary.nvim' } },
     }
 
     -- Great fuzzy finder

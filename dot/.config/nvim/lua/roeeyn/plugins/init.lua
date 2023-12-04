@@ -14,6 +14,7 @@ require 'roeeyn.plugins.nvim_comment'
 require 'roeeyn.plugins.nvim_lsp'
 require 'roeeyn.plugins.nvim_test'
 require 'roeeyn.plugins.nvim_ufo'
+require 'roeeyn.plugins.harpoon'
 require 'roeeyn.plugins.telescope'
 require 'roeeyn.plugins.tokyo_night'
 require 'roeeyn.plugins.flutter_tools'
@@ -24,7 +25,7 @@ require 'roeeyn.plugins.which_key'
 
 require 'impatient'
 require('package-info').setup {
-  package_manager = 'npm',
+    package_manager = 'npm',
 }
 
 -- Setup neovim lua configuration

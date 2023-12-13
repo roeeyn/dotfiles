@@ -171,4 +171,3 @@ eval "$(starship init zsh)"
 
 ## Profiling
 # zprof
-eval "$(zellij setup --generate-auto-start zsh)"

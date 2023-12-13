@@ -53,6 +53,7 @@ function M.setup()
         'thinking',
         'thisisfine',
         'rayquaza',
+        'pepe_pikachu',
     }
 
     local height = 25 -- two pixels per vertical space

@@ -127,6 +127,10 @@ alias gwp='git worktree prune'
 alias sayv='say -v Paulina'
 alias lg='lazygit'
 
+# Tmux sessionizer
+bindkey -s ^f "tmux-sessionizer -c\n"
+bindkey -s ^o "tmux-sessionizer\n"
+
 # For FZF
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
@@ -177,4 +181,3 @@ eval "$(starship init zsh)"
 
 ## Profiling
 # zprof
-eval "$(zellij setup --generate-auto-start zsh)"

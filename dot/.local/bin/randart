@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Directory containing the files
+directory="$HOME/.dotfiles/art"
+
+# Ensure the directory exists
+if [[ ! -d "$directory" ]]; then
+    echo "Directory does not exist: $directory"
+    exit 1
+fi
+
+# Get a list of executable files
+files=($(find "$directory" -maxdepth 1 -type f))
+
+# Check if there are any executable files
+if [[ ${#files[@]} -eq 0 ]]; then
+    echo "No executable files found in $directory"
+    exit 1
+fi
+
+# Generate a random number between 0 and the number of files minus one
+random_index=$(( RANDOM % ${#files[@]} ))
+
+# Execute the randomly selected file
+"${files[random_index]}"

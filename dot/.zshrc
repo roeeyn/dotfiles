@@ -127,6 +127,13 @@ alias gwp='git worktree prune'
 alias sayv='say -v Paulina'
 alias lg='lazygit'
 
+# Copilot
+# gh auth login
+# gh extension install github/gh-copilot
+noglob alias ??='gh copilot suggest -t shell'
+noglob alias git?='gh copilot suggest -t git'
+noglob alias gh?='gh copilot suggest -t gh'
+
 # Tmux sessionizer
 bindkey -s ^f "tmux-sessionizer -c\n"
 bindkey -s ^o "tmux-sessionizer\n"

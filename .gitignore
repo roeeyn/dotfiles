@@ -51,6 +51,7 @@ dot/.config/simple-update-notifier/
 dot/.config/SmartSetMasterErgo (Mac)/
 dot/.config/raycast/
 dot/.config/binwalk/
+dot/.config/gh-copilot/
 
 # Lua RC
 .luarc.json

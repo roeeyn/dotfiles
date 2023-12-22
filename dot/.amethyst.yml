@@ -145,12 +145,12 @@ swap-screen-cw:
 # Swap the position of the currently focused window with the next window in the list going counter-clockwise.
 swap-ccw:
   mod: mod1
-  key: left
+  key: right
 
 # Swap the position of the currently focused window with the next window in the list going clockwise.
 swap-cw:
   mod: mod1
-  key: right
+  key: left
 
 # Swap the position of the currently focused window with the main window in the list.
 swap-main:

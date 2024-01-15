@@ -12,6 +12,9 @@ update-notifier-firebase-tools.json
 # Copilot configuration
 github-copilot/
 
+# Golang
+vendor/
+
 # SSH files
 id_ed25519
 id_ed25519.pub
@@ -67,6 +70,5 @@ files/go/pkg/
 packer_compiled.lua
 
 #################### NO IGNORE PATTERNS ####################
-vendor/
 !*.env
 ############################################################

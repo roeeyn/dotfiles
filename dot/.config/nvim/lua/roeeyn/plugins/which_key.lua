@@ -69,7 +69,7 @@ wk.register({
         o = { '<cmd>lua require("telescope.builtin").diagnostics{bufnr=0}<cr>', 'Open current buffer diagnostics' },
     },
     f = {
-        name = 'File/Find', -- optional group name
+        name = 'File/Find/Telescope', -- optional group name
         f = { '<cmd>Telescope find_files<cr>', '[Telescope] Find file' },
         g = { '<cmd>Telescope grep_string<cr>', '[Telescope] Grep string' },
         h = { '<cmd>Telescope help_tags<cr>', '[Telescope] Find help tags' },

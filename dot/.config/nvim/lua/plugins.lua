@@ -11,19 +11,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.cmd [[packadd packer.nvim]]
 end
 
-local function get_theme_based_on_time()
-    local hour = tonumber(os.date '%H')
-
-    local day_theme = 'day'
-    local night_theme = 'night'
-
-    if hour >= 8 and hour <= 18 then
-        return day_theme
-    else
-        return night_theme
-    end
-end
-
 require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
@@ -108,8 +95,23 @@ require('packer').startup(function(use)
     use {
         'folke/tokyonight.nvim',
         config = function()
+            local function get_theme_based_on_time()
+                local hour = tonumber(os.date '%H')
+
+                local day_theme = 'day'
+                local night_theme = 'night'
+
+                if hour >= 8 and hour <= 18 then
+                    return day_theme
+                else
+                    return night_theme
+                end
+            end
+
+            local theme = get_theme_based_on_time()
+
             require('tokyonight').setup {
-                style = get_theme_based_on_time(),
+                style = theme,
                 styles = {
                     functions = {
                         italic = true,

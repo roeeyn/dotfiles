@@ -28,7 +28,7 @@ wk.register({
         o = { '<cmd>copen<cr>', '[Quickfix] Open quickfix list' },
         p = { '<cmd>cprevious<cr>', '[Quickfix] Go to prev element' },
         s = { '<cmd>lua vim.lsp.buf.signature_help()<cr>', '[LSP] Signature help' },
-        t = { '<cmd>lua vim.lsp.buf.hover()<cr>', '[LSP] Hover Info' },
+        t = { '<cmd>lua require("hover").hover()<cr>', '[LSP] Hover Info' },
         x = { '<cmd>lua vim.fn.setqflist({})<cr>', '[Quickfix] Clear quickfix' },
         y = { 'yypk <cmd>CommentToggle<CR>j', '[Misc] Duplicate and comment' },
     },
@@ -36,11 +36,12 @@ wk.register({
         name = 'Debug/Diag.',
         b = { '<cmd>lua require"dap".toggle_breakpoint()<cr>', '[Debug] Toggle Breakpoint' },
         c = { '<cmd>lua require"dap".continue()<cr>', '[Debug] Start/Continue' },
+        d = { '<cmd>Neogen<cr>', '[Neogen] Generate Annotation' },
         h = { "<cmd>lua require'dap.ui.widgets'.hover()<cr>", '[Debug] Hover' },
         n = { '<cmd>lua vim.diagnostic.goto_next()<cr>', '[Diag] Go Next' },
-        o = { '<cmd>DogeGenerate<cr>', '[DoGe] Generate docs' },
+        o = { '<cmd>TroubleToggle<cr>', '[Trouble] Open' },
         p = { '<cmd>lua vim.diagnostic.goto_prev()<cr>', '[Diag] Go Prev' },
-        r = { '<cmd>lua require"dap".repl.open({}, "vsplit")<CR><C-w>l', '[Debug] Open REPL' },
+        r = { '<cmd>TroubleRefresh<CR>', '[Trouble] Manual refresh' },
         s = {
             name = 'Debugging',
             d = { '<cmd>lua require"dap".down()<cr>', 'Down' },
@@ -70,6 +71,8 @@ wk.register({
     },
     f = {
         name = 'File/Find/Telescope', -- optional group name
+        a = { '<cmd>Telescope aerial<cr>', '[Telescope] aerial (symbols)' },
+        b = { '<cmd>Telescope builtin<cr>', '[Telescope] builtin' },
         f = { '<cmd>Telescope find_files<cr>', '[Telescope] Find file' },
         g = { '<cmd>Telescope grep_string<cr>', '[Telescope] Grep string' },
         h = { '<cmd>Telescope help_tags<cr>', '[Telescope] Find help tags' },
@@ -78,7 +81,7 @@ wk.register({
         r = { '<cmd>Telescope resume<cr>', '[Telescope] Resume' },
         s = { '<cmd>w<cr>', '[File] Save current buffer' },
         S = { '<cmd>wa<cr>', '[File] Save all buffers' },
-        t = { '<cmd>Telescope builtin<cr>', '[Telescope] builtin' },
+        t = { '<cmd>TodoTelescope<cr>', '[Telescope] Find ToDos' },
         -- ['/'] = 'Fuzzy search in current buffer', -- same as above
         ['/'] = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', '[Telescope] Fuzzy search in buffer' },
     },

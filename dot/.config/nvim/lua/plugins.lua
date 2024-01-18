@@ -2,6 +2,9 @@
 --                List of plugins used within NeoVim                --
 ----------------------------------------------------------------------
 
+-- Here's the dotfile of wbthomson, which provides great guidance and plugins variety
+-- https://github.com/wbthomason/dotfiles/blob/main/dot_config/nvim/lua/plugins.lua
+
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 
@@ -16,6 +19,8 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- My plugins here
+
+    -- Nice windows for inputs
     use {
         'stevearc/dressing.nvim',
         config = function()
@@ -28,6 +33,62 @@ require('packer').startup(function(use)
                     enabled = true,
                 },
             }
+        end,
+    }
+
+    -- Avoid having to execute :noh whenever a search has been done
+    use {
+        'romainl/vim-cool',
+    }
+
+    use {
+        'andymass/vim-matchup',
+        setup = function()
+            -- may set any options here
+            vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+        end,
+    }
+
+    -- useful hover information over different code parts
+    use {
+        'lewis6991/hover.nvim',
+        config = function()
+            require('hover').setup {
+                init = function()
+                    -- Require providers
+                    require 'hover.providers.lsp'
+                    require 'hover.providers.gh' -- requires the gh command
+                    require 'hover.providers.gh_user' -- requires the gh command
+                    -- require('hover.providers.jira') -- requires the jira command
+                    require 'hover.providers.man'
+                    require 'hover.providers.dictionary'
+                end,
+                preview_opts = {
+                    border = 'single',
+                },
+                -- Whether the contents of a currently open hover window should be moved
+                -- to a :h preview-window when pressing the hover keymap.
+                preview_window = true,
+                title = true,
+                mouse_providers = {
+                    'LSP',
+                },
+                mouse_delay = 1000,
+            }
+
+            -- Setup keymaps
+            -- vim.keymap.set("n", "K", require("hover").hover, {desc = "hover.nvim"})
+            -- vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
+            vim.keymap.set('n', '<C-p>', function()
+                require('hover').hover_switch 'previous'
+            end, { desc = 'hover.nvim (previous source)' })
+            vim.keymap.set('n', '<C-n>', function()
+                require('hover').hover_switch 'next'
+            end, { desc = 'hover.nvim (next source)' })
+
+            -- Mouse support
+            -- vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
+            -- vim.o.mousemoveevent = true
         end,
     }
 
@@ -86,6 +147,40 @@ require('packer').startup(function(use)
             require('ibl').setup {
                 indent = {
                     highlight = highlight,
+                },
+            }
+        end,
+    }
+
+    -- Very useful REPL, specifically for python and cybersec stuff
+    use {
+        'Vigemus/iron.nvim',
+    }
+
+    -- sidebar to see symbols (function, classes, etc)
+    -- attached to telescope for better integration
+    use {
+        'stevearc/aerial.nvim',
+        config = function()
+            require('aerial').setup()
+        end,
+    }
+
+    use {
+        'folke/todo-comments.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('todo-comments').setup {
+                signs = true,
+                search = {
+                    args = {
+                        '--color=never',
+                        '--no-heading',
+                        '--with-filename',
+                        '--line-number',
+                        '--column',
+                        '--hidden',
+                    },
                 },
             }
         end,
@@ -203,6 +298,10 @@ require('packer').startup(function(use)
                 playground = {
                     enable = true,
                 },
+                matchup = {
+                    enable = true,
+                    disable = {},
+                },
             }
         end,
     }
@@ -291,11 +390,34 @@ require('packer').startup(function(use)
         end,
     }
 
-    -- Documentation Generator
+    -- Annotation Toolkit (documentation)
     use {
-        'kkoomen/vim-doge',
-        run = ':call doge#install()',
-        -- run = 'npm i --no-save && npm run build:binary:unix',
+        'danymat/neogen',
+        config = function()
+            require('neogen').setup {
+                snippet_engine = 'luasnip',
+            }
+        end,
+        requires = 'nvim-treesitter/nvim-treesitter',
+        -- Uncomment next line if you want to follow only stable versions
+        -- tag = "*"
+    }
+
+    use {
+        'folke/trouble.nvim',
+        requires = {
+            'nvim-web-devicons',
+        },
+        config = function()
+            require('trouble').setup {
+                icons = true,
+                auto_open = false,
+                auto_close = false,
+                auto_preview = true,
+                auto_fold = false,
+                use_diagnostic_signs = false,
+            }
+        end,
     }
 
     -- Git integration
@@ -396,35 +518,6 @@ require('packer').startup(function(use)
         end,
     }
 
-    -- LSP configuration
-    use { -- LSP Configuration & Plugins
-        'neovim/nvim-lspconfig',
-        requires = {
-            -- Automatically install LSPs to stdpath for neovim
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
-
-            -- For formatting and linting
-            'jose-elias-alvarez/null-ls.nvim',
-
-            -- Additional lua configuration, makes nvim stuff amazing
-            'folke/neodev.nvim',
-        },
-    }
-
-    use {
-        -- Useful status updates for LSP
-        'j-hui/fidget.nvim',
-        tag = 'legacy',
-        config = function()
-            require('fidget').setup {
-                text = {
-                    spinner = 'moon',
-                },
-            }
-        end,
-    }
-
     -- Spacemacs like key
     use {
         'folke/which-key.nvim',
@@ -443,6 +536,7 @@ require('packer').startup(function(use)
         requires = {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-git',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lua',
@@ -453,6 +547,7 @@ require('packer').startup(function(use)
             -- Snippets
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
+            'rafamadriz/friendly-snippets',
         },
     }
 
@@ -495,6 +590,52 @@ require('packer').startup(function(use)
 
     -- Luv docs
     use 'nanotee/luv-vimdocs'
+
+    -- Colorize the background of the hex codes
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup()
+        end,
+    }
+
+    -- LSP configuration
+    -- TODO: Improve LSP configuration
+    use { -- LSP Configuration & Plugins
+        'neovim/nvim-lspconfig',
+        requires = {
+            -- Automatically install LSPs to stdpath for neovim
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+
+            -- For formatting and linting
+            'jose-elias-alvarez/null-ls.nvim',
+
+            -- Additional lua configuration, makes nvim stuff amazing
+            'folke/neodev.nvim',
+        },
+    }
+
+    use {
+        -- Useful status updates for LSP
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        config = function()
+            require('fidget').setup {
+                text = {
+                    spinner = 'moon',
+                },
+            }
+        end,
+    }
+
+    -- TODO: Add format configuration
+    use {
+        'stevearc/conform.nvim',
+        config = function()
+            require('conform').setup()
+        end,
+    }
 
     ----------------------------------------------------------------------
     --                        Local plugins WIP                         --

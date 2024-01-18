@@ -40,3 +40,4 @@ pcall(require('telescope').load_extension, 'fzf')
 require('telescope').load_extension 'harpoon'
 require('telescope').load_extension 'dap'
 require('telescope').load_extension 'media_files'
+require('telescope').load_extension 'aerial'

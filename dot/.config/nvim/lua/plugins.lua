@@ -280,7 +280,6 @@ require('packer').startup(function(use)
                     'vim',
                     'vimdoc',
                 },
-
                 highlight = { enable = true },
                 -- indent = {enable = true}
                 autotag = {
@@ -386,8 +385,14 @@ require('packer').startup(function(use)
             require('nvim_comment').setup {
                 line_mapping = '<leader>l;',
                 operator_mapping = '<leader>;',
+                function()
+                    require('ts_context_commentstring').update_commentstring()
+                end,
             }
         end,
+    }
+    use {
+        'JoosepAlviste/nvim-ts-context-commentstring',
     }
 
     -- Annotation Toolkit (documentation)

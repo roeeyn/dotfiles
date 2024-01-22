@@ -62,6 +62,15 @@ vim.api.nvim_create_autocmd('BufFilePost', {
     end,
 })
 
+-- Setting comment string for prisma
+vim.api.nvim_create_autocmd('FileType', {
+    group = set_comment_string_ag,
+    pattern = 'prisma',
+    callback = function()
+        vim.api.nvim_buf_set_option(0, 'commentstring', '// %s')
+    end,
+})
+
 -- Packer compile whenever plugins.lua is updated
 local packer_ag = vim.api.nvim_create_augroup('packer-user-config', { clear = true })
 

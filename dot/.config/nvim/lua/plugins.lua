@@ -155,4 +155,19 @@ require('lazy').setup {
             require 'treesitter'
         end,
     },
+    -- you can use the VeryLazy event for things that can
+    -- load later and are not important for the initial UI
+    {
+        'stevearc/dressing.nvim',
+        event = 'VeryLazy',
+        opts = {
+            input = {
+                enabled = true,
+                start_in_insert = false,
+            },
+            select = {
+                enabled = false,
+            },
+        },
+    },
 }

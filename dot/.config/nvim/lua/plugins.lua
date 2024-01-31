@@ -177,4 +177,5 @@ require('lazy').setup {
             },
         },
     },
+    { 'romainl/vim-cool' },
 }

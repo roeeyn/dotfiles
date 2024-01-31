@@ -194,7 +194,7 @@ require('packer').startup(function(use)
                 local hour = tonumber(os.date '%H')
 
                 local day_theme = 'day'
-                local night_theme = 'night'
+                local night_theme = 'moon'
 
                 if hour >= 8 and hour <= 18 then
                     return day_theme
@@ -219,12 +219,12 @@ require('packer').startup(function(use)
                     hl.CursorLineNr = {
                         fg = c.cyan,
                     }
-                    hl.Visual = {
-                        bg = '#2f334d',
-                    }
-                    hl.ColorColumn = {
-                        bg = '#222436',
-                    }
+                    -- hl.Visual = {
+                    --     bg = '#2f334d',
+                    -- }
+                    -- hl.ColorColumn = {
+                    --     bg = '#222436',
+                    -- }
                 end,
             }
 

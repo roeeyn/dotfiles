@@ -173,6 +173,11 @@ eval "$(aactivator init)"
 export N_PREFIX="/Users/roeeyn/"
 export PATH="/Users/roeeyn/bin:$PATH"
 
+# McFly
+export MCFLY_KEY_SCHEME=vim
+export MCFLY_FUZZY=2
+eval "$(mcfly init zsh)"
+
 # Starting starship
 eval "$(starship init zsh)"
 

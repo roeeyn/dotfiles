@@ -142,4 +142,17 @@ require('lazy').setup {
             },
         },
     },
+    {
+        'nvim-treesitter/nvim-treesitter',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter-refactor',
+            'nvim-treesitter/nvim-treesitter-context',
+            'nvim-treesitter/playground',
+        },
+        build = ':TSUpdate',
+        event = 'BufEnter',
+        config = function()
+            require 'treesitter'
+        end,
+    },
 }

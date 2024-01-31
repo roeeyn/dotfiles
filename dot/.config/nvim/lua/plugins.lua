@@ -118,4 +118,11 @@ require('lazy').setup {
             vim.cmd [[colorscheme tokyonight]]
         end,
     },
+    {
+        'folke/which-key.nvim',
+        event = 'BufEnter',
+        config = function()
+            require 'mappings'
+        end,
+    },
 }

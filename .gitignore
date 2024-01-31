@@ -21,6 +21,9 @@ ansible_password.txt
 # Judge0 Token
 .judge0-uploader.yaml
 
+# Unsplash API
+.unsplash_api_key
+
 # GPG configuration
 dot/.gnupg/openpgp-revocs.d/
 private-keys-v1.d

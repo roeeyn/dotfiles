@@ -11,10 +11,10 @@ function M.setup()
     local dashboard = require 'alpha.themes.dashboard'
 
     dashboard.section.buttons.val = {
-        dashboard.button('f', '  Find file', ':Telescope find_files<CR>'),
-        dashboard.button('h', '  Harpoon Files', ":lua require('roeeyn.plugins.harpoon').open_harpoon_telescope()<CR>"),
-        dashboard.button('t', '  Find text', ':Telescope live_grep <CR>'),
-        dashboard.button('q', '  Quit Neovim', ':qa<CR>'),
+        dashboard.button('f', '󰱼  Find file', ':Telescope find_files<CR>'),
+        dashboard.button('h', '󱡁  Harpoon Files', ":lua require('roeeyn.plugins.harpoon').open_harpoon_telescope()<CR>"),
+        dashboard.button('t', '  Find text', ':Telescope live_grep <CR>'),
+        dashboard.button('q', '󰩈  Quit Neovim', ':qa<CR>'),
     }
 
     for _, button in ipairs(dashboard.section.buttons.val) do
@@ -69,7 +69,7 @@ function M.setup()
         -- Number of plugins
         local total_plugins = #vim.tbl_keys(packer_plugins)
         local datetime = os.date '%d-%m-%Y %H:%M:%S'
-        local plugins_text = '   '
+        local plugins_text = '   '
             .. total_plugins
             .. ' plugins'
             .. '   v'
@@ -78,7 +78,7 @@ function M.setup()
             .. vim.version().minor
             .. '.'
             .. vim.version().patch
-            .. '   '
+            .. '   '
             .. datetime
 
         -- Quote

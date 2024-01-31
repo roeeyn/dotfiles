@@ -12,6 +12,9 @@ update-notifier-firebase-tools.json
 # Copilot configuration
 github-copilot/
 
+# Golang
+vendor/
+
 # SSH files
 id_ed25519
 id_ed25519.pub
@@ -71,13 +74,11 @@ dot/.ssh/kolors*
 
 #################### KOLORS IGNORE PATTERNS ####################
 !Makefile
-!*.env
 !go.work
-vendor/
 !command.json
 !sam_env.json
 ################################################################
 
 #################### NO IGNORE PATTERNS ####################
-vendor/
+!*.env
 ############################################################

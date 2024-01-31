@@ -5,6 +5,9 @@ vim.g.loaded_netrwPlugin = 1
 -- Needed settings for font issues (Telescope)
 vim.opt.encoding = 'utf-8'
 
+-- Highlight search
+vim.opt.hlsearch = true
+
 -- Column limit 120
 vim.opt.colorcolumn = '120'
 

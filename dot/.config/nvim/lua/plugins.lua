@@ -2,6 +2,9 @@
 --                List of plugins used within NeoVim                --
 ----------------------------------------------------------------------
 
+-- Here's the dotfile of wbthomson, which provides great guidance and plugins variety
+-- https://github.com/wbthomason/dotfiles/blob/main/dot_config/nvim/lua/plugins.lua
+
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 
@@ -16,6 +19,8 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- My plugins here
+
+    -- Nice windows for inputs
     use {
         'stevearc/dressing.nvim',
         config = function()
@@ -28,6 +33,62 @@ require('packer').startup(function(use)
                     enabled = true,
                 },
             }
+        end,
+    }
+
+    -- Avoid having to execute :noh whenever a search has been done
+    use {
+        'romainl/vim-cool',
+    }
+
+    use {
+        'andymass/vim-matchup',
+        setup = function()
+            -- may set any options here
+            vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+        end,
+    }
+
+    -- useful hover information over different code parts
+    use {
+        'lewis6991/hover.nvim',
+        config = function()
+            require('hover').setup {
+                init = function()
+                    -- Require providers
+                    require 'hover.providers.lsp'
+                    require 'hover.providers.gh' -- requires the gh command
+                    require 'hover.providers.gh_user' -- requires the gh command
+                    -- require('hover.providers.jira') -- requires the jira command
+                    require 'hover.providers.man'
+                    require 'hover.providers.dictionary'
+                end,
+                preview_opts = {
+                    border = 'single',
+                },
+                -- Whether the contents of a currently open hover window should be moved
+                -- to a :h preview-window when pressing the hover keymap.
+                preview_window = true,
+                title = true,
+                mouse_providers = {
+                    'LSP',
+                },
+                mouse_delay = 1000,
+            }
+
+            -- Setup keymaps
+            -- vim.keymap.set("n", "K", require("hover").hover, {desc = "hover.nvim"})
+            -- vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
+            vim.keymap.set('n', '<C-p>', function()
+                require('hover').hover_switch 'previous'
+            end, { desc = 'hover.nvim (previous source)' })
+            vim.keymap.set('n', '<C-n>', function()
+                require('hover').hover_switch 'next'
+            end, { desc = 'hover.nvim (next source)' })
+
+            -- Mouse support
+            -- vim.keymap.set('n', '<MouseMove>', require('hover').hover_mouse, { desc = "hover.nvim (mouse)" })
+            -- vim.o.mousemoveevent = true
         end,
     }
 
@@ -48,16 +109,128 @@ require('packer').startup(function(use)
     use {
         'vuki656/package-info.nvim',
         requires = 'MunifTanjim/nui.nvim',
+        config = function()
+            require('package-info').setup()
+        end,
     }
 
     -- Optimization Plugin
     use 'lewis6991/impatient.nvim'
 
     -- Nice indentation lines
-    use 'lukas-reineke/indent-blankline.nvim'
+    use {
+        'lukas-reineke/indent-blankline.nvim',
+        config = function()
+            local highlight = {
+                'RainbowRed',
+                'RainbowYellow',
+                'RainbowBlue',
+                'RainbowOrange',
+                'RainbowGreen',
+                'RainbowViolet',
+                'RainbowCyan',
+            }
+
+            local hooks = require 'ibl.hooks'
+            -- create the highlight groups in the highlight setup hook, so they are reset
+            -- every time the colorscheme changes
+            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+                vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
+                vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
+                vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
+                vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
+                vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
+                vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
+                vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
+            end)
+
+            require('ibl').setup {
+                indent = {
+                    highlight = highlight,
+                },
+            }
+        end,
+    }
+
+    -- Very useful REPL, specifically for python and cybersec stuff
+    use {
+        'Vigemus/iron.nvim',
+    }
+
+    -- sidebar to see symbols (function, classes, etc)
+    -- attached to telescope for better integration
+    use {
+        'stevearc/aerial.nvim',
+        config = function()
+            require('aerial').setup()
+        end,
+    }
+
+    use {
+        'folke/todo-comments.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('todo-comments').setup {
+                signs = true,
+                search = {
+                    args = {
+                        '--color=never',
+                        '--no-heading',
+                        '--with-filename',
+                        '--line-number',
+                        '--column',
+                        '--hidden',
+                    },
+                },
+            }
+        end,
+    }
 
     -- Theme for neovim
-    use 'folke/tokyonight.nvim'
+    use {
+        'folke/tokyonight.nvim',
+        config = function()
+            local function get_theme_based_on_time()
+                local hour = tonumber(os.date '%H')
+
+                local day_theme = 'day'
+                local night_theme = 'moon'
+
+                if hour >= 8 and hour <= 18 then
+                    return day_theme
+                else
+                    return night_theme
+                end
+            end
+
+            local theme = get_theme_based_on_time()
+
+            require('tokyonight').setup {
+                style = theme,
+                styles = {
+                    functions = {
+                        italic = true,
+                    },
+                },
+                on_colors = function(colors)
+                    colors.fg_gutter = '#555f8b'
+                end,
+                on_highlights = function(hl, c)
+                    hl.CursorLineNr = {
+                        fg = c.cyan,
+                    }
+                    -- hl.Visual = {
+                    --     bg = '#2f334d',
+                    -- }
+                    -- hl.ColorColumn = {
+                    --     bg = '#222436',
+                    -- }
+                end,
+            }
+
+            vim.cmd [[colorscheme tokyonight]]
+        end,
+    }
 
     -- Wakatime, code time tracking
     use 'wakatime/vim-wakatime'
@@ -67,6 +240,68 @@ require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = function()
             pcall(require('nvim-treesitter.install').update { with_sync = true })
+        end,
+        config = function()
+            require('nvim-treesitter.configs').setup {
+                -- Add languages to be installed here that you want installed for treesitter
+                ensure_installed = {
+                    'comment',
+                    'dockerfile',
+                    'git_config',
+                    'git_rebase',
+                    'gitattributes',
+                    'gitcommit',
+                    'gitignore',
+                    'go',
+                    'godot_resource',
+                    'gomod',
+                    'gosum',
+                    'gowork',
+                    'graphql',
+                    'hjson',
+                    'html',
+                    'javascript',
+                    'json',
+                    'json5',
+                    'jsonc',
+                    'jq',
+                    'lua',
+                    'markdown',
+                    'markdown_inline',
+                    'make',
+                    'mermaid',
+                    'passwd',
+                    'python',
+                    'rust',
+                    'sql',
+                    'todotxt',
+                    'typescript',
+                    'yaml',
+                    'vim',
+                    'vimdoc',
+                },
+                highlight = { enable = true },
+                -- indent = {enable = true}
+                autotag = {
+                    enable = true,
+                },
+                textsubjects = {
+                    enable = true,
+                    prev_selection = ',', -- (Optional) keymap to select the previous selection
+                    keymaps = {
+                        ['.'] = 'textsubjects-smart',
+                        [';'] = 'textsubjects-container-outer',
+                        ['i;'] = 'textsubjects-container-inner',
+                    },
+                },
+                playground = {
+                    enable = true,
+                },
+                matchup = {
+                    enable = true,
+                    disable = {},
+                },
+            }
         end,
     }
     use 'nvim-treesitter/playground'
@@ -85,12 +320,31 @@ require('packer').startup(function(use)
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config = function()
+            require('lualine').setup {
+                options = {
+                    theme = 'tokyonight',
+                },
+            }
+        end,
     }
 
     -- File browser
     use {
         'nvim-tree/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config = function()
+            require('nvim-tree').setup {
+                update_focused_file = {
+                    enable = true,
+                },
+                actions = {
+                    open_file = {
+                        quit_on_open = true,
+                    },
+                },
+            }
+        end,
     }
 
     -- Nice dashboard
@@ -102,7 +356,14 @@ require('packer').startup(function(use)
     }
 
     -- Awesome testing
-    use 'vim-test/vim-test'
+    use {
+        'vim-test/vim-test',
+        config = function()
+            vim.g['test#strategy'] = 'neovim'
+            vim.g['test#neovim#term_position'] = 'vert botright'
+            vim.g['test#neovim#start_normal'] = 1 -- Start in normal mode so we can scroll
+        end,
+    }
 
     -- Nice Comment boxes inside the code
     use {
@@ -118,27 +379,83 @@ require('packer').startup(function(use)
     }
 
     -- Commenting code easily
-    use 'terrortylor/nvim-comment'
-
-    -- Documentation Generator
     use {
-        'kkoomen/vim-doge',
-        run = ':call doge#install()',
-        -- run = 'npm i --no-save && npm run build:binary:unix',
+        'terrortylor/nvim-comment',
+        config = function()
+            require('nvim_comment').setup {
+                line_mapping = '<leader>l;',
+                operator_mapping = '<leader>;',
+                function()
+                    require('ts_context_commentstring').update_commentstring()
+                end,
+            }
+        end,
+    }
+    use {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+    }
+
+    -- Annotation Toolkit (documentation)
+    use {
+        'danymat/neogen',
+        config = function()
+            require('neogen').setup {
+                snippet_engine = 'luasnip',
+            }
+        end,
+        requires = 'nvim-treesitter/nvim-treesitter',
+        -- Uncomment next line if you want to follow only stable versions
+        -- tag = "*"
+    }
+
+    use {
+        'folke/trouble.nvim',
+        requires = {
+            'nvim-web-devicons',
+        },
+        config = function()
+            require('trouble').setup {
+                icons = true,
+                auto_open = false,
+                auto_close = false,
+                auto_preview = true,
+                auto_fold = false,
+                use_diagnostic_signs = false,
+            }
+        end,
     }
 
     -- Git integration
-    -- :0Gclog to see revision of the file
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-rhubarb'
     use 'rhysd/git-messenger.vim'
     use {
         'ruifm/gitlinker.nvim',
         requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('gitlinker').setup()
+        end,
+    }
+
+    -- Lazygit
+    use {
+        'kdheepak/lazygit.nvim',
+        -- optional for floating window border decoration
+        requires = {
+            'nvim-lua/plenary.nvim',
+        },
     }
 
     -- GitHub Copilot
-    use { 'zbirenbaum/copilot.lua' }
+    use {
+        'zbirenbaum/copilot.lua',
+        cmd = 'Copilot',
+        event = 'InsertEnter',
+        config = function()
+            require('copilot').setup {
+                suggestion = { enabled = false },
+                panel = { enabled = false },
+            }
+        end,
+    }
     use {
         'zbirenbaum/copilot-cmp',
         after = { 'copilot.lua' },
@@ -189,42 +506,22 @@ require('packer').startup(function(use)
             { 'kevinhwang91/promise-async' },
             { 'nvim-treesitter/nvim-treesitter', opt = true },
         },
-    }
+        config = function()
+            vim.o.foldcolumn = '1'
+            vim.o.foldlevel = 99 -- feel free to decrease the value
+            vim.o.foldlevelstart = -1
+            vim.o.foldenable = true
 
-    -- LSP configuration
-    use { -- LSP Configuration & Plugins
-        'neovim/nvim-lspconfig',
-        requires = {
-            -- Automatically install LSPs to stdpath for neovim
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
-
-            -- For formatting and linting
-            'jose-elias-alvarez/null-ls.nvim',
-
-            -- Additional lua configuration, makes nvim stuff amazing
-            'folke/neodev.nvim',
-        },
-    }
-
-    use {
-        -- Useful status updates for LSP
-        'j-hui/fidget.nvim',
-        tag = 'legacy',
-    }
-
-    -- Markdown preview
-    use {
-        'iamcco/markdown-preview.nvim',
-        run = 'cd app && npm install',
-        setup = function()
-            vim.g.mkdp_filetypes = { 'markdown' }
+            require('ufo').setup()
         end,
-        ft = { 'markdown' },
     }
 
-    -- Flutter
-    use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use {
+        'folke/neodev.nvim',
+        config = function()
+            require('neodev').setup()
+        end,
+    }
 
     -- Spacemacs like key
     use {
@@ -244,6 +541,7 @@ require('packer').startup(function(use)
         requires = {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-git',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lua',
@@ -254,6 +552,7 @@ require('packer').startup(function(use)
             -- Snippets
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
+            'rafamadriz/friendly-snippets',
         },
     }
 
@@ -262,21 +561,90 @@ require('packer').startup(function(use)
 
     -- Debugger
     use 'mfussenegger/nvim-dap'
-    use 'rcarriga/nvim-dap-ui'
-    use 'theHamsta/nvim-dap-virtual-text'
-    use 'mfussenegger/nvim-dap-python'
+    use {
+        'rcarriga/nvim-dap-ui',
+        config = function()
+            require('dapui').setup()
+        end,
+    }
+    use {
+        'theHamsta/nvim-dap-virtual-text',
+        config = function()
+            require('nvim-dap-virtual-text').setup {
+                -- If we want to use comments to identify the virtual text
+                commented = false,
+            }
+        end,
+    }
+    use {
+        'mfussenegger/nvim-dap-python',
+        config = function()
+            require('dap-python').setup('python', {})
+        end,
+    }
     use 'nvim-telescope/telescope-dap.nvim'
 
     -- Nice tab
-    use { 'alvarosevilla95/luatab.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+    use {
+        'alvarosevilla95/luatab.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function()
+            require('luatab').setup()
+        end,
+    }
 
     -- Luv docs
     use 'nanotee/luv-vimdocs'
 
+    -- Colorize the background of the hex codes
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup()
+        end,
+    }
+
+    -- LSP configuration
+    -- TODO: Improve LSP configuration
+    use { -- LSP Configuration & Plugins
+        'neovim/nvim-lspconfig',
+        requires = {
+            -- Automatically install LSPs to stdpath for neovim
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+
+            -- For formatting and linting
+            'jose-elias-alvarez/null-ls.nvim',
+
+            -- Additional lua configuration, makes nvim stuff amazing
+            'folke/neodev.nvim',
+        },
+    }
+
+    use {
+        -- Useful status updates for LSP
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        config = function()
+            require('fidget').setup {
+                text = {
+                    spinner = 'moon',
+                },
+            }
+        end,
+    }
+
+    -- TODO: Add format configuration
+    use {
+        'stevearc/conform.nvim',
+        config = function()
+            require('conform').setup()
+        end,
+    }
+
     ----------------------------------------------------------------------
     --                        Local plugins WIP                         --
     ----------------------------------------------------------------------
-    -- use '/Users/roeeyn/src/nvim-config-tutor'
 
     -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
     local has_plugins, plugins = pcall(require, 'custom.plugins')

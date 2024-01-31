@@ -242,4 +242,13 @@ require('lazy').setup {
         'stevearc/aerial.nvim',
         config = true,
     },
+    {
+        -- pinning needed files. Signal from noise
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            require 'harpoon_config'
+        end,
+    },
 }

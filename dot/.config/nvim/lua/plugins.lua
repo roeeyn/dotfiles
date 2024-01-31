@@ -69,6 +69,7 @@ require('lazy').setup {
             require('telescope').setup(opts)
 
             require('telescope').load_extension 'fzf'
+            require('telescope').load_extension 'aerial'
         end,
         cmd = 'Telescope',
     },
@@ -235,5 +236,10 @@ require('lazy').setup {
                 },
             }
         end,
+    },
+    {
+        -- fuzzy finding symbols
+        'stevearc/aerial.nvim',
+        config = true,
     },
 }

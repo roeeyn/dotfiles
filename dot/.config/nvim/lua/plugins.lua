@@ -185,4 +185,14 @@ require('lazy').setup {
             vim.g.matchup_matchparen_offscreen = { method = 'popup' }
         end,
     },
+    {
+        'windwp/nvim-ts-autotag',
+    },
+    {
+        'AckslD/nvim-neoclip.lua',
+        dependencies = {
+            'nvim-telescope/telescope.nvim',
+        },
+        config = true,
+    },
 }

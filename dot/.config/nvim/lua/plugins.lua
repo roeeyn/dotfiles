@@ -65,6 +65,7 @@ require('lazy').setup {
         end,
         config = function(plugin, opts)
             require('telescope').setup(opts)
+
             require('telescope').load_extension 'fzf'
         end,
         cmd = 'Telescope',
@@ -124,5 +125,21 @@ require('lazy').setup {
         config = function()
             require 'mappings'
         end,
+    },
+    {
+        'nvim-tree/nvim-tree.lua',
+        dependencies = {
+            'kyazdani42/nvim-web-devicons',
+        },
+        opts = {
+            update_focused_file = {
+                enable = true,
+            },
+            actions = {
+                open_file = {
+                    quit_on_open = true,
+                },
+            },
+        },
     },
 }

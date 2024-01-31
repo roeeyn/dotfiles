@@ -15,8 +15,10 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins Config
 require('lazy').setup {
+    -- Telescope needed fuzzy finding lib
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     {
+        -- fuzzy finding EVERYTHING
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',
         dependencies = {
@@ -71,6 +73,7 @@ require('lazy').setup {
         cmd = 'Telescope',
     },
     {
+        -- Great Theme
         'folke/tokyonight.nvim',
         lazy = false, -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
@@ -120,6 +123,7 @@ require('lazy').setup {
         end,
     },
     {
+        -- key mapping like Spacemacs
         'folke/which-key.nvim',
         event = 'BufEnter',
         config = function()
@@ -127,6 +131,7 @@ require('lazy').setup {
         end,
     },
     {
+        -- Project files side view
         'nvim-tree/nvim-tree.lua',
         dependencies = {
             'kyazdani42/nvim-web-devicons',
@@ -143,6 +148,7 @@ require('lazy').setup {
         },
     },
     {
+        -- AST for the code
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
             'nvim-treesitter/nvim-treesitter-refactor',
@@ -155,9 +161,10 @@ require('lazy').setup {
             require 'treesitter'
         end,
     },
-    -- you can use the VeryLazy event for things that can
-    -- load later and are not important for the initial UI
     {
+        -- you can use the VeryLazy event for things that can
+        -- load later and are not important for the initial UI
+        -- Nice windows for inputs
         'stevearc/dressing.nvim',
         event = 'VeryLazy',
         opts = {

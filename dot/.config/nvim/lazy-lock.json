@@ -37,5 +37,6 @@
   "vim-cool": { "branch": "master", "commit": "662e7b11064cbeedad17c45d2fe926e78d3cd0b6" },
   "vim-gitgutter": { "branch": "main", "commit": "67ef116100b40f9ca128196504a2e0bc0a2753b0" },
   "vim-matchup": { "branch": "master", "commit": "e2cca1747ab175b8d839a5d28679427564643a57" },
+  "vim-wakatime": { "branch": "master", "commit": "cae21a19c3db4d9aadd5d320de3da0c99dfd0f62" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }

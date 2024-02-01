@@ -251,4 +251,10 @@ require('lazy').setup {
             require 'harpoon_config'
         end,
     },
+    {
+        'j-hui/fidget.nvim',
+        opts = {
+            -- options
+        },
+    },
 }

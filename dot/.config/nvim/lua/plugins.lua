@@ -306,4 +306,29 @@ require('lazy').setup {
             'nvim-lua/plenary.nvim',
         },
     },
+    {
+        -- Nice Comment boxes inside the code
+        's1n7ax/nvim-comment-frame',
+        -- <leader>cf: Comment one line
+        -- <leader>cm: Comment multiple lines
+        dependencies = {
+            'nvim-treesitter',
+        },
+        opts = {},
+    },
+    {
+        -- Commenting code easily
+        'terrortylor/nvim-comment',
+        main = 'nvim_comment',
+        opts = {
+            line_mapping = '<leader>l;',
+            operator_mapping = '<leader>;',
+            hook = function()
+                require('ts_context_commentstring').update_commentstring()
+            end,
+        },
+        dependencies = {
+            'JoosepAlviste/nvim-ts-context-commentstring',
+        },
+    },
 }

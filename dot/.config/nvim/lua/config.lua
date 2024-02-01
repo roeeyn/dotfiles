@@ -1,3 +1,7 @@
+----------------------------------------------------------------------
+--                    Vim Global Configurations                     --
+----------------------------------------------------------------------
+
 -- Nvim Tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -80,7 +84,9 @@ vim.o.foldlevel = 99 -- feel free to decrease the value
 vim.o.foldlevelstart = -1
 vim.o.foldenable = true
 
--- AUTOCOMMANDS
+----------------------------------------------------------------------
+--                     Autocommands Generation                      --
+----------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd('FileType', {
     -- To add more files, transform the string to table {}

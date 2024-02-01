@@ -2,5 +2,5 @@
 --                  Main NeoVim configuration file                  --
 ----------------------------------------------------------------------
 
-require 'config'
+require 'vim_config'
 require 'plugins'

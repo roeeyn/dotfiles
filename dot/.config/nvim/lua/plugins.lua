@@ -257,4 +257,11 @@ require('lazy').setup {
             -- options
         },
     },
+    {
+        -- Colorize the background of the hex codes
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require('colorizer').setup()
+        end,
+    },
 }

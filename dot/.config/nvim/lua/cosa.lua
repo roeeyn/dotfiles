@@ -50,46 +50,6 @@ require('packer').startup(function(use)
         end,
     }
 
-    -- Awesome testing
-    use {
-        'vim-test/vim-test',
-        config = function()
-            vim.g['test#strategy'] = 'neovim'
-            vim.g['test#neovim#term_position'] = 'vert botright'
-            vim.g['test#neovim#start_normal'] = 1 -- Start in normal mode so we can scroll
-        end,
-    }
-
-    -- Annotation Toolkit (documentation)
-    use {
-        'danymat/neogen',
-        config = function()
-            require('neogen').setup {
-                snippet_engine = 'luasnip',
-            }
-        end,
-        requires = 'nvim-treesitter/nvim-treesitter',
-        -- Uncomment next line if you want to follow only stable versions
-        -- tag = "*"
-    }
-
-    use {
-        'folke/trouble.nvim',
-        requires = {
-            'nvim-web-devicons',
-        },
-        config = function()
-            require('trouble').setup {
-                icons = true,
-                auto_open = false,
-                auto_close = false,
-                auto_preview = true,
-                auto_fold = false,
-                use_diagnostic_signs = false,
-            }
-        end,
-    }
-
     -- GitHub Copilot
     use {
         'zbirenbaum/copilot.lua',

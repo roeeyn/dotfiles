@@ -15,8 +15,11 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins Config
 require('lazy').setup {
-    -- Telescope needed fuzzy finding lib
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    {
+        -- Telescope needed fuzzy finding lib
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+    },
     {
         -- fuzzy finding EVERYTHING
         'nvim-telescope/telescope.nvim',
@@ -378,8 +381,8 @@ require('lazy').setup {
         -- Coding time dashboard monitoring
         'wakatime/vim-wakatime',
     },
-    -- Lualine for nice statusline in the bottom
     {
+        -- Lualine for nice statusline in the bottom
         'nvim-lualine/lualine.nvim',
         dependencies = {
             'kyazdani42/nvim-web-devicons',
@@ -390,5 +393,39 @@ require('lazy').setup {
             },
             extensions = { 'quickfix', 'nvim-tree', 'trouble' },
         },
+    },
+    {
+        -- Useful diagnostics tab
+        'folke/trouble.nvim',
+        dependencies = {
+            'nvim-web-devicons',
+        },
+        opts = {
+            icons = true,
+            auto_open = false,
+            auto_close = false,
+            auto_preview = true,
+            auto_fold = false,
+            use_diagnostic_signs = false,
+        },
+    },
+    {
+        -- Annotation Toolkit (documentation)
+        'danymat/neogen',
+        opts = {
+            snippet_engine = 'luasnip',
+        },
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+        },
+    },
+    {
+        -- Awesome testing
+        'vim-test/vim-test',
+        init = function()
+            vim.g['test#strategy'] = 'neovim'
+            vim.g['test#neovim#term_position'] = 'vert botright'
+            vim.g['test#neovim#start_normal'] = 1 -- Start in normal mode so we can scroll
+        end,
     },
 }

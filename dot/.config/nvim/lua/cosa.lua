@@ -474,37 +474,7 @@ require('packer').startup(function(use)
     -- Nice buffer deletion without closing the window
     use 'famiu/bufdelete.nvim'
 
-    -- Harpoon
-    use 'nvim-lua/plenary.nvim'
-    use {
-        'ThePrimeagen/harpoon',
-        branch = 'harpoon2',
-        requires = { { 'nvim-lua/plenary.nvim' } },
-    }
-
-    -- Great fuzzy finder
-    use 'junegunn/fzf.vim'
-
-    -- Telescope Dependencies
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {
-            { 'nvim-lua/plenary.nvim' },
-        },
-    }
-
-    -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
-
-    use 'nvim-telescope/telescope-media-files.nvim'
     use 'nvim-telescope/telescope-symbols.nvim'
-
-    use {
-        'folke/neodev.nvim',
-        config = function()
-            require('neodev').setup()
-        end,
-    }
 
     -- Completion
     use {

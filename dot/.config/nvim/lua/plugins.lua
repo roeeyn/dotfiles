@@ -24,6 +24,8 @@ require('lazy').setup {
         dependencies = {
             'nvim-lua/plenary.nvim',
             'telescope-fzf-native.nvim',
+            'nvim-telescope/telescope-media-files.nvim',
+            'nvim-telescope/telescope-symbols.nvim',
         },
         opts = function(plugin, opts)
             local actions = require 'telescope.actions'
@@ -70,6 +72,7 @@ require('lazy').setup {
 
             require('telescope').load_extension 'fzf'
             require('telescope').load_extension 'aerial'
+            require('telescope').load_extension 'media_files'
         end,
         cmd = 'Telescope',
     },
@@ -270,7 +273,7 @@ require('lazy').setup {
         dependecies = {
             'kyazdani42/nvim-web-devicons',
         },
-        config = true,
+        opts = {},
     },
     {
         -- Nice folding based on treesitter
@@ -280,6 +283,7 @@ require('lazy').setup {
             'nvim-treesitter/nvim-treesitter',
         },
         main = 'ufo',
-        config = true,
+        opts = {},
     },
+    { 'folke/neodev.nvim', opts = {}, enabled = false },
 }

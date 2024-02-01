@@ -73,6 +73,7 @@ wk.register({
         name = 'File/Find/Telescope', -- optional group name
         a = { '<cmd>Telescope aerial<cr>', '[Telescope] aerial (symbols)' },
         b = { '<cmd>Telescope builtin<cr>', '[Telescope] builtin' },
+        e = { '<cmd>Telescope symbols<cr>', '[Telescope] emojis' },
         f = { '<cmd>Telescope find_files<cr>', '[Telescope] Find file' },
         g = { '<cmd>Telescope grep_string<cr>', '[Telescope] Grep string' },
         h = { '<cmd>Telescope help_tags<cr>', '[Telescope] Find help tags' },

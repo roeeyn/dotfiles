@@ -428,4 +428,10 @@ require('lazy').setup {
             vim.g['test#neovim#start_normal'] = 1 -- Start in normal mode so we can scroll
         end,
     },
+    {
+        'goolord/alpha-nvim',
+        config = function()
+            require('alpha_config').setup()
+        end,
+    },
 }

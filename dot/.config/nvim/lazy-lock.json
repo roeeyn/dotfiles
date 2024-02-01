@@ -1,10 +1,12 @@
 {
   "aerial.nvim": { "branch": "master", "commit": "e9661d4f739508377f42528fd08a85c4c8feba6e" },
+  "bufdelete.nvim": { "branch": "master", "commit": "0b9c0f182b09c51170bb9f252f15de7695e4d507" },
   "dressing.nvim": { "branch": "master", "commit": "6f212262061a2120e42da0d1e87326e8a41c0478" },
   "fidget.nvim": { "branch": "main", "commit": "1d1042d418ee8cb70d68f1e38db639844331c093" },
   "harpoon": { "branch": "harpoon2", "commit": "a38be6e0dd4c6db66997deab71fc4453ace97f9c" },
   "indent-blankline.nvim": { "branch": "master", "commit": "12e92044d313c54c438bd786d11684c88f6f78cd" },
   "lazy.nvim": { "branch": "main", "commit": "aedcd79811d491b60d0a6577a9c1701063c2a609" },
+  "lazygit.nvim": { "branch": "main", "commit": "1e08e3f5ac1152339690140e61a4a32b3bdc7de5" },
   "luatab.nvim": { "branch": "master", "commit": "79d53c11bd77274b49b50f1d6fdb10529d7354b7" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6" },
   "nvim-neoclip.lua": { "branch": "main", "commit": "798cd0592a81c185465db3a091a0ff8a21af60fd" },
@@ -24,6 +26,7 @@
   "telescope.nvim": { "branch": "master", "commit": "d90956833d7c27e73c621a61f20b29fdb7122709" },
   "tokyonight.nvim": { "branch": "main", "commit": "610179f7f12db3d08540b6cc61434db2eaecbcff" },
   "vim-cool": { "branch": "master", "commit": "662e7b11064cbeedad17c45d2fe926e78d3cd0b6" },
+  "vim-gitgutter": { "branch": "main", "commit": "67ef116100b40f9ca128196504a2e0bc0a2753b0" },
   "vim-matchup": { "branch": "master", "commit": "e2cca1747ab175b8d839a5d28679427564643a57" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }

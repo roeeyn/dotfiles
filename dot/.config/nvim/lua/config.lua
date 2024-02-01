@@ -188,13 +188,6 @@ local function xmap(shortcut, command)
     map('x', shortcut, command)
 end
 
-local function tmap(shortcut, command)
-    map('t', shortcut, command)
-end
-
--- Terminal
-tmap('<esc>', '<C-\\><C-n>')
-
 -- Moving lines up and down in visual mode
 vmap('J', ":m '>+1<CR>gv=gv")
 vmap('K', ":m '<-2<CR>gv=gv")

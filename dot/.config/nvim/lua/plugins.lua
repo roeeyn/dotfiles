@@ -285,5 +285,25 @@ require('lazy').setup {
         main = 'ufo',
         opts = {},
     },
-    { 'folke/neodev.nvim', opts = {}, enabled = false },
+    {
+        -- Nice buffer deletion without closing the window
+        'famiu/bufdelete.nvim',
+    },
+    {
+        -- git gutter
+        'airblade/vim-gitgutter',
+    },
+    {
+        -- completion for vim in lua documentation
+        'folke/neodev.nvim',
+        opts = {},
+        enabled = false,
+    },
+    {
+        -- Lazygit
+        'kdheepak/lazygit.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+    },
 }

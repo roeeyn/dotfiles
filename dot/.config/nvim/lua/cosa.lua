@@ -435,15 +435,6 @@ require('packer').startup(function(use)
         end,
     }
 
-    -- Lazygit
-    use {
-        'kdheepak/lazygit.nvim',
-        -- optional for floating window border decoration
-        requires = {
-            'nvim-lua/plenary.nvim',
-        },
-    }
-
     -- GitHub Copilot
     use {
         'zbirenbaum/copilot.lua',
@@ -467,14 +458,6 @@ require('packer').startup(function(use)
             }
         end,
     }
-
-    -- git gutter
-    use 'airblade/vim-gitgutter'
-
-    -- Nice buffer deletion without closing the window
-    use 'famiu/bufdelete.nvim'
-
-    use 'nvim-telescope/telescope-symbols.nvim'
 
     -- Completion
     use {

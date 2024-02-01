@@ -74,6 +74,12 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Folding configurations
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99 -- feel free to decrease the value
+vim.o.foldlevelstart = -1
+vim.o.foldenable = true
+
 -- AUTOCOMMANDS
 
 vim.api.nvim_create_autocmd('FileType', {

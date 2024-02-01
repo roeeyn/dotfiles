@@ -42,22 +42,6 @@ require('packer').startup(function(use)
         end,
     }
 
-    -- Wakatime, code time tracking
-    use 'wakatime/vim-wakatime'
-
-    -- Lualine for nice statusline in the bottom
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        config = function()
-            require('lualine').setup {
-                options = {
-                    theme = 'tokyonight',
-                },
-            }
-        end,
-    }
-
     -- Nice dashboard
     use {
         'goolord/alpha-nvim',

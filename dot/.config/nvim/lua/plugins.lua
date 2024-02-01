@@ -375,11 +375,20 @@ require('lazy').setup {
         opts = {},
     },
     {
-        -- Dashboard monitoring
+        -- Coding time dashboard monitoring
         'wakatime/vim-wakatime',
-        lazy = false,
-        setup = function()
-            vim.cmd [[packadd wakatime/vim-wakatime]]
-        end,
+    },
+    -- Lualine for nice statusline in the bottom
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = {
+            'kyazdani42/nvim-web-devicons',
+        },
+        opts = {
+            options = {
+                theme = 'tokyonight',
+            },
+            extensions = { 'quickfix', 'nvim-tree', 'trouble' },
+        },
     },
 }

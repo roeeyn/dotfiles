@@ -264,4 +264,12 @@ require('lazy').setup {
             require('colorizer').setup()
         end,
     },
+    {
+        -- Nice tab
+        'alvarosevilla95/luatab.nvim',
+        dependecies = {
+            'kyazdani42/nvim-web-devicons',
+        },
+        config = true,
+    },
 }

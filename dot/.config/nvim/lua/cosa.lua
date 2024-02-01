@@ -1,54 +1,4 @@
-----------------------------------------------------------------------
---                List of plugins used within NeoVim                --
-----------------------------------------------------------------------
-
--- Here's the dotfile of wbthomson, which provides great guidance and plugins variety
--- https://github.com/wbthomason/dotfiles/blob/main/dot_config/nvim/lua/plugins.lua
-
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local is_bootstrap = false
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    is_bootstrap = true
-    vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-    vim.cmd [[packadd packer.nvim]]
-end
-
 require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-
-    -- My plugins here
-
-    -- Nice windows for inputs
-    use {
-        'stevearc/dressing.nvim',
-        config = function()
-            require('dressing').setup {
-                input = {
-                    enabled = true,
-                    start_in_insert = false,
-                },
-                select = {
-                    enabled = true,
-                },
-            }
-        end,
-    }
-
-    -- Avoid having to execute :noh whenever a search has been done
-    use {
-        'romainl/vim-cool',
-    }
-
-    use {
-        'andymass/vim-matchup',
-        setup = function()
-            -- may set any options here
-            vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-        end,
-    }
-
     -- useful hover information over different code parts
     use {
         'lewis6991/hover.nvim',
@@ -92,100 +42,6 @@ require('packer').startup(function(use)
         end,
     }
 
-    use 'windwp/nvim-ts-autotag'
-
-    -- Clipboard/yank history
-    use {
-        'AckslD/nvim-neoclip.lua',
-        requires = {
-            { 'nvim-telescope/telescope.nvim' },
-        },
-        config = function()
-            require('neoclip').setup()
-        end,
-    }
-
-    -- Package json info
-    use {
-        'vuki656/package-info.nvim',
-        requires = 'MunifTanjim/nui.nvim',
-        config = function()
-            require('package-info').setup()
-        end,
-    }
-
-    -- Optimization Plugin
-    use 'lewis6991/impatient.nvim'
-
-    -- Nice indentation lines
-    use {
-        'lukas-reineke/indent-blankline.nvim',
-        config = function()
-            local highlight = {
-                'RainbowRed',
-                'RainbowYellow',
-                'RainbowBlue',
-                'RainbowOrange',
-                'RainbowGreen',
-                'RainbowViolet',
-                'RainbowCyan',
-            }
-
-            local hooks = require 'ibl.hooks'
-            -- create the highlight groups in the highlight setup hook, so they are reset
-            -- every time the colorscheme changes
-            hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-                vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
-                vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
-                vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
-                vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
-                vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
-                vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
-                vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
-            end)
-
-            require('ibl').setup {
-                indent = {
-                    highlight = highlight,
-                },
-            }
-        end,
-    }
-
-    -- Very useful REPL, specifically for python and cybersec stuff
-    use {
-        'Vigemus/iron.nvim',
-    }
-
-    -- sidebar to see symbols (function, classes, etc)
-    -- attached to telescope for better integration
-    use {
-        'stevearc/aerial.nvim',
-        config = function()
-            require('aerial').setup()
-        end,
-    }
-
-    use {
-        'folke/todo-comments.nvim',
-        requires = 'nvim-lua/plenary.nvim',
-        config = function()
-            require('todo-comments').setup {
-                signs = true,
-                search = {
-                    args = {
-                        '--color=never',
-                        '--no-heading',
-                        '--with-filename',
-                        '--line-number',
-                        '--column',
-                        '--hidden',
-                    },
-                },
-            }
-        end,
-    }
-
     -- Wakatime, code time tracking
     use 'wakatime/vim-wakatime'
 
@@ -197,24 +53,6 @@ require('packer').startup(function(use)
             require('lualine').setup {
                 options = {
                     theme = 'tokyonight',
-                },
-            }
-        end,
-    }
-
-    -- File browser
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        config = function()
-            require('nvim-tree').setup {
-                update_focused_file = {
-                    enable = true,
-                },
-                actions = {
-                    open_file = {
-                        quit_on_open = true,
-                    },
                 },
             }
         end,
@@ -237,9 +75,6 @@ require('packer').startup(function(use)
             vim.g['test#neovim#start_normal'] = 1 -- Start in normal mode so we can scroll
         end,
     }
-
-    -- N
-    use {}
 
     -- Annotation Toolkit (documentation)
     use {
@@ -268,16 +103,6 @@ require('packer').startup(function(use)
                 auto_fold = false,
                 use_diagnostic_signs = false,
             }
-        end,
-    }
-
-    -- Git integration
-    use 'rhysd/git-messenger.vim'
-    use {
-        'ruifm/gitlinker.nvim',
-        requires = 'nvim-lua/plenary.nvim',
-        config = function()
-            require('gitlinker').setup()
         end,
     }
 

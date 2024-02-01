@@ -331,4 +331,47 @@ require('lazy').setup {
             'JoosepAlviste/nvim-ts-context-commentstring',
         },
     },
+    {
+        -- Very useful REPL, specifically for python and Cybersec stuff
+        'Vigemus/iron.nvim',
+    },
+    {
+        -- Useful git commit messages on each line
+        'rhysd/git-messenger.vim',
+    },
+    {
+        'ruifm/gitlinker.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        opts = {},
+    },
+    {
+        'folke/todo-comments.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        opts = {
+
+            signs = true,
+            search = {
+                args = {
+                    '--color=never',
+                    '--no-heading',
+                    '--with-filename',
+                    '--line-number',
+                    '--column',
+                    '--hidden',
+                },
+            },
+        },
+    },
+    {
+        -- Package json info
+        'vuki656/package-info.nvim',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+        },
+        opts = {},
+    },
 }

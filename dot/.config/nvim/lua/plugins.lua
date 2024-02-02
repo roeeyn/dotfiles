@@ -556,6 +556,8 @@ require('lazy').setup {
         opts = {
             formatters_by_ft = {
                 lua = { 'stylua' },
+                typescript = { 'prettier' },
+                javascript = { 'prettier' },
             },
             format_on_save = {
                 timeout_ms = 500,

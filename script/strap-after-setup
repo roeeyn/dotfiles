@@ -13,6 +13,22 @@ pip3 install aactivator
 echo 'Setting up Node LTS'
 n lts
 
+# Check if the ansible password exists
+ansible_password="~/.dotfiles/ansible_password.txt"
+if [ -f "$ansible_password" ]; then
+    echo "Ansible password already exists at $ansible_password"
+else
+    # If the file does not exist, ask for user input
+    echo "Ansible password does not exist. Please enter the key to save to the file:"
+    read user_input
+
+    # Save the user input to the file
+    echo "$user_input" > "$ansible_password"
+
+    echo "Your input has been saved to $ansible_password"
+fi
+
+
 # Decrypting keys
 echo 'Decrypting vault passwords...'
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519.pub ~/.dotfiles/dot/.ssh/id_ed25519.pub.enc
@@ -20,6 +36,12 @@ ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --o
 
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.gnupg/pgp_secret.txt ~/.dotfiles/dot/.gnupg/pgp_secret.txt.enc
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.gnupg/pgp_public.txt ~/.dotfiles/dot/.gnupg/pgp_public.txt.enc
+
+# Decrypt unsplash API key
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.unsplash_api_key ~~/.dotfiles/dot/.unsplash_api_key.enc
+
+# Decrypt Wakatime API key
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.wakatime.cfg ~~/.dotfiles/dot/.wakatime.cfg.enc
 
 # SSH config
 echo "Configuring ssh keys..."

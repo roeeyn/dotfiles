@@ -18,6 +18,9 @@ known_hosts.old
 # Ansible password
 ansible_password.txt
 
+# Wakatime Config
+.wakatime.cfg
+
 # Judge0 Token
 .judge0-uploader.yaml
 

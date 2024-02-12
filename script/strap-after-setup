@@ -14,7 +14,7 @@ echo 'Setting up Node LTS'
 n lts
 
 # Check if the ansible password exists
-ansible_password="~/.dotfiles/ansible_password.txt"
+ansible_password="$HOME/.dotfiles/ansible_password.txt"
 if [ -f "$ansible_password" ]; then
     echo "Ansible password already exists at $ansible_password"
 else
@@ -38,10 +38,10 @@ ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --o
 ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.gnupg/pgp_public.txt ~/.dotfiles/dot/.gnupg/pgp_public.txt.enc
 
 # Decrypt unsplash API key
-ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.unsplash_api_key ~~/.dotfiles/dot/.unsplash_api_key.enc
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.unsplash_api_key ~/.dotfiles/dot/.unsplash_api_key.enc
 
 # Decrypt Wakatime API key
-ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.wakatime.cfg ~~/.dotfiles/dot/.wakatime.cfg.enc
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.wakatime.cfg ~/.dotfiles/dot/.wakatime.cfg.enc
 
 # SSH config
 echo "Configuring ssh keys..."

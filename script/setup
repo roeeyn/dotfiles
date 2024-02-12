@@ -5,7 +5,6 @@ echo "Linking the files..."
 brew install stow
 
 rm ~/.zshrc || echo 'Not zshrc found, continuing...'
-rm ~/.gitconfig || echo 'Not .gitconfig, continuing...'
 
 stow dot/ --target=$HOME
 

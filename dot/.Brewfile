@@ -100,7 +100,7 @@ cask 'font-fira-code'
 cask "font-hack-nerd-font"
 
 ####### Mac Application Store #########
-mas 'GIPHY Capture. The GIF Maker', id: 668208984
+# mas 'GIPHY Capture. The GIF Maker', id: 668208984
 mas 'Keynote', id: 409183694
-mas 'Magnet', id: 441258766
-mas 'Presentify - Screen Annotation', id: 1507246666
+# mas 'Magnet', id: 441258766
+# mas 'Presentify - Screen Annotation', id: 1507246666

@@ -98,7 +98,8 @@ require('lazy').setup {
                 end
             end
 
-            local theme = get_theme_based_on_time()
+            -- local theme = get_theme_based_on_time()
+            local theme = 'moon'
             return {
                 style = theme,
                 styles = {

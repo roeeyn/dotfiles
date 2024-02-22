@@ -21,13 +21,23 @@ ls.config.set_config {
     ext_opts = {
         [types.choiceNode] = {
             active = {
-                virt_text = { { '<-', 'Error' } },
+                virt_text = { { '<- choice', 'Error' } },
+            },
+        },
+        -- [types.insertNode] = {
+        --     active = {
+        --         virt_text = { { '<<-', 'GruvboxGreen' } },
+        --     },
+        -- },
+        [types.snippet] = {
+            active = {
+                virt_text = { { '<- snippet', 'Operator' } },
             },
         },
     },
 }
 
-require('luasnip/loaders/from_vscode').load()
+require('luasnip/loaders/from_vscode').lazy_load()
 
 -- Completion
 vim.keymap.set('i', '<C-j>', function()
@@ -47,3 +57,22 @@ vim.keymap.set('i', '<C-l>', function()
         ls.change_choice(1)
     end
 end)
+
+----------------------------------------------------------------------
+--                       Testing the snippets                       --
+----------------------------------------------------------------------
+
+local s = ls.snippet
+local f = ls.function_node
+
+ls.add_snippets('all', {
+    ls.parser.parse_snippet('qelv', 'Andamos al 100!'),
+    s(
+        'curtime',
+        f(function()
+            return os.date '%D - %H:%M'
+        end)
+    ),
+}, {
+    key = 'all',
+})

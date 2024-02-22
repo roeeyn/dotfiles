@@ -98,7 +98,8 @@ require('lazy').setup {
                 end
             end
 
-            local theme = get_theme_based_on_time()
+            -- local theme = get_theme_based_on_time()
+            local theme = 'moon'
             return {
                 style = theme,
                 styles = {
@@ -457,6 +458,9 @@ require('lazy').setup {
         version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         -- install jsregexp (optional!).
         build = 'make install_jsregexp',
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+        },
         config = function()
             require 'luasnip_config'
         end,
@@ -479,7 +483,6 @@ require('lazy').setup {
             -- Snippets
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
-            'rafamadriz/friendly-snippets',
         },
         config = function()
             require 'nvim_cmp_config'

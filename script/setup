@@ -5,6 +5,7 @@ echo "Linking the files..."
 brew install stow
 
 rm ~/.zshrc || echo 'Not zshrc found, continuing...'
+
 stow dot/ --target=$HOME
 
 # Symlink files/* into home directory as regular files

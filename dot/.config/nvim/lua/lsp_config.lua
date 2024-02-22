@@ -67,5 +67,3 @@ for server, config in pairs(servers) do
     -- config.capabilities = vim.tbl_deep_extend('keep', config.capabilities or {}, client_capabilities)
     lspconfig[server].setup(config)
 end
-
-print 'AHUEVO perro!!!'

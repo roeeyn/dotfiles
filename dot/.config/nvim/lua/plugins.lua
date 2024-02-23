@@ -561,7 +561,7 @@ require('lazy').setup {
                 lua = { 'stylua' },
                 typescript = { 'prettier' },
                 javascript = { 'prettier' },
-                python = { 'black' },
+                python = { 'ruff_format', 'black' },
             },
             format_on_save = {
                 timeout_ms = 500,

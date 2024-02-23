@@ -126,6 +126,7 @@ alias gwa='git worktree add'
 alias gwp='git worktree prune'
 alias sayv='say -v Paulina'
 alias lg='lazygit'
+alias cdh='cd /Users/roeeyn/src/anzen-platform/'
 
 # Copilot
 # gh auth login

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+API_KEY_FILE="$HOME/.unsplash_api_key"
+
+# Check if the API key file exists
+if [ ! -f "$API_KEY_FILE" ]; then
+  echo "API key file not found at $API_KEY_FILE. Please create the file with your Unsplash API key."
+  exit 1
+fi
+
+# Read Unsplash API Key from file
+API_KEY=$(cat "$API_KEY_FILE")
+
+# Unsplash URL for random images
+URL="https://api.unsplash.com/photos/random/?orientation=landscape&client_id=$API_KEY"
+
+# Determine the temporary directory, use /tmp as a fallback
+TMP_DIR="${TMPDIR:-/tmp}"
+
+# Download path within the temporary directory
+DOWNLOAD_PATH="$TMP_DIR/$(date +%s)UnsplashBackground.jpg"
+
+# Fetch and download image
+IMAGE_URL=$(curl -s "$URL" | jq -r ".links.download")
+# Validate fetched URL
+if [[ $IMAGE_URL != http* ]]; then
+  echo "Failed to fetch a valid image URL from Unsplash."
+  exit 1
+fi
+
+curl -s -L $IMAGE_URL > "$DOWNLOAD_PATH"
+wallpaper set "$DOWNLOAD_PATH"

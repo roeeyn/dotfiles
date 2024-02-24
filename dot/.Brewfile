@@ -69,6 +69,7 @@ brew 'vim'
 brew 'wallpaper'
 brew 'watchexec'
 brew 'wget'
+brew 'yazi'
 brew 'youtube-dl'
 brew 'zoxide'
 

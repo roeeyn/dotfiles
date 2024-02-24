@@ -16,6 +16,7 @@ brew 'dive' # Optimizer for docker images
 brew 'exiftool' # Read and write metadata
 brew 'fd' # Find files faster
 brew 'ffmpeg' # Great transformer for videos
+brew 'ffmpegthumbnailer'
 brew 'fzf' # Fuzzy finder
 brew 'gh'
 brew 'gnupg'
@@ -39,13 +40,14 @@ brew 'neovim'
 brew 'nmap'
 brew 'pgcli'
 brew 'pinentry-mac'
+brew 'poppler'
 brew 'postgresql@14'
 brew 'pre-commit'
 brew 'pulseaudio'
 brew 'pyenv'
 brew 'pyenv-virtualenv'
-brew 'qpdf'
 brew 'python3'
+brew 'qpdf'
 brew 'ripgrep'
 brew 'rust-analyzer' # IDE good experience for rust
 brew 'rustup-init'
@@ -55,18 +57,20 @@ brew 'speedtest-cli'
 brew 'starship' # Nice terminal prompt
 brew 'stow'
 brew 'stylua'
+brew 'supabase/tap/supabase'
 brew 'terraform-ls' # Terraform ls
 brew 'tilt'
 brew 'tldr'
 brew 'tmux'
 brew 'tree'
+brew 'unar'
 brew 'urlview' # because of tmux-urlview
 brew 'vim'
 brew 'wallpaper'
 brew 'watchexec'
 brew 'wget'
 brew 'youtube-dl'
-brew "supabase/tap/supabase"
+brew 'zoxide'
 
 ######## CASK ########
 cask '1password'

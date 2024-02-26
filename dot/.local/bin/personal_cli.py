@@ -74,7 +74,9 @@ def scaffold_anzen_api():
     steps = list(SCAFFOLD_STEPS.keys())
     steps_to_execute = []
 
-    print("[yellow]:warning: Remember to create a new docker-compose[/yellow]")
+    print(
+        "[yellow]:warning: Remember to create a new docker-compose and run migrations[/yellow]"
+    )
 
     for step in steps:
         if Confirm.ask(f"Add '{step}'?", default=True):

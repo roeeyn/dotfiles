@@ -562,8 +562,8 @@ require('lazy').setup {
         opts = {
             formatters_by_ft = {
                 lua = { 'stylua' },
-                typescript = { 'prettier' },
-                javascript = { 'prettier' },
+                typescript = { { 'prettierd', 'prettier' } },
+                javascript = { { 'prettierd', 'prettier' } },
                 python = { 'ruff_format', 'black' },
             },
             format_on_save = {

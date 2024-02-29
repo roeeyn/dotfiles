@@ -52,18 +52,26 @@ def copy_dotfiles():
     )
 
 
+def run_migrations():
+    subprocess.run(
+        ["pnpm", "run-migrations"],
+    )
+
+
 def create_anzen_employee():
     subprocess.run(
         ["pnpm", "ts-node", "packages/anzen-api/scripts/create-anzen-employee"],
     )
 
 
+# Order here is the execution order
 SCAFFOLD_STEPS = {
     "pnpm install": pnpm_install,
     "install git hooks": install_git_hooks,
     "download openapi generator": download_openapi_generator,
     "turbo build": turbo_build,
     "copy dotfiles": copy_dotfiles,
+    "run migrations": run_migrations,
     "create anzen employee": create_anzen_employee,
 }
 

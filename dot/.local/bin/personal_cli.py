@@ -31,8 +31,8 @@ def download_openapi_generator():
     subprocess.run(["pnpm", "download-openapi-generator"])
 
 
-def turbo_build():
-    subprocess.run(["pnpm", "turbo", "build"])
+def turbo_build_api():
+    subprocess.run(["pnpm", "turbo", "build:anzen-api"])
 
 
 def copy_dotfiles():
@@ -69,7 +69,7 @@ SCAFFOLD_STEPS = {
     "pnpm install": pnpm_install,
     "install git hooks": install_git_hooks,
     "download openapi generator": download_openapi_generator,
-    "turbo build": turbo_build,
+    "turbo build api": turbo_build_api,
     "copy dotfiles": copy_dotfiles,
     "run migrations": run_migrations,
     "create anzen employee": create_anzen_employee,

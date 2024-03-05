@@ -581,4 +581,7 @@ require('lazy').setup {
             dim = true, -- dim all other characters if set to true (recommended!)
         },
     },
+    {
+        'mechatroner/rainbow_csv',
+    },
 }

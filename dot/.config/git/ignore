@@ -1,3 +1,6 @@
 .wakatime-project
 node_modules/
 :LOCALAPPDATA*
+.idea/
+.activate.sh
+.deactivate.sh

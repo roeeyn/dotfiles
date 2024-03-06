@@ -52,6 +52,12 @@ def copy_dotfiles():
     )
 
 
+def build_tensorflow_from_source():
+    subprocess.run(
+        ["npm", "rebuild", "--build-from-source", "@tensorflow/tfjs-node"],
+    )
+
+
 def run_migrations():
     subprocess.run(
         ["pnpm", "run-migrations"],
@@ -64,7 +70,7 @@ def create_anzen_employee():
     )
 
 
-# Order here is the execution order
+# NOTE: Order here is the execution order
 SCAFFOLD_STEPS = {
     "pnpm install": pnpm_install,
     "install git hooks": install_git_hooks,
@@ -72,6 +78,7 @@ SCAFFOLD_STEPS = {
     "turbo build api": turbo_build_api,
     "copy dotfiles": copy_dotfiles,
     "run migrations": run_migrations,
+    "build tensorflow from source": build_tensorflow_from_source,
     "create anzen employee": create_anzen_employee,
 }
 

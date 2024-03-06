@@ -70,6 +70,7 @@ dot/.local/state/
 dot/.local/share/
 dot/.local/bin/hs
 dot/.local/bin/pandoc-*
+dot/.local/bin/poetry
 dot/.local/lib/
 
 # local files

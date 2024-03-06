@@ -1,6 +1,6 @@
 #!/bin/bash
 
-session=$(fd . ~ ~/src ~/playground ~/Desktop ~/src/anzen-platform --type d --min-depth 1 --max-depth 1 -H -I -c never -E refs -E worktrees -E hooks -E info -E logs -E objects -E anzen-monorepo | fzf)
+session=$(fd . ~ ~/src ~/playground ~/Desktop ~/src/anzen-platform --type d --min-depth 1 --max-depth 1 -H -I -c never -E refs -E worktrees -E hooks -E info -E logs -E objects | fzf)
 session_name=$(basename "$session" | tr . _)
 
 session_type=''

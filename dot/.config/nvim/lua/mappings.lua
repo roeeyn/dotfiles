@@ -122,6 +122,10 @@ wk.register({
         name = 'Line',
         [';'] = { 'Toggle line comment' },
     },
+    m = {
+        name = 'Marks',
+        x = { '<cmd>delmarks!<cr>', 'Remove all marks' },
+    },
     q = {
         name = 'Quit',
         q = { '<cmd>q<cr>', 'Soft quit' },

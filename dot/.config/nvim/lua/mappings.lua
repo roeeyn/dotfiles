@@ -73,6 +73,7 @@ wk.register({
         name = 'File/Find/Telescope', -- optional group name
         a = { '<cmd>Telescope aerial<cr>', '[Telescope] aerial (symbols)' },
         b = { '<cmd>Telescope builtin<cr>', '[Telescope] builtin' },
+        c = { '<cmd>Telescope quickfix<cr>', '[Telescope] quickfix' },
         e = { '<cmd>Telescope symbols<cr>', '[Telescope] emojis' },
         f = { '<cmd>Telescope find_files<cr>', '[Telescope] Find file' },
         g = { '<cmd>Telescope grep_string<cr>', '[Telescope] Grep string' },
@@ -121,10 +122,13 @@ wk.register({
         [';'] = { 'Toggle line comment' },
     },
     m = {
-        name = 'Marks',
-        x = { '<cmd>delmarks! | delmarks A-Z0-9 | echo "Marks removed"<cr>', 'Remove all marks' },
-        f = { '<cmd>Telescope marks mark_type=local<cr>', '[Telescope] Find local marks' },
-        F = { '<cmd>Telescope marks mark_type=global<cr>', '[Telescope] Find global marks' },
+        name = 'Trail Blazer Marks',
+        a = { '<cmd>TrailBlazerNewTrailMark<cr>', 'Toggle a new mark at the current cursor position' },
+        n = { '<cmd>TrailBlazerPeekMoveNextDown<cr>', 'Move to the next mark WITHOUT removing it from stack' },
+        p = { '<cmd>TrailBlazerPeekMovePreviousUp<cr>', 'Move to the previous mark WITHOUT removing it from stack' },
+        P = { '<cmd>TrailBlazerTrackBack<cr>', 'Move to the previous mark POPPING it from stack' },
+        o = { '<cmd>TrailBlazerToggleTrailMarkList<cr>', 'Toggle the quickfix list with marks' },
+        x = { '<cmd>TrailBlazerDeleteAllTrailMarks<cr>', 'Remove all marks' },
     },
     q = {
         name = 'Quit',

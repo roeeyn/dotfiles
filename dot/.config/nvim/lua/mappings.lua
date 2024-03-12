@@ -133,7 +133,8 @@ wk.register({
     },
     p = {
         name = 'Project',
-        t = { '<cmd>NvimTreeToggle<cr>', 'File browser' },
+        t = { '<cmd>NvimTreeToggle<cr>', 'Tree File browser' },
+        o = { '<cmd>Oil<cr>', 'Oil File browser' },
         ['/'] = { '<cmd>Telescope live_grep<cr>', 'Live grep in whole project' },
     },
     r = {

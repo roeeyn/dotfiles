@@ -158,6 +158,9 @@ export GOPATH="/Users/roeeyn/go"
 export GOTOOLDIR="$GOPATH/bin/"
 export PATH="$GOTOOLDIR:$PATH"
 
+# For john the ripper
+export PATH="/opt/homebrew/Cellar/john-jumbo/1.9.0_1/share/john:$PATH"
+
 # For pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"

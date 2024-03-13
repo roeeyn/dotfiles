@@ -581,4 +581,28 @@ require('lazy').setup {
             dim = true, -- dim all other characters if set to true (recommended!)
         },
     },
+    {
+        'mechatroner/rainbow_csv',
+    },
+    {
+        -- Awesome single-directory file explorer
+        'stevearc/oil.nvim',
+        opts = {
+            view_options = {
+                -- Show files and directories that start with "."
+                show_hidden = true,
+            },
+        },
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+        },
+    },
+    {
+        -- GREAT marks navigation through your code
+        'LeonHeidelbach/trailblazer.nvim',
+        opts = {
+            auto_save_trailblazer_state_on_exit = true,
+            auto_load_trailblazer_state_on_enter = true,
+        },
+    },
 }

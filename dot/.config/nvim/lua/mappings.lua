@@ -73,6 +73,7 @@ wk.register({
         name = 'File/Find/Telescope', -- optional group name
         a = { '<cmd>Telescope aerial<cr>', '[Telescope] aerial (symbols)' },
         b = { '<cmd>Telescope builtin<cr>', '[Telescope] builtin' },
+        c = { '<cmd>Telescope quickfix<cr>', '[Telescope] quickfix' },
         e = { '<cmd>Telescope symbols<cr>', '[Telescope] emojis' },
         f = { '<cmd>Telescope find_files<cr>', '[Telescope] Find file' },
         g = { '<cmd>Telescope grep_string<cr>', '[Telescope] Grep string' },
@@ -120,6 +121,15 @@ wk.register({
         name = 'Line',
         [';'] = { 'Toggle line comment' },
     },
+    m = {
+        name = 'Trail Blazer Marks',
+        a = { '<cmd>TrailBlazerNewTrailMark<cr>', 'Toggle a new mark at the current cursor position' },
+        n = { '<cmd>TrailBlazerPeekMoveNextDown<cr>', 'Move to the next mark WITHOUT removing it from stack' },
+        p = { '<cmd>TrailBlazerPeekMovePreviousUp<cr>', 'Move to the previous mark WITHOUT removing it from stack' },
+        P = { '<cmd>TrailBlazerTrackBack<cr>', 'Move to the previous mark POPPING it from stack' },
+        o = { '<cmd>TrailBlazerToggleTrailMarkList<cr>', 'Toggle the quickfix list with marks' },
+        x = { '<cmd>TrailBlazerDeleteAllTrailMarks<cr>', 'Remove all marks' },
+    },
     q = {
         name = 'Quit',
         q = { '<cmd>q<cr>', 'Soft quit' },
@@ -127,7 +137,8 @@ wk.register({
     },
     p = {
         name = 'Project',
-        t = { '<cmd>NvimTreeToggle<cr>', 'File browser' },
+        t = { '<cmd>NvimTreeToggle<cr>', 'Tree File browser' },
+        o = { '<cmd>Oil<cr>', 'Oil File browser' },
         ['/'] = { '<cmd>Telescope live_grep<cr>', 'Live grep in whole project' },
     },
     r = {

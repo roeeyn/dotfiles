@@ -185,6 +185,9 @@ eval "$(mcfly init zsh)"
 # Starting starship
 eval "$(starship init zsh)"
 
+# Start zoxide
+eval "$(zoxide init zsh --cmd cd)"
+
 ## Profiling
 # zprof
 

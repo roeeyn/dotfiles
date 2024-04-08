@@ -588,6 +588,7 @@ require('lazy').setup {
         -- Awesome single-directory file explorer
         'stevearc/oil.nvim',
         opts = {
+            default_file_explorer = true,
             view_options = {
                 -- Show files and directories that start with "."
                 show_hidden = true,

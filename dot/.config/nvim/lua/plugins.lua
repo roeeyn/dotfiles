@@ -606,4 +606,10 @@ require('lazy').setup {
             auto_load_trailblazer_state_on_enter = true,
         },
     },
+    {
+        -- Forces me to improve my navigation workflow inside neovim
+        'm4xshen/hardtime.nvim',
+        dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+        opts = {},
+    },
 }

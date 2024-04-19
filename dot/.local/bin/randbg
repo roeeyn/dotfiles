@@ -21,7 +21,7 @@ TMP_DIR="${TMPDIR:-/tmp}"
 DOWNLOAD_PATH="$TMP_DIR/$(date +%s)UnsplashBackground.jpg"
 
 # Fetch and download image
-IMAGE_URL=$(curl -s "$URL" | jq -r ".links.download")
+IMAGE_URL=$(curl -s "$URL" | /opt/homebrew/bin/jq -r ".links.download")
 # Validate fetched URL
 if [[ $IMAGE_URL != http* ]]; then
   echo "Failed to fetch a valid image URL from Unsplash."
@@ -29,4 +29,4 @@ if [[ $IMAGE_URL != http* ]]; then
 fi
 
 curl -s -L $IMAGE_URL > "$DOWNLOAD_PATH"
-wallpaper set "$DOWNLOAD_PATH"
+/opt/homebrew/bin/wallpaper set "$DOWNLOAD_PATH"

@@ -171,6 +171,10 @@ wk.register({
         L = { '<cmd>vsplit | term pytest --lf<cr>', 'Test last failed' },
         t = { '<cmd>TestNearest<cr>', 'Test nearest' },
     },
+    v = {
+        name = 'Vertical Split',
+        o = { '<cmd>vsplit | Oil<cr>', '[Oil] to the right' },
+    },
     w = {
         name = 'Window',
         c = { '<cmd>close<cr>', 'Close the current window' },

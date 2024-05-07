@@ -89,6 +89,7 @@ wk.register({
     },
     g = {
         name = 'Git/GitHub/GoTo',
+        b = { '<cmd>BlameToggle<cr>', '[Git] Blame' },
         T = { '<cmd>Telescope lsp_type_definitions<cr>', '[GoTo] LSP type definitions' },
         d = { '<cmd>Telescope lsp_definitions<cr>', '[GoTo] LSP definitions' },
         i = { '<cmd>Telescope lsp_implementations<cr>', '[GoTo] LSP implementations' },

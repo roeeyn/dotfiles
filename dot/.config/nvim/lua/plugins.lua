@@ -612,4 +612,12 @@ require('lazy').setup {
         dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
         opts = {},
     },
+    {
+        -- Git blame UI
+        'FabijanZulj/blame.nvim',
+        opts = {},
+        -- config = function()
+        --   require("blame").setup()
+        -- end
+    },
 }

@@ -337,6 +337,7 @@ require('lazy').setup {
         'rhysd/git-messenger.vim',
     },
     {
+        -- Create permalinks for the github code at the current cursor
         'ruifm/gitlinker.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -344,6 +345,7 @@ require('lazy').setup {
         opts = {},
     },
     {
+        -- Prettify the TODO comments
         'folke/todo-comments.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -557,6 +559,7 @@ require('lazy').setup {
         end,
     },
     {
+        -- Easy formatting
         'stevearc/conform.nvim',
         opts = {
             formatters_by_ft = {
@@ -581,6 +584,7 @@ require('lazy').setup {
         },
     },
     {
+        -- prettify csv files
         'mechatroner/rainbow_csv',
     },
     {
@@ -614,8 +618,8 @@ require('lazy').setup {
         opts = {
             show_icons = true,
             separate_by_branch = true, -- Bookmarks will be separated by git branch
-            leader_key = 'M', -- Recommended to be a single key
-            buffer_leader_key = 'm', -- Per Buffer Mappings
+            leader_key = ' M', -- Recommended to be a single key
+            buffer_leader_key = ' m', -- Per Buffer Mappings
             mappings = {
                 edit = 'e',
                 delete_mode = 'd',
@@ -628,6 +632,15 @@ require('lazy').setup {
                 next_item = '[',
                 prev_item = ']',
             },
+        },
+    },
+    -- Lua
+    {
+        -- saving session (buffers state)
+        'folke/persistence.nvim',
+        event = 'BufReadPre', -- this will only start session saving when an actual file was opened
+        opts = {
+            -- add any custom options here
         },
     },
 }

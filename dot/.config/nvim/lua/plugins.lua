@@ -253,15 +253,6 @@ require('lazy').setup {
         config = true,
     },
     {
-        -- pinning needed files. Signal from noise
-        'ThePrimeagen/harpoon',
-        branch = 'harpoon2',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            require 'harpoon_config'
-        end,
-    },
-    {
         'j-hui/fidget.nvim',
         opts = {
             -- options
@@ -395,6 +386,14 @@ require('lazy').setup {
                 theme = 'tokyonight',
             },
             extensions = { 'quickfix', 'nvim-tree', 'trouble' },
+            sections = {
+                lualine_b = {
+                    'branch',
+                    'diff',
+                    "require('arrow.statusline').text_for_statusline_with_icons()",
+                    'diagnostics',
+                },
+            },
         },
     },
     {
@@ -599,14 +598,6 @@ require('lazy').setup {
         },
     },
     {
-        -- GREAT marks navigation through your code
-        'LeonHeidelbach/trailblazer.nvim',
-        opts = {
-            auto_save_trailblazer_state_on_exit = true,
-            auto_load_trailblazer_state_on_enter = true,
-        },
-    },
-    {
         -- Forces me to improve my navigation workflow inside neovim
         'm4xshen/hardtime.nvim',
         dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
@@ -616,8 +607,27 @@ require('lazy').setup {
         -- Git blame UI
         'FabijanZulj/blame.nvim',
         opts = {},
-        -- config = function()
-        --   require("blame").setup()
-        -- end
+    },
+    {
+        -- Greate navigation plugin for marks
+        'otavioschwanck/arrow.nvim',
+        opts = {
+            show_icons = true,
+            separate_by_branch = true, -- Bookmarks will be separated by git branch
+            leader_key = 'M', -- Recommended to be a single key
+            buffer_leader_key = 'm', -- Per Buffer Mappings
+            mappings = {
+                edit = 'e',
+                delete_mode = 'd',
+                clear_all_items = 'X',
+                toggle = 's', -- used as save if separate_save_and_remove is true
+                open_vertical = 'v',
+                open_horizontal = '-',
+                quit = 'q',
+                remove = 'x', -- only used if separate_save_and_remove is true
+                next_item = '[',
+                prev_item = ']',
+            },
+        },
     },
 }

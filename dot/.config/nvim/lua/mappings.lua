@@ -123,13 +123,10 @@ wk.register({
         [';'] = { 'Toggle line comment' },
     },
     m = {
-        name = 'Trail Blazer Marks',
-        a = { '<cmd>TrailBlazerNewTrailMark<cr>', 'Toggle a new mark at the current cursor position' },
-        n = { '<cmd>TrailBlazerPeekMoveNextDown<cr>', 'Move to the next mark WITHOUT removing it from stack' },
-        p = { '<cmd>TrailBlazerPeekMovePreviousUp<cr>', 'Move to the previous mark WITHOUT removing it from stack' },
-        P = { '<cmd>TrailBlazerTrackBack<cr>', 'Move to the previous mark POPPING it from stack' },
-        o = { '<cmd>TrailBlazerToggleTrailMarkList<cr>', 'Toggle the quickfix list with marks' },
-        x = { '<cmd>TrailBlazerDeleteAllTrailMarks<cr>', 'Remove all marks' },
+        name = 'Marks',
+        a = { '<cmd>lua require("arrow.persist").toggle()<cr>', 'Toggle a new mark for this file' },
+        n = { '<cmd>lua require("arrow.persist").next()<cr>', 'Move to the next mark' },
+        p = { '<cmd>lua require("arrow.persist").previous()<cr>', 'Move to the previous mark' },
     },
     q = {
         name = 'Quit',

@@ -122,12 +122,6 @@ wk.register({
         name = 'Line',
         [';'] = { 'Toggle line comment' },
     },
-    m = {
-        name = 'Marks',
-        a = { '<cmd>lua require("arrow.persist").toggle()<cr>', 'Toggle a new mark for this file' },
-        n = { '<cmd>lua require("arrow.persist").next()<cr>', 'Move to the next mark' },
-        p = { '<cmd>lua require("arrow.persist").previous()<cr>', 'Move to the previous mark' },
-    },
     q = {
         name = 'Quit',
         q = { '<cmd>q<cr>', 'Soft quit' },
@@ -142,6 +136,11 @@ wk.register({
     r = {
         name = 'Run',
         p = { '<cmd>vsplit | term .git/hooks/pre-commit<cr>', '[Run] pre-commit' },
+    },
+    s = {
+        name = 'Session',
+        l = { '<cmd>lua require("persistence").load()<cr>', 'Load last session in this project' },
+        s = { '<cmd>lua require("persistence").stop()<cr>', "Stop (won't save on exit)" },
     },
     t = {
         name = 'Tab',

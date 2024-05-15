@@ -159,14 +159,10 @@ wk.register({
     },
     u = {
         name = 'Testing',
-        A = { '<cmd>vsplit | term pytest<cr>', 'Run pytest globally' },
-        a = { '<cmd>TestSuite<cr>', 'Test all suite' },
-        c = { '<cmd>CoverageToggle<cr>', 'Toggle coverage line' },
-        C = { '<cmd>CoverageSummary<cr>', 'Coverage popup' },
-        f = { '<cmd>TestFile<cr>', 'Test file' },
-        l = { '<cmd>TestLast<cr>', 'Test last' },
-        L = { '<cmd>vsplit | term pytest --lf<cr>', 'Test last failed' },
-        t = { '<cmd>TestNearest<cr>', 'Test nearest' },
+        p = { '<cmd>lua require("neotest").output_panel.toggle()<cr>', 'Toggle Panel' },
+        s = { '<cmd>lua require("neotest").summary.toggle()<cr>', 'Toggle Summary' },
+        t = { '<cmd>lua require("neotest").run.run()<cr>', 'Test nearest' },
+        w = { '<cmd>lua require("neotest").output.open()<cr>', 'Open window' },
     },
     v = {
         name = 'Vertical Split',

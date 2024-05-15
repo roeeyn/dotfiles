@@ -294,7 +294,12 @@ require('lazy').setup {
     {
         -- completion for vim in lua documentation
         'folke/neodev.nvim',
-        opts = {},
+        opts = {
+            library = {
+                plugins = { 'neotest' },
+                types = true,
+            },
+        },
     },
     {
         -- Lazygit
@@ -425,11 +430,80 @@ require('lazy').setup {
     },
     {
         -- Awesome testing
-        'vim-test/vim-test',
-        init = function()
-            vim.g['test#strategy'] = 'neovim'
-            vim.g['test#neovim#term_position'] = 'vert botright'
-            vim.g['test#neovim#start_normal'] = 1 -- Start in normal mode so we can scroll
+        'nvim-neotest/neotest',
+        dependencies = {
+            'nvim-neotest/nvim-nio',
+            'nvim-lua/plenary.nvim',
+            'antoinemadec/FixCursorHold.nvim',
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-neotest/neotest-jest',
+        },
+        config = function()
+            require('neotest').setup {
+                log_level = 1,
+                output = {
+                    open_on_run = 'always',
+                    enabled = true,
+                },
+                -- output_panel = {
+                --     enabled = true,
+                --     open = 1,
+                -- },
+                adapters = {
+                    require 'neotest-jest' {
+                        jestCommand = function(file)
+                            if string.find(file, '/packages/anzen-api/test', 1, true) then
+                                return 'npm run test:e2e --'
+                            end
+
+                            if string.find(file, '/packages/anzen-api', 1, true) then
+                                return 'npm run test:unit --'
+                            end
+
+                            return 'npm run test --'
+                        end,
+                        jestConfigFile = function(file)
+                            if string.find(file, '/packages/anzen-api/test', 1, true) then
+                                -- should return nil as the test command already sets the config file
+                                return nil
+                            end
+
+                            if string.find(file, '/packages/anzen-api', 1, true) then
+                                -- should return nil as the jest config is in the package json
+                                return nil
+                            end
+
+                            return vim.fn.getcwd() .. '/jest.config.ts'
+                        end,
+                        env = {
+                            -- CI = false
+                        },
+                        cwd = function(file)
+                            if string.find(file, '/packages/anzen-api/test', 1, true) then
+                                -- TODO(@roeeyn): fix this
+                                -- print '111111111111'
+                                -- local otherRedsult = string.match(file, '(.-/[^/]+/)packages/anzen%-api/test')
+                                -- print(file, otherRedsult)
+                                -- print '111111111111'
+                                -- return otherRedsult
+                                return '/Users/roeeyn/src/anzen-platform/packages/anzen-api/'
+                            end
+
+                            if string.find(file, '/packages/anzen-api', 1, true) then
+                                -- TODO(@roeeyn): fix this
+                                -- print '222222222222'
+                                -- local otherRedsult = string.match(file, '(.-/[^/]+/)packages/([^/]+)')
+                                -- print(file, otherRedsult)
+                                -- print '222222222222'
+                                -- return otherRedsult
+                                return '/Users/roeeyn/src/anzen-platform/packages/anzen-api/'
+                            end
+
+                            return vim.fn.getcwd()
+                        end,
+                    },
+                },
+            }
         end,
     },
     {

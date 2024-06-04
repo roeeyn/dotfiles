@@ -129,6 +129,7 @@ wk.register({
     },
     p = {
         name = 'Project',
+        f = { '<cmd>lua require("telescope.builtin").live_grep({search_dirs= {vim.fn.expand("%:p:h")} })<cr>', 'Live grep current folder' },
         t = { '<cmd>NvimTreeToggle<cr>', 'Tree File browser' },
         o = { '<cmd>Oil<cr>', 'Oil File browser' },
         ['/'] = { '<cmd>Telescope live_grep<cr>', 'Live grep in whole project' },

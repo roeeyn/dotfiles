@@ -16,6 +16,13 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins Config
 require('lazy').setup {
     {
+        -- REPL for elixir
+        'jpalardy/vim-slime',
+        init = function()
+            vim.g.slime_target = 'tmux'
+        end,
+    },
+    {
         -- Telescope needed fuzzy finding lib
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',

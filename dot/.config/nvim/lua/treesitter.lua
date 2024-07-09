@@ -31,6 +31,8 @@ require('nvim-treesitter.configs').setup {
     ensure_installed = {
         'comment',
         'dockerfile',
+        'eex',
+        'elixir',
         'git_config',
         'git_rebase',
         'gitattributes',
@@ -42,6 +44,7 @@ require('nvim-treesitter.configs').setup {
         'gosum',
         'gowork',
         'graphql',
+        'heex',
         'hjson',
         'html',
         'javascript',
@@ -64,8 +67,9 @@ require('nvim-treesitter.configs').setup {
         'vim',
         'vimdoc',
     },
+    auto_install = true,
     highlight = { enable = true },
-    -- indent = {enable = true}
+    indent = { enable = true },
     autotag = {
         enable = true,
     },

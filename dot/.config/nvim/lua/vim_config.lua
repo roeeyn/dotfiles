@@ -13,7 +13,7 @@ vim.opt.encoding = 'utf-8'
 vim.opt.hlsearch = true
 
 -- Column limit 120
-vim.opt.colorcolumn = '120'
+vim.opt.colorcolumn = '98'
 
 -- Cursor line
 vim.opt.cursorline = true

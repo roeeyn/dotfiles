@@ -11,14 +11,16 @@ local on_attach = function(_, bufnr)
     -- end, { desc = 'Format current buffer with LSP' })
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 local servers = {
     ansiblels = {},
     dockerls = {},
     bashls = {},
     gopls = {},
     graphql = {},
-    elixirls = {},
-    emmet_ls = {},
+    elixirls = { capabilities = capabilities },
+    emmet_ls = { capabilities = capabilities, filetypes = { 'ex', 'heex' } },
     tsserver = {},
     pyright = {
         settings = {
@@ -31,7 +33,16 @@ local servers = {
     html = {},
     svelte = {},
     jsonls = {},
-    tailwindcss = {},
+    tailwindcss = {
+        capabilities = capabilities,
+        init_options = {
+            userLanguages = {
+                elixir = 'html-eex',
+                eelixir = 'html-eex',
+                heex = 'html-eex',
+            },
+        },
+    },
     lua_ls = {
         settings = {
             Lua = {

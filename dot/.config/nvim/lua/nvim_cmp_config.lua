@@ -26,6 +26,7 @@ cmp.setup {
             end,
             symbol_map = { Copilot = '' },
         },
+        expandable_indicator = true,
     },
     window = {
         completion = cmp.config.window.bordered(),

@@ -280,16 +280,16 @@ require('lazy').setup {
         },
         opts = {},
     },
-    {
-        -- Nice folding based on treesitter
-        'kevinhwang91/nvim-ufo',
-        dependencies = {
-            'kevinhwang91/promise-async',
-            'nvim-treesitter/nvim-treesitter',
-        },
-        main = 'ufo',
-        opts = {},
-    },
+    -- {
+    --     -- Nice folding based on treesitter
+    --     'kevinhwang91/nvim-ufo',
+    --     dependencies = {
+    --         'kevinhwang91/promise-async',
+    --         'nvim-treesitter/nvim-treesitter',
+    --     },
+    --     main = 'ufo',
+    --     opts = {},
+    -- },
     {
         -- Nice buffer deletion without closing the window
         'famiu/bufdelete.nvim',
@@ -608,12 +608,12 @@ require('lazy').setup {
             'nvim-tree/nvim-web-devicons',
         },
     },
-    {
-        -- Forces me to improve my navigation workflow inside neovim
-        'm4xshen/hardtime.nvim',
-        dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-        opts = {},
-    },
+    -- {
+    --     -- Forces me to improve my navigation workflow inside neovim
+    --     'm4xshen/hardtime.nvim',
+    --     dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+    --     opts = {},
+    -- },
     {
         -- Git blame UI
         'FabijanZulj/blame.nvim',

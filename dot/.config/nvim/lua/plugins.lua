@@ -150,7 +150,6 @@ require('lazy').setup {
                 end,
                 desc = 'Buffer Local Keymaps (which-key)',
             },
-            { '<leader>;', desc = 'Toggle group comment' },
             { '<leader>b', group = 'Buffers' },
             { '<leader>bD', '<cmd>%bd|e#|bd#<cr>', desc = 'Close other buffers' },
             { '<leader>bb', '<cmd>Telescope buffers<cr>', desc = 'Telescope buffers' },
@@ -482,7 +481,7 @@ require('lazy').setup {
         'terrortylor/nvim-comment',
         main = 'nvim_comment',
         opts = {
-            line_mapping = '<leader>l;',
+            -- line_mapping = '<leader>l;',
             operator_mapping = '<leader>;',
             hook = function()
                 require('ts_context_commentstring').update_commentstring()

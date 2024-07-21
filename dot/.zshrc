@@ -145,6 +145,7 @@ fi
 
 # EDITOR variable for gh and git
 export EDITOR="nvim"
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 
 # Enable history in IEX through Erlang(OTP)
 export ERL_AFLAGS="-kernel shell_history enabled"

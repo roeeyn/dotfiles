@@ -59,6 +59,7 @@ dot/.config/SmartSetMasterErgo (Mac)/
 dot/.config/raycast/
 dot/.config/binwalk/
 dot/.config/gh-copilot/
+dot/.config/stripe/
 
 # Lua RC
 .luarc.json

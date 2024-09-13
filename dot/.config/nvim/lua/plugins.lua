@@ -736,6 +736,7 @@ require('lazy').setup {
         opts = {
             formatters_by_ft = {
                 lua = { 'stylua' },
+                svelte = { 'prettierd', 'prettier', 'biome', stop_after_first = true },
                 typescript = { { 'biome', 'prettierd', 'prettier' } },
                 javascript = { { 'biome', 'prettierd', 'prettier' } },
                 python = { { 'ruff_format', 'black' } },

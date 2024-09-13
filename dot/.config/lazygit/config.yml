@@ -174,7 +174,7 @@ keybinding:
         scrollDownMain-alt1: J
         scrollUpMain-alt2: <c-u>
         scrollDownMain-alt2: <c-d>
-        executeCustomCommand: ':'
+        executeShellCommand: ':'
         createRebaseOptionsMenu: m
         pushFiles: P
         pullFiles: p
@@ -284,7 +284,7 @@ keybinding:
     commitMessage:
         commitMenu: <c-o>
 os:
-  edit: 'nvim --server "$NVIM" --remote-tab {{filename}}'
-  editAtLine: 'nvim --server "$NVIM" --remote-tab {{filename}}; [ -z "$NVIM" ] || nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
-  editAtLineAndWait: 'nvim +{{line}} {{filename}}'
+    edit: 'nvim --server "$NVIM" --remote-tab {{filename}}'
+    editAtLine: 'nvim --server "$NVIM" --remote-tab {{filename}}; [ -z "$NVIM" ] || nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
+    editAtLineAndWait: 'nvim +{{line}} {{filename}}'
 promptToReturnFromSubprocess: false

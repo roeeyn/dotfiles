@@ -177,6 +177,9 @@ eval "$(aactivator init)"
 export N_PREFIX="/Users/roeeyn/"
 export PATH="/Users/roeeyn/bin:$PATH"
 
+# For postgres 15
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
 # McFly
 export MCFLY_KEY_SCHEME=vim
 export MCFLY_FUZZY=2

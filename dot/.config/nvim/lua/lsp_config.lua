@@ -21,7 +21,7 @@ local servers = {
     graphql = {},
     elixirls = { capabilities = capabilities },
     emmet_ls = { capabilities = capabilities, filetypes = { 'ex', 'heex' } },
-    tsserver = {},
+    ts_ls = {},
     pyright = {
         settings = {
             python = {

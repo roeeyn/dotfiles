@@ -60,6 +60,9 @@ dot/.config/raycast/
 dot/.config/binwalk/
 dot/.config/gh-copilot/
 dot/.config/stripe/
+dot/.config/zed/conversations/
+dot/.config/zed/embeddings/
+dot/.config/zed/prompts/
 
 # Lua RC
 .luarc.json

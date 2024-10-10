@@ -641,8 +641,32 @@ require('lazy').setup {
             require 'luasnip_config'
         end,
     },
+    -- {
+    --     'hrsh7th/nvim-cmp',
+    --     dependencies = {
+    --         'hrsh7th/cmp-buffer',
+    --         'hrsh7th/cmp-cmdline',
+    --         'hrsh7th/cmp-nvim-lsp-signature-help',
+    --         'hrsh7th/cmp-git',
+    --         'hrsh7th/cmp-nvim-lsp',
+    --         'hrsh7th/cmp-nvim-lua',
+    --         'hrsh7th/cmp-path',
+    --         'hrsh7th/cmp-calc',
+    --         'hrsh7th/cmp-emoji',
+    --         'ray-x/cmp-treesitter',
+    --         -- Nice Icon for cmp window
+    --         'onsails/lspkind.nvim',
+    --         -- Snippets
+    --         'L3MON4D3/LuaSnip',
+    --         'saadparwaiz1/cmp_luasnip',
+    --     },
+    --     config = function()
+    --         require 'nvim_cmp_config'
+    --     end,
+    -- },
     {
-        'hrsh7th/nvim-cmp',
+        'iguanacucumber/magazine.nvim',
+        name = 'nvim-cmp',
         dependencies = {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-cmdline',
@@ -737,9 +761,9 @@ require('lazy').setup {
             formatters_by_ft = {
                 lua = { 'stylua' },
                 svelte = { 'prettier', 'prettierd', 'biome', stop_after_first = true },
-                typescript = { { 'biome', 'prettierd', 'prettier' } },
-                javascript = { { 'biome', 'prettierd', 'prettier' } },
-                python = { { 'ruff_format', 'black' } },
+                typescript = { 'prettier', 'prettierd', 'biome', stop_after_first = true },
+                javascript = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
+                python = { 'ruff_format', 'black', stop_after_first = true },
                 yaml = { 'yamlft' },
             },
             format_on_save = {

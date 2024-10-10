@@ -64,6 +64,8 @@ end)
 
 local s = ls.snippet
 local f = ls.function_node
+local i = ls.insert_node
+local fmt = require('luasnip.extras.fmt').fmt
 
 ls.add_snippets('all', {
     ls.parser.parse_snippet('qelv', 'Andamos al 100!'),
@@ -75,4 +77,22 @@ ls.add_snippets('all', {
     ),
 }, {
     key = 'all',
+})
+
+-- Snippet for Elixir filetype
+ls.add_snippets('elixir', {
+    s(
+        'log',
+        fmt(
+            [[
+                require Logger
+                Logger.debug(inspect({}), ansi_color: :yellow)
+            ]],
+            {
+                i(1),
+            }
+        )
+    ),
+}, {
+    key = 'elixir',
 })

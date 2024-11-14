@@ -88,6 +88,10 @@ vim.o.foldenable = true
 -- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 -- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
+-- For NVIM avante
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
+
 ----------------------------------------------------------------------
 --                     Autocommands Generation                      --
 ----------------------------------------------------------------------

@@ -201,9 +201,10 @@ alt-shift-semicolon = 'mode service'
 
 # Workspace 1
 
-[[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
-run = "move-node-to-workspace 1"
+# Do not force ARc because of little arc
+# [[on-window-detected]]
+# if.app-id = 'company.thebrowser.Browser'
+# run = "move-node-to-workspace 1"
 
 [[on-window-detected]]
 if.app-id = 'com.googlecode.iterm2'

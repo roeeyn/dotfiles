@@ -68,7 +68,7 @@ cmp.setup {
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lua' },
         { name = 'path' },
-        { name = 'emoji' },
+        -- { name = 'emoji' },
         { name = 'spell' },
         { name = 'treesitter' },
         { name = 'copilot' },

@@ -73,7 +73,7 @@ outer.right =      5
 outer.top =        [
     {monitor."LG HDR 4K" = 36},
     # 36
-    5
+    3
 ]
 
 # 'main' binding mode declaration

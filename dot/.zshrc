@@ -162,13 +162,13 @@ export PATH="$GOTOOLDIR:$PATH"
 export PATH="/opt/homebrew/Cellar/john-jumbo/1.9.0_1/share/john:$PATH"
 
 # For pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
 # For pyenv virtual env
-eval "$(pyenv virtualenv-init -)"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+# eval "$(pyenv virtualenv-init -)"
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Python venv automatic activation
 eval "$(aactivator init)"

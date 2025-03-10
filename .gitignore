@@ -76,6 +76,7 @@ dot/.local/share/
 dot/.local/bin/hs
 dot/.local/bin/pandoc-*
 dot/.local/bin/poetry
+dot/.local/bin/ruff
 dot/.local/lib/
 
 # local files

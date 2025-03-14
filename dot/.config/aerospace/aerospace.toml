@@ -208,13 +208,13 @@ alt-shift-semicolon = 'mode service'
 # if.app-id = 'company.thebrowser.Browser'
 # run = "move-node-to-workspace 1"
 
-[[on-window-detected]]
-if.app-id = 'com.googlecode.iterm2'
-run = "move-node-to-workspace 1"
+# [[on-window-detected]]
+# if.app-id = 'com.googlecode.iterm2'
+# run = "move-node-to-workspace 1"
 
-[[on-window-detected]]
-if.app-id = 'com.openai.chat'
-run = "move-node-to-workspace 1"
+# [[on-window-detected]]
+# if.app-id = 'com.openai.chat'
+# run = "move-node-to-workspace 1"
 
 # Workspace 2
 

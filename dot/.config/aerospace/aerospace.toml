@@ -155,7 +155,7 @@ alt-5 = 'workspace 5'
 # alt-t = 'workspace T'
 # alt-u = 'workspace U'
 # alt-v = 'workspace V'
-alt-w = 'workspace W'
+# alt-w = 'workspace W'
 # alt-x = 'workspace X'
 # alt-y = 'workspace Y'
 # alt-z = 'workspace Z'
@@ -188,7 +188,7 @@ alt-shift-5 = 'move-node-to-workspace 5'
 # alt-shift-t = 'move-node-to-workspace T'
 # alt-shift-u = 'move-node-to-workspace U'
 # alt-shift-v = 'move-node-to-workspace V'
-alt-shift-w = 'move-node-to-workspace W'
+# alt-shift-w = 'move-node-to-workspace W'
 # alt-shift-x = 'move-node-to-workspace X'
 # alt-shift-y = 'move-node-to-workspace Y'
 # alt-shift-z = 'move-node-to-workspace Z'
@@ -201,20 +201,32 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
 
+# Application shortcuts
+alt-a = "exec-and-forget open -a Arc"          # Quickly focus Arc
+alt-c = "exec-and-forget open -a ChatGPT"    # Quickly focus ChatGPT
+alt-f = "exec-and-forget open -a 'Firefox Developer Edition'"
+alt-i = "exec-and-forget open -a iTerm"       # Quickly focus iTerm
+alt-p = "exec-and-forget open -a Postman"     # Quickly focus Postman
+alt-w = "exec-and-forget open -a Windsurf"     # Quickly focus Windsurf
+
 # Workspace 1
 
-# Do not force ARc because of little arc
+# Do not force Arc because of little arc
 # [[on-window-detected]]
 # if.app-id = 'company.thebrowser.Browser'
 # run = "move-node-to-workspace 1"
 
-# [[on-window-detected]]
-# if.app-id = 'com.googlecode.iterm2'
-# run = "move-node-to-workspace 1"
+[[on-window-detected]]
+if.app-id = 'com.googlecode.iterm2'
+run = "move-node-to-workspace 1"
 
-# [[on-window-detected]]
-# if.app-id = 'com.openai.chat'
-# run = "move-node-to-workspace 1"
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = "move-node-to-workspace 1"
+
+[[on-window-detected]]
+if.app-id = 'com.exafunction.windsurf'
+run = "move-node-to-workspace 1"
 
 # Workspace 2
 

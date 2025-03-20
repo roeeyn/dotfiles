@@ -892,3 +892,440 @@ require('lazy').setup {
         event = 'BufEnter',
     },
 }
+--- This are the keybindings applied for VSCODE
+--- {
+--     "windsurf.autocompleteSpeed": "fast",
+--     "windsurf.autoExecutionPolicy": "auto",
+--     "windsurf.chatFontSize": "default",
+--     "windsurf.rememberLastModelSelection": true,
+--     "windsurf.openRecentConversation": true,
+--     "windsurf.explainAndFixInCurrentConversation": true,
+--     "workbench.colorTheme": "Tomorrow Night Blue",
+--     "git.autofetch": true,
+--     "git.confirmSync": false,
+--     "editor.lineNumbers": "relative",
+--     "svelte.enable-ts-plugin": true,
+--     "vim.normalModeKeyBindingsNonRecursive": [
+--         {
+--             "before": [
+--                 "<space>"
+--             ],
+--             "commands": [
+--                 "whichkey.show"
+--             ]
+--         }
+--     ],
+--     "vim.visualModeKeyBindingsNonRecursive": [
+--         {
+--             "before": [
+--                 "<space>"
+--             ],
+--             "commands": [
+--                 "whichkey.show"
+--             ]
+--         }
+--     ],
+--     "whichkey.bindingOverrides": [
+--         // Buffers
+--         {
+--             "keys": "b",
+--             "name": "Buffers",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "D",
+--                     "name": "Close other editors",
+--                     "type": "command",
+--                     "command": "workbench.action.closeOtherEditors"
+--                 },
+--                 {
+--                     "key": "b",
+--                     "name": "Show all open editors",
+--                     "type": "command",
+--                     "command": "workbench.action.showAllEditors"
+--                 },
+--                 {
+--                     "key": "d",
+--                     "name": "Close editor",
+--                     "type": "command",
+--                     "command": "workbench.action.closeActiveEditor"
+--                 },
+--                 {
+--                     "key": "l",
+--                     "name": "Last editor",
+--                     "type": "command",
+--                     "command": "workbench.action.openPreviousRecentlyUsedEditor"
+--                 },
+--                 {
+--                     "key": "n",
+--                     "name": "Next editor",
+--                     "type": "command",
+--                     "command": "workbench.action.nextEditor"
+--                 },
+--                 {
+--                     "key": "p",
+--                     "name": "Previous editor",
+--                     "type": "command",
+--                     "command": "workbench.action.previousEditor"
+--                 },
+--                 {
+--                     "key": "x",
+--                     "name": "Hard remove editor",
+--                     "type": "command",
+--                     "command": "workbench.action.closeActiveEditor"
+--                 },
+--                 {
+--                     "key": "X",
+--                     "name": "Close editor group",
+--                     "type": "command",
+--                     "command": "workbench.action.closeEditorsInGroup"
+--                 }
+--             ]
+--         },
+--         // Code
+--         {
+--             "keys": "c",
+--             "name": "Code",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "0",
+--                     "name": "Format document",
+--                     "type": "command",
+--                     "command": "editor.action.formatDocument"
+--                 },
+--                 {
+--                     "key": "R",
+--                     "name": "Rename symbol",
+--                     "type": "command",
+--                     "command": "editor.action.rename"
+--                 },
+--                 {
+--                     "key": "a",
+--                     "name": "Code action",
+--                     "type": "command",
+--                     "command": "editor.action.codeAction"
+--                 },
+--                 {
+--                     "key": "d",
+--                     "name": "Go to declaration",
+--                     "type": "command",
+--                     "command": "editor.action.goToDeclaration"
+--                 },
+--                 {
+--                     "key": "s",
+--                     "name": "Signature help",
+--                     "type": "command",
+--                     "command": "editor.action.triggerParameterHints"
+--                 },
+--                 {
+--                     "key": "t",
+--                     "name": "Hover info",
+--                     "type": "command",
+--                     "command": "editor.action.showHover"
+--                 },
+--                 {
+--                     "key": "y",
+--                     "name": "Duplicate and comment",
+--                     "type": "command",
+--                     "command": "editor.action.copyLinesDownAction",
+--                     "postCommand": "editor.action.commentLine"
+--                 }
+--                 // Comment frame commands not directly available in VS Code
+--             ]
+--         },
+--         // Debug/Diagnostics
+--         {
+--             "keys": "d",
+--             "name": "Debug/Diag.",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "b",
+--                     "name": "Toggle breakpoint",
+--                     "type": "command",
+--                     "command": "editor.debug.action.toggleBreakpoint"
+--                 },
+--                 {
+--                     "key": "c",
+--                     "name": "Start/Continue debugging",
+--                     "type": "command",
+--                     "command": "workbench.action.debug.start"
+--                 },
+--                 {
+--                     "key": "n",
+--                     "name": "Go to next diagnostic",
+--                     "type": "command",
+--                     "command": "editor.action.marker.next"
+--                 },
+--                 {
+--                     "key": "p",
+--                     "name": "Go to prev diagnostic",
+--                     "type": "command",
+--                     "command": "editor.action.marker.prev"
+--                 },
+--                 {
+--                     "key": "s",
+--                     "name": "Debugging",
+--                     "type": "bindings",
+--                     "bindings": [
+--                         {
+--                             "key": "i",
+--                             "name": "Step into",
+--                             "type": "command",
+--                             "command": "workbench.action.debug.stepInto"
+--                         },
+--                         {
+--                             "key": "o",
+--                             "name": "Step out",
+--                             "type": "command",
+--                             "command": "workbench.action.debug.stepOut"
+--                         },
+--                         {
+--                             "key": "t",
+--                             "name": "Stop",
+--                             "type": "command",
+--                             "command": "workbench.action.debug.stop"
+--                         },
+--                         {
+--                             "key": "v",
+--                             "name": "Step over",
+--                             "type": "command",
+--                             "command": "workbench.action.debug.stepOver"
+--                         }
+--                     ]
+--                 }
+--             ]
+--         },
+--         // Errors
+--         {
+--             "keys": "e",
+--             "name": "Errors",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "O",
+--                     "name": "Open diagnostics",
+--                     "type": "command",
+--                     "command": "workbench.actions.view.problems"
+--                 },
+--                 {
+--                     "key": "l",
+--                     "name": "Open diagnostic float",
+--                     "type": "command",
+--                     "command": "editor.action.showHover"
+--                 },
+--                 {
+--                     "key": "n",
+--                     "name": "Next error",
+--                     "type": "command",
+--                     "command": "editor.action.marker.next"
+--                 },
+--                 {
+--                     "key": "p",
+--                     "name": "Prev error",
+--                     "type": "command",
+--                     "command": "editor.action.marker.prev"
+--                 }
+--             ]
+--         },
+--         // File/Find/Telescope
+--         {
+--             "keys": "f",
+--             "name": "File/Find/Telescope",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "/",
+--                     "name": "Find in current file",
+--                     "type": "command",
+--                     "command": "actions.find"
+--                 },
+--                 {
+--                     "key": "S",
+--                     "name": "Save all",
+--                     "type": "command",
+--                     "command": "workbench.action.files.saveAll"
+--                 },
+--                 {
+--                     "key": "f",
+--                     "name": "Find files",
+--                     "type": "command",
+--                     "command": "workbench.action.quickOpen"
+--                 },
+--                 {
+--                     "key": "g",
+--                     "name": "Find text in files",
+--                     "type": "command",
+--                     "command": "workbench.action.findInFiles"
+--                 },
+--                 {
+--                     "key": "s",
+--                     "name": "Save",
+--                     "type": "command",
+--                     "command": "workbench.action.files.save"
+--                 }
+--             ]
+--         },
+--         // Git/GitHub/GoTo
+--         {
+--             "keys": "g",
+--             "name": "Git/GitHub/GoTo",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "b",
+--                     "name": "Git blame",
+--                     "type": "command",
+--                     "command": "gitlens.toggleFileBlame"
+--                 },
+--                 {
+--                     "key": "d",
+--                     "name": "Go to definition",
+--                     "type": "command",
+--                     "command": "editor.action.revealDefinition"
+--                 },
+--                 {
+--                     "key": "i",
+--                     "name": "Go to implementation",
+--                     "type": "command",
+--                     "command": "editor.action.goToImplementation"
+--                 },
+--                 {
+--                     "key": "r",
+--                     "name": "Find references",
+--                     "type": "command",
+--                     "command": "editor.action.goToReferences"
+--                 },
+--                 {
+--                     "key": "s",
+--                     "name": "Git status",
+--                     "type": "command",
+--                     "command": "workbench.view.scm"
+--                 },
+--                 {
+--                     "key": "t",
+--                     "name": "Git changed files",
+--                     "type": "command",
+--                     "command": "git.openChange"
+--                 }
+--             ]
+--         },
+--         // Project
+--         {
+--             "keys": "p",
+--             "name": "Project",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "/",
+--                     "name": "Find in project",
+--                     "type": "command",
+--                     "command": "workbench.action.findInFiles"
+--                 },
+--                 {
+--                     "key": "t",
+--                     "name": "Toggle explorer",
+--                     "type": "command",
+--                     "command": "workbench.view.explorer"
+--                 },
+--                 {
+--                     "key": "c",
+--                     "name": "Close explorer",
+--                     "type": "command",
+--                     "command": "workbench.action.closeSidebar"
+--                 }
+--             ]
+--         },
+--         // Quit
+--         {
+--             "keys": "q",
+--             "name": "Quit",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "q",
+--                     "name": "Quit",
+--                     "type": "command",
+--                     "command": "workbench.action.closeWindow"
+--                 }
+--             ]
+--         },
+--         // Window
+--         {
+--             "keys": "w",
+--             "name": "Window",
+--             "type": "bindings",
+--             "bindings": [
+--                 {
+--                     "key": "0",
+--                     "name": "Reset editor sizes",
+--                     "type": "command",
+--                     "command": "workbench.action.evenEditorWidths"
+--                 },
+--                 {
+--                     "key": "O",
+--                     "name": "Close other editors",
+--                     "type": "command",
+--                     "command": "workbench.action.closeOtherEditors"
+--                 },
+--                 {
+--                     "key": "c",
+--                     "name": "Close editor",
+--                     "type": "command",
+--                     "command": "workbench.action.closeActiveEditor"
+--                 },
+--                 {
+--                     "key": "h",
+--                     "name": "Move to left editor",
+--                     "type": "command",
+--                     "command": "workbench.action.navigateLeft"
+--                 },
+--                 {
+--                     "key": "j",
+--                     "name": "Move to bottom editor",
+--                     "type": "command",
+--                     "command": "workbench.action.navigateDown"
+--                 },
+--                 {
+--                     "key": "k",
+--                     "name": "Move to above editor",
+--                     "type": "command",
+--                     "command": "workbench.action.navigateUp"
+--                 },
+--                 {
+--                     "key": "l",
+--                     "name": "Move to right editor",
+--                     "type": "command",
+--                     "command": "workbench.action.navigateRight"
+--                 },
+--                 {
+--                     "key": "v",
+--                     "name": "Split editor vertically",
+--                     "type": "command",
+--                     "command": "workbench.action.splitEditorRight"
+--                 },
+--                 {
+--                     "key": "q",
+--                     "name": "Save and close editor",
+--                     "type": "command",
+--                     "command": "workbench.action.files.save",
+--                     "postCommand": "workbench.action.closeActiveEditor"
+--                 },
+--                 {
+--                     "key": "t",
+--                     "name": "Open in new tab",
+--                     "type": "command",
+--                     "command": "workbench.action.moveEditorToNewWindow"
+--                 }
+--             ]
+--         }
+--         // The following sections don't have direct equivalents in VS Code or would need custom extensions:
+--         // - Harpoon (h)
+--         // - Testing (u)
+--         // - Session (s)
+--         // - Line (l)
+--         // - Tab (t) - VS Code has different tab management
+--         // - Yank (y) - VS Code has different clipboard management
+--     ]
+-- }

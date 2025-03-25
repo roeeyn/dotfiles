@@ -206,7 +206,9 @@ alt-a = "exec-and-forget open -a Arc"          # Quickly focus Arc
 alt-c = "exec-and-forget open -a ChatGPT"    # Quickly focus ChatGPT
 alt-f = "exec-and-forget open -a 'Firefox Developer Edition'"
 alt-i = "exec-and-forget open -a iTerm"       # Quickly focus iTerm
+alt-m = "exec-and-forget open -a Ferdium"      # Quickly focus Ferdium
 alt-p = "exec-and-forget open -a Postman"     # Quickly focus Postman
+alt-s = "exec-and-forget open -a Slack"       # Quickly focus Slack
 alt-w = "exec-and-forget open -a Windsurf"     # Quickly focus Windsurf
 
 # Workspace 1

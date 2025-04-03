@@ -12,6 +12,8 @@ github-copilot/
 # SSH files
 id_ed25519
 id_ed25519.pub
+id_rsa
+id_rsa.pub
 known_hosts
 known_hosts.old
 

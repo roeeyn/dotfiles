@@ -1,7 +1,3 @@
-tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
-tap "homebrew/services"
 tap "smudge/smudge"
 tap "stripe/stripe-cli"
 tap "supabase/tap"
@@ -171,8 +167,6 @@ brew "watchexec"
 brew "wget"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
-# Download YouTube videos from the command-line
-brew "youtube-dl"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑

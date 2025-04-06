@@ -73,6 +73,7 @@ dot/.config/zed/prompts/
 .unsplash_api_key
 
 # local state
+dot/.local/bin/aactivator
 dot/.local/state/
 dot/.local/share/
 dot/.local/bin/hs

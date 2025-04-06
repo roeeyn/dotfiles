@@ -3,6 +3,7 @@ set -e
 echo "Linking the files..."
 
 brew install stow
+brew install ansible
 
 rm ~/.zshrc || echo 'Not zshrc found, continuing...'
 
@@ -13,3 +14,57 @@ stow files/ --target=$HOME
 
 echo "Installing rosetta..."
 sudo softwareupdate --install-rosetta
+
+# Check if the ansible password exists
+ansible_password="$HOME/.dotfiles/ansible_password.txt"
+if [ -f "$ansible_password" ]; then
+    echo "Ansible password already exists at $ansible_password"
+else
+    # If the file does not exist, ask for user input
+    echo "Ansible password does not exist. Please enter the key to save to the file:"
+    read user_input
+
+    # Save the user input to the file
+    echo "$user_input" > "$ansible_password"
+
+    echo "Your input has been saved to $ansible_password"
+fi
+#
+# Decrypting keys
+echo 'Decrypting vault passwords...'
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519.pub ~/.dotfiles/dot/.ssh/id_ed25519.pub.enc
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_ed25519 ~/.dotfiles/dot/.ssh/id_ed25519.enc
+
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_rsa.pub ~/.dotfiles/dot/.ssh/id_rsa.pub.enc
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.ssh/id_rsa ~/.dotfiles/dot/.ssh/id_rsa.enc
+
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.gnupg/pgp_secret.txt ~/.dotfiles/dot/.gnupg/pgp_secret.txt.enc
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.gnupg/pgp_public.txt ~/.dotfiles/dot/.gnupg/pgp_public.txt.enc
+
+# Decrypt unsplash API key
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.unsplash_api_key ~/.dotfiles/dot/.unsplash_api_key.enc
+
+# Decrypt Wakatime API key
+ansible-vault decrypt --vault-password-file ~/.dotfiles/ansible_password.txt --output ~/.dotfiles/dot/.wakatime.cfg ~/.dotfiles/dot/.wakatime.cfg.enc
+
+# SSH config
+echo "Configuring ssh keys..."
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_ed25519
+ssh-add -K ~/.ssh/id_rsa
+
+echo 'Trying GPG installation...'
+# Remember to kill the gpg-agent so the new pinentry can work
+# gpgconf --kill gpg-agent
+gpg_key_id='615B67D406A71EC5'
+if ! gpg --list-secret-keys --keyid-format=long | rg $gpg_key_id &>/dev/null; then
+  echo 'Installing GPG key...'
+  gpg --import ~/.dotfiles/dot/.gnupg/pgp_public.txt
+  gpg --import ~/.dotfiles/dot/.gnupg/pgp_secret.txt
+  gpg --list-secret-keys
+  gpg --list-secret-keys --keyid-format=long
+  git config --global user.signingkey $gpg_key_id
+  git config --global commit.gpgsign true
+else
+  echo 'GPG key already installed, skipping...'
+fi

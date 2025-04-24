@@ -203,6 +203,9 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Added by Windsurf
 export PATH="/Users/roeeyn/.codeium/windsurf/bin:$PATH"
 
+# Local composer for the CFDI stuff in FiscaLink
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/roeeyn/.docker/completions $fpath)
 autoload -Uz compinit

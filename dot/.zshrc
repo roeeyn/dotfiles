@@ -206,9 +206,12 @@ export PATH="/Users/roeeyn/.codeium/windsurf/bin:$PATH"
 # Local composer for the CFDI stuff in FiscaLink
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
+# ASDF package manager
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/roeeyn/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+autoload -Uz compinit && compinit
 
 # End of Docker CLI completions

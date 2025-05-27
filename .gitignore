@@ -77,6 +77,8 @@ dot/.local/bin/aactivator
 dot/.local/state/
 dot/.local/share/
 dot/.local/bin/hs
+dot/.local/bin/mcp-proxy
+dot/.local/bin/mcp-reverse-proxy
 dot/.local/bin/pandoc-*
 dot/.local/bin/poetry
 dot/.local/bin/ruff

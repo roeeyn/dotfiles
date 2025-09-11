@@ -2,4 +2,5 @@
 --                  Main NeoVim configuration file                  --
 ----------------------------------------------------------------------
 
-print('NeoVim configuration file')
+require 'config.vim'
+require 'config.lazy'

@@ -1,0 +1,5 @@
+theme = dark:tokyonight,light:tokyonight-day
+keybind = shift+enter=text:\x1b\r
+
+# Hide mouse cursor when typing
+mouse-hide-while-typing = true

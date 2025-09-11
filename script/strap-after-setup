@@ -3,31 +3,4 @@ set -e
 
 # After brew installed goes here!
 
-echo 'Installing aactivator...'
-uv tool install aactivator
-
-# Symlink again the .ssh files
-stow dot/ --target=$HOME
-
-## Install Oh My Zsh
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    # Oh My Zsh installing script
-    echo "Installing oh my zsh..."
-    curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-
-    # OMZ plugins
-    echo "Installing oh my zsh plugins..."
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-    # Tmux package manager
-    echo "Installing tmux package manager..."
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-    # Oh my zshrc will update the zshrc file
-    rm ~/.zshrc
-    stow dot/ --target=$HOME
-
-else
-    echo "Detected oh my zsh installation... skipping it"
-fi
+echo 'after setup'

@@ -114,6 +114,7 @@ function ggu() {
 }
 
 alias ggpur='ggu'
+alias ggpush='git push origin $(git_current_branch)'
 
 alias gignore='git update-index --assume-unchanged'
 alias gignored='git ls-files -v | grep "^[[:lower:]]"'

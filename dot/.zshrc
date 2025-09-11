@@ -1,5 +1,8 @@
 echo "Loading .zshrc..."
 
+# Initialize completion system
+autoload -Uz compinit && compinit
+
 # For loading local binaries
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -14,7 +17,12 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # This removes from history the commands starting with a space
 setopt HIST_IGNORE_SPACE
 
-# aliases
+# Load aliases from separate file
+if [ -f "$HOME/.config/zsh/aliases.zsh" ]; then
+    source "$HOME/.config/zsh/aliases.zsh"
+fi
+
+# Personal aliases
 alias lg=lazygit
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh

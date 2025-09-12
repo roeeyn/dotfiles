@@ -1,3 +1,5 @@
 .wakatime-project
 node_modules/
 :LOCALAPPDATA*
+
+**/.claude/settings.local.json

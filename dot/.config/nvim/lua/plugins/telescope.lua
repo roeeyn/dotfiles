@@ -48,6 +48,7 @@ return {
 
             -- Load fzf extension
             pcall(telescope.load_extension, 'fzf')
+            pcall(telescope.load_extension, 'neoclip')
         end,
     },
 }

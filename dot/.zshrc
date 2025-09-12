@@ -2,7 +2,8 @@
 autoload -Uz compinit && compinit
 
 # For loading local binaries
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
 
 export LANG=en_US.UTF-8
 

@@ -1,6 +1,3 @@
-# Initialize completion system
-autoload -Uz compinit && compinit
-
 # For loading local binaries
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
@@ -24,6 +21,8 @@ fi
 # Personal aliases
 alias lg=lazygit
 
+export SERVERLESS_LICENSE_KEY=not_relevant
+
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -39,3 +38,11 @@ eval "$(starship init zsh)"
 # Tmux sessionizer keybindings
 bindkey -s ^f "tmux-sessionizer -c\n"
 bindkey -s ^o "tmux-sessionizer\n"
+
+# Initialize completion system
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+else
+    compinit -C
+fi

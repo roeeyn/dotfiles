@@ -71,6 +71,8 @@ cask "logi-options+"
 cask "obsidian"
 # Client program for the OpenVPN Access Server
 cask "openvpn-connect"
+# Collaboration platform for API development
+cask "postman"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Team communication and collaboration software

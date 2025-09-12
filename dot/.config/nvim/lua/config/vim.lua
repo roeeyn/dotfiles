@@ -94,5 +94,3 @@ vmap('K', ":m '<-2<CR>gv=gv")
 
 -- Yanking in visual mode to clipboard
 xmap('<leader>y', '"+y<CR>')
-
-print 'loaded vim correctly'

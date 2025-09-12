@@ -34,3 +34,7 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # Nice terminal prompt
 eval "$(starship init zsh)"
+
+# Tmux sessionizer keybindings
+bindkey -s ^f "tmux-sessionizer -c\n"
+bindkey -s ^o "tmux-sessionizer\n"

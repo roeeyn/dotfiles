@@ -282,8 +282,8 @@ function git_main_branch() {
 
 # Other useful aliases
 alias ls='ls --color=auto'
-alias ll='ls -alF'
-alias la='ls -A'
+alias ll='ls -A'
+alias la='ls -laF'
 alias l='ls -CF'
 alias ..='cd ..'
 alias ...='cd ../..'

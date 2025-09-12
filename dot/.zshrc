@@ -1,5 +1,3 @@
-echo "Loading .zshrc..."
-
 # Initialize completion system
 autoload -Uz compinit && compinit
 

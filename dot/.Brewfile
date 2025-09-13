@@ -29,6 +29,8 @@ brew "luajit"
 brew "luarocks"
 # Fly through your shell history
 brew "mcfly"
+# Polyglot runtime manager (asdf rust clone)
+brew "mise"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Framework for managing multi-language pre-commit hooks

@@ -4,6 +4,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Title for tmux
+vim.opt.title = true
+vim.opt.titlestring = "nvim: %{expand('%:p:h:t')}"
+
 -- Needed settings for font issues (Telescope)
 vim.opt.encoding = 'utf-8'
 

@@ -20,8 +20,9 @@ fi
 
 # Personal aliases
 alias lg=lazygit
-
-export SERVERLESS_LICENSE_KEY=not_relevant
+alias cl=claude
+alias cx=codex
+alias ca=cursor-agent
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -41,6 +42,10 @@ eval "$(mise activate bash)"
 # Tmux sessionizer keybindings
 bindkey -s ^f "tmux-sessionizer -c\n"
 bindkey -s ^o "tmux-sessionizer\n"
+
+############# AlertMedia #############
+
+export SERVERLESS_LICENSE_KEY=not_relevant
 
 # Initialize completion system
 autoload -Uz compinit

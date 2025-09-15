@@ -28,6 +28,7 @@ return {
                     },
                 },
             },
+            terraformls = {},
             lua_ls = {
                 settings = {
                     Lua = {

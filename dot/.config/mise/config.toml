@@ -3,3 +3,5 @@ idiomatic_version_file_enable_tools = ["node"]
 
 [tools]
 node = "latest"
+terraform = "0.12.29"
+terragrunt = "0.32.3"

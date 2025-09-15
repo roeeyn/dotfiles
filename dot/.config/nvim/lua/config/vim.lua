@@ -39,6 +39,10 @@ vim.opt.number = true
 -- Set relative line numbers
 vim.opt.relativenumber = true
 
+-- Gitgutter to catch the changes faster
+vim.opt.updatetime = 100
+vim.g.gitgutter_map_keys = 0
+
 -- Winbar Config (Top right with modifier)
 vim.opt.winbar = '%=%m %f'
 

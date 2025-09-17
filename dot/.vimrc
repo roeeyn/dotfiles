@@ -1,5 +1,5 @@
 " Needed for cool ayu colors
-set termguicolors
+" set termguicolors
 
 " Is how many columns of whitespace a tab keypress or a backspace keypress is worth
 set tabstop=2 softtabstop=2

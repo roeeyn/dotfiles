@@ -11,7 +11,9 @@ return {
             ansiblels = {},
             dockerls = {},
             bashls = {},
-            elixirls = {},
+            elixirls = {
+                cmd = { vim.fn.stdpath 'data' .. '/mason/packages/elixir-ls/language_server.sh' },
+            },
             emmet_ls = {
                 filetypes = { 'html', 'css', 'javascript', 'typescript', 'ex', 'heex' },
             },

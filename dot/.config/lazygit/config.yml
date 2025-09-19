@@ -1,6 +1,21 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+
 os:
-  edit: 'nvim --server "$NVIM" --remote-tab {{filename}}'
-  editAtLine: 'nvim --server "$NVIM" --remote-tab {{filename}}; [ -z "$NVIM" ] || nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
-  editAtLineAndWait: 'nvim +{{line}} {{filename}}'
+  # Use the built-in preset that understands when it's running inside Neovim.
+  # When LG is launched from Neovim, it will:
+  #   1) target the same Neovim instance (via $NVIM), and
+  #   2) send a 'q' to close the floating LG terminal before opening the file buffer.
+  editPreset: "nvim-remote"
+
+  # OPTIONAL: if you prefer window split instead of tab when opening files:
+  # (requires nvr to be installed; see “Why this works” below)
+  # edit: '[ -z "$NVIM" ] && (nvim -- "{{filename}}") || (nvr --remote "{{filename}}")'
+  # editAtLine: '[ -z "$NVIM" ] && (nvim +{{line}} -- "{{filename}}") || (nvr --remote +{{line}} -- "{{filename}}")'
+
+  # OPTIONAL: if you want LG to *wait* until you close the file (rarely needed with the popup approach):
+  # editAtLineAndWait: '[ -z "$NVIM" ] && (nvim +{{line}} -- "{{filename}}") || (nvr --remote-wait +{{line}} -- "{{filename}}")'
+
+  # Don't suspend LG to a background TTY just to run the editor
+  editInTerminal: false

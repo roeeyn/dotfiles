@@ -33,8 +33,14 @@ brew "mcfly"
 brew "mise"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Control nvim processes using `nvr` command-line tool
+brew "neovim-remote"
+# Password manager
+brew "pass"
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
+# Pack repository contents into a single AI-friendly file
+brew "repomix"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -45,10 +51,14 @@ brew "tldr"
 brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
+# XML command-line utilities
+brew "xmlstarlet"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
+# Zsh port of Fish shell's history search
+brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
 # The easiest way to access your cloud.
@@ -59,6 +69,8 @@ cask "chatgpt"
 cask "claude-code"
 # Write, edit, and chat about your code with AI
 cask "cursor"
+# Databases and SQL IDE
+cask "datagrip"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Terminal emulator that uses platform-native UI and GPU acceleration
@@ -79,3 +91,8 @@ cask "postman"
 cask "raycast"
 # Team communication and collaboration software
 cask "slack"
+# Music streaming service
+cask "spotify"
+vscode "elixir-lsp.elixir-ls"
+vscode "victorbjorklund.phoenix"
+vscode "vscodevim.vim"

@@ -196,7 +196,7 @@ local-dev-nerd() {
     nc ncweb nr mp
     nc-celery nc-celery-crit
     ml ml-callback mss
-    outbox sendgrid-mock phone-provider-tester
+    outbox sendgrid-mock
   )
   dockc up -d "${services[@]}"
 }

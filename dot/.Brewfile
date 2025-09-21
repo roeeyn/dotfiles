@@ -41,6 +41,8 @@ brew "pass"
 brew "pre-commit"
 # Pack repository contents into a single AI-friendly file
 brew "repomix"
+# Autoformat shell script source code
+brew "shfmt"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)

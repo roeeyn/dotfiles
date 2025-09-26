@@ -1,4 +1,5 @@
 tap "common-fate/granted"
+tap "smudge/smudge"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.13"
 # Official Amazon AWS command-line interface
@@ -43,6 +44,8 @@ brew "pre-commit"
 brew "repomix"
 # Autoformat shell script source code
 brew "shfmt"
+# Command-line interface for https://speedtest.net bandwidth tests
+brew "speedtest-cli"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -65,6 +68,8 @@ brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 # The easiest way to access your cloud.
 brew "common-fate/granted/granted"
+# A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
+brew "smudge/smudge/nightlight"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
 # Terminal-based AI coding assistant
@@ -73,6 +78,8 @@ cask "claude-code"
 cask "cursor"
 # Databases and SQL IDE
 cask "datagrip"
+# Universal database tool and SQL client
+cask "dbeaver-community"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
 # Terminal emulator that uses platform-native UI and GPU acceleration

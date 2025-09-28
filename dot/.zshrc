@@ -45,6 +45,9 @@ eval "$(starship init zsh)"
 # tool version activation
 eval "$(mise activate bash)"
 
+# GPG configuration for signing commits
+export GPG_TTY=$(tty)
+
 # Tmux sessionizer keybindings
 bindkey -s ^f "tmux-sessionizer -c\n"
 bindkey -s ^o "tmux-sessionizer\n"

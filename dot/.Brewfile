@@ -6,8 +6,6 @@ tap "supabase/tap"
 brew "tree"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
-# Extendable version manager with support for Ruby, Node.js, Erlang & more
-brew "asdf"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -102,8 +100,6 @@ brew "mas"
 brew "mcfly"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
-# Node version management
-brew "n"
 # NCurses Disk Usage
 brew "ncdu"
 # Fast, highly customisable system info script

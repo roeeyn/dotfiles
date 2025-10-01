@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Split horizontally to the right (20% width)
+tmux split-window -h -p 20
+
+# Execute claude command in the right pane
+tmux send-keys "claude" C-m
+
+# Select the previous (original) pane
+tmux select-pane -L
+
+# Split vertically in the original pane (20% height at bottom)
+tmux split-window -v -p 20
+
+# Return focus to the top-left pane (original position)
+tmux select-pane -U

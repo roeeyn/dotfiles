@@ -19,6 +19,7 @@ fi
 
 # Personal aliases
 alias lg=lazygit
+alias ldo=lazydocker
 alias cl=claude
 alias cx=codex
 alias ca=cursor-agent

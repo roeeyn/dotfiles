@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Get the number of panes
+pane_count=$(tmux list-panes | wc -l | tr -d ' ')
+
+# If we have exactly 3 panes, check if it matches the split-layout pattern
+if [ "$pane_count" -eq 3 ]; then
+    # Get pane information: index, width, height, left, top
+    pane_info=$(tmux list-panes -F "#{pane_index} #{pane_width} #{pane_height} #{pane_left} #{pane_top}")
+
+    # Get window dimensions
+    window_width=$(tmux display-message -p "#{window_width}")
+    window_height=$(tmux display-message -p "#{window_height}")
+
+    # Expected layout from tmux-split-layout:
+    # - Pane on the right: full height, 20% width
+    # - Pane on bottom-left: 80% width, 20% height
+    # - Pane on top-left: 80% width, 80% height
+
+    # Check if we have a pane that spans full height and is positioned on the right
+    right_pane=$(echo "$pane_info" | awk -v wh="$window_height" '{
+        if ($3 >= wh - 2 && $4 > 0) print $1
+    }' | head -n 1)
+
+    # Check if we have a pane at bottom-left
+    bottom_pane=$(echo "$pane_info" | awk -v wh="$window_height" '{
+        if ($4 == 0 && $5 > 0) print $1
+    }' | head -n 1)
+
+    # If we found both characteristic panes, enforce the 20% rule
+    if [ -n "$right_pane" ] && [ -n "$bottom_pane" ]; then
+        # Resize right pane to 20% width
+        tmux resize-pane -t "$right_pane" -x 20%
+
+        # Resize bottom pane to 20% height
+        tmux resize-pane -t "$bottom_pane" -y 80%
+    else
+        # Not the expected layout, equalize all panes
+        tmux select-layout tiled
+    fi
+else
+    # Not 3 panes, just equalize everything
+    tmux select-layout tiled
+fi

@@ -53,6 +53,11 @@ vim.opt.splitright = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- Set the livebook filetype to markdown
+vim.filetype.add {
+    extension = { livemd = 'markdown' },
+}
+
 -- Clearing red for empty spaces in scratch
 local empty_spaces_ag = vim.api.nvim_create_augroup('highlight-trailing-spaces', { clear = true })
 

@@ -9,8 +9,20 @@ set -o vi
 # Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# This removes from history the commands starting with a space
-setopt HIST_IGNORE_SPACE
+## Files & sizes (matches OMZ defaults)
+HISTFILE=${HISTFILE:-$HOME/.zsh_history}
+HISTSIZE=50000
+SAVEHIST=10000
+
+### Core history behavior
+setopt EXTENDED_HISTORY         # store :epoch:elapsed;command in $HISTFILE
+setopt HIST_EXPIRE_DUPS_FIRST   # when trimming, drop older duplicates first
+setopt HIST_IGNORE_DUPS         # ignore a command if it's identical to the previous one
+setopt HIST_IGNORE_SPACE        # don't store commands that start with a space
+setopt HIST_REDUCE_BLANKS      # normalize whitespace so dup detection is consistent
+setopt HIST_VERIFY              # after "!" expansion, load back into the editor instead of running
+setopt SHARE_HISTORY            # merge history across terminals & append incrementally
+
 
 # Load aliases from separate file
 if [ -f "$HOME/.config/zsh/aliases.zsh" ]; then
@@ -52,6 +64,8 @@ export GPG_TTY=$(tty)
 # Tmux sessionizer keybindings
 bindkey -s ^f "tmux-sessionizer -c\n"
 bindkey -s ^o "tmux-sessionizer\n"
+
+source "$HOME/.alert_media.zsh"
 
 # Initialize completion system
 autoload -Uz compinit

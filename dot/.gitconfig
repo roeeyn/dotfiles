@@ -1,0 +1,16 @@
+[core]
+    pager = DELTA_FEATURES=+side-by-side delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = false # use n and N to jump between diff sections
+    hyperlinks = false
+[merge]
+    conflictStyle = zdiff3
+[user]
+    name = Rodrigo Medina
+    email = rodrigo.medina@alertmedia.com
+[github]
+    user = roeeyn
+[pull]
+    rebase = false

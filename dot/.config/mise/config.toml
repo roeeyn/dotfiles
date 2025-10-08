@@ -1,8 +1,2 @@
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
-
-[tools]
-node = "latest"
-terraform = "1.5.5"
-terragrunt = "0.32.3"
-tflint = "latest"

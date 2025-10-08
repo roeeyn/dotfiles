@@ -1,2 +1,7 @@
 elixir 1.18.3
 erlang 27.3.4
+python 3.13.8
+node latest
+terragrunt 0.32.3
+terraform 1.5.5
+tflint latest

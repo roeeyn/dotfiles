@@ -16,10 +16,16 @@ brew "deno"
 brew "erdtree"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
+# Lazier way to manage everything docker
+brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Powerful, lightweight programming language
@@ -56,6 +62,8 @@ brew "tldr"
 brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # XML command-line utilities
 brew "xmlstarlet"
 # Shell extension to navigate your filesystem faster
@@ -90,6 +98,8 @@ cask "google-chrome"
 cask "keeper-password-manager"
 # Software for Logitech devices
 cask "logi-options+"
+# Full TeX Live distribution with GUI applications
+cask "mactex"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Client program for the OpenVPN Access Server
@@ -100,8 +110,10 @@ cask "postman"
 cask "raycast"
 # Team communication and collaboration software
 cask "slack"
-# Music streaming service
-cask "spotify"
+vscode "anysphere.cursorpyright"
 vscode "elixir-lsp.elixir-ls"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "rickaym.manim-sideview"
 vscode "victorbjorklund.phoenix"
 vscode "vscodevim.vim"

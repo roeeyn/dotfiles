@@ -50,38 +50,14 @@ brew "eza"
 brew "fd"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
-# Create thumbnails for your video files
-brew "ffmpegthumbnailer"
-# Firebase command-line tools
-brew "firebase-cli"
-# Command-line tools for fly.io services
-brew "flyctl"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# GitHub command-line tool
-brew "gh"
-# GNU Pretty Good Privacy (PGP) package
-brew "gnupg"
-# Open source programming language to build simple/reliable/efficient software
-brew "go"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
-# Fast linters runner for Go
-brew "golangci-lint"
-# Terminal based graphical activity monitor inspired by gtop and vtop
-brew "gotop"
-# Graph visualization software from AT&T and Bell Labs
-brew "graphviz"
-# Improved top (interactive process viewer)
-brew "htop"
-# Tools and libraries to manipulate images in many formats
-brew "imagemagick"
-# GNU utilities for networking
-brew "inetutils"
-# Enhanced version of john, a UNIX password cracker
-brew "john-jumbo"
-# Lightweight and flexible command-line JSON processor
-brew "jq"
+# Lazier way to manage everything docker
+brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Postgres C API library
@@ -178,22 +154,8 @@ brew "tldr"
 brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
-# Vulnerability scanner for container images, file systems, and Git repos
-brew "trivy"
-# Command-line unarchiving tools supporting multiple formats
-brew "unar"
-# URL extractor/launcher
-brew "urlview"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
-# Vi 'workalike' with many additional features
-brew "vim"
-# Manage the desktop wallpaper
-brew "wallpaper"
-# Execute commands when watched files change
-brew "watchexec"
-# Internet file retriever
-brew "wget"
 # XML command-line utilities
 brew "xmlstarlet"
 # JavaScript package manager
@@ -280,18 +242,8 @@ cask "keymapp"
 cask "livebook"
 # Software for Logitech devices
 cask "logi-options+"
-# Screen and video recording software
-cask "loom"
-# Interactive tool for analyzing MongoDB data
-cask "mongodb-compass"
-# VPN client
-cask "mullvad-vpn"
-# Reverse proxy, secure introspectable tunnels to localhost
-cask "ngrok"
-# Open-source software for live streaming and screen recording
-cask "obs"
-# Virtual Green-screen and Low-Light Enhancement OBS Plugin
-cask "obs-backgroundremoval"
+# Full TeX Live distribution with GUI applications
+cask "mactex"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Client program for the OpenVPN Access Server
@@ -304,56 +256,10 @@ cask "qlmarkdown"
 cask "raycast"
 # Team communication and collaboration software
 cask "slack"
-# Music streaming service
-cask "spotify"
-# JDK from the Eclipse Foundation (Adoptium)
-cask "temurin@8"
-# Open-source code editor
-cask "visual-studio-code"
-# Open-source code editor
-cask "visual-studio-code@insiders"
-# Multimedia player
-cask "vlc"
-# Network protocol analyzer
-cask "wireshark-app"
-# Free and open source web app scanner
-cask "zap"
-# Multiplayer code editor
-cask "zed"
-# Gecko based web browser
-cask "zen"
-# Video communication and virtual meeting platform
-cask "zoom"
-vscode "bradlc.vscode-tailwindcss"
-vscode "docker.docker"
-vscode "dotjoshjohnson.xml"
-vscode "eamodio.gitlens"
+vscode "anysphere.cursorpyright"
 vscode "elixir-lsp.elixir-ls"
-vscode "esbenp.prettier-vscode"
-vscode "github.copilot"
-vscode "github.copilot-chat"
-vscode "graphql.vscode-graphql"
-vscode "graphql.vscode-graphql-syntax"
-vscode "hackiai.hacki"
-vscode "jakebecker.elixir-ls"
-vscode "kamikillerto.vscode-colorize"
-vscode "mechatroner.rainbow-csv"
-vscode "ms-azuretools.vscode-containers"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-dotnettools.csdevkit"
-vscode "ms-dotnettools.csharp"
-vscode "ms-dotnettools.vscode-dotnet-runtime"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vsliveshare.vsliveshare"
-vscode "phoenixframework.phoenix"
-vscode "phplasma.csv-to-table"
-vscode "prisma.prisma"
-vscode "ritwickdey.liveserver"
-vscode "svelte.svelte-vscode"
-vscode "visualstudioexptteam.intellicode-api-usage-examples"
-vscode "visualstudioexptteam.vscodeintellicode"
-vscode "vscode-icons-team.vscode-icons"
+vscode "rickaym.manim-sideview"
+vscode "victorbjorklund.phoenix"
 vscode "vscodevim.vim"

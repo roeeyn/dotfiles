@@ -73,4 +73,5 @@ packer_compiled.lua
 !*.env
 !_scratch.ex
 !.scratch/
+!scratch/
 ############################################################

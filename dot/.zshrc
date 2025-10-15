@@ -33,6 +33,7 @@ fi
 alias lg=lazygit
 alias ldo=lazydocker
 alias cl=claude
+alias cls="claude --dangerously-skip-permissions"
 alias cx=codex
 alias ca=cursor-agent
 

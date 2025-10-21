@@ -31,6 +31,7 @@ ansible_password.txt
 
 # GPG configuration
 dot/.gnupg/openpgp-revocs.d/
+dot/.gnupg/random_seed
 private-keys-v1.d
 pgp_public.txt
 pgp_secret.txt

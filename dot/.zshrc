@@ -76,3 +76,6 @@ if [[ -f ${ZDOTDIR:-$HOME}/.zcompdump && -n $(find ${ZDOTDIR:-$HOME}/.zcompdump 
 else
   compinit -C
 fi
+
+# Shopify Hydrogen alias to local projects
+alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'

@@ -78,6 +78,7 @@ dot/.local/environment.yaml*
 dot/.local/bin/aactivator
 dot/.local/bin/claude
 dot/.local/bin/cursor-agent
+dot/.local/bin/expert
 dot/.local/state/
 dot/.local/share/
 dot/.local/bin/hs

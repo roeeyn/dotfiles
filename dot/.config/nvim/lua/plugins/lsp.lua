@@ -16,20 +16,8 @@ return {
             emmet_ls = {
                 filetypes = { 'html', 'css', 'javascript', 'typescript', 'ex', 'heex' },
             },
-            ts_ls = {},
             html = {},
-            svelte = {},
             jsonls = {},
-            tailwindcss = {
-                init_options = {
-                    userLanguages = {
-                        elixir = 'html-eex',
-                        eelixir = 'html-eex',
-                        heex = 'html-eex',
-                    },
-                },
-            },
-            terraformls = {},
             lua_ls = {
                 settings = {
                     Lua = {
@@ -49,6 +37,19 @@ return {
                     },
                 },
             },
+            pyright = {},
+            svelte = {},
+            tailwindcss = {
+                init_options = {
+                    userLanguages = {
+                        elixir = 'html-eex',
+                        eelixir = 'html-eex',
+                        heex = 'html-eex',
+                    },
+                },
+            },
+            terraformls = {},
+            ts_ls = {},
         }
 
         -- Configure all other servers with basic setup

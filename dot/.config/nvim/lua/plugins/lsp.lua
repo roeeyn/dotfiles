@@ -12,6 +12,7 @@ return {
             dockerls = {},
             bashls = {},
             expert = {},
+            -- elixir_ls = {},
             emmet_ls = {
                 filetypes = { 'html', 'css', 'javascript', 'typescript', 'ex', 'heex' },
             },

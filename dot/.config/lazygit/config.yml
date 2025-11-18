@@ -3,8 +3,7 @@
 os:
   editPreset: "nvim-remote"
   editInTerminal: false
-
 git:
-  paging:
-    colorArg: always
-    pager: "delta --dark --paging=never --hunk-header-style=omit --file-style=omit"
+  pagers:
+    - colorArg: always
+      pager: "delta --dark --paging=never --hunk-header-style=omit --file-style=omit"

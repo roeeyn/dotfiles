@@ -11,7 +11,12 @@ return {
             ansiblels = {},
             dockerls = {},
             bashls = {},
-            expert = {},
+            expert = {
+                -- Download the release from github worked better than building locally
+                cmd = { 'expert', '--stdio' },
+                filetypes = { 'eelixir', 'elixir', 'heex' },
+                root_markers = { 'mix.exs', '.git' },
+            },
             -- elixir_ls = {},
             emmet_ls = {
                 filetypes = { 'html', 'css', 'javascript', 'typescript', 'ex', 'heex' },
@@ -54,7 +59,7 @@ return {
 
         -- Configure all other servers with basic setup
         for server_name, config in pairs(servers) do
-            config.capabilities = capabilities
+            config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
             -- Register the server configuration, then enable it
             vim.lsp.config(server_name, config)
             vim.lsp.enable(server_name)

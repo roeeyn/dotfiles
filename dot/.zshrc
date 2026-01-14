@@ -3,6 +3,8 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 export LANG=en_US.UTF-8
 
+export EDITOR=vim
+
 # Vim keybindings in shell
 set -o vi
 
@@ -36,6 +38,7 @@ alias cl=claude
 alias cls="claude --dangerously-skip-permissions"
 alias cx=codex
 alias ca=cursor-agent
+alias oc=opencode
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

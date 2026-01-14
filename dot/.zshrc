@@ -31,6 +31,13 @@ if [ -f "$HOME/.config/zsh/aliases.zsh" ]; then
   source "$HOME/.config/zsh/aliases.zsh"
 fi
 
+# Load global ENV variables
+# Load private env vars (secrets)
+ENV_PRIVATE="$HOME/.dotfiles/dot/env/.env"
+if [[ -f "$ENV_PRIVATE" ]]; then
+  source "$ENV_PRIVATE"
+fi
+
 # Personal aliases
 alias lg=lazygit
 alias ldo=lazydocker

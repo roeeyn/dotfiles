@@ -29,6 +29,9 @@ ansible_password.txt
 # Unsplash API
 .unsplash_api_key
 
+# Env variables (tokens, secrets, etc)
+dot/env/.env
+
 # GPG configuration
 dot/.gnupg/openpgp-revocs.d/
 private-keys-v1.d

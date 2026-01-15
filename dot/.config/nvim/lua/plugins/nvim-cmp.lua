@@ -89,7 +89,6 @@ return {
                 { name = 'nvim_lua' },
                 { name = 'path' },
                 -- { name = 'emoji' },
-                { name = 'spell' },
                 { name = 'treesitter' },
                 { name = 'copilot' },
             }, {

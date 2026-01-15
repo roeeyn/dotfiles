@@ -11,13 +11,6 @@ return {
             ansiblels = {},
             dockerls = {},
             bashls = {},
-            expert = {
-                -- Download the release from github worked better than building locally
-                cmd = { 'expert', '--stdio' },
-                filetypes = { 'eelixir', 'elixir', 'heex' },
-                root_markers = { 'mix.exs', '.git' },
-            },
-            -- elixir_ls = {},
             emmet_ls = {
                 filetypes = { 'html', 'css', 'javascript', 'typescript', 'ex', 'heex' },
             },

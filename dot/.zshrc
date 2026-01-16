@@ -76,8 +76,6 @@ export GPG_TTY=$(tty)
 bindkey -s ^f "tmux-sessionizer -c\n"
 bindkey -s ^o "tmux-sessionizer\n"
 
-source "$HOME/.alert_media.zsh"
-
 # Initialize completion system
 autoload -Uz compinit
 # Check if .zcompdump is older than 24 hours

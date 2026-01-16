@@ -79,3 +79,8 @@ fi
 
 # Shopify Hydrogen alias to local projects
 alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/roeeyn/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

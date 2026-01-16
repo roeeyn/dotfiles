@@ -85,6 +85,29 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
+-- Opencode terminal escape mappings live here so the UI behavior is centralized.
+vim.api.nvim_create_autocmd('TermOpen', {
+    pattern = 'term://*opencode*',
+    callback = function(args)
+        vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], {
+            buffer = args.buf,
+            silent = true,
+            desc = 'Exit terminal mode',
+        })
+    end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'opencode_terminal',
+    callback = function(args)
+        vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], {
+            buffer = args.buf,
+            silent = true,
+            desc = 'Exit terminal mode',
+        })
+    end,
+})
+
 local function map(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, {
         noremap = true,

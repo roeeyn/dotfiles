@@ -112,6 +112,49 @@ return {
         { '<leader>hx', '<cmd>lua require("harpoon_config").clear_all()<cr>', desc = 'Clear all marks' },
         { '<leader>l', group = 'Line' },
         { '<leader>l;', desc = 'Toggle line comment' },
+        { '<leader>o', group = 'Opencode' },
+        {
+            '<leader>oa',
+            function()
+                require('opencode').ask('@this: ', { submit = true })
+            end,
+            desc = 'Ask opencode',
+            mode = { 'n', 'x' },
+        },
+        {
+            '<leader>os',
+            function()
+                require('opencode').select()
+            end,
+            desc = 'Select opencode action…',
+            mode = { 'n', 'x' },
+        },
+        {
+            '<leader>ot',
+            function()
+                require('opencode').toggle()
+            end,
+            desc = 'Toggle opencode',
+            mode = { 'n', 't' },
+        },
+        {
+            'go',
+            function()
+                return require('opencode').operator '@this '
+            end,
+            expr = true,
+            desc = 'Add range to opencode',
+            mode = { 'n', 'x' },
+        },
+        {
+            'goo',
+            function()
+                return require('opencode').operator '@this ' .. '_'
+            end,
+            expr = true,
+            desc = 'Add line to opencode',
+            mode = 'n',
+        },
         { '<leader>p', group = 'Project' },
         { '<leader>p/', '<cmd>Telescope live_grep<cr>', desc = 'Live grep in whole project' },
         { '<leader>po', '<cmd>Oil<cr>', desc = 'Oil File browser' },

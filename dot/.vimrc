@@ -33,3 +33,5 @@ set smartindent
 
 " Set normal backspace behaviour
 set backspace=indent,eol,start
+
+inoremap <S-CR> <CR>

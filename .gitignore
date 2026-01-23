@@ -34,7 +34,6 @@ dot/env/.env
 
 # GPG configuration
 dot/.gnupg/openpgp-revocs.d/
-dot/.gnupg/randome_seed
 dot/.gnupg/random_seed
 private-keys-v1.d
 pgp_public.txt

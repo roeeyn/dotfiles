@@ -64,8 +64,6 @@ brew "speedtest-cli"
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
-# General purpose fuzzy finder TUI
-brew "television"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer

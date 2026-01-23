@@ -1,4 +1,3 @@
-tap "anomalyco/tap"
 tap "common-fate/granted"
 tap "smudge/smudge"
 tap "stripe/stripe-cli"
@@ -67,14 +66,6 @@ brew "git-delta"
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Syntax-highlighting pager for git and diff output
-brew "git-delta"
-# Git extension for versioning large files
-brew "git-lfs"
-# Render markdown on the CLI
-brew "glow"
-# GNU typing tutor
-brew "gnu-typist"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
 # Fast linters runner for Go
@@ -155,8 +146,6 @@ brew "pulseaudio"
 brew "python@3.11"
 # Tools for and transforming and inspecting PDF files
 brew "qpdf"
-# Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
-brew "prettier"
 # Multi-agent orchestration framework for autonomous AI task completion
 brew "ralph-orchestrator"
 # Pack repository contents into a single AI-friendly file
@@ -195,8 +184,6 @@ brew "terraform-ls"
 brew "testdisk"
 # Define your dev environment as code. For microservice apps on Kubernetes
 brew "tilt"
-# General purpose fuzzy finder TUI
-brew "television"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer
@@ -233,8 +220,6 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-# The AI coding agent built for the terminal.
-brew "anomalyco/tap/opencode"
 # The easiest way to access your cloud.
 brew "common-fate/granted/granted"
 # A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
@@ -267,10 +252,6 @@ cask "chatgpt-atlas"
 cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
-# OpenAI's coding agent that runs in your terminal
-cask "codex"
-# Web browser with integrated AI assistant
-cask "comet"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 # Databases and SQL IDE
@@ -339,8 +320,6 @@ cask "postman"
 cask "qlmarkdown"
 # Control your tools with a few keystrokes
 cask "raycast"
-# GUI for streamlined Redis application development
-cask "redis-insight"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
@@ -395,13 +374,4 @@ vscode "rickaym.manim-sideview"
 vscode "ritwickdey.liveserver"
 vscode "svelte.svelte-vscode"
 vscode "vscode-icons-team.vscode-icons"
-# Video communication and virtual meeting platform
-cask "zoom"
-vscode "anysphere.cursorpyright"
-vscode "elixir-lsp.elixir-ls"
-vscode "hashicorp.terraform"
-vscode "ms-python.debugpy"
-vscode "ms-python.python"
-vscode "rickaym.manim-sideview"
-vscode "victorbjorklund.phoenix"
 vscode "vscodevim.vim"

@@ -48,15 +48,21 @@ brew "exiftool"
 brew "eza"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Play, record, convert, and stream audio and video
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Create thumbnails for your video files
+brew "ffmpegthumbnailer"
+# Firebase command-line tools
+brew "firebase-cli"
+# Command-line tools for fly.io services
+brew "flyctl"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# GNU Pretty Good Privacy (PGP) package
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
@@ -70,7 +76,7 @@ brew "gotop"
 brew "graphviz"
 # Improved top (interactive process viewer)
 brew "htop"
-# Tools and libraries to manipulate images in many formats
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # GNU utilities for networking
 brew "inetutils"
@@ -108,8 +114,12 @@ brew "neovim"
 brew "neovim-remote"
 # Port scanning utility for large networks
 brew "nmap"
+# AI coding agent, built for the terminal
+brew "opencode"
 # Development kit for the Java programming language
 brew "openjdk"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
 # Password manager
 brew "pass"
 # CLI for Postgres with auto-completion and syntax highlighting
@@ -136,6 +146,8 @@ brew "pulseaudio"
 brew "python@3.11"
 # Tools for and transforming and inspecting PDF files
 brew "qpdf"
+# Multi-agent orchestration framework for autonomous AI task completion
+brew "ralph-orchestrator"
 # Pack repository contents into a single AI-friendly file
 brew "repomix"
 # Extremely fast Python linter, written in Rust
@@ -164,6 +176,8 @@ brew "starship"
 brew "stow"
 # Opinionated Lua code formatter
 brew "stylua"
+# General purpose fuzzy finder TUI
+brew "television"
 # Terraform Language Server
 brew "terraform-ls"
 # Powerful free data recovery utility
@@ -176,8 +190,22 @@ brew "tldr"
 brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
+# Vulnerability scanner for container images, file systems, and Git repos
+brew "trivy"
+# Command-line unarchiving tools supporting multiple formats
+brew "unar"
+# URL extractor/launcher
+brew "urlview"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Vi 'workalike' with many additional features
+brew "vim"
+# Manage the desktop wallpaper
+brew "wallpaper"
+# Execute commands when watched files change
+brew "watchexec"
+# Internet file retriever
+brew "wget"
 # XML command-line utilities
 brew "xmlstarlet"
 # JavaScript package manager
@@ -218,6 +246,10 @@ cask "burp-suite"
 cask "capacities"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
+# OpenAI's official browser with ChatGPT built in
+cask "chatgpt-atlas"
+# Anthropic's official Claude AI desktop app
+cask "claude"
 # Terminal-based AI coding assistant
 cask "claude-code"
 # Write, edit, and chat about your code with AI
@@ -310,11 +342,26 @@ cask "zed"
 cask "zen"
 # Video communication and virtual meeting platform
 cask "zoom"
+mas "Keynote", id: 409183694
+vscode "bierner.markdown-mermaid"
 vscode "bradlc.vscode-tailwindcss"
 vscode "docker.docker"
 vscode "dotjoshjohnson.xml"
 vscode "eamodio.gitlens"
-vscode "elixir-lsp.elixir-ls"
+vscode "esbenp.prettier-vscode"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "graphql.vscode-graphql"
+vscode "graphql.vscode-graphql-syntax"
+vscode "hackiai.hacki"
+vscode "jakebecker.elixir-ls"
+vscode "kamikillerto.vscode-colorize"
+vscode "mechatroner.rainbow-csv"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-dotnettools.csdevkit"
+vscode "ms-dotnettools.csharp"
+vscode "ms-dotnettools.vscode-dotnet-runtime"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
@@ -326,7 +373,5 @@ vscode "prisma.prisma"
 vscode "rickaym.manim-sideview"
 vscode "ritwickdey.liveserver"
 vscode "svelte.svelte-vscode"
-vscode "visualstudioexptteam.intellicode-api-usage-examples"
-vscode "visualstudioexptteam.vscodeintellicode"
 vscode "vscode-icons-team.vscode-icons"
 vscode "vscodevim.vim"

@@ -67,7 +67,7 @@ eval "$(zoxide init zsh --cmd cd)"
 eval "$(starship init zsh)"
 
 # tool version activation
-eval "$(mise activate bash)"
+eval "$(mise activate zsh)"
 
 # GPG configuration for signing commits
 export GPG_TTY=$(tty)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-session=$(find ~ ~/src ~/playground ~/Desktop -mindepth 1 -maxdepth 1 -type d | fzf)
+session=$(find ~ ~/src ~/playground ~/Desktop /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop -mindepth 1 -maxdepth 1 -type d | fzf)
 session_name=$(basename "$session" | tr . _)
 
 session_type=''

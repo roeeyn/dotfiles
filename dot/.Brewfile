@@ -1,10 +1,5 @@
-tap "anomalyco/tap"
 tap "common-fate/granted"
 tap "smudge/smudge"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -27,8 +22,6 @@ brew "git-delta"
 brew "git-lfs"
 # Render markdown on the CLI
 brew "glow"
-# GNU typing tutor
-brew "gnu-typist"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
 # Handy way to save and run project-specific commands
@@ -91,8 +84,6 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-# The AI coding agent built for the terminal.
-brew "anomalyco/tap/opencode"
 # The easiest way to access your cloud.
 brew "common-fate/granted/granted"
 # A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑

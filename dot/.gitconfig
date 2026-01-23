@@ -1,3 +1,10 @@
+[user]
+    name = Rodrigo Medina
+    email = rodrigo.medina@alertmedia.com
+[github]
+    user = roeeyn
+[pull]
+    rebase = false
 [core]
     pager = DELTA_FEATURES=+side-by-side delta
 [interactive]
@@ -7,10 +14,3 @@
     hyperlinks = false
 [merge]
     conflictStyle = zdiff3
-[user]
-    name = Rodrigo Medina
-    email = rodrigo.medina@alertmedia.com
-[github]
-    user = roeeyn
-[pull]
-    rebase = false

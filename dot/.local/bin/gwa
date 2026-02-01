@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Git Worktree Add - creates a worktree with branch name "/" replaced by "-"
+# Usage: gwa <branch-name>
+# Example: gwa feat/some-stuff -> git worktree add -b feat/some-stuff feat-some-stuff
+
+if [ -z "$1" ]; then
+  echo "Usage: gwa <branch-name>"
+  echo "Example: gwa feat/some-stuff"
+  exit 1
+fi
+
+branch_name="$1"
+folder_name="${branch_name//\//-}"
+
+git worktree add -b "$branch_name" "$folder_name"

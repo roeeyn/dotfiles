@@ -46,7 +46,7 @@ alias cls="claude --dangerously-skip-permissions"
 alias cx=codex
 alias ca=cursor-agent
 alias oc=opencode
-alias gwa="git worktree add"
+# gwa is now a script in ~/.local/bin/gwa
 alias gwl="git worktree list"
 alias gwp="git worktree prune"
 

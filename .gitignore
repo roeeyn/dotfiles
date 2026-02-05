@@ -47,6 +47,7 @@ dot/.local/share/nvim/
 
 # local applications
 dot/.config/biolab.si/
+dot/.config/cagent/
 dot/.config/configstore/
 dot/.config/gcloud/
 dot/.config/gh/

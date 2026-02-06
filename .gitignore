@@ -91,6 +91,7 @@ dot/.local/bin/mcp-reverse-proxy
 dot/.local/bin/pandoc-*
 dot/.local/bin/poetry
 dot/.local/bin/pyright*
+dot/.local/bin/python3.12
 dot/.local/bin/ruff
 dot/.local/lib/
 

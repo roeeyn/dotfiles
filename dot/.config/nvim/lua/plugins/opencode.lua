@@ -7,7 +7,14 @@ return {
         },
     },
     config = function()
-        vim.g.opencode_opts = {}
+        vim.g.opencode_opts = {
+            provider = {
+                enabled = 'tmux',
+                tmux = {
+                    -- ...
+                },
+            },
+        }
         vim.o.autoread = true
     end,
 }

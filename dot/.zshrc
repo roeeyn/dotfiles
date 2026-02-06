@@ -77,6 +77,7 @@ bindkey -s ^f "tmux-sessionizer -c\n"
 bindkey -s ^o "tmux-sessionizer\n"
 
 source "$HOME/.alert_media.zsh"
+source "$HOME/.switch_env.zsh"
 
 # Initialize completion system
 autoload -Uz compinit

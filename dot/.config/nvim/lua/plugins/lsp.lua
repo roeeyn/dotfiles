@@ -8,15 +8,15 @@ return {
 
         -- Configure all LSP servers
         local servers = {
-            -- ansiblels = {},
             bashls = {},
-            -- dockerls = {},
+            basedpyright = {},
+            dockerls = {},
             elixirls = {},
             -- emmet_ls = {
             --     filetypes = { 'html', 'css', 'javascript', 'typescript', 'ex', 'heex' },
             -- },
-            -- html = {},
-            -- jsonls = {},
+            html = {},
+            jsonls = {},
             lua_ls = {
                 settings = {
                     Lua = {
@@ -36,19 +36,15 @@ return {
                     },
                 },
             },
-            -- pyright = {},
-            -- svelte = {},
-            -- tailwindcss = {
-            --     init_options = {
-            --         userLanguages = {
-            --             elixir = 'html-eex',
-            --             eelixir = 'html-eex',
-            --             heex = 'html-eex',
-            --         },
-            --     },
-            -- },
-            -- terraformls = {},
-            -- ts_ls = {},
+            tailwindcss = {
+                init_options = {
+                    userLanguages = {
+                        elixir = 'html-eex',
+                        eelixir = 'html-eex',
+                        heex = 'html-eex',
+                    },
+                },
+            },
         }
 
         -- Configure all other servers with basic setup

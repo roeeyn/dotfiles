@@ -8,6 +8,8 @@ brew "tree"
 brew "ansible"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Language Server for Bash
+brew "bash-language-server"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Searches a binary image for embedded files and executable code
@@ -162,6 +164,8 @@ brew "ruff"
 brew "rust-analyzer"
 # Rust toolchain installer
 brew "rustup"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
 # Simple keystroke visualizer
@@ -355,20 +359,17 @@ cask "zen"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "Keynote", id: 409183694
-vscode "anysphere.cursorpyright"
 vscode "bierner.markdown-mermaid"
 vscode "bradlc.vscode-tailwindcss"
 vscode "docker.docker"
 vscode "dotjoshjohnson.xml"
 vscode "eamodio.gitlens"
-vscode "elixir-lsp.elixir-ls"
 vscode "esbenp.prettier-vscode"
 vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "graphql.vscode-graphql"
 vscode "graphql.vscode-graphql-syntax"
 vscode "hackiai.hacki"
-vscode "hashicorp.terraform"
 vscode "jakebecker.elixir-ls"
 vscode "kamikillerto.vscode-colorize"
 vscode "mechatroner.rainbow-csv"
@@ -388,6 +389,5 @@ vscode "prisma.prisma"
 vscode "rickaym.manim-sideview"
 vscode "ritwickdey.liveserver"
 vscode "svelte.svelte-vscode"
-vscode "victorbjorklund.phoenix"
 vscode "vscode-icons-team.vscode-icons"
 vscode "vscodevim.vim"

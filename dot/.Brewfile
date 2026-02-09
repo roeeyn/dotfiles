@@ -9,6 +9,10 @@ brew "openssl@3"
 brew "python@3.13"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Pyright fork with various improvements and built-in pylance features
+brew "basedpyright"
+# Language Server for Bash
+brew "bash-language-server"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Python code formatter
@@ -25,6 +29,10 @@ brew "ctop"
 brew "deno"
 # Tool for exploring each layer in a docker image
 brew "dive"
+# Language service for Docker Compose documents
+brew "docker-compose-langserver"
+# Language server for Dockerfiles powered by Node, TypeScript, and VSCode
+brew "dockerfile-language-server"
 # Disk Usage/Free Utility - a better 'df' alternative
 brew "duf"
 # Language Server and Debugger for Elixir
@@ -121,6 +129,8 @@ brew "ruff"
 brew "rust-analyzer"
 # Rust toolchain installer
 brew "rustup"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
 # Command-line interface for https://speedtest.net bandwidth tests
@@ -133,6 +143,8 @@ brew "starship"
 brew "stow"
 # Opinionated Lua code formatter
 brew "stylua"
+# LSP for TailwindCSS
+brew "tailwindcss-language-server"
 # Terraform Language Server
 brew "terraform-ls"
 # Simplified and community-driven man pages
@@ -149,6 +161,8 @@ brew "urlview"
 brew "uv"
 # Vi 'workalike' with many additional features
 brew "vim"
+# Language servers for HTML, CSS, JavaScript, and JSON extracted from vscode
+brew "vscode-langservers-extracted"
 # Execute commands when watched files change
 brew "watchexec"
 # Internet file retriever

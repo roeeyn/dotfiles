@@ -8,6 +8,10 @@ brew "tree"
 brew "ansible"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Pyright fork with various improvements and built-in pylance features
+brew "basedpyright"
+# Language Server for Bash
+brew "bash-language-server"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Searches a binary image for embedded files and executable code
@@ -32,6 +36,10 @@ brew "ctop"
 brew "deno"
 # Tool for exploring each layer in a docker image
 brew "dive"
+# Language service for Docker Compose documents
+brew "docker-compose-langserver"
+# Language server for Dockerfiles powered by Node, TypeScript, and VSCode
+brew "dockerfile-language-server"
 # Disk Usage/Free Utility - a better 'df' alternative
 brew "duf"
 # Language Server and Debugger for Elixir
@@ -162,6 +170,8 @@ brew "ruff"
 brew "rust-analyzer"
 # Rust toolchain installer
 brew "rustup"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
 # Simple keystroke visualizer
@@ -182,6 +192,8 @@ brew "starship"
 brew "stow"
 # Opinionated Lua code formatter
 brew "stylua"
+# LSP for TailwindCSS
+brew "tailwindcss-language-server"
 # Terraform Language Server
 brew "terraform-ls"
 # Powerful free data recovery utility
@@ -204,6 +216,8 @@ brew "urlview"
 brew "uv"
 # Vi 'workalike' with many additional features
 brew "vim"
+# Language servers for HTML, CSS, JavaScript, and JSON extracted from vscode
+brew "vscode-langservers-extracted"
 # Manage the desktop wallpaper
 brew "wallpaper"
 # Execute commands when watched files change
@@ -355,20 +369,17 @@ cask "zen"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "Keynote", id: 409183694
-vscode "anysphere.cursorpyright"
 vscode "bierner.markdown-mermaid"
 vscode "bradlc.vscode-tailwindcss"
 vscode "docker.docker"
 vscode "dotjoshjohnson.xml"
 vscode "eamodio.gitlens"
-vscode "elixir-lsp.elixir-ls"
 vscode "esbenp.prettier-vscode"
 vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "graphql.vscode-graphql"
 vscode "graphql.vscode-graphql-syntax"
 vscode "hackiai.hacki"
-vscode "hashicorp.terraform"
 vscode "jakebecker.elixir-ls"
 vscode "kamikillerto.vscode-colorize"
 vscode "mechatroner.rainbow-csv"
@@ -388,6 +399,5 @@ vscode "prisma.prisma"
 vscode "rickaym.manim-sideview"
 vscode "ritwickdey.liveserver"
 vscode "svelte.svelte-vscode"
-vscode "victorbjorklund.phoenix"
 vscode "vscode-icons-team.vscode-icons"
 vscode "vscodevim.vim"

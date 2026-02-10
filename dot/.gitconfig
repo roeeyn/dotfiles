@@ -1,7 +1,6 @@
 [user]
 	name = Rodrigo Medina
-	email = rodrigo.medina.neri@gmail.com
-	signingkey = 615B67D406A71EC5
+	email = rodrigo.medina@alertmedia.com
 [github]
 	user = roeeyn
 [push]
@@ -9,7 +8,7 @@
 [credential]
 	helper = osxkeychain
 [commit]
-	gpgsign = true
+	gpgsign = false
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [pull]

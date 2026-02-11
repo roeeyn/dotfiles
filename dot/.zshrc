@@ -49,6 +49,8 @@ alias oc=opencode
 # gwa is now a script in ~/.local/bin/gwa
 alias gwl="git worktree list"
 alias gwp="git worktree prune"
+# quick switch branches
+alias se="switch-env"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

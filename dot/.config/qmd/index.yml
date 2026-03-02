@@ -1,0 +1,4 @@
+collections:
+  orvault:
+    path: /Users/roeeyn/orvault
+    pattern: "**/*.md"

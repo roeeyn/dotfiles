@@ -2,4 +2,5 @@
 idiomatic_version_file_enable_tools = ["node"]
 
 [tools]
+go = "latest"
 python = ["3.12", "3.13"]

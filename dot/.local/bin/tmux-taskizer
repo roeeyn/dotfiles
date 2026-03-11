@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# tmux-taskizer: Create task-based tmux sessions
+#
+# Usage:
+#   tmux-taskizer        → prompt for task name, use PWD, run cls (fast mode)
+#   tmux-taskizer -i     → prompt for task name, pick directory, ask about cls
+#
+
+interactive=false
+
+while getopts "i" opt; do
+  case $opt in
+    i)
+      interactive=true
+      ;;
+  esac
+done
+
+# Prompt for task/ticket name
+read -rp "Task name: " task_name
+
+if [ -z "$task_name" ]; then
+  echo "No task name provided, aborting."
+  exit 1
+fi
+
+# Sanitize: tmux sessions can't have dots or colons
+session_name=$(printf '%s' "$task_name" | tr '.:' '__' | tr -s ' ' '-')
+
+# If session already exists, just switch to it
+if tmux has-session -t="$session_name" 2>/dev/null; then
+  if [ -z "$TMUX" ]; then
+    tmux attach -t "$session_name"
+  else
+    tmux switch-client -t "$session_name"
+  fi
+  exit 0
+fi
+
+# Defaults
+work_dir="$PWD"
+run_claude=true
+
+if [ "$interactive" = true ]; then
+  # Pick working directory via fzf, with PWD as the first option
+  selected=$({ echo "$PWD"; find ~ ~/src ~/playground ~/Desktop /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory: ")
+  if [ -z "$selected" ]; then
+    echo "No directory selected, aborting."
+    exit 1
+  fi
+  work_dir="$selected"
+
+  # Ask about running cls (default: yes)
+  read -rp "Run cls? [Y/n]: " run_cls_answer
+  if [[ "$run_cls_answer" =~ ^[Nn]$ ]]; then
+    run_claude=false
+  fi
+fi
+
+# Create session with "main convo" window
+tmux new-session -d -s "$session_name" -n "main convo" -c "$work_dir"
+
+# Run cls (claude) in the main window
+if [ "$run_claude" = true ]; then
+  tmux send-keys -t "$session_name:main convo" "cls" C-m
+fi
+
+# Switch to the new session
+if [ -z "$TMUX" ]; then
+  tmux attach -t "$session_name"
+else
+  tmux switch-client -t "$session_name"
+fi

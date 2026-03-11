@@ -74,9 +74,9 @@ eval "$(starship init zsh)"
 # tool version activation
 eval "$(mise activate zsh)"
 
-# Tmux sessionizer keybindings
-bindkey -s ^f "tmux-sessionizer -c\n"
-bindkey -s ^o "tmux-sessionizer\n"
+# Tmux taskizer keybindings (outside tmux fallback)
+bindkey -s ^f "tmux-taskizer\n"
+bindkey -s ^o "tmux-taskizer -i\n"
 
 source "$HOME/.alert_media.zsh"
 source "$HOME/.switch_env.zsh"

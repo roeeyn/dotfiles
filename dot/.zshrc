@@ -64,7 +64,7 @@ bindkey '^[[B' history-substring-search-down
 eval "$(mcfly init zsh)"
 
 # Fast move between folders
-eval "$(zoxide init zsh --cmd cd)"
+eval "$(zoxide init zsh)"
 
 # Nice terminal prompt
 eval "$(starship init zsh)"

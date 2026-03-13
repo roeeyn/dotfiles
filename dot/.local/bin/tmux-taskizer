@@ -5,17 +5,68 @@
 # Usage:
 #   tmux-taskizer        → prompt for task name, use PWD, run cls (fast mode)
 #   tmux-taskizer -i     → prompt for task name, pick directory, ask about cls
+#   tmux-taskizer -q     → quick prompt: ask for prompt & dir, auto-close on exit
 #
 
-interactive=false
+sanitize_name() {
+  printf '%s' "$1" | tr "'.:\"\\\$#()!" '___________' | tr -s ' ' '-' | cut -c1-50
+}
 
-while getopts "i" opt; do
+interactive=false
+quick_prompt=false
+
+while getopts "iq" opt; do
   case $opt in
     i)
       interactive=true
       ;;
+    q)
+      quick_prompt=true
+      ;;
   esac
 done
+
+# --- Quick Prompt mode ---
+if [ "$quick_prompt" = true ]; then
+  read -rp "Prompt: " prompt_text
+
+  if [ -z "$prompt_text" ]; then
+    echo "No prompt provided, aborting."
+    exit 1
+  fi
+
+  session_name=$(sanitize_name "$prompt_text")
+
+  # If session already exists, just switch to it
+  if tmux has-session -t="$session_name" 2>/dev/null; then
+    if [ -z "$TMUX" ]; then
+      tmux attach -t "$session_name"
+    else
+      tmux switch-client -t "$session_name"
+    fi
+    exit 0
+  fi
+
+  # Pick working directory (default: PWD)
+  selected=$({ echo "$PWD"; find ~ ~/src ~/playground ~/Desktop /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory (default PWD): " --header="Press ESC to use $PWD")
+  work_dir="${selected:-$PWD}"
+
+  # Create session and send cls with the prompt; exit shell when cls finishes
+  tmux new-session -d -s "$session_name" -n "quick" -c "$work_dir"
+
+  # Escape single quotes in prompt for safe shell embedding
+  escaped_prompt=$(printf '%s' "$prompt_text" | sed "s/'/'\\\\''/g")
+  tmux send-keys -t "$session_name:quick" "cls '${escaped_prompt}'" C-m
+
+  if [ -z "$TMUX" ]; then
+    tmux attach -t "$session_name"
+  else
+    tmux switch-client -t "$session_name"
+  fi
+  exit 0
+fi
+
+# --- Normal mode ---
 
 # Prompt for task/ticket name
 read -rp "Task name: " task_name
@@ -25,8 +76,7 @@ if [ -z "$task_name" ]; then
   exit 1
 fi
 
-# Sanitize: tmux sessions can't have dots or colons
-session_name=$(printf '%s' "$task_name" | tr '.:' '__' | tr -s ' ' '-')
+session_name=$(sanitize_name "$task_name")
 
 # If session already exists, just switch to it
 if tmux has-session -t="$session_name" 2>/dev/null; then

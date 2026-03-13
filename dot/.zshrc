@@ -43,7 +43,8 @@ alias lg=lazygit
 alias ldo=lazydocker
 alias cl=claude
 alias cls="claude --dangerously-skip-permissions"
-alias cx=codex
+alias cx="LOL use oc"
+alias codex="LOL use oc"
 alias ca=cursor-agent
 alias oc=opencode
 # gwa is now a script in ~/.local/bin/gwa
@@ -77,6 +78,7 @@ eval "$(mise activate zsh)"
 # Tmux taskizer keybindings (outside tmux fallback)
 bindkey -s ^f "tmux-taskizer\n"
 bindkey -s ^o "tmux-taskizer -i\n"
+bindkey -s ^p "tmux-taskizer -q\n"
 
 source "$HOME/.alert_media.zsh"
 source "$HOME/.switch_env.zsh"

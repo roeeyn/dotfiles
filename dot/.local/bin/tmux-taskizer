@@ -4,12 +4,40 @@
 #
 # Usage:
 #   tmux-taskizer        → prompt for task name, use PWD, run cls (fast mode)
-#   tmux-taskizer -i     → prompt for task name, pick directory, ask about cls
-#   tmux-taskizer -q     → quick prompt: ask for prompt & dir, auto-close on exit
+#   tmux-taskizer -i     → prompt for task name, pick directory, choose claude/opencode/none
+#   tmux-taskizer -q     → quick prompt: ask for prompt & dir, choose claude/opencode/none
 #
 
 sanitize_name() {
   printf '%s' "$1" | tr "'.:\"\\\$#()!" '___________' | tr -s ' ' '-' | cut -c1-50
+}
+
+build_starter_command() {
+  local starter="$1"
+  local prompt_text="${2:-}"
+  local escaped_prompt
+
+  case "$starter" in
+    claude)
+      if [ -n "$prompt_text" ]; then
+        escaped_prompt=$(printf '%s' "$prompt_text" | sed "s/'/'\\\\''/g")
+        printf "cls '%s'" "$escaped_prompt"
+      else
+        printf 'cls'
+      fi
+      ;;
+    opencode)
+      if [ -n "$prompt_text" ]; then
+        escaped_prompt=$(printf '%s' "$prompt_text" | sed "s/'/'\\\\''/g")
+        printf "oc --prompt '%s'" "$escaped_prompt"
+      else
+        printf 'oc'
+      fi
+      ;;
+    none)
+      printf ''
+      ;;
+  esac
 }
 
 interactive=false
@@ -51,12 +79,15 @@ if [ "$quick_prompt" = true ]; then
   selected=$({ echo "$PWD"; find ~ ~/src ~/playground ~/Desktop /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory (default PWD): " --header="Press ESC to use $PWD")
   work_dir="${selected:-$PWD}"
 
-  # Create session and send cls with the prompt; exit shell when cls finishes
+  selected_starter=$(printf '%s\n' 'claude' 'opencode' 'none' | fzf --prompt="Starter: " --header="ESC defaults to claude")
+  starter_command=$(build_starter_command "${selected_starter:-claude}" "$prompt_text")
+
+  # Create session and optionally start the selected tool with the prompt
   tmux new-session -d -s "$session_name" -n "quick" -c "$work_dir"
 
-  # Escape single quotes in prompt for safe shell embedding
-  escaped_prompt=$(printf '%s' "$prompt_text" | sed "s/'/'\\\\''/g")
-  tmux send-keys -t "$session_name:quick" "cls '${escaped_prompt}'" C-m
+  if [ -n "$starter_command" ]; then
+    tmux send-keys -t "$session_name:quick" "$starter_command" C-m
+  fi
 
   if [ -z "$TMUX" ]; then
     tmux attach -t "$session_name"
@@ -90,7 +121,7 @@ fi
 
 # Defaults
 work_dir="$PWD"
-run_claude=true
+starter_command=$(build_starter_command claude)
 
 if [ "$interactive" = true ]; then
   # Pick working directory via fzf, with PWD as the first option
@@ -101,19 +132,16 @@ if [ "$interactive" = true ]; then
   fi
   work_dir="$selected"
 
-  # Ask about running cls (default: yes)
-  read -rp "Run cls? [Y/n]: " run_cls_answer
-  if [[ "$run_cls_answer" =~ ^[Nn]$ ]]; then
-    run_claude=false
-  fi
+  selected_starter=$(printf '%s\n' 'claude' 'opencode' 'none' | fzf --prompt="Starter: " --header="ESC defaults to claude")
+  starter_command=$(build_starter_command "${selected_starter:-claude}")
 fi
 
 # Create session with "main convo" window
 tmux new-session -d -s "$session_name" -n "main convo" -c "$work_dir"
 
-# Run cls (claude) in the main window
-if [ "$run_claude" = true ]; then
-  tmux send-keys -t "$session_name:main convo" "cls" C-m
+# Run selected starter in the main window
+if [ -n "$starter_command" ]; then
+  tmux send-keys -t "$session_name:main convo" "$starter_command" C-m
 fi
 
 # Switch to the new session

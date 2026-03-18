@@ -12,6 +12,7 @@ return {
     {
         -- Copilot inside the cmp window
         'zbirenbaum/copilot-cmp',
+        event = 'InsertEnter',
         dependencies = {
             'copilot.lua',
         },

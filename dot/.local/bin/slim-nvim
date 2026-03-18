@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export NVIM_APPNAME=slim-nvim
+exec nvim "$@"

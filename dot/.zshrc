@@ -3,7 +3,8 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 export LANG=en_US.UTF-8
 
-export EDITOR=vim
+export EDITOR=slim-nvim
+export VISUAL=slim-nvim
 
 # Vim keybindings in shell
 set -o vi

@@ -1,4 +1,5 @@
 #!/bin/bash
 
 export NVIM_APPNAME=slim-nvim
+export SLIM_NVIM_CWD="${SLIM_NVIM_CWD:-$PWD}"
 exec nvim "$@"

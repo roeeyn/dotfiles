@@ -7,28 +7,8 @@ return {
     },
     config = function()
         local cmp = require 'cmp'
-        local cmp_path = require 'cmp_path'
 
-        local original_complete = cmp_path.complete
-        cmp_path.complete = function(self, params, callback)
-            local option = self:_validate_option(params)
-            if not option.show_hidden_files then
-                return original_complete(self, params, callback)
-            end
-
-            local dirname = self:_dirname(params, option)
-            if not dirname then
-                return callback()
-            end
-
-            self:_candidates(dirname, true, option, function(err, candidates)
-                if err then
-                    return callback()
-                end
-
-                callback(candidates)
-            end)
-        end
+        cmp.register_source('fuzzy_path', require('cmp_fuzzy_path').new())
 
         cmp.setup {
             completion = {
@@ -45,6 +25,7 @@ return {
                 ['<C-Space>'] = cmp.mapping.complete(),
             },
             sources = cmp.config.sources({
+                { name = 'fuzzy_path' },
                 {
                     name = 'path',
                     option = {

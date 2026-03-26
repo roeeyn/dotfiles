@@ -9,6 +9,7 @@ return {
         local cmp = require 'cmp'
 
         cmp.register_source('fuzzy_path', require('cmp_fuzzy_path').new())
+        cmp.register_source('jira', require('cmp_jira').new())
 
         cmp.setup {
             completion = {
@@ -25,6 +26,7 @@ return {
                 ['<C-Space>'] = cmp.mapping.complete(),
             },
             sources = cmp.config.sources({
+                { name = 'jira' },
                 { name = 'fuzzy_path' },
                 {
                     name = 'path',

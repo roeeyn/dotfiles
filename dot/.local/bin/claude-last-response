@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""Extract recent Claude Code responses for the slim-nvim prompt editor.
+
+Used by slim-nvim's BufReadPost autocmd on claude-prompt-*.md files to show
+conversation context below a scissors line (git commit --verbose style).
+
+Session lookup: CWD -> project slug -> most recently modified .jsonl file.
+Only considers sessions active within MAX_AGE_SECONDS to avoid cross-session
+pollution when multiple Claude Code instances run in the same project.
+"""
+
+import json
+import os
+import sys
+import time
+from pathlib import Path
+
+MAX_AGE_SECONDS = 120
+NUM_RESPONSES = 3
+
+
+def get_project_dir() -> Path | None:
+    """Derive the Claude project directory from CWD.
+
+    Claude Code stores sessions at ~/.claude/projects/<slug>/ where <slug>
+    is the CWD with / and . replaced by -.
+    """
+    cwd = os.environ.get("SLIM_NVIM_CWD", os.getcwd())
+    project_slug = cwd.replace("/", "-").replace(".", "-")
+    project_path = Path.home() / ".claude" / "projects" / project_slug
+    return project_path if project_path.is_dir() else None
+
+
+def get_active_session(project_dir: Path) -> Path | None:
+    """Find the most recently modified session JSONL, within recency window."""
+    now = time.time()
+    sessions = sorted(project_dir.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
+
+    for session in sessions:
+        if now - session.stat().st_mtime <= MAX_AGE_SECONDS:
+            return session
+
+    return None
+
+
+def extract_responses(session_path: Path) -> list[str]:
+    """Extract the last N assistant text responses from a session JSONL.
+
+    Returns in reverse-chronological order (most recent first) so the
+    latest response appears closest to the prompt in the editor.
+    """
+    with open(session_path) as f:
+        lines = f.readlines()
+
+    responses: list[str] = []
+    for line in reversed(lines):
+        try:
+            obj = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+
+        if obj.get("type") != "assistant":
+            continue
+
+        # Assistant content is always a list of blocks
+        content = obj.get("message", {}).get("content", [])
+        texts = [b["text"] for b in content if isinstance(b, dict) and b.get("type") == "text"]
+
+        if texts:
+            responses.append("\n".join(texts))
+            if len(responses) >= NUM_RESPONSES:
+                break
+
+    return responses
+
+
+def main():
+    project_dir = get_project_dir()
+    if not project_dir:
+        sys.exit(0)
+
+    session = get_active_session(project_dir)
+    if not session:
+        sys.exit(0)
+
+    responses = extract_responses(session)
+    if responses:
+        print("\n\n---\n\n".join(responses))
+
+
+if __name__ == "__main__":
+    main()

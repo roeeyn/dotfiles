@@ -11,11 +11,10 @@ pollution when multiple Claude Code instances run in the same project.
 
 import json
 import os
+import re
 import sys
-import time
 from pathlib import Path
 
-MAX_AGE_SECONDS = 120
 NUM_RESPONSES = 3
 
 
@@ -23,24 +22,18 @@ def get_project_dir() -> Path | None:
     """Derive the Claude project directory from CWD.
 
     Claude Code stores sessions at ~/.claude/projects/<slug>/ where <slug>
-    is the CWD with / and . replaced by -.
+    is the CWD with all non-alphanumeric characters replaced by -.
     """
     cwd = os.environ.get("SLIM_NVIM_CWD", os.getcwd())
-    project_slug = cwd.replace("/", "-").replace(".", "-")
+    project_slug = re.sub(r'[^a-zA-Z0-9]', '-', cwd)
     project_path = Path.home() / ".claude" / "projects" / project_slug
     return project_path if project_path.is_dir() else None
 
 
 def get_active_session(project_dir: Path) -> Path | None:
-    """Find the most recently modified session JSONL, within recency window."""
-    now = time.time()
+    """Find the most recently modified session JSONL."""
     sessions = sorted(project_dir.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
-
-    for session in sessions:
-        if now - session.stat().st_mtime <= MAX_AGE_SECONDS:
-            return session
-
-    return None
+    return sessions[0] if sessions else None
 
 
 def extract_responses(session_path: Path) -> list[str]:

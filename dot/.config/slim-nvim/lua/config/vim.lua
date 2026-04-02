@@ -73,7 +73,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
             return
         end
 
-        local content = {
+        local scissors = {
             '',
             '# ─────────────────── >8 ───────────────────',
             '# Do not modify or remove the line above.',
@@ -82,9 +82,11 @@ vim.api.nvim_create_autocmd('BufReadPost', {
             '# Recent conversation (newest first):',
             '',
         }
-        vim.list_extend(content, result)
+        vim.list_extend(scissors, result)
 
-        vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, content)
+        -- Append scissors below existing content (preserves draft from prompt line)
+        local last_line = vim.api.nvim_buf_line_count(args.buf)
+        vim.api.nvim_buf_set_lines(args.buf, last_line, last_line, false, scissors)
         vim.api.nvim_win_set_cursor(0, { 1, 0 })
     end,
 })

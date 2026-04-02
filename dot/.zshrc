@@ -44,8 +44,6 @@ alias lg=lazygit
 alias ldo=lazydocker
 alias cl=claude
 alias cls="claude --dangerously-skip-permissions"
-alias cx="LOL use oc"
-alias codex="LOL use oc"
 alias ca=cursor-agent
 alias oc=opencode
 # gwa is now a script in ~/.local/bin/gwa

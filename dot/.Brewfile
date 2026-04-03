@@ -1,12 +1,11 @@
 tap "anomalyco/tap"
 tap "common-fate/granted"
 tap "smudge/smudge"
+tap "sqitchers/sqitch"
 tap "stripe/stripe-cli"
 tap "supabase/tap"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Pyright fork with various improvements and built-in pylance features
@@ -23,6 +22,8 @@ brew "chafa"
 brew "coreutils"
 # Securely send things from one computer to another
 brew "croc"
+# Suite of command-line tools for converting to and working with CSV
+brew "csvkit"
 # Top-like interface for container metrics
 brew "ctop"
 # Secure runtime for JavaScript and TypeScript
@@ -74,7 +75,7 @@ brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Postgres C API library
-brew "libpq"
+brew "libpq", link: true
 # Powerful, lightweight programming language
 brew "lua"
 # Language Server for the Lua language
@@ -89,6 +90,8 @@ brew "markdownlint-cli"
 brew "mas"
 # Fly through your shell history
 brew "mcfly"
+# CLI for Mermaid library
+brew "mermaid-cli"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
 # NCurses Disk Usage
@@ -97,14 +100,22 @@ brew "ncdu"
 brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
 # Control nvim processes using `nvr` command-line tool
 brew "neovim-remote"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Password manager
+brew "pass"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
 # Fast, disk space efficient package manager
 brew "pnpm"
 # Object-relational database system
@@ -113,6 +124,8 @@ brew "postgresql@15"
 brew "pre-commit"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
+# Static type checker for Python
+brew "pyright"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
 # Tools for and transforming and inspecting PDF files
@@ -147,12 +160,14 @@ brew "stylua"
 brew "tailwindcss-language-server"
 # Terraform Language Server
 brew "terraform-ls"
-# Simplified and community-driven man pages
-brew "tldr"
+# Official tldr client written in Rust
+brew "tlrc"
 # Terminal multiplexer
 brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
+# Parser generator tool
+brew "tree-sitter-cli"
 # Command-line unarchiving tools supporting multiple formats
 brew "unar"
 # URL extractor/launcher
@@ -183,8 +198,12 @@ brew "anomalyco/tap/opencode"
 brew "common-fate/granted/granted"
 # A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
 brew "smudge/smudge/nightlight"
+# Sensible database change management
+brew "sqitchers/sqitch/sqitch", args: ["with-postgres-support"]
 # AI Coding Agent IDE
 cask "antigravity"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
 # Web security testing toolkit
 cask "burp-suite"
 # OpenAI's official ChatGPT desktop app
@@ -192,11 +211,9 @@ cask "chatgpt"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
-cask "claude-code"
+cask "claude-code@latest"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
-# OpenAI's Codex desktop app for managing coding agents
-cask "codex-app"
 # Web browser with integrated AI assistant
 cask "comet"
 # Write, edit, and chat about your code with AI
@@ -205,6 +222,8 @@ cask "cursor"
 cask "dbeaver-community"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
+# Web browser
+cask "firefox@developer-edition"
 cask "font-fira-code"
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono"
@@ -239,6 +258,8 @@ cask "qlmarkdown"
 cask "raycast"
 # Team communication and collaboration software
 cask "slack"
+# Music streaming service
+cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"
 # Multimedia player
@@ -251,7 +272,6 @@ vscode "bierner.markdown-mermaid"
 vscode "bradlc.vscode-tailwindcss"
 vscode "docker.docker"
 vscode "eamodio.gitlens"
-vscode "elixir-lsp.elixir-ls"
 vscode "esbenp.prettier-vscode"
 vscode "github.copilot-chat"
 vscode "hashicorp.terraform"
@@ -268,9 +288,11 @@ vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vsliveshare.vsliveshare"
 vscode "phoenixframework.phoenix"
 vscode "phplasma.csv-to-table"
-vscode "prisma.prisma"
 vscode "rickaym.manim-sideview"
 vscode "ritwickdey.liveserver"
-vscode "svelte.svelte-vscode"
 vscode "vscode-icons-team.vscode-icons"
 vscode "vscodevim.vim"
+go "cmd/go"
+go "cmd/gofmt"
+go "github.com/AlexanderGrooff/mermaid-ascii"
+uv "pyright"

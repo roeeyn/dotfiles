@@ -9,7 +9,7 @@ return {
         -- Configure all LSP servers
         local servers = {
             bashls = {},
-            basedpyright = {},
+            -- basedpyright = {},
             dockerls = {},
             elixirls = {},
             -- emmet_ls = {
@@ -36,6 +36,7 @@ return {
                     },
                 },
             },
+            pyright = {},
             tailwindcss = {
                 init_options = {
                     userLanguages = {

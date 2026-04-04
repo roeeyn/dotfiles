@@ -12,7 +12,8 @@ return {
     },
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.8',
+        version = '*',
+        cmd = 'Telescope',
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-fzf-native.nvim',

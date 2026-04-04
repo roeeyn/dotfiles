@@ -3,7 +3,8 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 export LANG=en_US.UTF-8
 
-export EDITOR=vim
+export EDITOR=slim-nvim
+export VISUAL=slim-nvim
 
 # Vim keybindings in shell
 set -o vi
@@ -43,7 +44,6 @@ alias lg=lazygit
 alias ldo=lazydocker
 alias cl=claude
 alias cls="claude --dangerously-skip-permissions"
-alias cx=codex
 alias ca=cursor-agent
 alias oc=opencode
 # gwa is now a script in ~/.local/bin/gwa
@@ -72,12 +72,10 @@ eval "$(starship init zsh)"
 # tool version activation
 eval "$(mise activate zsh)"
 
-# GPG configuration for signing commits
-export GPG_TTY=$(tty)
-
-# Tmux sessionizer keybindings
-bindkey -s ^f "tmux-sessionizer -c\n"
-bindkey -s ^o "tmux-sessionizer\n"
+# Tmux taskizer keybindings (outside tmux fallback)
+bindkey -s ^f "tmux-taskizer\n"
+bindkey -s ^o "tmux-taskizer -i\n"
+bindkey -s ^p "tmux-taskizer -q\n"
 
 # Initialize completion system
 autoload -Uz compinit

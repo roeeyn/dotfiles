@@ -35,6 +35,24 @@ nvim "$@"
 - `lua/config/lazy.lua` bootstraps `lazy.nvim`
 - `lua/plugins/*.lua` contains one file per plugin
 
+## Post-install: tree-sitter parsers
+
+Syntax highlighting inside fenced code blocks requires tree-sitter parsers for each language. These are compiled on the machine and can't be managed by the plugin manager.
+
+1. Install the tree-sitter CLI (required by nvim-treesitter to compile parsers):
+
+   ```bash
+   brew install tree-sitter-cli
+   ```
+
+2. Open slim-nvim and install the parsers you need:
+
+   ```vim
+   :TSInstall sql python elixir json bash lua go html css javascript typescript heex eex yaml toml dockerfile terraform hcl erlang regex diff git_rebase gitcommit
+   ```
+
+Neovim 0.12 bundles `markdown`, `markdown_inline`, `c`, `lua`, `vim`, `vimdoc`, and `query` — those work without installing anything.
+
 ## Notes
 
 - unknown files default to `markdown` in this setup so prompt buffers get markdown behavior by default

@@ -23,6 +23,19 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
+-- Indentation: use spaces, 4-wide
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+
+-- Shift-Tab dedents in insert mode
+vim.keymap.set('i', '<S-Tab>', '<C-d>', { desc = 'Dedent line' })
+
+-- Yank to system clipboard in visual mode
+vim.keymap.set('x', '<leader>y', '"+y', { desc = 'Yank to clipboard' })
+
 -- Move to underscore words (treat _ as word boundary for w/e/b motions)
 vim.opt.iskeyword = vim.opt.iskeyword - '_'
 
@@ -117,5 +130,23 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = slim_nvim,
     callback = function()
         vim.highlight.on_yank { timeout = 200, on_visual = true }
+    end,
+})
+
+-- Highlight Claude skills (e.g. /morning, /commit) — matches a single /word
+-- token that is NOT part of a path (i.e. contains exactly one /)
+vim.api.nvim_set_hl(0, 'ClaudeSkill', { fg = '#d3869b', bold = true }) -- gruvbox purple
+
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter' }, {
+    group = slim_nvim,
+    callback = function()
+        -- Avoid duplicate matches in the same window
+        if vim.w.claude_skill_match then
+            return
+        end
+        -- Pattern: start-of-line or whitespace, then /word (letters, digits, _, -)
+        -- The character class after / excludes /, so paths like /foo/bar won't match
+        vim.fn.matchadd('ClaudeSkill', [[\v(^|\s)\zs\/[a-zA-Z][a-zA-Z0-9_-]*\ze(\s|$)]])
+        vim.w.claude_skill_match = true
     end,
 })

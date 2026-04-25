@@ -210,6 +210,8 @@ brew "tldr"
 brew "tmux"
 # Plugin manager for tmux
 brew "tpm"
+# Parser generator tool
+brew "tree-sitter-cli"
 # Vulnerability scanner for container images, file systems, and Git repos
 brew "trivy"
 # Command-line unarchiving tools supporting multiple formats

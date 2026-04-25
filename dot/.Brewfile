@@ -1,5 +1,6 @@
 tap "anomalyco/tap"
 tap "common-fate/granted"
+tap "shopify/shopify"
 tap "smudge/smudge"
 tap "sqitchers/sqitch"
 tap "stripe/stripe-cli"
@@ -154,6 +155,8 @@ brew "sqlmap"
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Command-line tool for Stripe
+brew "stripe-cli"
 # Opinionated Lua code formatter
 brew "stylua"
 # LSP for TailwindCSS

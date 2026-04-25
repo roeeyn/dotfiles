@@ -4,3 +4,6 @@ set -e
 # After brew installed goes here!
 
 echo 'after setup'
+
+# Register user-scope Claude Code MCP servers from declarative config.
+"$(dirname "$0")/sync-mcps"

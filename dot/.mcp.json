@@ -15,27 +15,6 @@
     "tidewave": {
       "type": "http",
       "url": "http://localhost:4000/tidewave/mcp"
-    },
-    "mcp-atlassian": {
-      "command": "uvx",
-      "args": ["mcp-atlassian"],
-      "env": {
-        "JIRA_URL": "${ATLASSIAN_URL}",
-        "JIRA_USERNAME": "${ATLASSIAN_USERNAME}",
-        "JIRA_API_TOKEN": "${ATLASSIAN_API_KEY}",
-        "CONFLUENCE_URL": "${ATLASSIAN_URL}/wiki",
-        "CONFLUENCE_USERNAME": "${ATLASSIAN_USERNAME}",
-        "CONFLUENCE_API_TOKEN": "${ATLASSIAN_API_KEY}"
-      }
-    },
-    "bitbucket": {
-      "command": "npx",
-      "args": ["-y", "@aashari/mcp-server-atlassian-bitbucket"],
-      "env": {
-        "ATLASSIAN_SITE_NAME": "bitbucket",
-        "ATLASSIAN_USER_EMAIL": "${ATLASSIAN_USERNAME}",
-        "ATLASSIAN_API_TOKEN": "${BITBUCKET_API_KEY}"
-      }
     }
   }
 }

@@ -1,7 +1,9 @@
 tap "common-fate/granted"
+tap "shopify/shopify"
 tap "smudge/smudge"
-tap "stripe/stripe-cli"
 tap "supabase/tap"
+# Command-line interface for SQLite
+brew "sqlite"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Automate deployment, configuration, and upgrading
@@ -190,6 +192,8 @@ brew "sslscan"
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Command-line tool for Stripe
+brew "stripe-cli"
 # Opinionated Lua code formatter
 brew "stylua"
 # LSP for TailwindCSS
@@ -242,8 +246,6 @@ brew "zsh-syntax-highlighting"
 brew "common-fate/granted/granted"
 # A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
 brew "smudge/smudge/nightlight"
-# Stripe CLI utility
-brew "stripe/stripe-cli/stripe"
 # Supabase CLI
 brew "supabase/tap/supabase"
 # Password manager that keeps all passwords secure behind one password
@@ -252,8 +254,6 @@ cask "1password"
 cask "amazon-chime"
 # Memory training application
 cask "anki"
-# AI Coding Agent IDE
-cask "antigravity"
 # Chromium based browser
 cask "arc"
 # Multi-track audio editor and recorder
@@ -271,13 +271,11 @@ cask "chatgpt-atlas"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
-cask "claude-code"
+cask "claude-code@latest"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
 # Web browser with integrated AI assistant
 cask "comet"
-# Write, edit, and chat about your code with AI
-cask "cursor"
 # Databases and SQL IDE
 cask "datagrip"
 # Universal database tool and SQL client
@@ -330,6 +328,8 @@ cask "mongodb-compass"
 cask "mullvad-vpn"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
+# VPN client for secure internet access and private browsing
+cask "nordvpn"
 # Open-source software for live streaming and screen recording
 cask "obs"
 # Virtual Green-screen and Low-Light Enhancement OBS Plugin
@@ -350,8 +350,12 @@ cask "redis-insight"
 cask "slack"
 # Music streaming service
 cask "spotify"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
 # JDK from the Eclipse Foundation (Adoptium)
 cask "temurin@8"
+# Open-source BitTorrent client
+cask "transmission"
 # Open-source code editor
 cask "visual-studio-code"
 # Open-source code editor
@@ -362,12 +366,9 @@ cask "vlc"
 cask "wireshark-app"
 # Free and open source web app scanner
 cask "zap"
-# Multiplayer code editor
-cask "zed"
-# Gecko based web browser
-cask "zen"
 # Video communication and virtual meeting platform
 cask "zoom"
+mas "brrr", id: 6755617665
 mas "Keynote", id: 409183694
 vscode "bierner.markdown-mermaid"
 vscode "bradlc.vscode-tailwindcss"
@@ -400,3 +401,7 @@ vscode "ritwickdey.liveserver"
 vscode "svelte.svelte-vscode"
 vscode "vscode-icons-team.vscode-icons"
 vscode "vscodevim.vim"
+go "cmd/go"
+go "cmd/gofmt"
+uv "aactivator"
+uv "mcp-proxy"

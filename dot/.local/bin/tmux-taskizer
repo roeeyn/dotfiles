@@ -3,8 +3,7 @@
 # tmux-taskizer: Create task-based tmux sessions
 #
 # Usage:
-#   tmux-taskizer        → prompt for task name, use PWD, run cls (fast mode)
-#   tmux-taskizer -i     → prompt for task name, pick directory, choose claude/opencode/none
+#   tmux-taskizer        → prompt for task name, pick directory, choose claude/opencode/none
 #   tmux-taskizer -q     → quick prompt: ask for prompt & dir, choose claude/opencode/none
 #
 
@@ -40,14 +39,10 @@ build_starter_command() {
   esac
 }
 
-interactive=false
 quick_prompt=false
 
-while getopts "iq" opt; do
+while getopts "q" opt; do
   case $opt in
-    i)
-      interactive=true
-      ;;
     q)
       quick_prompt=true
       ;;
@@ -97,7 +92,7 @@ if [ "$quick_prompt" = true ]; then
   exit 0
 fi
 
-# --- Normal mode ---
+# --- Main mode ---
 
 # Prompt for task/ticket name
 read -rp "Task name: " task_name
@@ -119,22 +114,16 @@ if tmux has-session -t="$session_name" 2>/dev/null; then
   exit 0
 fi
 
-# Defaults
-work_dir="$PWD"
-starter_command=$(build_starter_command claude)
-
-if [ "$interactive" = true ]; then
-  # Pick working directory via fzf, with PWD as the first option
-  selected=$({ echo "$PWD"; find ~ ~/src ~/playground ~/Desktop /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory: ")
-  if [ -z "$selected" ]; then
-    echo "No directory selected, aborting."
-    exit 1
-  fi
-  work_dir="$selected"
-
-  selected_starter=$(printf '%s\n' 'claude' 'opencode' 'none' | fzf --prompt="Starter: " --header="ESC defaults to claude")
-  starter_command=$(build_starter_command "${selected_starter:-claude}")
+# Pick working directory via fzf, with PWD as the first option
+selected=$({ echo "$PWD"; find ~ ~/src ~/playground ~/Desktop /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory: ")
+if [ -z "$selected" ]; then
+  echo "No directory selected, aborting."
+  exit 1
 fi
+work_dir="$selected"
+
+selected_starter=$(printf '%s\n' 'claude' 'opencode' 'none' | fzf --prompt="Starter: " --header="ESC defaults to claude")
+starter_command=$(build_starter_command "${selected_starter:-claude}")
 
 # Create session with "main convo" window
 tmux new-session -d -s "$session_name" -n "main convo" -c "$work_dir"

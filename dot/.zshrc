@@ -74,10 +74,8 @@ eval "$(starship init zsh)"
 # tool version activation
 eval "$(mise activate zsh)"
 
-# Tmux taskizer keybindings (outside tmux fallback)
+# Tmux taskizer keybinding (outside tmux fallback)
 bindkey -s ^f "tmux-taskizer\n"
-bindkey -s ^o "tmux-taskizer -i\n"
-bindkey -s ^p "tmux-taskizer -q\n"
 
 source "$HOME/.alert_media.zsh"
 source "$HOME/.switch_env.zsh"

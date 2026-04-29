@@ -1,4 +1,4 @@
 collections:
-  oramvault:
-    path: /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop/oramvault
+  orvault:
+    path: /Users/roeeyn/orvault
     pattern: "**/*.md"

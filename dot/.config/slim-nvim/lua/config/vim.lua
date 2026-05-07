@@ -141,10 +141,14 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     end,
 })
 
+-- Distinct flash color when the yank lands in the system clipboard (`+`).
+vim.api.nvim_set_hl(0, 'YankClipboard', { bg = '#689d6a', fg = '#fbf1c7', bold = true }) -- gruvbox neutral aqua
+
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = slim_nvim,
     callback = function()
-        vim.highlight.on_yank { timeout = 200, on_visual = true }
+        local higroup = vim.v.event.regname == '+' and 'YankClipboard' or 'IncSearch'
+        vim.highlight.on_yank { timeout = 200, on_visual = true, higroup = higroup }
     end,
 })
 

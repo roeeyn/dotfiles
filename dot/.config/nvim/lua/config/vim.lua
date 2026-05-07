@@ -75,13 +75,18 @@ vim.api.nvim_create_autocmd('FileType', {
     command = 'match none',
 })
 
--- Highlight Yanked text
+-- Highlight Yanked text — flash a different color when the yank lands in the
+-- system clipboard (`+` register) so we can tell at a glance whether the text
+-- left the editor or only filled the unnamed register.
 local yank_ag = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+
+vim.api.nvim_set_hl(0, 'YankClipboard', { bg = '#8ec07c', fg = '#1d2021', bold = true }) -- gruvbox bright aqua
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = yank_ag,
     callback = function()
-        vim.highlight.on_yank { timeout = 250, on_visual = true }
+        local higroup = vim.v.event.regname == '+' and 'YankClipboard' or 'IncSearch'
+        vim.highlight.on_yank { timeout = 250, on_visual = true, higroup = higroup }
     end,
 })
 

@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+
+CONFIG="$HOME/.config/claude/user-mcp-servers.json"
+
+if ! command -v claude >/dev/null 2>&1; then
+  echo "claude CLI not found in PATH, skipping MCP sync"
+  exit 0
+fi
+
+if [[ ! -f "$CONFIG" ]]; then
+  echo "No user-mcp-servers.json found at $CONFIG, skipping MCP sync"
+  exit 0
+fi
+
+echo "Syncing user-scope MCP servers from $CONFIG..."
+
+jq -r 'to_entries[] | "\(.key)\t\(.value | @json)"' "$CONFIG" |
+  while IFS=$'\t' read -r name cfg; do
+    echo "  - $name"
+    claude mcp remove "$name" -s user >/dev/null 2>&1 || true
+    claude mcp add-json "$name" "$cfg" -s user >/dev/null
+  done
+
+echo "MCP sync complete."

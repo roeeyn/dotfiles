@@ -3,3 +3,11 @@ keybind = shift+enter=text:\x1b\r
 
 # Hide mouse cursor when typing
 mouse-hide-while-typing = true
+
+# Background image (Ghostty 1.2.0+). PNG or JPEG, absolute path.
+background-image = /Users/roeeyn/.dotfiles/wallpapers/synthwave-sunset-city-stockcake.jpg
+background-image-fit = cover
+background-image-position = top-left
+# Tune image-opacity: lower = subtler, more readable.
+#   0.10 = ghostly hint / 0.18 = clearly atmospheric / 0.30 = vibe-heavy / 0.50+ = text starts to suffer
+background-image-opacity = 0.07

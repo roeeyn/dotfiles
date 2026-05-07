@@ -78,7 +78,11 @@ def main():
 
     responses = extract_responses(session)
     if responses:
-        print("\n\n---\n\n".join(responses))
+        # Distinctive separator — `---` alone collides with horizontal rules
+        # that appear inside Claude responses, making message boundaries hard
+        # to spot. The arrow-and-banner block is unlikely to occur naturally.
+        separator = "\n\n---\n=== PREVIOUS MESSAGE vvv ===\n---\n\n"
+        print(separator.join(responses))
 
 
 if __name__ == "__main__":

@@ -36,6 +36,21 @@ vim.keymap.set('i', '<S-Tab>', '<C-d>', { desc = 'Dedent line' })
 -- Yank to system clipboard in visual mode
 vim.keymap.set('x', '<leader>y', '"+y', { desc = 'Yank to clipboard' })
 
+-- Window navigation (mirrors main nvim config: which-key.lua)
+vim.keymap.set('n', '<leader>wh', '<C-w>h', { desc = 'Move to left window' })
+vim.keymap.set('n', '<leader>wj', '<C-w>j', { desc = 'Move to bottom window' })
+vim.keymap.set('n', '<leader>wk', '<C-w>k', { desc = 'Move to above window' })
+vim.keymap.set('n', '<leader>wl', '<C-w>l', { desc = 'Move to right window' })
+
+-- Window splitting (mirrors main nvim config)
+vim.keymap.set('n', '<leader>wv', '<C-w>v', { desc = 'Split window vertically' })
+vim.keymap.set('n', '<leader>ws', '<C-w>s', { desc = 'Split window horizontally' })
+
+-- Close current window — mirrors main nvim's <leader>wc.
+-- In slim-nvim a single buffer is shown across multiple windows, so we close
+-- the window (`:close`), not the buffer.
+vim.keymap.set('n', '<leader>wc', '<cmd>close<cr>', { desc = 'Close the current window' })
+
 -- Move to underscore words (treat _ as word boundary for w/e/b motions)
 vim.opt.iskeyword = vim.opt.iskeyword - '_'
 
@@ -126,10 +141,14 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     end,
 })
 
+-- Distinct flash color when the yank lands in the system clipboard (`+`).
+vim.api.nvim_set_hl(0, 'YankClipboard', { bg = '#689d6a', fg = '#fbf1c7', bold = true }) -- gruvbox neutral aqua
+
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = slim_nvim,
     callback = function()
-        vim.highlight.on_yank { timeout = 200, on_visual = true }
+        local higroup = vim.v.event.regname == '+' and 'YankClipboard' or 'IncSearch'
+        vim.highlight.on_yank { timeout = 200, on_visual = true, higroup = higroup }
     end,
 })
 

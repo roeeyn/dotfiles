@@ -10,6 +10,7 @@ local filetypes = {
     'lua',
     'markdown',
     'python',
+    'sql',
     'typescript',
     'vim',
     'vimdoc',

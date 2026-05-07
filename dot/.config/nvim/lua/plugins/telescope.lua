@@ -20,8 +20,19 @@ return {
         },
         config = function()
             local telescope = require 'telescope'
+            local actions = require 'telescope.actions'
 
             telescope.setup {
+                defaults = {
+                    mappings = {
+                        i = {
+                            ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+                        },
+                        n = {
+                            ['<C-q>'] = actions.smart_send_to_qflist + actions.open_qflist,
+                        },
+                    },
+                },
                 pickers = {
                     colorscheme = {
                         enable_preview = true,

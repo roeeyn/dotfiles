@@ -17,6 +17,10 @@ id_rsa.pub
 known_hosts
 known_hosts.old
 
+# dot/.ssh/ — only the config file is tracked; everything else (keys, agent socks, known_hosts) stays out
+dot/.ssh/*
+!dot/.ssh/config
+
 # Ansible password
 ansible_password.txt
 

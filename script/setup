@@ -5,6 +5,7 @@ echo "Linking the files..."
 brew install stow
 
 rm ~/.zshrc || echo 'Not zshrc found, continuing...'
+rm ~/.ssh/config || echo 'No ~/.ssh/config found, continuing...'
 
 stow dot/ --target=$HOME
 

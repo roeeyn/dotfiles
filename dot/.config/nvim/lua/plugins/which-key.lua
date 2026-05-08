@@ -23,7 +23,7 @@ return {
         { '<leader>bp', '<cmd>bp<cr>', desc = 'Previous buffer' },
         { '<leader>bx', '<cmd>bd<cr>', desc = 'Hard remove buffer' },
         { '<leader>c', group = 'Code' },
-        { '<leader>c0', '<cmd>lua require("conform").format()<cr>', desc = '[Format] Buffer' },
+        { '<leader>c0', '<cmd>lua require("conform").format({ lsp_format = "fallback" })<cr>', desc = '[Format] Buffer' },
         { '<leader>cR', '<cmd>lua vim.lsp.buf.rename()<cr>', desc = '[LSP] Rename definition' },
         { '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', desc = '[LSP] Diagn. Action' },
         { '<leader>cc', '<cmd>cclose<cr>', desc = '[Quickfix] Close' },

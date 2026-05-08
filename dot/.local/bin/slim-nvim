@@ -1,5 +1,27 @@
 #!/bin/bash
 
+# Walk up the process tree to identify the launcher (claude, opencode, etc).
+# Downstream slim-nvim autocmds use $SLIM_NVIM_LAUNCHER to route prompt-history
+# loading and any other launcher-specific behavior. The immediate parent is
+# often a shell or runtime (bun, node) rather than the agent itself, so we
+# walk up until a known name matches or we hit init.
+detect_launcher() {
+    local pid=$PPID
+    local depth=0
+    while [ -n "$pid" ] && [ "$pid" != "1" ] && [ "$pid" != "0" ] && [ "$depth" -lt 12 ]; do
+        local name
+        name=$(ps -o comm= -p "$pid" 2>/dev/null | tr -d ' ')
+        case "$name" in
+            *claude*) echo "claude"; return 0 ;;
+            *opencode*) echo "opencode"; return 0 ;;
+        esac
+        pid=$(ps -o ppid= -p "$pid" 2>/dev/null | tr -d ' ')
+        depth=$((depth + 1))
+    done
+    echo "shell"
+}
+
 export NVIM_APPNAME=slim-nvim
 export SLIM_NVIM_CWD="${SLIM_NVIM_CWD:-$PWD}"
+export SLIM_NVIM_LAUNCHER="${SLIM_NVIM_LAUNCHER:-$(detect_launcher)}"
 exec nvim "$@"

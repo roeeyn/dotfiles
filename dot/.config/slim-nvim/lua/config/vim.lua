@@ -89,14 +89,54 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
     end,
 })
 
--- Claude Code <C-g> prompt context (git commit --verbose style):
--- BufReadPost: populate buffer with scissors line + recent responses
--- BufWritePre: strip everything from scissors down so only the prompt is sent
-vim.api.nvim_create_autocmd('BufReadPost', {
+-- External-editor prompt context (git commit --verbose style):
+-- BufReadPost  → append a "scissors" block with recent assistant responses
+-- BufWritePre  → strip scissors + everything below so the agent only sees the prompt
+--
+-- Each launcher decides what evidence it needs to claim the buffer. Claude's
+-- filename pattern (`claude-prompt-<hex>.md`) is already unique — env-var
+-- gating on top would just add a way to silently no-op. opencode's filename
+-- (`<unix-ms>.md`) is too generic to trust on its own, so it also requires
+-- $SLIM_NVIM_LAUNCHER=opencode set by the wrapper.
+local prompt_launchers = {
+    {
+        history_cmd = 'claude-last-response',
+        matches = function(filename, _)
+            return filename:match 'claude%-prompt%-' ~= nil
+        end,
+    },
+    {
+        history_cmd = 'opencode-last-response',
+        matches = function(filename, launcher_env)
+            if launcher_env ~= 'opencode' then
+                return false
+            end
+            local basename = vim.fn.fnamemodify(filename, ':t')
+            return basename:match '^%d+%.md$' ~= nil
+        end,
+    },
+}
+
+local function active_prompt_launcher(filename)
+    local launcher_env = vim.env.SLIM_NVIM_LAUNCHER
+    for _, launcher in ipairs(prompt_launchers) do
+        if launcher.matches(filename, launcher_env) then
+            return launcher
+        end
+    end
+    return nil
+end
+
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
     group = slim_nvim,
-    pattern = '*claude-prompt-*.md',
+    pattern = '*.md',
     callback = function(args)
-        local result = vim.fn.systemlist 'claude-last-response'
+        local launcher = active_prompt_launcher(vim.api.nvim_buf_get_name(args.buf))
+        if not launcher then
+            return
+        end
+
+        local result = vim.fn.systemlist(launcher.history_cmd)
         if vim.v.shell_error ~= 0 or #result == 0 then
             return
         end
@@ -121,8 +161,12 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 
 vim.api.nvim_create_autocmd('BufWritePre', {
     group = slim_nvim,
-    pattern = '*claude-prompt-*.md',
+    pattern = '*.md',
     callback = function(args)
+        if not active_prompt_launcher(vim.api.nvim_buf_get_name(args.buf)) then
+            return
+        end
+
         local lines = vim.api.nvim_buf_get_lines(args.buf, 0, -1, false)
         for i, line in ipairs(lines) do
             if line:find '>8' then

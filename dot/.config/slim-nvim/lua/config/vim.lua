@@ -46,6 +46,9 @@ vim.keymap.set('n', '<leader>wl', '<C-w>l', { desc = 'Move to right window' })
 vim.keymap.set('n', '<leader>wv', '<C-w>v', { desc = 'Split window vertically' })
 vim.keymap.set('n', '<leader>ws', '<C-w>s', { desc = 'Split window horizontally' })
 
+-- Equalize window sizes (mirrors main nvim config)
+vim.keymap.set('n', '<leader>w0', '<C-w>=', { desc = 'Resize windows equally' })
+
 -- Close current window — mirrors main nvim's <leader>wc.
 -- In slim-nvim a single buffer is shown across multiple windows, so we close
 -- the window (`:close`), not the buffer.

@@ -50,27 +50,32 @@ trustdb.gpg
 dot/.local/share/nvim/
 
 # local applications
+dot/.config/SmartSetMasterErgo (Mac)/
+dot/.config/binwalk/
 dot/.config/biolab.si/
 dot/.config/cagent/
 dot/.config/configstore/
-dot/.config/gcloud/
-dot/.config/gh/
-dot/.config/htop/
-dot/.config/iterm2/
-dot/.config/jgit/
+dot/.config/crush/skills/
+dot/.config/devin/skills/
 dot/.config/exercism/
 dot/.config/flipperdevices.com/
 dot/.config/flutter/
-dot/.config/neofetch/
-dot/.config/pip/
-dot/.config/yarn/
-dot/.config/nvim/.luarc.json
-dot/.config/simple-update-notifier/
-dot/.config/SmartSetMasterErgo (Mac)/
-dot/.config/raycast/
-dot/.config/binwalk/
+dot/.config/gcloud/
 dot/.config/gh-copilot/
+dot/.config/gh/
+dot/.config/goose/skills/
+dot/.config/htop/
+dot/.config/iterm2/
+dot/.config/jgit/
+dot/.config/neofetch/
+dot/.config/nvim/.luarc.json
+dot/.config/opencode/skills/
+dot/.config/pip/
+dot/.config/raycast-x/
+dot/.config/raycast/
+dot/.config/simple-update-notifier/
 dot/.config/stripe/
+dot/.config/yarn/
 dot/.config/zed/conversations/
 dot/.config/zed/embeddings/
 dot/.config/zed/prompts/

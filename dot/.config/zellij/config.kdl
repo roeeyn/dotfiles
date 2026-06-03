@@ -4,7 +4,7 @@
 
 keybinds clear-defaults=true {
     locked {
-        bind "Ctrl y" { SwitchToMode "normal"; }
+        bind "Ctrl a" { SwitchToMode "normal"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -145,8 +145,16 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
-        bind "Ctrl y" { SwitchToMode "locked"; }
+        bind "Ctrl a" { SwitchToMode "locked"; }
         bind "Ctrl q" { Quit; }
+        // Fuzzy-find a project folder and open it in a new tab (see zellij-folder-finder).
+        bind "Ctrl f" {
+            Run "zellij-folder-finder" {
+                floating true
+                close_on_exit true
+                name "folder-finder"
+            }
+        }
     }
     shared_except "locked" "move" {
         bind "Ctrl h" { SwitchToMode "move"; }

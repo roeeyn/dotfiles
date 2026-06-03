@@ -22,9 +22,11 @@ themes {
             emphasis_2 158 206 106
             emphasis_3 187 154 247
         }
+        // background = tokyonight `bg_visual` (blend_bg(blue0, 0.4)) so a
+        // mouse text selection is clearly visible and matches nvim Visual mode.
         text_selected {
             base 192 202 245
-            background 41 46 66
+            background 46 60 100
             emphasis_0 255 158 100
             emphasis_1 125 207 255
             emphasis_2 158 206 106

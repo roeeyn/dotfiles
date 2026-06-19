@@ -11,7 +11,17 @@ return {
             bashls = {},
             -- basedpyright = {},
             dockerls = {},
-            elixirls = {},
+            -- Elixir: Expert is the official successor to ElixirLS. It degrades
+            -- gracefully on a partial compile (ElixirLS aborts its whole index
+            -- on a single deps error), so go-to-definition is available sooner.
+            -- Binary: `brew install expert`. Config ships with nvim-lspconfig.
+            -- Known gap (v0.1.4): resolves go-to-definition for YOUR code and
+            -- deps, but NOT stdlib/built-ins (Enum, Map, String, Kernel) -- those
+            -- live in the precompiled Elixir distro, not your _build, so Telescope
+            -- shows "No LSP Definitions found". Use hover (<leader>ct) for stdlib.
+            -- To fall back to elixirls (slower, stdlib-capable), swap the two lines.
+            expert = {},
+            -- elixirls = {},
             -- emmet_ls = {
             --     filetypes = { 'html', 'css', 'javascript', 'typescript', 'ex', 'heex' },
             -- },

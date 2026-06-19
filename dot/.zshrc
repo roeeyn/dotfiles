@@ -32,6 +32,11 @@ if [ -f "$HOME/.config/zsh/aliases.zsh" ]; then
   source "$HOME/.config/zsh/aliases.zsh"
 fi
 
+# Load read-only psql DB helper (db function + completion)
+if [ -f "$HOME/.config/zsh/db.zsh" ]; then
+  source "$HOME/.config/zsh/db.zsh"
+fi
+
 # Load global ENV variables
 # Load private env vars (secrets)
 ENV_PRIVATE="$HOME/.dotfiles/dot/env/.env"

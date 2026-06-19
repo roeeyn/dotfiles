@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# pg-nvim — a lean, SQL-aware Neovim app used as psql's `\e` editor.
+#
+# psql resolves the `\e` editor from $PSQL_EDITOR before $EDITOR/$VISUAL, so the
+# `db` wrapper points PSQL_EDITOR here while the global $EDITOR stays slim-nvim.
+# NVIM_APPNAME isolates config/plugins/state under ~/.config/pg-nvim and
+# ~/.local/share/pg-nvim, exactly like slim-nvim.
+#
+# $PG_NVIM_SERVICE (exported by the `db` wrapper) flows through psql into this
+# process, telling downstream autocmds which service the edit buffer belongs to
+# — used later for per-service schema completion.
+
+export NVIM_APPNAME=pg-nvim
+exec nvim "$@"

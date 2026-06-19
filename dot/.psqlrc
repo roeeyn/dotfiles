@@ -1,0 +1,79 @@
+-- ~/.psqlrc — psql behavior/quality-of-life settings (loaded on every psql start)
+
+-- Stay quiet while this file runs so the startup isn't noisy.
+\set QUIET on
+
+-- Show NULLs explicitly instead of blank space — huge for spotting missing data.
+\pset null '⌀'
+
+-- Auto-expanded display: normal table for narrow results, one-field-per-line
+-- (\x) automatically when a row is too wide for the terminal.
+\x auto
+
+-- Time every query. The fastest way to build an instinct for what's slow.
+\timing on
+
+-- Pager: prefer pspg (tabular pager w/ frozen headers + in-pager sort).
+-- psql checks PSQL_PAGER before PAGER; PAGER stays as a fallback if pspg is
+-- ever missing. Only output that doesn't fit triggers the pager.
+\setenv PSQL_PAGER 'pspg -s 6 --reprint-on-exit'
+\setenv PAGER 'less -SRXF'
+\pset pager on
+
+-- Use pg-nvim when crafting queries with \e — a SQL-aware editor (syntax
+-- highlighting + recent-query recall below a scissors line) on the temp .sql
+-- file. psql checks PSQL_EDITOR before EDITOR/VISUAL, so this overrides the
+-- global slim-nvim. (db.zsh also exports PG_NVIM_SERVICE so pg-nvim knows which
+-- service the buffer belongs to.)
+\setenv PSQL_EDITOR 'pg-nvim'
+
+-- Stream large results in 1000-row batches via a cursor instead of buffering
+-- the whole thing in memory. Makes a runaway SELECT * Ctrl-C-able.
+--
+-- DISABLED: FETCH_COUNT streams rows incrementally, so psql can't measure the
+-- full result width up front and `\x auto` falls back to expanded/record mode
+-- even for narrow results. statement_timeout='30s' + habitual LIMIT already
+-- guard against runaway/huge queries (and give a HARDER 30s ceiling, since the
+-- per-FETCH timeout resets each batch). Re-enable if you need to stream a giant
+-- export without buffering it all in client memory.
+-- \set FETCH_COUNT 1000
+
+-- Nicer table borders.
+\pset linestyle unicode
+\pset border 2
+
+-- Wrap over-wide values to the terminal width instead of stretching the whole
+-- table to match one giant JSON/text cell. Shows '…' at wrap points.
+\pset format wrapped
+
+-- Single shared, deduplicated, larger history — queries are often useful
+-- across services, and pg-nvim's \e recall reads this one file.
+\set HISTFILE ~/.psql_history
+\set HISTCONTROL ignoredups
+\set HISTSIZE 5000
+
+-- Autocomplete keywords in UPPERCASE (SELECT, WHERE, …).
+\set COMP_KEYWORD_CASE upper
+
+-- Handy shortcuts you can type as :name<Enter>
+--   :rotx   -> toggle expanded display on/off
+--   :ro     -> confirm this session is read-only (should return: on)
+--   :slow   -> 10 slowest live queries (read replicas expose pg_stat_statements
+--              on some envs; harmless if the extension isn't present)
+\set rotx '\\x'
+\set ro 'SHOW default_transaction_read_only;'
+\set slow 'SELECT round(mean_exec_time::numeric,1) AS avg_ms, calls, query FROM pg_stat_statements ORDER BY mean_exec_time DESC LIMIT 10;'
+
+-- Prompt: <host>:<dbname>  — the host segment tells you the ENV
+-- (test03 vs load vs localhost), the dbname tells you nc vs stats.
+-- Yellow host so it's impossible to miss which environment you're on.
+-- (user %n disabled for now)
+\set PROMPT1 '%[%033[1;33m%]%M%[%033[0m%]:%/ %R%# '
+\set PROMPT2 '%R%# '
+
+-- Safety net: auto-cancel any query running longer than 30s. Override live
+-- when you KNOW a query is legitimately slow:  SET statement_timeout = 0;
+SET statement_timeout = '30s';
+
+\set QUIET off
+\echo 'psqlrc loaded — read-only + 30s timeout active. :ro to confirm, SET statement_timeout=0 to wait.'

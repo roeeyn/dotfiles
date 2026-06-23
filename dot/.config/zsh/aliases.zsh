@@ -295,3 +295,6 @@ alias .....='cd ../../../..'
 # Directory navigation
 alias md='mkdir -p'
 alias rd='rmdir'
+
+# Daily note — open today's vault log in nvim (dly -1 = yesterday, dly 1 = tomorrow)
+alias dly='daily'

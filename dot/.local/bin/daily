@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# daily — open the current daily note in Neovim.
+#
+# Daily notes live in the orvault Logs/ dir, one Markdown file per day named
+# by ISO date (e.g. ~/orvault/Logs/2026-06-23.md). This wrapper computes
+# today's filename and opens it; nvim creates the buffer if the file is new.
+#
+# An optional integer offset shifts the date: `daily -1` opens yesterday,
+# `daily 1` opens tomorrow. Offsets are handy for back-filling a missed log
+# or jotting tomorrow's plan.
+
+set -euo pipefail
+
+LOGS_DIR="${DAILY_NOTES_DIR:-$HOME/orvault/Logs}"
+offset="${1:-0}"
+
+# resolve_date — print the ISO-8601 (YYYY-MM-DD) date for a day offset from
+# today. `offset` is a signed integer: 0 = today, -1 = yesterday, 2 = two days
+# out. This must work on macOS's BSD `date` (this is a darwin dotfiles repo).
+#
+# TODO(you): implement this. The BSD-vs-GNU date split is the real decision:
+#   - BSD/macOS: date -v"${offset}d" +%F   (note: needs an explicit sign, e.g. -v-1d / -v+1d)
+#   - GNU/Linux: date -d "${offset} days"  +%F
+# Decide whether to target BSD only (simplest, matches this machine) or detect
+# and support both (portable if these dotfiles ever land on Linux).
+resolve_date() {
+  local offset="$1"
+  # BSD `date -v` needs an explicit sign; default a bare number to "+".
+  [[ "$offset" == -* ]] || offset="+$offset"
+  date -v"${offset}d" +%F
+}
+
+note="$LOGS_DIR/$(resolve_date "$offset").md"
+exec nvim "$note"

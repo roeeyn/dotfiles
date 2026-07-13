@@ -3,8 +3,9 @@
 A lightweight, isolated Neovim app for markdown daily notes with BuJo-style
 task migration. Launched via `bujo-nvim` (in `~/.local/bin`, tracked at
 `dot/.local/bin/bujo-nvim`), which sets `NVIM_APPNAME=bujo-nvim`, cds into the
-notes root, and lands directly in today's note. Kanagawa *wave* on purpose —
-the notes app should never be mistaken for a code editor.
+notes root, and lands directly in today's note. Kanagawa *lotus* (the light
+variant) on purpose — the notes app should never be mistaken for a code
+editor.
 
 The notes root is `~/notes` (`$BUJO_NOTES_DIR` overrides it, which is also how
 the e2e tests point the app at a sandbox):

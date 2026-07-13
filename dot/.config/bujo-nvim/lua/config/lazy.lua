@@ -21,7 +21,7 @@ require('lazy').setup {
     spec = {
         { import = 'plugins' },
     },
-    install = { colorscheme = { 'kanagawa-wave', 'habamax' } },
+    install = { colorscheme = { 'kanagawa-lotus', 'habamax' } },
     checker = { enabled = false },
     change_detection = {
         enabled = false,

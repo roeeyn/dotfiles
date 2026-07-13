@@ -74,9 +74,14 @@ vim.keymap.set('n', '<leader>wc', '<cmd>close<cr>', { desc = 'Close the current 
 
 local bujo_nvim = vim.api.nvim_create_augroup('bujo-nvim', { clear = true })
 
+-- Distinct flash color when the yank lands in the system clipboard (`+`),
+-- mirrors main nvim / slim-nvim. kanagawa-wave springGreen on sumiInk.
+vim.api.nvim_set_hl(0, 'YankClipboard', { bg = '#98bb6c', fg = '#1f1f28', bold = true })
+
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = bujo_nvim,
     callback = function()
-        vim.highlight.on_yank { timeout = 200, on_visual = true }
+        local higroup = vim.v.event.regname == '+' and 'YankClipboard' or 'IncSearch'
+        vim.highlight.on_yank { timeout = 250, on_visual = true, higroup = higroup }
     end,
 })

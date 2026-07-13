@@ -8,4 +8,4 @@ repos:
 - repo: https://github.com/JohnnyMorganz/StyLua
   rev: v0.14.2
   hooks:
-    - id: stylua # or stylua-system / stylua-github
+    - id: stylua-system # brew-installed stylua; the plain `stylua` id builds from source and needs cargo

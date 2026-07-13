@@ -76,6 +76,7 @@ re-runs migration.
 | `<leader>b{b,n,p,l,d,x,D}` | buffers: telescope list, next, prev, last, delete, force-delete, close others |
 | `-` / `<leader>po` | oil file browser (`<leader>po` mirrors main nvim) |
 | `<leader>?` | which-key: buffer-local keymaps (pressing `<leader>` and waiting shows all) |
+| `<leader>q1` / `<leader>qq` | force quit / soft quit (mirrors main nvim) |
 | `<leader>w{h,j,k,l,v,s,c,0}` | window nav/split/close/equalize (mirrors slim-nvim) |
 | `<leader>y` (visual) | yank to system clipboard |
 

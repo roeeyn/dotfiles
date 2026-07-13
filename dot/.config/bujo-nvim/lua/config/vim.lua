@@ -62,6 +62,10 @@ vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = 'Remove buffer' })
 vim.keymap.set('n', '<leader>bx', '<cmd>bd!<cr>', { desc = 'Remove buffer (discard changes)' })
 vim.keymap.set('n', '<leader>bD', '<cmd>%bd|e#|bd#<cr>', { desc = 'Close other buffers' })
 
+-- Quit (mirrors main nvim config)
+vim.keymap.set('n', '<leader>q1', '<cmd>q!<cr>', { desc = 'Force quit' })
+vim.keymap.set('n', '<leader>qq', '<cmd>q<cr>', { desc = 'Soft quit' })
+
 -- Window navigation/splitting (mirrors slim-nvim / main nvim config)
 vim.keymap.set('n', '<leader>wh', '<C-w>h', { desc = 'Move to left window' })
 vim.keymap.set('n', '<leader>wj', '<C-w>j', { desc = 'Move to bottom window' })

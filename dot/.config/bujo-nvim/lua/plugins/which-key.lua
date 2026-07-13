@@ -10,6 +10,7 @@ return {
             { '<leader>f', group = 'File/Find' },
             { '<leader>n', group = 'Notes' },
             { '<leader>p', group = 'Project' },
+            { '<leader>q', group = 'Quit' },
             { '<leader>w', group = 'Windows' },
         },
     },

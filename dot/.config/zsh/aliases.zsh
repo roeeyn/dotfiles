@@ -298,3 +298,6 @@ alias rd='rmdir'
 
 # Daily note — open today's vault log in nvim (dly -1 = yesterday, dly 1 = tomorrow)
 alias dly='daily'
+
+# BuJo notes app — isolated nvim instance landing in today's note
+alias bujo='bujo-nvim'

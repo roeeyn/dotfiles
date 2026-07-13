@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# bujo-nvim — an isolated Neovim app for markdown daily notes with
+# BuJo-style task migration.
+#
+# NVIM_APPNAME isolates config/plugins/state under ~/.config/bujo-nvim and
+# ~/.local/share/bujo-nvim, exactly like slim-nvim and pg-nvim. The bujo Lua
+# plugin (lua/bujo/ inside the app config) provides :BujoToday, which creates
+# today's note — migrating pending tasks from the nearest previous daily note
+# — or just opens it if it already exists.
+#
+# $BUJO_NOTES_DIR overrides the notes root (~/notes); the Lua side reads the
+# same variable, which is also how the e2e tests point the app at a sandbox.
+
+export NVIM_APPNAME=bujo-nvim
+
+NOTES_ROOT="${BUJO_NOTES_DIR:-$HOME/notes}"
+mkdir -p "$NOTES_ROOT/notes"
+
+cd "$NOTES_ROOT" || exit 1
+
+# With explicit args (a file, -c, …) behave like plain nvim in the notes
+# root; bare `bujo-nvim` lands directly in today's note.
+if [ "$#" -gt 0 ]; then
+    exec nvim "$@"
+fi
+exec nvim +BujoToday

@@ -1,4 +1,4 @@
 collections:
-  orvault:
-    path: /Users/roeeyn/orvault
+  notes:
+    path: /Users/roeeyn/notes
     pattern: "**/*.md"

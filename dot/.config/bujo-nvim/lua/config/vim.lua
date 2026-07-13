@@ -49,6 +49,19 @@ vim.keymap.set('i', '<S-Tab>', '<C-d>', { desc = 'Dedent line' })
 -- Yank to system clipboard in visual mode
 vim.keymap.set('x', '<leader>y', '"+y', { desc = 'Yank to clipboard' })
 
+-- File save (mirrors main nvim config)
+vim.keymap.set('n', '<leader>fs', '<cmd>w<cr>', { desc = '[File] Save current buffer' })
+vim.keymap.set('n', '<leader>fS', '<cmd>wa<cr>', { desc = '[File] Save all buffers' })
+
+-- Buffers (mirrors main nvim config; no Bdelete here, plain :bd suffices)
+vim.keymap.set('n', '<leader>bb', '<cmd>Telescope buffers<cr>', { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>bn', '<cmd>bn<cr>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<leader>bp', '<cmd>bp<cr>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<leader>bl', '<C-^>', { desc = 'Last buffer' })
+vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = 'Remove buffer' })
+vim.keymap.set('n', '<leader>bx', '<cmd>bd!<cr>', { desc = 'Remove buffer (discard changes)' })
+vim.keymap.set('n', '<leader>bD', '<cmd>%bd|e#|bd#<cr>', { desc = 'Close other buffers' })
+
 -- Window navigation/splitting (mirrors slim-nvim / main nvim config)
 vim.keymap.set('n', '<leader>wh', '<C-w>h', { desc = 'Move to left window' })
 vim.keymap.set('n', '<leader>wj', '<C-w>j', { desc = 'Move to bottom window' })

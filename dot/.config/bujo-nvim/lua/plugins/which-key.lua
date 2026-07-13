@@ -6,7 +6,8 @@ return {
     event = 'VeryLazy',
     opts = {
         spec = {
-            { '<leader>f', group = 'Find' },
+            { '<leader>b', group = 'Buffers' },
+            { '<leader>f', group = 'File/Find' },
             { '<leader>n', group = 'Notes' },
             { '<leader>p', group = 'Project' },
             { '<leader>w', group = 'Windows' },

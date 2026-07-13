@@ -71,6 +71,8 @@ re-runs migration.
 | `<leader>fd` | **f**ind **d**aily notes, newest first |
 | `<leader>fg` | **f**ind by **g**rep across all of `~/notes` |
 | `<leader>ft` | **f**ind **t**asks: pending `- [ ]` lines, last ~30 days |
+| `<leader>fs` / `<leader>fS` | save current buffer / save all (mirrors main nvim) |
+| `<leader>b{b,n,p,l,d,x,D}` | buffers: telescope list, next, prev, last, delete, force-delete, close others |
 | `-` / `<leader>po` | oil file browser (`<leader>po` mirrors main nvim) |
 | `<leader>?` | which-key: buffer-local keymaps (pressing `<leader>` and waiting shows all) |
 | `<leader>w{h,j,k,l,v,s,c,0}` | window nav/split/close/equalize (mirrors slim-nvim) |

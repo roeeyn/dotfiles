@@ -59,6 +59,7 @@ re-runs migration.
 | `:BujoToggle` | toggle `- [ ]` ↔ `- [x]` on the line or range (never touches `>` `<` `-`) |
 | `:BujoNote <name>` | create/open `notes/<kebab-case-name>.md` with a `# Title` (tab-completes existing notes) |
 | `:BujoNew` | quick-capture `notes/YYYY-MM-DD Note <n>.md`, auto-incrementing `<n>` |
+| `:BujoShortenLinks` | rewrite `[MSG-1234](url)` / `[repo#56](url)` links into bare refs (see below) |
 
 ## Keymaps (`<leader>` = space)
 
@@ -67,7 +68,7 @@ re-runs migration.
 | `<leader>d` | **d**aily: `:BujoToday` |
 | `<leader>h` / `<leader>l` | previous / next daily note (vim-directional: h = back in time) |
 | `<leader>x` | toggle checkbox (normal: current line; visual: range) |
-| `<leader>a` | **a**dd task: append `- [ ]` to today's note, insert mode |
+| `<leader>a` | **a**dd task: insert `- [ ]` below the cursor (same indent), insert mode |
 | `<leader>nn` | **n**ew **n**ote: `:BujoNew` |
 | `<leader>fd` | **f**ind **d**aily notes, newest first |
 | `<leader>fg` | **f**ind by **g**rep across all of `~/notes` |
@@ -77,6 +78,25 @@ re-runs migration.
 | `-` / `<leader>po` | oil file browser (`<leader>po` mirrors main nvim) |
 | `<leader>?` | which-key: buffer-local keymaps (pressing `<leader>` and waiting shows all) |
 | `<leader>q1` / `<leader>qq` | force quit / soft quit (mirrors main nvim) |
+| `gx` / `<leader>o` | **o**pen ticket/PR ref or URL under cursor in the browser |
+
+## Ticket/PR references (`lua/bujo/links.lua`)
+
+Neovim wraps on raw buffer columns even when text is concealed
+(neovim/neovim#14409), so tasks carrying full markdown links wrap weirdly
+under render-markdown. Instead, lines carry bare refs — `MSG-1234`,
+`repo#56` — and the URL is reconstructed on demand:
+
+- `MSG-1234` → Jira; `repo#56` → GitHub under `alertmediainc` (aliases:
+  `nr` = `notification_router`); repos listed in `bitbucket_repos`
+  (currently `notify_me`) → Bitbucket. Edit the table at the top of
+  `lua/bujo/links.lua` (or pass `setup { links = ... }`) to add aliases or
+  drop a repo once it migrates off Bitbucket.
+- Refs are decorated in place with render-markdown's link look (icon +
+  underline) via extmarks; the raw text is just the ref, so wrap stays
+  correct.
+- `:BujoShortenLinks` converts existing ref-labeled markdown links in the
+  buffer; prose-labeled or foreign links are left alone.
 | `<leader>w{h,j,k,l,v,s,c,0}` | window nav/split/close/equalize (mirrors slim-nvim) |
 | `<leader>y` (visual) | yank to system clipboard |
 

@@ -130,23 +130,26 @@ function M.toggle(line1, line2)
     end
 end
 
---- Quick-add: append a fresh `- [ ]` at the end of today's note and start
---- typing. Opens today's note first if the cursor is somewhere else.
+--- Quick-add: insert a fresh `- [ ]` below the cursor line, inheriting its
+--- indentation (so adding from a subtask creates a sibling subtask), and
+--- start typing. A blank cursor line is filled in place instead. Opens
+--- today's note first if the buffer is somewhere else — the cursor then sits
+--- on its last line, so the task lands at the end.
 function M.quick_add()
     local now = os.date '*t'
     if vim.api.nvim_buf_get_name(0) ~= daily_path(now.year, now.month, now.day) then
         M.open_today()
     end
 
-    local last = vim.api.nvim_buf_line_count(0)
-    local last_line = vim.api.nvim_buf_get_lines(0, last - 1, last, false)[1]
-    if last_line:match '^%s*$' then
-        vim.api.nvim_buf_set_lines(0, last - 1, last, false, { '- [ ] ' })
+    local lnum = vim.api.nvim_win_get_cursor(0)[1]
+    local line = vim.fn.getline(lnum)
+    if line:match '^%s*$' then
+        vim.api.nvim_buf_set_lines(0, lnum - 1, lnum, false, { '- [ ] ' })
     else
-        vim.api.nvim_buf_set_lines(0, last, last, false, { '- [ ] ' })
-        last = last + 1
+        vim.api.nvim_buf_set_lines(0, lnum, lnum, false, { line:match '^%s*' .. '- [ ] ' })
+        lnum = lnum + 1
     end
-    vim.api.nvim_win_set_cursor(0, { last, 0 })
+    vim.api.nvim_win_set_cursor(0, { lnum, 0 })
     vim.cmd.startinsert { bang = true } -- like `A`: insert at end of line
 end
 
@@ -282,6 +285,7 @@ end
 
 function M.setup(opts)
     M.root = vim.fs.normalize((opts and opts.root) or vim.env.BUJO_NOTES_DIR or '~/notes')
+    require('bujo.links').setup(opts and opts.links)
 
     local command = vim.api.nvim_create_user_command
     command('BujoToday', M.open_today, { desc = "Open (or create + migrate) today's daily note" })

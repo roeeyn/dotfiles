@@ -1,6 +1,8 @@
 model = "gpt-5.6-sol"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 personality = "pragmatic"
+
+
 notify = ["/Users/roeeyn/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 
 [projects."/Users/roeeyn/.dotfiles"]
@@ -39,14 +41,14 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_n
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/roeeyn/.codex"
 CODEX_HOME = "/Users/roeeyn/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,7abc8b22abade944bcd80135500416c7aee60c0e94290c7d644b54428a0013ab"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,d0b55a8f9e8e7e9c88421416ea4ce9542c302abf43aa7fc871be4553ea70dd26"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.707.91948"
-SKY_CUA_SERVICE_PATH = "/Users/roeeyn/.codex/plugins/cache/openai-bundled/computer-use/1.0.1000387/Codex Computer Use.app"
+BROWSER_USE_CODEX_APP_VERSION = "26.715.72359"
+SKY_CUA_SERVICE_PATH = "/Users/roeeyn/.codex/plugins/cache/openai-bundled/computer-use/1.0.1000451/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [mcp_servers.computer-use]
@@ -61,7 +63,7 @@ gpt-5-codex = "gpt-5.3-codex"
 
 [tui.model_availability_nux]
 "gpt-5.5" = 1
-"gpt-5.6-sol" = 1
+"gpt-5.6-sol" = 2
 
 [desktop]
 followUpQueueMode = "queue"
@@ -76,7 +78,7 @@ global = "cursor"
 "/Users/roeeyn/src" = "cursor"
 
 [marketplaces.openai-bundled]
-last_updated = "2026-07-16T14:56:10Z"
+last_updated = "2026-07-22T16:22:58Z"
 source_type = "local"
 source = "/Users/roeeyn/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
@@ -114,3 +116,8 @@ enabled = true
 
 [features]
 js_repl = false
+
+[shell_environment_policy.set]
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,d0b55a8f9e8e7e9c88421416ea4ce9542c302abf43aa7fc871be4553ea70dd26"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/roeeyn/.codex"

@@ -94,6 +94,3 @@ if [[ -f ${ZDOTDIR:-$HOME}/.zcompdump && -n $(find ${ZDOTDIR:-$HOME}/.zcompdump 
 else
   compinit -C
 fi
-
-# Added by Antigravity
-export PATH="/Users/roeeyn/.antigravity/antigravity/bin:$PATH"

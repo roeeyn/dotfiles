@@ -1,10 +1,7 @@
 tap "anomalyco/tap"
 tap "common-fate/granted"
-tap "shopify/shopify"
 tap "smudge/smudge"
 tap "sqitchers/sqitch"
-tap "stripe/stripe-cli"
-tap "supabase/tap"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
 # Official Amazon AWS command-line interface
@@ -17,56 +14,48 @@ brew "bash-language-server"
 brew "bat"
 # Python code formatter
 brew "black"
-# Versatile and fast Unicode/ASCII/ANSI graphics renderer
-brew "chafa"
+# CLI of the open-source IDE For exploring and testing APIs
+brew "bruno-cli"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Securely send things from one computer to another
 brew "croc"
 # Suite of command-line tools for converting to and working with CSV
 brew "csvkit"
-# Top-like interface for container metrics
-brew "ctop"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
-# Tool for exploring each layer in a docker image
-brew "dive"
 # Language service for Docker Compose documents
 brew "docker-compose-langserver"
 # Language server for Dockerfiles powered by Node, TypeScript, and VSCode
 brew "dockerfile-language-server"
-# Disk Usage/Free Utility - a better 'df' alternative
-brew "duf"
 # Language Server and Debugger for Elixir
 brew "elixir-ls"
+# Official Elixir Language Server Protocol implementation
+brew "expert"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
-# Create thumbnails for your video files
-brew "ffmpegthumbnailer"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU database manager
+brew "gdbm"
 # GitHub command-line tool
 brew "gh"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
 # Git extension for versioning large files
 brew "git-lfs"
-# Render markdown on the CLI
-brew "glow"
-# GNU typing tutor
-brew "gnu-typist"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
 # Terminal based graphical activity monitor inspired by gtop and vtop
 brew "gotop"
+# GitHub Markdown previewer
+brew "grip"
 # Improved top (interactive process viewer)
 brew "htop"
-# Tools and libraries to manipulate images in select formats
-brew "imagemagick"
 # GNU utilities for networking
 brew "inetutils"
 # Lightweight and flexible command-line JSON processor
@@ -91,32 +80,22 @@ brew "markdownlint-cli"
 brew "mas"
 # Fly through your shell history
 brew "mcfly"
-# CLI for Mermaid library
-brew "mermaid-cli"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
-# NCurses Disk Usage
-brew "ncdu"
-# Fast, highly customisable system info script
-brew "neofetch"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
-# Control nvim processes using `nvr` command-line tool
-brew "neovim-remote"
-# Swiss-army knife of markup format conversion
-brew "pandoc"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Password manager
 brew "pass"
+# Highly capable, feature-rich programming language
+brew "perl"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
+# PostgreSQL syntax beautifier
+brew "pgformatter"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
-# Package compiler and linker metadata toolkit
-brew "pkgconf"
 # Fast, disk space efficient package manager
 brew "pnpm"
 # Object-relational database system
@@ -125,38 +104,30 @@ brew "postgresql@15"
 brew "pre-commit"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
+# Unix pager optimized for psql
+brew "pspg"
 # Static type checker for Python
 brew "pyright"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
-# Tools for and transforming and inspecting PDF files
-brew "qpdf"
-# Multi-agent orchestration framework for autonomous AI task completion
-brew "ralph-orchestrator"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.13"
+# Persistent key-value database, with built-in net interface
+brew "redis"
 # Pack repository contents into a single AI-friendly file
 brew "repomix"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Extremely fast Python linter, written in Rust
 brew "ruff"
-# Experimental Rust compiler front-end for IDEs
-brew "rust-analyzer"
-# Rust toolchain installer
-brew "rustup"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
-# Command-line interface for https://speedtest.net bandwidth tests
-brew "speedtest-cli"
-# Penetration testing for SQL injection and database servers
-brew "sqlmap"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
-# Command-line tool for Stripe
-brew "stripe-cli"
 # Opinionated Lua code formatter
 brew "stylua"
 # LSP for TailwindCSS
@@ -165,28 +136,20 @@ brew "tailwindcss-language-server"
 brew "terraform-ls"
 # Official tldr client written in Rust
 brew "tlrc"
-# Terminal multiplexer
-brew "tmux"
-# Plugin manager for tmux
-brew "tpm"
 # Parser generator tool
 brew "tree-sitter-cli"
-# Command-line unarchiving tools supporting multiple formats
-brew "unar"
-# URL extractor/launcher
-brew "urlview"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # Vi 'workalike' with many additional features
 brew "vim"
-# Language servers for HTML, CSS, JavaScript, and JSON extracted from vscode
-brew "vscode-langservers-extracted"
-# Execute commands when watched files change
-brew "watchexec"
 # Internet file retriever
 brew "wget"
 # JavaScript package manager
 brew "yarn"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
+brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Fish-like fast/unobtrusive autosuggestions for zsh
@@ -196,19 +159,17 @@ brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
 # The AI coding agent built for the terminal.
-brew "anomalyco/tap/opencode"
+brew "anomalyco/tap/opencode", trusted: true
 # The easiest way to access your cloud.
-brew "common-fate/granted/granted"
+brew "common-fate/granted/granted", trusted: true
 # A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
-brew "smudge/smudge/nightlight"
+brew "smudge/smudge/nightlight", trusted: true
 # Sensible database change management
-brew "sqitchers/sqitch/sqitch", args: ["with-postgres-support"]
-# AI Coding Agent IDE
-cask "antigravity"
-# Compact TeX distribution as alternative to the full TeX Live / MacTeX
-cask "basictex"
-# Web security testing toolkit
-cask "burp-suite"
+brew "sqitchers/sqitch/sqitch", args: ["with-postgres-support"], trusted: true
+# Web browser focusing on privacy
+cask "brave-browser"
+# Open source IDE for exploring and testing APIs
+cask "bruno"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
 # Anthropic's official Claude AI desktop app
@@ -217,10 +178,6 @@ cask "claude"
 cask "claude-code@latest"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
-# Web browser with integrated AI assistant
-cask "comet"
-# Write, edit, and chat about your code with AI
-cask "cursor"
 # Universal database tool and SQL client
 cask "dbeaver-community"
 # App to build and share containerised applications and microservices
@@ -235,38 +192,26 @@ cask "font-symbols-only-nerd-font"
 cask "ghostty"
 # Web browser
 cask "google-chrome"
-# Tool to optimise images to a smaller size
-cask "imageoptim"
 # Password manager application and digital vault
 cask "keeper-password-manager"
-# ZSA keyboard firmware flasher
-cask "keymapp"
-# Code notebooks for Elixir developers
-cask "livebook"
-# Software for Logitech devices
-cask "logi-options+"
-# Screen and video recording software
-cask "loom"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
 # Client program for the OpenVPN Access Server
 cask "openvpn-connect"
-# Collaboration platform for API development
-cask "postman"
 # Quick Look generator for Markdown files
 cask "qlmarkdown"
 # Control your tools with a few keystrokes
 cask "raycast"
+# Create desktop apps by chatting with AI
+cask "raycast-glaze"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
 cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"
-# Multimedia player
-cask "vlc"
 # Multiplayer code editor
 cask "zed"
 # Video communication and virtual meeting platform
@@ -276,7 +221,6 @@ vscode "bradlc.vscode-tailwindcss"
 vscode "docker.docker"
 vscode "eamodio.gitlens"
 vscode "esbenp.prettier-vscode"
-vscode "github.copilot-chat"
 vscode "hashicorp.terraform"
 vscode "jakebecker.elixir-ls"
 vscode "kamikillerto.vscode-colorize"
@@ -299,3 +243,5 @@ go "cmd/go"
 go "cmd/gofmt"
 go "github.com/AlexanderGrooff/mermaid-ascii"
 uv "pyright"
+npm "@tobilu/qmd"
+npm "corepack"

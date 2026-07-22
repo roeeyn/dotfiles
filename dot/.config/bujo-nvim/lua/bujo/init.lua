@@ -286,6 +286,7 @@ end
 function M.setup(opts)
     M.root = vim.fs.normalize((opts and opts.root) or vim.env.BUJO_NOTES_DIR or '~/notes')
     require('bujo.links').setup(opts and opts.links)
+    require('bujo.strike').setup(opts and opts.strike)
 
     local command = vim.api.nvim_create_user_command
     command('BujoToday', M.open_today, { desc = "Open (or create + migrate) today's daily note" })

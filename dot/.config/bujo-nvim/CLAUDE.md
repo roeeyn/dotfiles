@@ -34,6 +34,23 @@ to GitHub, delete its `bitbucket_repos` entry — that's the whole migration.
 The `/morning` skill (`~/notes/.claude/skills/morning/SKILL.md`) writes bare
 refs into daily notes and cites the alias table — keep the two in sync.
 
+## Strikethrough (`lua/bujo/strike.lua`)
+
+Done `[x]` and irrelevant `[-]` blocks are struck by this module, **not** by
+render-markdown's `checkbox.scope_highlight` — that option draws one extmark
+across the item's whole multi-line inline node, striking through the leading
+indentation of child lines (no upstream option to trim it; checked at commit
+f422cb5). strike.lua instead places one extmark per line from the first
+non-blank column (the bullet) to EOL. Don't reintroduce `scope_highlight` in
+`lua/plugins/render-markdown.lua`; you'd get a doubled, indent-crossing
+strike.
+
+A task's block (which lines strike with it) uses the **same rule as
+`migrate.lua`**: subsequent deeper-indented lines, ended by a blank line or
+a line at/above the task's indent. If one module's block rule ever changes,
+change both — the specs pin each side. `[>]`/`[<]` are never struck: they
+point to work that still exists elsewhere.
+
 ## Gotchas learned the hard way
 
 - Ephemeral extmarks with `virt_text_pos = 'inline'` inside a decoration

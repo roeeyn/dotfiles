@@ -67,7 +67,7 @@ re-runs migration.
 | ---- | ------ |
 | `<leader>d` | **d**aily: `:BujoToday` |
 | `<leader>h` / `<leader>l` | previous / next daily note (vim-directional: h = back in time) |
-| `<leader>x` | toggle checkbox (normal: current line; visual: range) |
+| `<leader>x` / `<leader>;l` | toggle checkbox (normal: current line; visual: range); `;l` mirrors the main-nvim comment-line binding |
 | `<leader>a` | **a**dd task: insert `- [ ]` below the cursor (same indent), insert mode |
 | `<leader>nn` | **n**ew **n**ote: `:BujoNew` |
 | `<leader>fd` | **f**ind **d**aily notes, newest first |

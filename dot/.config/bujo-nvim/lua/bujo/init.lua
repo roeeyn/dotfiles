@@ -310,6 +310,8 @@ function M.setup(opts)
     map('n', '<leader>l', '<cmd>BujoNext<cr>', { desc = 'Next daily note (forward in time)' })
     -- `:` not `<cmd>` so visual mode passes its range to the command
     map({ 'n', 'x' }, '<leader>x', ':BujoToggle<cr>', { silent = true, desc = 'Toggle checkbox' })
+    -- alias matching the comment-line binding in the main nvim config
+    map({ 'n', 'x' }, '<leader>;l', ':BujoToggle<cr>', { silent = true, desc = 'Toggle checkbox' })
     map('n', '<leader>a', M.quick_add, { desc = "Add a task to today's note" })
     map('n', '<leader>nn', M.new_note, { desc = 'New quick-capture note' })
     map('n', '<leader>fd', M.pick_daily, { desc = 'Find daily note' })

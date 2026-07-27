@@ -149,4 +149,27 @@ describe('bujo.strike.decorate', function()
         strike.decorate(buf)
         assert.same({}, vim.api.nvim_buf_get_extmarks(buf, ns, 0, -1, {}))
     end)
+
+    it('draws no marks in Insert mode and restores them on leave', function()
+        local buf = vim.api.nvim_create_buf(false, true)
+        vim.api.nvim_buf_set_lines(buf, 0, -1, false, { '- [x] done task' })
+        local ns = vim.api.nvim_get_namespaces()['bujo-strike']
+
+        -- Mode is stubbed rather than entered: :startinsert is deferred in
+        -- specs, and feedkeys('i', 'x!') kills the headless runner outright
+        -- (the run dies mid-file with no summary). The stub pins the same
+        -- contract: decorate() draws nothing while the mode reports insert.
+        local real_get_mode = vim.api.nvim_get_mode
+        vim.api.nvim_get_mode = function()
+            return { mode = 'i', blocking = false }
+        end
+        local ok, err = pcall(strike.decorate, buf)
+        vim.api.nvim_get_mode = real_get_mode
+        assert(ok, err)
+        assert.same({}, vim.api.nvim_buf_get_extmarks(buf, ns, 0, -1, {}))
+
+        -- Back in (real) Normal mode the same call restores the strike.
+        strike.decorate(buf)
+        assert.equal(1, #vim.api.nvim_buf_get_extmarks(buf, ns, 0, -1, {}))
+    end)
 end)

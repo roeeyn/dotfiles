@@ -51,6 +51,12 @@ a line at/above the task's indent. If one module's block rule ever changes,
 change both — the specs pin each side. `[>]`/`[<]` are never struck: they
 point to work that still exists elsewhere.
 
+Strikes render only outside Insert/Replace mode: `decorate()` bails (after
+clearing) when `nvim_get_mode()` reports `i`/`R`, and `InsertEnter`/
+`InsertLeave` share the `TextChanged*` callback. The mode check lives in
+`decorate()` on purpose — a `TextChangedI` recompute can never re-add marks
+mid-insert.
+
 ## Gotchas learned the hard way
 
 - Ephemeral extmarks with `virt_text_pos = 'inline'` inside a decoration
@@ -59,3 +65,8 @@ point to work that still exists elsewhere.
   `TextChanged` (see `links.decorate()`).
 - `startinsert { bang = true }` moves the cursor to end-of-line, so spec
   assertions on cursor position must expect EOL columns, not 0.
+- You cannot genuinely enter Insert mode inside a headless spec:
+  `:startinsert` is deferred until the main loop, and
+  `nvim_feedkeys('i', 'x!', false)` kills the runner mid-file (the spec's
+  output just stops, no failure, no summary). Stub `nvim_get_mode` instead
+  (see the Insert-mode spec in `tests/strike_spec.lua`).

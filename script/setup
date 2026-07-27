@@ -7,7 +7,10 @@ brew install stow
 rm ~/.zshrc || echo 'Not zshrc found, continuing...'
 rm ~/.ssh/config || echo 'No ~/.ssh/config found, continuing...'
 
-stow dot/ --target=$HOME
+# Keep lazygit's mutable state outside the stowed config directory.
+mkdir -p "$HOME/Library/Application Support/lazygit"
+
+stow dot/ --target="$HOME"
 
 # Symlink files/* into home directory as regular files
-stow files/ --target=$HOME
+stow files/ --target="$HOME"

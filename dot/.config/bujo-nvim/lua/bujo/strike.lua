@@ -115,8 +115,16 @@ function M.ranges(lines)
 end
 
 --- Re-scan `buf` and strike every done/irrelevant task block, bullet-to-EOL.
+--- Strikes render only in Normal(-ish) modes: while typing (Insert/Replace)
+--- the whole buffer is left unstruck, because watching your own words get
+--- crossed out as you write under a done task is distracting. The mode check
+--- lives HERE, not in the autocmds, so a TextChangedI recompute can never
+--- re-add marks mid-insert.
 function M.decorate(buf)
     vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+    if vim.api.nvim_get_mode().mode:find '^[iR]' then
+        return
+    end
     local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
     for _, r in ipairs(M.ranges(lines)) do
         vim.api.nvim_buf_set_extmark(buf, ns, r.row - 1, r.from - 1, {
@@ -143,7 +151,10 @@ function M.setup(opts)
                 return
             end
             vim.b[a.buf].bujo_strike = true
-            vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
+            -- InsertEnter/InsertLeave drive the mode transitions; decorate()
+            -- itself decides whether marks are drawn, so all four events can
+            -- share the same callback.
+            vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI', 'InsertEnter', 'InsertLeave' }, {
                 group = group,
                 buffer = a.buf,
                 callback = function()

@@ -15,7 +15,9 @@ M.config = {
     github = 'https://github.com/alertmediainc/', -- <repo>/issues/<n> appended
     bitbucket = 'https://bitbucket.org/alertmediaadmin/', -- <repo>/pull-requests/<n>
     -- Repos still on Bitbucket; delete an entry once it migrates to GitHub.
-    bitbucket_repos = { notify_me = true },
+    -- notify_me migrated the week of 2026-07-27: refs from before then are
+    -- Bitbucket PR numbers and no longer resolve (accepted breakage).
+    bitbucket_repos = {},
     -- Short names for long repos; anything not listed is used verbatim.
     aliases = {
         nr = 'notification_router',

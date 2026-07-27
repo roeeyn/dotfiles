@@ -15,8 +15,8 @@ describe('bujo.links', function()
             assert.equal('https://github.com/alertmediainc/src-root/issues/32', links.resolve 'src-root#32')
         end)
 
-        it('routes Bitbucket-hosted repos to Bitbucket', function()
-            assert.equal('https://bitbucket.org/alertmediaadmin/notify_me/pull-requests/6366', links.resolve 'notify_me#6366')
+        it('routes notify_me to GitHub since the 2026-07-27 migration', function()
+            assert.equal('https://github.com/alertmediainc/notify_me/issues/6366', links.resolve 'notify_me#6366')
         end)
 
         it('rejects non-refs', function()
@@ -44,7 +44,7 @@ describe('bujo.links', function()
 
         it('classifies kinds for decoration', function()
             local refs = links.refs 'MSG-1 nr#2 notify_me#3'
-            assert.same({ 'jira', 'github', 'bitbucket' }, { refs[1].kind, refs[2].kind, refs[3].kind })
+            assert.same({ 'jira', 'github', 'github' }, { refs[1].kind, refs[2].kind, refs[3].kind })
         end)
     end)
 

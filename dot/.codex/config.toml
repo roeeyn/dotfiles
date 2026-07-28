@@ -8,6 +8,15 @@ notify = ["/Users/roeeyn/.codex/computer-use/Codex Computer Use.app/Contents/Sha
 [projects."/Users/roeeyn/.dotfiles"]
 trust_level = "trusted"
 
+[projects."/Users/roeeyn/src/ynab-helper"]
+trust_level = "trusted"
+
+[projects."/Users/roeeyn/src/ralph_base_template"]
+trust_level = "trusted"
+
+[projects."/Users/roeeyn/src/navi_travel"]
+trust_level = "trusted"
+
 [projects."/Users/roeeyn/Downloads/copy"]
 trust_level = "trusted"
 

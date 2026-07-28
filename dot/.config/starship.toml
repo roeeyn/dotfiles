@@ -4,6 +4,11 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
+# Raise the per-command timeout (default 500ms). The Elixir/Erlang BEAM VM is
+# slow to cold-start, so `elixir --version` can take ~600ms and would otherwise
+# time out, logging a [WARN] from starship::utils on every prompt.
+command_timeout = 1000
+
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
 success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'

@@ -32,6 +32,11 @@ if [ -f "$HOME/.config/zsh/aliases.zsh" ]; then
   source "$HOME/.config/zsh/aliases.zsh"
 fi
 
+# Load read-only psql DB helper (db function + completion)
+if [ -f "$HOME/.config/zsh/db.zsh" ]; then
+  source "$HOME/.config/zsh/db.zsh"
+fi
+
 # Load global ENV variables
 # Load private env vars (secrets)
 ENV_PRIVATE="$HOME/.dotfiles/dot/env/.env"
@@ -43,12 +48,15 @@ fi
 alias lg=lazygit
 alias ldo=lazydocker
 alias cl=claude
-alias cls="claude --dangerously-skip-permissions"
+alias cls="claude --dangerously-skip-permissions --add-dir $HOME/src"
+alias clp='CLAUDE_CONFIG_DIR="$HOME/.claude-personal" claude --dangerously-skip-permissions'
 alias ca=cursor-agent
 alias oc=opencode
 # gwa is now a script in ~/.local/bin/gwa
 alias gwl="git worktree list"
 alias gwp="git worktree prune"
+# quick switch branches
+alias se="switch-env"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -72,10 +80,10 @@ eval "$(starship init zsh)"
 # tool version activation
 eval "$(mise activate zsh)"
 
-# Tmux taskizer keybindings (outside tmux fallback)
+# Tmux taskizer keybinding (outside tmux fallback)
 bindkey -s ^f "tmux-taskizer\n"
-bindkey -s ^o "tmux-taskizer -i\n"
-bindkey -s ^p "tmux-taskizer -q\n"
+
+source "$HOME/.switch_env.zsh"
 
 # Initialize completion system
 autoload -Uz compinit
@@ -85,6 +93,3 @@ if [[ -f ${ZDOTDIR:-$HOME}/.zcompdump && -n $(find ${ZDOTDIR:-$HOME}/.zcompdump 
 else
   compinit -C
 fi
-
-# Added by Antigravity
-export PATH="/Users/roeeyn/.antigravity/antigravity/bin:$PATH"

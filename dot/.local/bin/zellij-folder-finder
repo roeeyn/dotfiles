@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# zellij-folder-finder: fuzzy-find a project folder and open it in a new zellij tab.
+#
+# Bound to Ctrl-f in zellij (see ~/.config/zellij/config.kdl). It is launched in a
+# floating command pane; on selection it opens a NEW TAB whose shell starts in the
+# chosen folder. You're asked for a tab name, defaulting to the folder's basename.
+#
+# This is the zellij counterpart to tmux-taskizer's directory picker — same search
+# roots so the muscle memory carries over — minus the session/starter machinery.
+
+# Mirror tmux-taskizer's search roots so both tools feel the same.
+search_roots=(
+  "$HOME"
+  "$HOME/src"
+  "$HOME/playground"
+  "$HOME/Desktop"
+)
+
+# Reuse tmux-taskizer's sanitizer: strip shell-hostile chars, collapse spaces to
+# dashes, cap length — keeps tab names tidy and predictable.
+sanitize_name() {
+  printf '%s' "$1" | tr "'.:\"\\\$#()!" '___________' | tr -s ' ' '-' | cut -c1-50
+}
+
+# Pick a directory: PWD first, then one level under each search root.
+selected=$({ echo "$PWD"; find "${search_roots[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Folder: " --header="Open a new zellij tab here (ESC to cancel)")
+
+# Nothing chosen (ESC) → quietly bail; the floating pane just closes.
+if [ -z "$selected" ]; then
+  exit 0
+fi
+
+# Ask for a tab name, defaulting to the folder's basename when left blank.
+default_name=$(basename "$selected")
+read -rp "Tab name [$default_name]: " tab_name
+tab_name=$(sanitize_name "${tab_name:-$default_name}")
+
+# Open a new tab rooted in the chosen folder. new-tab switches focus to it, and
+# this pane (the finder) closes via `close_on_exit` once we return.
+zellij action new-tab --cwd "$selected" --name "$tab_name"

@@ -21,6 +21,8 @@ require('lazy').setup {
         -- import your plugins
         { import = 'plugins' },
     },
+    -- Local plugin development: plugins with `dev = true` are loaded from here.
+    dev = { path = '~/src', fallback = false },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.
     install = { colorscheme = { 'habamax' } },

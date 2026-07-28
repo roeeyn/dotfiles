@@ -4,18 +4,24 @@
 Used by slim-nvim's BufReadPost autocmd on claude-prompt-*.md files to show
 conversation context below a scissors line (git commit --verbose style).
 
-Session lookup: CWD -> project slug -> most recently modified .jsonl file.
-Only considers sessions active within MAX_AGE_SECONDS to avoid cross-session
-pollution when multiple Claude Code instances run in the same project.
+Session lookup precedence (most → least precise):
+1. Parent claude PID → ~/.claude/sessions/<PID>.json — authoritative current
+   session for the specific Claude instance that spawned us. Survives /clear
+   and disambiguates multiple instances in the same project.
+2. $CLAUDE_CODE_SESSION_ID — env-based fallback (can be stale after /clear).
+3. Most recently modified .jsonl — last resort, used when both above fail.
 """
 
 import json
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
 NUM_RESPONSES = 3
+SESSIONS_DIR = Path.home() / ".claude" / "sessions"
+PARENT_WALK_LIMIT = 12
 
 
 def get_project_dir() -> Path | None:
@@ -30,8 +36,56 @@ def get_project_dir() -> Path | None:
     return project_path if project_path.is_dir() else None
 
 
+def _ps_field(pid: int, field: str) -> str | None:
+    """Read a single ps column for `pid`, stripped. Returns None on error."""
+    try:
+        out = subprocess.check_output(
+            ["ps", "-o", f"{field}=", "-p", str(pid)],
+            stderr=subprocess.DEVNULL,
+            text=True,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+    return out.strip() or None
+
+
+def get_session_id_from_parent_claude() -> str | None:
+    """Walk up to find the controlling claude PID, then read its session
+    manifest at ~/.claude/sessions/<PID>.json for the currently active
+    sessionId. This is what changes when the user does /clear."""
+    pid = os.getppid()
+    for _ in range(PARENT_WALK_LIMIT):
+        if not pid or pid <= 1:
+            return None
+        comm = _ps_field(pid, "comm")
+        if comm and "claude" in comm.lower():
+            manifest = SESSIONS_DIR / f"{pid}.json"
+            if manifest.is_file():
+                try:
+                    data = json.loads(manifest.read_text())
+                except (json.JSONDecodeError, OSError):
+                    return None
+                return data.get("sessionId")
+            return None
+        ppid_str = _ps_field(pid, "ppid")
+        try:
+            pid = int(ppid_str) if ppid_str else 0
+        except ValueError:
+            return None
+    return None
+
+
 def get_active_session(project_dir: Path) -> Path | None:
-    """Find the most recently modified session JSONL."""
+    """Locate the active session JSONL via the precedence ladder above."""
+    for source in (
+        get_session_id_from_parent_claude,
+        lambda: os.environ.get("CLAUDE_CODE_SESSION_ID"),
+    ):
+        session_id = source()
+        if session_id:
+            pinned = project_dir / f"{session_id}.jsonl"
+            if pinned.is_file():
+                return pinned
     sessions = sorted(project_dir.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
     return sessions[0] if sessions else None
 
@@ -78,7 +132,11 @@ def main():
 
     responses = extract_responses(session)
     if responses:
-        print("\n\n---\n\n".join(responses))
+        # Distinctive separator — `---` alone collides with horizontal rules
+        # that appear inside Claude responses, making message boundaries hard
+        # to spot. The arrow-and-banner block is unlikely to occur naturally.
+        separator = "\n\n---\n=== PREVIOUS MESSAGE vvv ===\n---\n\n"
+        print(separator.join(responses))
 
 
 if __name__ == "__main__":

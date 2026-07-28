@@ -168,6 +168,8 @@ brew "ralph-orchestrator"
 brew "repomix"
 # Extremely fast Python linter, written in Rust
 brew "ruff"
+# Safe, concurrent, practical language
+brew "rust"
 # Experimental Rust compiler front-end for IDEs
 brew "rust-analyzer"
 # Rust toolchain installer
@@ -236,6 +238,8 @@ brew "xmlstarlet"
 brew "yarn"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Pluggable terminal workspace, with terminal multiplexer as the base feature
+brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Fish-like fast/unobtrusive autosuggestions for zsh
@@ -244,12 +248,6 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-# The easiest way to access your cloud.
-brew "common-fate/granted/granted"
-# A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
-brew "smudge/smudge/nightlight"
-# Supabase CLI
-brew "supabase/tap/supabase"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Communications service
@@ -406,4 +404,9 @@ vscode "vscodevim.vim"
 go "cmd/go"
 go "cmd/gofmt"
 uv "aactivator"
-uv "mcp-proxy"
+uv "mcp-proxy", source: "git+https://github.com/sparfenyuk/mcp-proxy"
+npm "@tobilu/qmd"
+npm "corepack"
+npm "typescript-language-server"
+npm "typescript"
+npm "uipro-cli"

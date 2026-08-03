@@ -13,5 +13,12 @@ return {
         require('kanagawa').setup(opts)
         vim.o.background = 'light'
         vim.cmd.colorscheme 'kanagawa-lotus'
+
+        -- Priority marker (bujo/priority.lua): its default link is
+        -- DiagnosticWarn, which lotus maps to lotusOrange2 (#e98a00) — too
+        -- washed out on the pale background. Use the darker lotusOrange,
+        -- bold. Defined here (post-colorscheme, no `default`) so it wins
+        -- over the module's `default = true` link.
+        vim.api.nvim_set_hl(0, 'BujoPriority', { fg = '#cc6d00', bold = true })
     end,
 }

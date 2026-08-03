@@ -31,6 +31,34 @@ the e2e tests point the app at a sandbox):
 | `- [<]` | scheduled |
 | `- [-]` | irrelevant |
 
+## Priority (`lua/bujo/priority.lua`)
+
+A `!` immediately after the checkbox marks a task important:
+
+```markdown
+- [ ] !renew the passport
+```
+
+The `!` lives in the task *text*, not in the brackets, so it is orthogonal
+to state: migration copies the line verbatim (the marker follows the task
+across days), `:BujoToggle` works unchanged, and a done important task is
+just `- [x] !...`. A bang anywhere else in the text is plain punctuation.
+
+Rendering (via extmark *overlay*, so line width and soft-wrap are
+unaffected):
+
+- **pending** `- [ ] !` — the `!` is painted over with a warning icon and
+  the task text is highlighted (`BujoPriority`: bold lotusOrange, overridden
+  in `lua/plugins/kanagawa.lua`; the module default links `DiagnosticWarn`);
+- **done/irrelevant** `- [x]` / `- [-]` — only a muted icon remains
+  (`BujoPriorityMuted` → `NonText`); the strikethrough takes over, so
+  finished work stops shouting;
+- **migrated/scheduled** `- [>]` / `- [<]` — currently undecorated (the raw
+  `!` stays visible); the treatment is an open decision in the `styles`
+  table at the top of `lua/bujo/priority.lua`.
+
+`<leader>ft` (pending tasks picker) floats `!` tasks to the top of the list.
+
 ## Migration (`:BujoToday` on a fresh day)
 
 If today's note doesn't exist yet, the **nearest previous existing** daily
@@ -72,7 +100,7 @@ re-runs migration.
 | `<leader>nn` | **n**ew **n**ote: `:BujoNew` |
 | `<leader>fd` | **f**ind **d**aily notes, newest first |
 | `<leader>fg` | **f**ind by **g**rep across all of `~/notes` |
-| `<leader>ft` | **f**ind **t**asks: pending `- [ ]` lines, last ~30 days |
+| `<leader>ft` | **f**ind **t**asks: pending `- [ ]` lines, last ~30 days, `!` tasks first |
 | `<leader>fs` / `<leader>fS` | save current buffer / save all (mirrors main nvim) |
 | `<leader>b{b,n,p,l,d,x,D}` | buffers: telescope list, next, prev, last, delete, force-delete, close others |
 | `-` / `<leader>po` | oil file browser (`<leader>po` mirrors main nvim) |

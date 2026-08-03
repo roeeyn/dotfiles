@@ -235,18 +235,22 @@ function M.pick_tasks()
     local conf = require('telescope.config').values
 
     local cutoff = os.date('%Y-%m-%d', os.time() - 30 * 86400) .. '.md'
-    local results = {}
+    -- Important tasks (`!` after the checkbox, see bujo/priority.lua) float
+    -- to the top; both groups stay newest-file-first.
+    local important, rest = {}, {}
     local files = daily_notes()
     for i = #files, 1, -1 do -- newest file first
         local f = files[i]
         if basename(f) >= cutoff then
             for lnum, line in ipairs(vim.fn.readfile(f)) do
                 if line:match '^%s*%- %[ %]' then
-                    results[#results + 1] = { path = f, lnum = lnum, text = line }
+                    local bucket = line:match '^%s*%- %[ %] !' and important or rest
+                    bucket[#bucket + 1] = { path = f, lnum = lnum, text = line }
                 end
             end
         end
     end
+    local results = vim.list_extend(important, rest)
 
     pickers
         .new({}, {
@@ -287,6 +291,7 @@ function M.setup(opts)
     M.root = vim.fs.normalize((opts and opts.root) or vim.env.BUJO_NOTES_DIR or '~/notes')
     require('bujo.links').setup(opts and opts.links)
     require('bujo.strike').setup(opts and opts.strike)
+    require('bujo.priority').setup(opts and opts.priority)
 
     local command = vim.api.nvim_create_user_command
     command('BujoToday', M.open_today, { desc = "Open (or create + migrate) today's daily note" })

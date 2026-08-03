@@ -57,6 +57,33 @@ clearing) when `nvim_get_mode()` reports `i`/`R`, and `InsertEnter`/
 `decorate()` on purpose — a `TextChangedI` recompute can never re-add marks
 mid-insert.
 
+## Priority marker (`lua/bujo/priority.lua`)
+
+`- [ ] !task` marks a task important. The `!` is task **text**, deliberately
+NOT a bracket state like `[!]`: the bracket char is a state machine owned by
+migrate.lua (only `[ ]` migrates), `toggle` (only `[ ]`↔`[x]`), and
+`pick_tasks` (only `[ ]` listed) — a `[!]` state would have to be taught to
+all three and would be lost the moment the task toggles to `[x]`. As text,
+the marker migrates verbatim across days and composes with every state
+(`- [x] !...` = done important task). Don't "upgrade" it to a checkbox state.
+
+The `!` is decorated with `virt_text_pos = 'overlay'`, not conceal — overlay
+paints over the cell without changing line width, so soft-wrap stays honest
+(conceal doesn't: neovim/neovim#14409, the same reason links are bare refs).
+The icon in `M.config` must stay **one cell wide** or it paints over the
+first letter of the task.
+
+Per-state treatment lives in the `styles` table at the top of the module:
+pending shouts (`BujoPriority` — default-linked to `DiagnosticWarn`, but
+overridden to bold lotusOrange in `lua/plugins/kanagawa.lua` because lotus
+maps DiagnosticWarn to a washed-out amber), `[x]`/`[-]` keep only a muted
+icon (strike.lua owns the line), `[>]`/`[<]` are an open TODO — they render
+the raw `!` untouched until decided. Pin any change in
+`tests/priority_spec.lua`.
+
+Same Insert-mode rule as strike.lua: `decorate()` clears then bails when the
+mode is `i`/`R`, so the raw `!` is editable while typing.
+
 ## Gotchas learned the hard way
 
 - Ephemeral extmarks with `virt_text_pos = 'inline'` inside a decoration

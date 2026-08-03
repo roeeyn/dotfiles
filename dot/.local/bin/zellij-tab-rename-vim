@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# zellij-tab-rename-vim: rename the current zellij tab inside $EDITOR (vim).
+#
+# Bound to "r" in zellij's Tab mode (see ~/.config/zellij/config.kdl). It runs
+# in a compact floating pane near the top, keeping the content you're naming
+# the tab after visible: the tab name is loaded into a temp file, edited in
+# vim, and applied on :wq. Quitting with :q! leaves the name untouched.
+# Default-named tabs ("Tab #N") open as an empty buffer, and saving an empty
+# buffer resets the tab back to its default name.
+
+set -euo pipefail
+
+default_name_re='^Tab #[0-9]+$'
+
+current=$(zellij action current-tab-info | sed -n 's/^name: //p')
+
+# Default names are zellij's, not the user's — open them as an empty buffer.
+bare="$current"
+if [[ $bare =~ $default_name_re ]]; then
+  bare=""
+fi
+
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+printf '%s\n' "$bare" >"$tmp"
+
+${EDITOR:-vim} "$tmp"
+
+# Only the first line becomes the name; anything below it is ignored.
+after=$(head -n 1 "$tmp")
+
+if [ -z "$after" ]; then
+  # Emptied name → back to the default "Tab #N" (skip if it already was default).
+  if [ -n "$bare" ]; then
+    zellij action undo-rename-tab
+  fi
+elif [ "$after" != "$current" ]; then
+  zellij action rename-tab "$after"
+fi

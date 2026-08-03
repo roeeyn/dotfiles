@@ -54,7 +54,22 @@ keybinds clear-defaults=true {
     }
     tab {
         bind "Ctrl t" { SwitchToMode "Normal"; }
-        bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
+        // CUSTOM: rename the tab in vim instead of the inline prompt. Opens as
+        // a compact floating strip near the top so the content you're naming
+        // the tab after stays visible (see zellij-tab-rename-vim). Geometry
+        // values must be quoted strings — bare KDL integers are ignored here.
+        bind "r" {
+            Run "zellij-tab-rename-vim" {
+                floating true
+                width "50%"
+                height "8"
+                x "25%"
+                y "2"
+                close_on_exit true
+                name "rename-tab"
+            }
+            SwitchToMode "Normal"
+        }
         bind "h" "Left" "Up" "k" { GoToPreviousTab; }
         bind "l" "Right" "Down" "j" { GoToNextTab; }
         bind "n" { NewTab; SwitchToMode "Normal"; }

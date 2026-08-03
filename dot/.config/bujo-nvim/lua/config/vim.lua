@@ -33,6 +33,13 @@ vim.opt.breakindent = true
 -- raw text for editing.
 vim.opt.conceallevel = 2
 
+-- Cursor look is owned by ghostty, not nvim: zellij swallows the OSC 12
+-- color escape, so guicursor colors can never reach the screen here —
+-- `cursor-color` (lotusRed) and `adjust-cursor-thickness` in the ghostty
+-- config do that job for every mode/app. Shapes stay nvim's defaults
+-- (block normal, thin bar insert). The insert-mode SIGNAL is the
+-- CursorLineNr badge below.
+
 -- No swap noise for a notes app; undo history persists instead.
 vim.opt.swapfile = false
 vim.opt.undofile = true
@@ -77,6 +84,27 @@ vim.keymap.set('n', '<leader>w0', '<C-w>=', { desc = 'Resize windows equally' })
 vim.keymap.set('n', '<leader>wc', '<cmd>close<cr>', { desc = 'Close the current window' })
 
 local bujo_nvim = vim.api.nvim_create_augroup('bujo-nvim', { clear = true })
+
+-- Insert-mode lamp: the current line's NUMBER becomes a lotusRed badge while
+-- inserting. Cursor escapes proved unreliable through zellij (color/blink
+-- are swallowed, see the zellij memory) and a full CursorLine repaint was
+-- too loud; the number column is nvim-rendered (nothing can swallow it) and
+-- confined to the gutter. Normal-mode CursorLineNr is captured lazily on
+-- the first InsertEnter, i.e. after the colorscheme defined it.
+local linenr_normal
+vim.api.nvim_create_autocmd('InsertEnter', {
+    group = bujo_nvim,
+    callback = function()
+        linenr_normal = linenr_normal or vim.api.nvim_get_hl(0, { name = 'CursorLineNr' })
+        vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#f2ecbc', bg = '#c84053', bold = true })
+    end,
+})
+vim.api.nvim_create_autocmd('InsertLeave', {
+    group = bujo_nvim,
+    callback = function()
+        vim.api.nvim_set_hl(0, 'CursorLineNr', linenr_normal or {})
+    end,
+})
 
 -- Distinct flash color when the yank lands in the system clipboard (`+`),
 -- mirrors main nvim / slim-nvim. kanagawa-wave springGreen on sumiInk.

@@ -30,22 +30,51 @@ local function expand_alias(name)
     return M.config.aliases[name] or name
 end
 
--- Blank out spans that must not be parsed as refs — inline markdown links
--- and bare URLs already carry their own URL — preserving byte positions.
-local function masked(line)
-    local blank = function(m)
-        return (' '):rep(#m)
-    end
-    local s = line:gsub('%[[^%]]-%]%([^%)]-%)', blank)
-    s = s:gsub('https?://%S+', blank)
-    return s
+-- Equal-length space run, so gsub masking preserves byte positions.
+local function blank(m)
+    return (' '):rep(#m)
 end
 
---- All ticket/PR references in a line, as { ref, kind, from, to } with
---- 1-based inclusive byte columns. kind is 'jira' | 'github' | 'bitbucket'.
+-- Bare URLs match greedily (%S+), which drags in closing punctuation that
+-- belongs to the prose, not the URL: `(see https://x.test)`,
+-- `https://x.test, then...`. Trim it off before the URL becomes a ref,
+-- keeping a trailing `)` for each unmatched `(` inside the URL so
+-- wikipedia-style `Foo_(bar)` paths survive (same policy as GitHub/Slack
+-- linkifiers).
+local function trim_url(url)
+    while true do
+        local last = url:sub(-1)
+        if last:match '[.,;:!?]' then
+            url = url:sub(1, -2)
+        elseif last == ')' then
+            local _, opens = url:gsub('%(', '')
+            local _, closes = url:gsub('%)', '')
+            if closes <= opens then
+                break
+            end
+            url = url:sub(1, -2)
+        else
+            break
+        end
+    end
+    return url
+end
+
+--- All link references in a line, as { ref, kind, from, to } with 1-based
+--- inclusive byte columns. kind is 'jira' | 'github' | 'bitbucket' | 'url'.
 function M.refs(line)
-    line = masked(line)
+    -- Inline markdown links and <autolinks> already carry their own URL and
+    -- their own render-markdown decoration; blank them before any scanning.
+    line = line:gsub('%[[^%]]-%]%([^%)]-%)', blank):gsub('<https?://[^%s>]*>', blank)
     local out = {}
+
+    -- Bare URLs, opened verbatim. Scanned first, then blanked, so a URL's
+    -- path can't be misread as a ticket ref by the passes below.
+    for from, url in line:gmatch '()(https?://%S+)' do
+        url = trim_url(url)
+        out[#out + 1] = { ref = url, kind = 'url', from = from, to = from + #url - 1 }
+    end
+    line = line:gsub('https?://%S+', blank)
 
     -- repo#NN — the greedy char set makes the start boundary automatic.
     for from, ref, after in line:gmatch '()([%w_.%-]+#%d+)()' do
@@ -75,6 +104,9 @@ end
 
 --- Reconstruct the URL for a single reference, or nil if it isn't one.
 function M.resolve(ref)
+    if ref:match '^https?://' then
+        return ref -- a bare URL already is its own URL
+    end
     if ref:match '^%u+%-%d+$' then
         return M.config.jira .. ref
     end
@@ -197,7 +229,9 @@ end
 
 local ns = vim.api.nvim_create_namespace 'bujo-links'
 
-local ICONS = { jira = '󰖟 ', github = '󰊤 ', bitbucket = '󰂨 ' }
+-- url reuses render-markdown's default hyperlink icon (link.hyperlink),
+-- so bare URLs and <autolink>s look the same.
+local ICONS = { jira = '󰖟 ', github = '󰊤 ', bitbucket = '󰂨 ', url = '󰌹 ' }
 
 --- Re-scan `buf` and decorate every bare ref with an icon + link styling.
 function M.decorate(buf)

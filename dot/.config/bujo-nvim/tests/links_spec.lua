@@ -19,6 +19,10 @@ describe('bujo.links', function()
             assert.equal('https://github.com/alertmediainc/notify_me/issues/6366', links.resolve 'notify_me#6366')
         end)
 
+        it('passes bare URLs through verbatim', function()
+            assert.equal('https://example.com/docs?q=1', links.resolve 'https://example.com/docs?q=1')
+        end)
+
         it('rejects non-refs', function()
             assert.is_nil(links.resolve 'plain word')
             assert.is_nil(links.resolve '2026-07-16')
@@ -33,9 +37,31 @@ describe('bujo.links', function()
             assert.is_nil(links.find(line, 7)) -- on 'Review'
         end)
 
-        it('ignores refs inside markdown links and bare URLs', function()
+        it('masks markdown links; bare URLs become url refs, not ticket refs', function()
             local line = 'see [nr#52](https://github.com/alertmediainc/notification_router/pull/52) and https://x.test/MSG-1'
-            assert.same({}, links.refs(line))
+            local from = line:find('https://x.test', 1, true)
+            local refs = links.refs(line)
+            assert.same({ { ref = 'https://x.test/MSG-1', kind = 'url', from = from, to = #line } }, refs)
+        end)
+
+        it('opens a bare URL under the cursor', function()
+            local line = '- [ ] read https://example.com/docs then MSG-9'
+            assert.equal('https://example.com/docs', links.find(line, 12))
+            assert.equal('https://alertmedia.atlassian.net/browse/MSG-9', links.find(line, 42))
+        end)
+
+        it('leaves <autolinks> to render-markdown', function()
+            assert.same({}, links.refs 'auto <https://x.test> done')
+        end)
+
+        -- Balanced-paren trimming: keep a trailing `)` only when the URL
+        -- contains an unmatched `(` (wikipedia-style paths).
+        it('trims trailing prose punctuation off bare URLs', function()
+            assert.equal('https://x.test', links.refs('see https://x.test.')[1].ref)
+            assert.equal('https://x.test', links.refs('(see https://x.test)')[1].ref)
+            assert.equal('https://x.test', links.refs('really? https://x.test),')[1].ref)
+            assert.equal('https://en.wikipedia.org/wiki/Foo_(bar)', links.refs('read https://en.wikipedia.org/wiki/Foo_(bar) today')[1].ref)
+            assert.equal('https://en.wikipedia.org/wiki/Foo_(bar)', links.refs('(read https://en.wikipedia.org/wiki/Foo_(bar))')[1].ref)
         end)
 
         it('does not treat headings or dates as refs', function()

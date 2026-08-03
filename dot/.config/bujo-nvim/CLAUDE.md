@@ -22,7 +22,10 @@ Daily notes carry bare refs (`MSG-1234`, `repo#56`), never full markdown
 links: Neovim computes soft-wrap from raw buffer columns even under conceal
 (neovim/neovim#14409, open), so concealed URLs make lines wrap weirdly.
 `gx`/`<leader>o` reconstructs the URL; `:BujoShortenLinks` converts old links;
-extmarks give refs the render-markdown link look.
+extmarks give refs the render-markdown link look. Bare `https://` URLs are a
+fourth ref kind (`url`, 󰌹 icon, opened verbatim) — bare because tree-sitter
+only parses `<url>` autolinks (render-markdown owns those, so links.lua masks
+them), never naked URLs.
 
 **Adding a repo alias** (label ≠ GitHub repo name): add it to `aliases` in
 `M.config` at the top of `links.lua`, and pin it in `tests/links_spec.lua`

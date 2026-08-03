@@ -4,21 +4,6 @@ keybind = shift+enter=text:\x1b\r
 # Hide mouse cursor when typing
 mouse-hide-while-typing = true
 
-# Cursor: fixed high-contrast color at the terminal level. Zellij swallows
-# OSC 12, so apps (nvim) cannot recolor the cursor per-mode inside it — a
-# static terminal-level color is the reliable way to make the thin insert
-# bar visible. lotusRed: dark on the light kanagawa-lotus notes app, bright
-# on the dark tokyonight editors. cursor-text = char color under the block.
-cursor-color = #c84053
-cursor-text = #f2ecbc
-
-# Bar-cursor thickness: ABSOLUTE pixels, not a percentage — the base bar is
-# ~1px on Retina, so percentage adjustments are imperceptible (ghostty
-# discussion #8441 confirms pixel values work on macOS; its sibling
-# adjust-cursor-height is broken, #10514, but thickness is not).
-# Requires a full Ghostty restart, not just cmd+shift+, reload.
-adjust-cursor-thickness = 4
-
 # Background image (Ghostty 1.2.0+). PNG or JPEG, absolute path.
 background-image = /Users/roeeyn/.dotfiles/wallpapers/synthwave-sunset-city-stockcake.jpg
 background-image-fit = cover

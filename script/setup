@@ -10,7 +10,7 @@ rm ~/.ssh/config || echo 'No ~/.ssh/config found, continuing...'
 # Keep lazygit's mutable state outside the stowed config directory.
 mkdir -p "$HOME/Library/Application Support/lazygit"
 
-stow dot/ --target="$HOME"
+stow --restow dot/ --target="$HOME"
 
 # Symlink files/* into home directory as regular files
-stow files/ --target="$HOME"
+stow --restow files/ --target="$HOME"

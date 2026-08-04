@@ -100,6 +100,8 @@ brew "stylua"
 brew "tailwindcss-language-server"
 # Terraform Language Server
 brew "terraform-ls"
+# Official tldr client written in Rust
+brew "tlrc"
 # Parser generator tool
 brew "tree-sitter-cli"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -122,6 +124,8 @@ brew "zsh-history-substring-search"
 brew "zsh-syntax-highlighting"
 # Web browser focusing on privacy
 cask "brave-browser"
+# Open source IDE for exploring and testing APIs
+cask "bruno"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
 # Anthropic's official Claude AI desktop app
@@ -160,6 +164,8 @@ cask "slack"
 cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"
+# Multiplayer code editor
+cask "zed"
 # Video communication and virtual meeting platform
 cask "zoom"
 vscode "bierner.markdown-mermaid"

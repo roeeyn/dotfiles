@@ -1,0 +1,24 @@
+# personal-profile packages, included by the shared ~/.Brewfile.
+# Safe, concurrent, practical language
+brew "rust"
+# Experimental Rust compiler front-end for IDEs
+brew "rust-analyzer"
+# Rust toolchain installer
+brew "rustup"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
+# Communications service
+cask "amazon-chime"
+# Memory training application
+cask "anki"
+# Chromium based browser
+cask "arc"
+# Multi-track audio editor and recorder
+cask "audacity"
+uv "aactivator"
+uv "mcp-proxy", source: "git+https://github.com/sparfenyuk/mcp-proxy"
+npm "typescript-language-server"
+npm "typescript"
+npm "uipro-cli"

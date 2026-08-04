@@ -1,9 +1,5 @@
-tap "anomalyco/tap"
 tap "common-fate/granted"
 tap "smudge/smudge"
-tap "sqitchers/sqitch"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Pyright fork with various improvements and built-in pylance features
@@ -14,14 +10,10 @@ brew "bash-language-server"
 brew "bat"
 # Python code formatter
 brew "black"
-# CLI of the open-source IDE For exploring and testing APIs
-brew "bruno-cli"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Securely send things from one computer to another
 brew "croc"
-# Suite of command-line tools for converting to and working with CSV
-brew "csvkit"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
 # Language service for Docker Compose documents
@@ -30,16 +22,12 @@ brew "docker-compose-langserver"
 brew "dockerfile-language-server"
 # Language Server and Debugger for Elixir
 brew "elixir-ls"
-# Official Elixir Language Server Protocol implementation
-brew "expert"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# GNU database manager
-brew "gdbm"
 # GitHub command-line tool
 brew "gh"
 # Syntax-highlighting pager for git and diff output
@@ -52,8 +40,6 @@ brew "gnupg"
 brew "go-task"
 # Terminal based graphical activity monitor inspired by gtop and vtop
 brew "gotop"
-# GitHub Markdown previewer
-brew "grip"
 # Improved top (interactive process viewer)
 brew "htop"
 # GNU utilities for networking
@@ -88,12 +74,8 @@ brew "neovim"
 brew "tree"
 # Password manager
 brew "pass"
-# Highly capable, feature-rich programming language
-brew "perl"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
-# PostgreSQL syntax beautifier
-brew "pgformatter"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 # Fast, disk space efficient package manager
@@ -104,28 +86,14 @@ brew "postgresql@15"
 brew "pre-commit"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
-# Unix pager optimized for psql
-brew "pspg"
-# Static type checker for Python
-brew "pyright"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.13"
-# Persistent key-value database, with built-in net interface
-brew "redis"
 # Pack repository contents into a single AI-friendly file
 brew "repomix"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Extremely fast Python linter, written in Rust
 brew "ruff"
-# Safe, concurrent, practical language
-brew "rust"
-# Experimental Rust compiler front-end for IDEs
-brew "rust-analyzer"
-# Rust toolchain installer
-brew "rustup"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -140,8 +108,6 @@ brew "stylua"
 brew "tailwindcss-language-server"
 # Terraform Language Server
 brew "terraform-ls"
-# Official tldr client written in Rust
-brew "tlrc"
 # Parser generator tool
 brew "tree-sitter-cli"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -152,10 +118,6 @@ brew "vim"
 brew "wget"
 # JavaScript package manager
 brew "yarn"
-# Blazing fast terminal file manager written in Rust, based on async I/O
-brew "yazi"
-# Process YAML, JSON, XML, CSV and properties documents from the CLI
-brew "yq"
 # Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
 # Shell extension to navigate your filesystem faster
@@ -166,28 +128,8 @@ brew "zsh-autosuggestions"
 brew "zsh-history-substring-search"
 # Fish shell like syntax highlighting for zsh
 brew "zsh-syntax-highlighting"
-# The AI coding agent built for the terminal.
-brew "anomalyco/tap/opencode", trusted: true
-# The easiest way to access your cloud.
-brew "common-fate/granted/granted", trusted: true
-# A CLI for configuring 'Night Shift' on macOS 🌕🌖🌗🌘🌑
-brew "smudge/smudge/nightlight", trusted: true
-# Sensible database change management
-brew "sqitchers/sqitch/sqitch", args: ["with-postgres-support"], trusted: true
-# Password manager that keeps all passwords secure behind one password
-cask "1password"
-# Communications service
-cask "amazon-chime"
-# Memory training application
-cask "anki"
-# Chromium based browser
-cask "arc"
-# Multi-track audio editor and recorder
-cask "audacity"
 # Web browser focusing on privacy
 cask "brave-browser"
-# Open source IDE for exploring and testing APIs
-cask "bruno"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
 # Anthropic's official Claude AI desktop app
@@ -222,16 +164,12 @@ cask "openvpn-connect"
 cask "qlmarkdown"
 # Control your tools with a few keystrokes
 cask "raycast"
-# Create desktop apps by chatting with AI
-cask "raycast-glaze"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
 cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"
-# Multiplayer code editor
-cask "zed"
 # Video communication and virtual meeting platform
 cask "zoom"
 vscode "bierner.markdown-mermaid"
@@ -239,7 +177,6 @@ vscode "bradlc.vscode-tailwindcss"
 vscode "docker.docker"
 vscode "eamodio.gitlens"
 vscode "esbenp.prettier-vscode"
-vscode "hashicorp.terraform"
 vscode "jakebecker.elixir-ls"
 vscode "kamikillerto.vscode-colorize"
 vscode "mechatroner.rainbow-csv"
@@ -248,7 +185,6 @@ vscode "ms-azuretools.vscode-docker"
 vscode "ms-python.debugpy"
 vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
-vscode "ms-python.vscode-python-envs"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vsliveshare.vsliveshare"
 vscode "phoenixframework.phoenix"
@@ -259,12 +195,11 @@ vscode "vscode-icons-team.vscode-icons"
 vscode "vscodevim.vim"
 go "cmd/go"
 go "cmd/gofmt"
-go "github.com/AlexanderGrooff/mermaid-ascii"
-uv "aactivator"
-uv "mcp-proxy", source: "git+https://github.com/sparfenyuk/mcp-proxy"
-uv "pyright"
 npm "@tobilu/qmd"
 npm "corepack"
-npm "typescript-language-server"
-npm "typescript"
-npm "uipro-cli"
+
+# Machine-specific packages provided by the stowed profile (work overlay or
+# profiles/personal). Brewfiles are Ruby, so this include keeps Strap's
+# single `brew bundle --global` covering both.
+local_brewfile = File.join(Dir.home, ".Brewfile.local")
+instance_eval(File.read(local_brewfile), local_brewfile) if File.exist?(local_brewfile)

@@ -120,6 +120,12 @@ brew "repomix"
 brew "ripgrep"
 # Extremely fast Python linter, written in Rust
 brew "ruff"
+# Safe, concurrent, practical language
+brew "rust"
+# Experimental Rust compiler front-end for IDEs
+brew "rust-analyzer"
+# Rust toolchain installer
+brew "rustup"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -146,6 +152,8 @@ brew "vim"
 brew "wget"
 # JavaScript package manager
 brew "yarn"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
 # Pluggable terminal workspace, with terminal multiplexer as the base feature
@@ -166,6 +174,16 @@ brew "common-fate/granted/granted", trusted: true
 brew "smudge/smudge/nightlight", trusted: true
 # Sensible database change management
 brew "sqitchers/sqitch/sqitch", args: ["with-postgres-support"], trusted: true
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
+# Communications service
+cask "amazon-chime"
+# Memory training application
+cask "anki"
+# Chromium based browser
+cask "arc"
+# Multi-track audio editor and recorder
+cask "audacity"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Open source IDE for exploring and testing APIs
@@ -242,6 +260,11 @@ vscode "vscodevim.vim"
 go "cmd/go"
 go "cmd/gofmt"
 go "github.com/AlexanderGrooff/mermaid-ascii"
+uv "aactivator"
+uv "mcp-proxy", source: "git+https://github.com/sparfenyuk/mcp-proxy"
 uv "pyright"
 npm "@tobilu/qmd"
 npm "corepack"
+npm "typescript-language-server"
+npm "typescript"
+npm "uipro-cli"

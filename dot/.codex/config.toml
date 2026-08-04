@@ -1,11 +1,20 @@
-model = "gpt-5.6-sol"
-model_reasoning_effort = "high"
+model = "gpt-5.6-terra"
+model_reasoning_effort = "medium"
 personality = "pragmatic"
 
 
 notify = ["/Users/roeeyn/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 
 [projects."/Users/roeeyn/.dotfiles"]
+trust_level = "trusted"
+
+[projects."/Users/roeeyn/src/ynab-helper"]
+trust_level = "trusted"
+
+[projects."/Users/roeeyn/src/ralph_base_template"]
+trust_level = "trusted"
+
+[projects."/Users/roeeyn/src/navi_travel"]
 trust_level = "trusted"
 
 [projects."/Users/roeeyn/Downloads/copy"]
@@ -24,6 +33,9 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/roeeyn/src/notify_me"]
+trust_level = "trusted"
+
+[projects."/Users/roeeyn/src/numerodon"]
 trust_level = "trusted"
 
 [mcp_servers.atlassian-rovo]
@@ -63,7 +75,7 @@ gpt-5-codex = "gpt-5.3-codex"
 
 [tui.model_availability_nux]
 "gpt-5.5" = 1
-"gpt-5.6-sol" = 2
+"gpt-5.6-sol" = 3
 
 [desktop]
 followUpQueueMode = "queue"

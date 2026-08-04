@@ -6,7 +6,3 @@ set -e
 # free second convergence pass: anything that could not happen before the
 # dependencies existed (e.g. the private work-overlay clone) is retried.
 "$(dirname "$0")/setup"
-
-# Register user-scope Claude Code MCP servers from declarative config.
-# After setup so it reads the freshly (re)stowed config.
-"$(dirname "$0")/sync-mcps"

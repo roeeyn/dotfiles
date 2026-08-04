@@ -1,8 +1,0 @@
-{
-  "bitbucket": {
-    "type": "stdio",
-    "command": "/Users/roeeyn/src/mcp-server-atlassian-bitbucket/start-mcp.sh",
-    "args": [],
-    "env": {}
-  }
-}

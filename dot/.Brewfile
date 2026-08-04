@@ -1,5 +1,3 @@
-tap "common-fate/granted"
-tap "smudge/smudge"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Pyright fork with various improvements and built-in pylance features

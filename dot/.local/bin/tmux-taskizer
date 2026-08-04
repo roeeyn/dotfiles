@@ -7,6 +7,14 @@
 #   tmux-taskizer -q     → quick prompt: ask for prompt & dir, choose claude/opencode/none
 #
 
+# Directory-picker roots. Profiles can append machine-specific roots via
+# colon-separated DOTFILES_EXTRA_SEARCH_ROOTS (e.g. the work OneDrive desktop).
+search_roots=("$HOME" "$HOME/src" "$HOME/playground" "$HOME/Desktop")
+if [ -n "${DOTFILES_EXTRA_SEARCH_ROOTS:-}" ]; then
+  IFS=':' read -ra _extra_roots <<<"$DOTFILES_EXTRA_SEARCH_ROOTS"
+  search_roots+=("${_extra_roots[@]}")
+fi
+
 sanitize_name() {
   printf '%s' "$1" | tr "'.:\"\\\$#()!" '___________' | tr -s ' ' '-' | cut -c1-50
 }
@@ -71,7 +79,7 @@ if [ "$quick_prompt" = true ]; then
   fi
 
   # Pick working directory (default: PWD)
-  selected=$({ echo "$PWD"; find ~ ~/src ~/playground ~/Desktop /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory (default PWD): " --header="Press ESC to use $PWD")
+  selected=$({ echo "$PWD"; find "${search_roots[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory (default PWD): " --header="Press ESC to use $PWD")
   work_dir="${selected:-$PWD}"
 
   selected_starter=$(printf '%s\n' 'claude' 'opencode' 'none' | fzf --prompt="Starter: " --header="ESC defaults to claude")
@@ -115,7 +123,7 @@ if tmux has-session -t="$session_name" 2>/dev/null; then
 fi
 
 # Pick working directory via fzf, with PWD as the first option
-selected=$({ echo "$PWD"; find ~ ~/src ~/playground ~/Desktop /Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory: ")
+selected=$({ echo "$PWD"; find "${search_roots[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null; } | fzf --prompt="Directory: ")
 if [ -z "$selected" ]; then
   echo "No directory selected, aborting."
   exit 1

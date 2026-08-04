@@ -68,11 +68,12 @@ done
 # Keep lazygit's mutable state outside the stowed config directory.
 mkdir -p "$HOME/Library/Application Support/lazygit"
 
-# Real dirs so stow never folds ~/.ssh into the repo (ssh-keygen must
-# not write private keys into the repo tree) and both the dot/ and
-# profile packages can coexist inside it.
-mkdir -p "$HOME/.ssh/config.d"
-chmod 700 "$HOME/.ssh"
+# Real dirs so stow never folds ~/.ssh or ~/.gnupg into the repo
+# (ssh-keygen and gpg must not write private keys, keyrings, or sockets
+# into the repo tree) and both the dot/ and profile packages can
+# coexist inside them.
+mkdir -p "$HOME/.ssh/config.d" "$HOME/.gnupg"
+chmod 700 "$HOME/.ssh" "$HOME/.gnupg"
 
 stow --restow dot/ --target="$HOME"
 

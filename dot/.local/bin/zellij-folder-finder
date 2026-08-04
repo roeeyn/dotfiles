@@ -9,14 +9,18 @@
 # This is the zellij counterpart to tmux-taskizer's directory picker — same search
 # roots so the muscle memory carries over — minus the session/starter machinery.
 
-# Mirror tmux-taskizer's search roots so both tools feel the same.
+# Mirror tmux-taskizer's search roots so both tools feel the same. Profiles
+# append machine-specific roots via colon-separated DOTFILES_EXTRA_SEARCH_ROOTS.
 search_roots=(
   "$HOME"
   "$HOME/src"
   "$HOME/playground"
   "$HOME/Desktop"
-  "/Users/roeeyn/Library/CloudStorage/OneDrive-AlertMedia/Desktop"
 )
+if [ -n "${DOTFILES_EXTRA_SEARCH_ROOTS:-}" ]; then
+  IFS=':' read -ra _extra_roots <<<"$DOTFILES_EXTRA_SEARCH_ROOTS"
+  search_roots+=("${_extra_roots[@]}")
+fi
 
 # Reuse tmux-taskizer's sanitizer: strip shell-hostile chars, collapse spaces to
 # dashes, cap length — keeps tab names tidy and predictable.

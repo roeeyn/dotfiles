@@ -115,3 +115,7 @@ packer_compiled.lua
 
 # private work overlay (nested clone, never tracked here)
 profiles/work/
+
+# codex rewrites its config constantly (project trusts, app-managed MCP
+# blocks) — machine-local runtime state, not shared config
+dot/.codex/config.toml

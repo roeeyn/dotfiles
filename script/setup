@@ -3,34 +3,44 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-# shellcheck disable=SC2034  # consumed by select_profile once implemented
 PROFILE_FILE="$HOME/.dotfiles-profile"
 WORK_OVERLAY_REPO="git@github.com:roeeyn/dotfiles-work.git"
 
 # ----------------------------------------------------------------------
-# Profile preflight — prints the chosen profile name on stdout.
+# Profile preflight — RESOLVES the profile and prints its name on stdout.
+# Persistence and switch cleanup are handled by the main flow below;
+# this function only decides.
 #
 # Contract:
-#   - `script/setup <profile>` selects <profile>; a bare `script/setup`
-#     reuses the selection saved in $PROFILE_FILE.
+#   - Precedence: CLI arg > $DOTFILES_PROFILE env > $PROFILE_FILE marker
+#     > default "personal". The marker MUST outrank the default: Strap
+#     re-runs this script bare, and a work machine must not silently
+#     fall back to personal.
 #   - Validate against the folders in profiles/ — except "work", which
 #     is always valid even before the private overlay has been cloned.
-#   - Strap runs this script non-interactively: with no saved profile,
-#     no argument, and no TTY, fail with instructions instead of hanging.
-#   - Persist the final selection to $PROFILE_FILE so re-runs converge.
+#   - Diagnostics go to STDOUT: Strap discards stderr (2>/dev/null)
+#     unless STRAP_DEBUG is set, so stderr messages are invisible.
 #
-# TODO(roeeyn): implement select_profile. Open decision that is yours:
-# what does a re-run with a DIFFERENT profile than the saved one do —
-# switch silently, or refuse unless the user passes --force?
+# TODO(roeeyn): implement select_profile.
 select_profile() {
-  echo "select_profile is not implemented yet; see the TODO above" >&2
+  echo "select_profile is not implemented yet; see the TODO above"
   return 1
 }
 
+command -v stow >/dev/null || brew install stow
+
+PREV_PROFILE="$(cat "$PROFILE_FILE" 2>/dev/null || true)"
 PROFILE="$(select_profile "$@")"
 echo "Setting up profile: $PROFILE"
 
-command -v stow >/dev/null || brew install stow
+# Switching profiles: unstow the old overlay first so none of its links
+# leak into the new profile (stow only removes links the package owns).
+if [ -n "$PREV_PROFILE" ] && [ "$PREV_PROFILE" != "$PROFILE" ] &&
+  [ -d "profiles/$PREV_PROFILE" ]; then
+  echo "Profile switch: $PREV_PROFILE -> $PROFILE (unstowing $PREV_PROFILE)"
+  stow --delete -d profiles "$PREV_PROFILE" --target="$HOME"
+fi
+echo "$PROFILE" >"$PROFILE_FILE"
 
 # Adopt pre-existing real files once; never touch our own symlinks.
 for f in "$HOME/.zshrc" "$HOME/.ssh/config"; do

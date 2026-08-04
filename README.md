@@ -8,6 +8,44 @@ For setting up your computer:
 
 Happy coding!
 
+## TEMPORARY — testing `new-main` on the personal machine
+
+> Delete this section once both machines run this branch.
+
+```sh
+cd ~/.dotfiles
+cp dot/.codex/config.toml /tmp/codex-backup.toml   # untracked on this branch
+git fetch origin
+git checkout -- dot/.codex/config.toml 2>/dev/null || true
+git checkout new-main
+cp /tmp/codex-backup.toml dot/.codex/config.toml   # restore; gitignored now
+./script/setup                                     # defaults to the personal profile
+```
+
+Verify (all four must pass):
+
+```sh
+git config user.email                    # rodrigo.medina.neri@gmail.com
+git config commit.gpgsign                # true
+ssh -G github.com | grep identityfile    # ~/.ssh/id_ed25519
+ls -l ~/.gitconfig.local ~/.ssh/config.d/personal ~/.Brewfile.local ~/.gnupg/gpg-agent.conf
+```
+
+Then reconcile Homebrew:
+
+```sh
+brew bundle --global             # installs shared promotions (tlrc, bruno, zed, ...)
+brew bundle cleanup --global     # review the "Would uninstall" list, then add --force
+```
+
+Also open a NEW terminal and confirm zsh starts silently (no missing-file
+errors) and git/ssh/lazygit feel normal. If ssh grabs the wrong key or a
+symlink above is missing, stop and report — do not force anything.
+
+Rollback if needed: `git checkout master && ./script/setup` is NOT enough
+(master predates profiles); instead `git checkout master`, then manually
+`stow --restow dot/ files/` and re-check `git config user.email`.
+
 ## Profiles
 
 One branch serves every machine. `dot/` and `files/` are the shared Stow

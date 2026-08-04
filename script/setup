@@ -11,29 +11,42 @@ WORK_OVERLAY_REPO="git@github-personal:roeeyn/dotfiles-work.git"
 
 # ----------------------------------------------------------------------
 # Profile preflight — RESOLVES the profile and prints its name on stdout.
-# Persistence and switch cleanup are handled by the main flow below;
-# this function only decides.
+# Its stdout is the value channel (captured below), so it prints nothing
+# else; the main flow reports failures on stdout, where Strap shows them
+# (Strap discards stderr unless STRAP_DEBUG is set). Persistence and
+# switch cleanup are handled by the main flow too; this function only
+# decides.
 #
-# Contract:
-#   - Precedence: CLI arg > $DOTFILES_PROFILE env > $PROFILE_FILE marker
-#     > default "personal". The marker MUST outrank the default: Strap
-#     re-runs this script bare, and a work machine must not silently
-#     fall back to personal.
-#   - Validate against the folders in profiles/ — except "work", which
-#     is always valid even before the private overlay has been cloned.
-#   - Diagnostics go to STDOUT: Strap discards stderr (2>/dev/null)
-#     unless STRAP_DEBUG is set, so stderr messages are invisible.
-#
-# TODO(roeeyn): implement select_profile.
+# Precedence: CLI arg > $DOTFILES_PROFILE env > $PROFILE_FILE marker
+# > default "personal". The marker MUST outrank the default: Strap
+# re-runs this script bare, and a work machine must not silently fall
+# back to personal. Valid profiles are the folders in profiles/, plus
+# "work", which is valid even before the private overlay is cloned.
 select_profile() {
-  echo "select_profile is not implemented yet; see the TODO above"
+  local profile
+  profile="${1:-${DOTFILES_PROFILE:-}}"
+  if [ -z "$profile" ] && [ -f "$PROFILE_FILE" ]; then
+    profile="$(cat "$PROFILE_FILE")"
+  fi
+  profile="${profile:-personal}"
+
+  case "$profile" in */* | .*) return 1 ;; esac
+  if [ "$profile" = "work" ] || [ -d "profiles/$profile" ]; then
+    echo "$profile"
+    return 0
+  fi
   return 1
 }
 
 command -v stow >/dev/null || brew install stow
 
 PREV_PROFILE="$(cat "$PROFILE_FILE" 2>/dev/null || true)"
-PROFILE="$(select_profile "$@")"
+if ! PROFILE="$(select_profile "$@")"; then
+  echo "Unknown profile '${1:-${DOTFILES_PROFILE:-}}'." \
+    "Available: $( (ls profiles/ 2>/dev/null; echo work) | sort -u | tr '\n' ' ')"
+  echo "Usage: script/setup [profile]  (or DOTFILES_PROFILE=<profile>)"
+  exit 1
+fi
 echo "Setting up profile: $PROFILE"
 
 # Switching profiles: unstow the old overlay first so none of its links

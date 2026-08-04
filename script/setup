@@ -4,7 +4,10 @@ set -e
 cd "$(dirname "$0")/.."
 
 PROFILE_FILE="$HOME/.dotfiles-profile"
-WORK_OVERLAY_REPO="git@github.com:roeeyn/dotfiles-work.git"
+# Cloned via the github-personal ssh alias from the SHARED ssh config:
+# the work machine's github.com host uses the EMU key, which cannot
+# access personal private repos.
+WORK_OVERLAY_REPO="git@github-personal:roeeyn/dotfiles-work.git"
 
 # ----------------------------------------------------------------------
 # Profile preflight — RESOLVES the profile and prints its name on stdout.

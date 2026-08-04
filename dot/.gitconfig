@@ -1,14 +1,11 @@
 [user]
 	name = Rodrigo Medina
-	email = rodrigo.medina@alertmedia.com
 [github]
 	user = roeeyn
 [push]
 	default = simple
 [credential]
 	helper = osxkeychain
-[commit]
-	gpgsign = false
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [pull]
@@ -26,3 +23,7 @@
     conflictStyle = zdiff3
 [fetch]
 	prune = true
+# Profile-provided identity and signing (stowed by profiles/personal or the
+# private work overlay). Last include wins, so profile values override.
+[include]
+	path = ~/.gitconfig.local

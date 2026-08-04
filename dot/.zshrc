@@ -83,7 +83,8 @@ eval "$(mise activate zsh)"
 # Tmux taskizer keybinding (outside tmux fallback)
 bindkey -s ^f "tmux-taskizer\n"
 
-source "$HOME/.alert_media.zsh"
+# Profile overlay (stowed by profiles/work on work machines only)
+[[ -f "$HOME/.alert_media.zsh" ]] && source "$HOME/.alert_media.zsh"
 source "$HOME/.switch_env.zsh"
 
 # Initialize completion system

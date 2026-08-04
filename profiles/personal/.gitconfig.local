@@ -1,0 +1,5 @@
+[user]
+	email = rodrigo.medina.neri@gmail.com
+	signingkey = 615B67D406A71EC5
+[commit]
+	gpgsign = true

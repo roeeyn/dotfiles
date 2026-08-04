@@ -46,6 +46,38 @@ Rollback if needed: `git checkout master && ./script/setup` is NOT enough
 (master predates profiles); instead `git checkout master`, then manually
 `stow --restow dot/ files/` and re-check `git config user.email`.
 
+### Reviewing the migration (draft PR)
+
+Create the draft PR from the personal machine (the work gh account is EMU
+and cannot act on this repo), or via
+<https://github.com/roeeyn/dotfiles/compare/master...new-main>:
+
+```sh
+gh pr create --draft --base master --head new-main \
+  --title "Profile-based single-branch migration" \
+  --body "Review-only draft; will be closed, not merged. Review commit by commit."
+```
+
+Do NOT review the whole Files-changed diff — it drags in ~99 already-lived-in
+work-branch commits. Review these migration commits, in order (Commits tab,
+one at a time):
+
+| Commit | What to look at |
+| --- | --- |
+| `28ddd2d` | merge baseline — only the union .Brewfile resolution is new |
+| `a6ae18e` | Phase 0: profiles/ skeleton, idempotent setup rewrite |
+| `2e5bf98` | profile-switch semantics, strap-after-setup convergence pass |
+| `e175829` | Phase 1: gitconfig include seam, ssh config.d split, alert_media out |
+| `7caed8c` | .gitkeep collision fix, ~/.ssh fold guard |
+| `deba83d` | select_profile implementation |
+| `d62d393` | Phase 2: search-roots env seam, codex untrack, gpg-agent seam |
+| `9dec42f` | Phase 4: Brewfile split (shared + .Brewfile.local include) |
+| `42a8309` | prune: stale backups, work-only taps relocation |
+| `c680ad6` | prune: dep removals per review |
+| `d8f967b` | brew-sync script + docs |
+| `d0bb807` | tlrc/bruno/zed promoted to shared |
+| `55cbd2d` | sync-mcps retirement |
+
 ## Profiles
 
 One branch serves every machine. `dot/` and `files/` are the shared Stow

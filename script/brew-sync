@@ -1,0 +1,65 @@
+#!/bin/bash
+# brew-sync: reconcile installed Homebrew packages with the split Brewfiles.
+#
+# The Brewfile is split: dot/.Brewfile declares the SHARED packages and ends
+# with a Ruby include of ~/.Brewfile.local, which the stowed profile provides
+# (profiles/personal, or the private work overlay in profiles/work). A plain
+# `brew bundle dump --global --force` would flatten that split by overwriting
+# ~/.Brewfile with everything installed — never run that again. Use this:
+#
+#   script/brew-sync           # report drift; changes nothing (default)
+#   script/brew-sync --apply   # append newly installed packages to this
+#                              # machine's .Brewfile.local
+#
+# Routing policy: new packages land in the machine's PROFILE local, because
+# only this machine is known to want them. Promoting one to everyone is a
+# deliberate act — move its line into dot/.Brewfile by hand. Entries that are
+# declared but no longer installed are only reported: delete the line
+# yourself, then `brew bundle cleanup --global` to uninstall leftovers.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+PROFILE="${DOTFILES_PROFILE:-$(cat "$HOME/.dotfiles-profile" 2>/dev/null || echo personal)}"
+LOCAL="profiles/$PROFILE/.Brewfile.local"
+if [ ! -f "$LOCAL" ]; then
+  echo "No $LOCAL — is the $PROFILE profile set up on this machine?"
+  exit 1
+fi
+
+dump="$(mktemp)"
+trap 'rm -f "$dump"' EXIT
+brew bundle dump --file="$dump" --force
+
+entry_keys() {
+  grep -hoE '^(tap|brew|cask|vscode|mas|whalebrew|go|uv|npm) "[^"]+"' "$@" | sort -u
+}
+
+declared="$(entry_keys dot/.Brewfile "$LOCAL")"
+installed="$(entry_keys "$dump")"
+new_keys="$(comm -13 <(echo "$declared") <(echo "$installed"))"
+gone_keys="$(comm -23 <(echo "$declared") <(echo "$installed"))"
+
+if [ -n "$gone_keys" ]; then
+  echo "Declared but not installed (remove the line, or brew install it):"
+  awk '{print "  - " $0}' <<<"$gone_keys"
+fi
+
+if [ -z "$new_keys" ]; then
+  echo "No new packages — Brewfiles already cover everything installed."
+  exit 0
+fi
+
+echo "Installed but not declared (destined for $LOCAL):"
+awk '{print "  + " $0}' <<<"$new_keys"
+
+if [ "${1:-}" != "--apply" ]; then
+  echo "Dry run. Re-run with --apply to append them to $LOCAL."
+  exit 0
+fi
+
+while IFS= read -r key; do
+  # Carry the dump's full line (args and all) plus its --describe comment.
+  grep -F -B1 -- "$key" "$dump" | grep -v '^--$' >>"$LOCAL"
+done <<<"$new_keys"
+echo "Appended $(wc -l <<<"$new_keys" | tr -d ' ') entrie(s) to $LOCAL."
+echo "Review the diff; move anything both machines want into dot/.Brewfile."

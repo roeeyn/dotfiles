@@ -3,14 +3,10 @@
 brew "rust"
 # Experimental Rust compiler front-end for IDEs
 brew "rust-analyzer"
-# Rust toolchain installer
-brew "rustup"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
-# Communications service
-cask "amazon-chime"
 # Memory training application
 cask "anki"
 # Chromium based browser

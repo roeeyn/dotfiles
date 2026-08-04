@@ -36,12 +36,8 @@ brew "git-lfs"
 brew "gnupg"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
-# Terminal based graphical activity monitor inspired by gtop and vtop
-brew "gotop"
 # Improved top (interactive process viewer)
 brew "htop"
-# GNU utilities for networking
-brew "inetutils"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Lazier way to manage everything docker
@@ -84,8 +80,6 @@ brew "postgresql@15"
 brew "pre-commit"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
 # Pack repository contents into a single AI-friendly file
 brew "repomix"
 # Search tool like grep and The Silver Searcher
@@ -150,8 +144,6 @@ cask "font-symbols-only-nerd-font"
 cask "ghostty"
 # Web browser
 cask "google-chrome"
-# Password manager application and digital vault
-cask "keeper-password-manager"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # Knowledge base that works on top of a local folder of plain text Markdown files

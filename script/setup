@@ -1,11 +1,43 @@
 #!/bin/bash
 set -e
-echo "Linking the files..."
 
-brew install stow
+cd "$(dirname "$0")/.."
 
-rm ~/.zshrc || echo 'Not zshrc found, continuing...'
-rm ~/.ssh/config || echo 'No ~/.ssh/config found, continuing...'
+# shellcheck disable=SC2034  # consumed by select_profile once implemented
+PROFILE_FILE="$HOME/.dotfiles-profile"
+WORK_OVERLAY_REPO="git@github.com:roeeyn/dotfiles-work.git"
+
+# ----------------------------------------------------------------------
+# Profile preflight — prints the chosen profile name on stdout.
+#
+# Contract:
+#   - `script/setup <profile>` selects <profile>; a bare `script/setup`
+#     reuses the selection saved in $PROFILE_FILE.
+#   - Validate against the folders in profiles/ — except "work", which
+#     is always valid even before the private overlay has been cloned.
+#   - Strap runs this script non-interactively: with no saved profile,
+#     no argument, and no TTY, fail with instructions instead of hanging.
+#   - Persist the final selection to $PROFILE_FILE so re-runs converge.
+#
+# TODO(roeeyn): implement select_profile. Open decision that is yours:
+# what does a re-run with a DIFFERENT profile than the saved one do —
+# switch silently, or refuse unless the user passes --force?
+select_profile() {
+  echo "select_profile is not implemented yet; see the TODO above" >&2
+  return 1
+}
+
+PROFILE="$(select_profile "$@")"
+echo "Setting up profile: $PROFILE"
+
+command -v stow >/dev/null || brew install stow
+
+# Adopt pre-existing real files once; never touch our own symlinks.
+for f in "$HOME/.zshrc" "$HOME/.ssh/config"; do
+  if [ -f "$f" ] && [ ! -L "$f" ]; then
+    mv "$f" "$f.pre-dotfiles"
+  fi
+done
 
 # Keep lazygit's mutable state outside the stowed config directory.
 mkdir -p "$HOME/Library/Application Support/lazygit"
@@ -14,3 +46,15 @@ stow --restow dot/ --target="$HOME"
 
 # Symlink files/* into home directory as regular files
 stow --restow files/ --target="$HOME"
+
+# The work overlay lives in a private repo, cloned on demand. Soft-fail:
+# a fresh Strap run may predate the machine's SSH keys — shared config
+# still applies, and the next `script/setup` picks the overlay up.
+if [ "$PROFILE" = "work" ] && [ ! -d "profiles/work/.git" ]; then
+  git clone "$WORK_OVERLAY_REPO" profiles/work ||
+    echo "WARN: work overlay clone failed (SSH keys?); re-run script/setup later."
+fi
+
+if [ -d "profiles/$PROFILE" ]; then
+  stow --restow -d profiles "$PROFILE" --target="$HOME"
+fi

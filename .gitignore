@@ -112,3 +112,6 @@ files/go/pkg/
 
 # Packer
 packer_compiled.lua
+
+# private work overlay (nested clone, never tracked here)
+profiles/work/

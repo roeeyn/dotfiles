@@ -2,6 +2,13 @@
 	name = Rodrigo Medina
 [github]
 	user = roeeyn
+# SSH commit signing everywhere; each profile's .gitconfig.local supplies
+# the signingkey registered on the matching GitHub account (personal key
+# for the personal account, EMU key for the work account).
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
 [push]
 	default = simple
 [credential]

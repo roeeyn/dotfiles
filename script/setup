@@ -92,6 +92,15 @@ if [ -d "profiles/$PROFILE" ]; then
   stow --restow -d profiles "$PROFILE" --target="$HOME"
 fi
 
+# Machine-local secrets: dot/env/.env is sourced by .zshrc and gitignored
+# (secrets never enter git). Scaffold it from the template on first run so
+# a fresh machine gets an explicit fill-me-in file instead of silent
+# missing env vars.
+if [ ! -f dot/env/.env ]; then
+  cp dot/env/.example.env dot/env/.env
+  echo "Created dot/env/.env from the template — fill in the real values."
+fi
+
 # ----------------------------------------------------------------------
 # Per-machine SSH identity. Keys are generated locally and never enter
 # the repo; GitHub holds one auth + one signing pubkey per machine, so a

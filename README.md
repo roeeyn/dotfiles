@@ -57,6 +57,8 @@ cd ~/.dotfiles && git pull
 # a fresh per-machine key:
 mv ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.old
 mv ~/.ssh/id_ed25519.pub ~/.ssh/id_ed25519.old.pub
+# default gh scopes cannot manage keys — grant once:
+gh auth refresh -h github.com -s admin:public_key,admin:ssh_signing_key
 ./script/setup      # generates + auto-registers with GitHub (gh must be
                     # authenticated as roeeyn; re-run after gh auth login if not)
 ```

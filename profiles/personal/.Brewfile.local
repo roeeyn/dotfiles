@@ -19,6 +19,8 @@ brew "gobuster"
 brew "maigret"
 # Port scanning utility for large networks
 brew "nmap"
+# Python client for Neovim (nvr) — required by lazygit.nvim editPreset nvim-remote
+brew "neovim-remote"
 # Create, run, and share large language models (LLMs)
 brew "ollama"
 # AI coding agent, built for the terminal

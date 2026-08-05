@@ -80,9 +80,6 @@ eval "$(starship init zsh)"
 # tool version activation
 eval "$(mise activate zsh)"
 
-# Tmux taskizer keybinding (outside tmux fallback)
-bindkey -s ^f "tmux-taskizer\n"
-
 # Profile overlay (stowed by profiles/work on work machines only)
 [[ -f "$HOME/.alert_media.zsh" ]] && source "$HOME/.alert_media.zsh"
 source "$HOME/.switch_env.zsh"

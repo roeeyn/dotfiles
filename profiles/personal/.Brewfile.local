@@ -5,6 +5,30 @@ brew "rust"
 brew "rust-analyzer"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Firmware analysis tool
+brew "binwalk"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
+# Open source programming language to build simple, reliable, efficient software
+brew "go"
+# Directory/File, DNS and VHost busting tool written in Go
+brew "gobuster"
+# Collect a dossier on a person by username from thousands of sites
+brew "maigret"
+# Port scanning utility for large networks
+brew "nmap"
+# Create, run, and share large language models (LLMs)
+brew "ollama"
+# AI coding agent, built for the terminal
+brew "opencode"
+# Hunt down social media accounts by username across social networks
+brew "sherlock"
+# Penetration testing for SQL injection and database servers
+brew "sqlmap"
+# Command-line tool for Stripe
+brew "stripe-cli"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Memory training application
@@ -13,6 +37,18 @@ cask "anki"
 cask "arc"
 # Multi-track audio editor and recorder
 cask "audacity"
+# Messaging app combining WhatsApp, Slack, Telegram and others
+cask "ferdium"
+# VPN client
+cask "nordvpn"
+# Mesh VPN based on WireGuard
+cask "tailscale-app"
+# Open-source BitTorrent client
+cask "transmission"
+# Network protocol analyzer
+cask "wireshark-app"
+# OWASP ZAP web application security scanner
+cask "zap"
 uv "aactivator"
 uv "mcp-proxy", source: "git+https://github.com/sparfenyuk/mcp-proxy"
 npm "typescript-language-server"

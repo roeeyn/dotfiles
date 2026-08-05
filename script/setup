@@ -91,3 +91,33 @@ fi
 if [ -d "profiles/$PROFILE" ]; then
   stow --restow -d profiles "$PROFILE" --target="$HOME"
 fi
+
+# ----------------------------------------------------------------------
+# Per-machine SSH identity. Keys are generated locally and never enter
+# the repo; GitHub holds one auth + one signing pubkey per machine, so a
+# lost machine means revoking one key, not rotating a shared one.
+# Registration needs an authenticated PERSONAL gh — a fresh Strap run
+# won't have it, but strap-after-setup re-runs this script after `brew
+# bundle`, and a manual re-run after `gh auth login` also converges.
+KEY="$HOME/.ssh/id_ed25519"
+if [ ! -f "$KEY" ]; then
+  echo "Generating this machine's SSH key..."
+  ssh-keygen -t ed25519 -N "" -C "roeeyn@$(hostname -s)" -f "$KEY"
+fi
+if command -v gh >/dev/null && [ "$(gh api user --jq .login 2>/dev/null)" = "roeeyn" ]; then
+  if ! gh ssh-key list 2>/dev/null | grep -qF "$(awk '{print $2}' "$KEY.pub")"; then
+    echo "Registering this machine's key with GitHub (auth + signing)..."
+    gh ssh-key add "$KEY.pub" --title "roeeyn@$(hostname -s)" ||
+      echo "WARN: auth-key registration failed; add $KEY.pub manually."
+    gh ssh-key add "$KEY.pub" --type signing --title "roeeyn@$(hostname -s)" ||
+      echo "WARN: signing-key registration failed; add $KEY.pub manually."
+  fi
+else
+  # Work machines run gh as the EMU account — NEVER auto-register there:
+  # the key would land on the wrong GitHub account.
+  echo "gh is missing or not the personal account. To register this key:"
+  echo "  gh ssh-key add ~/.ssh/id_ed25519.pub --title roeeyn@$(hostname -s)"
+  echo "  gh ssh-key add ~/.ssh/id_ed25519.pub --type signing --title roeeyn@$(hostname -s)"
+  echo "  (or paste it at https://github.com/settings/keys)"
+  cat "$KEY.pub"
+fi

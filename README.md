@@ -46,6 +46,49 @@ Rollback if needed: `git checkout master && ./script/setup` is NOT enough
 (master predates profiles); instead `git checkout master`, then manually
 `stow --restow dot/ files/` and re-check `git config user.email`.
 
+### Round 2 on the personal laptop — per-machine keys + SSH signing
+
+After pulling the latest `new-main`:
+
+```sh
+cd ~/.dotfiles && git pull
+# Deliberate rotation: the current id_ed25519 is the OLD shared key whose
+# encrypted blob sits in public git history. Move it aside so setup mints
+# a fresh per-machine key:
+mv ~/.ssh/id_ed25519 ~/.ssh/id_ed25519.old
+mv ~/.ssh/id_ed25519.pub ~/.ssh/id_ed25519.old.pub
+./script/setup      # generates + auto-registers with GitHub (gh must be
+                    # authenticated as roeeyn; re-run after gh auth login if not)
+```
+
+Verify, in this order, BEFORE deleting anything on GitHub:
+
+```sh
+ssh -T git@github.com          # greets roeeyn using the NEW key
+git -C ~/.dotfiles pull        # ssh transport still works
+git commit --allow-empty -m "test: ssh signing" && git push
+# -> the commit shows "Verified" on GitHub (SSH signing, no GPG involved)
+```
+
+Only then clean up (GitHub → Settings → SSH and GPG keys): remove the OLD
+ssh key entry, and delete GPG key 615B67D406A71EC5 (old commits flip to
+"Unverified" — accepted; the key must die because its encrypted secret is
+public). Finally `rm ~/.ssh/id_ed25519.old*`.
+
+### Key rotation checklist (from the public .enc blobs)
+
+Everything below sat encrypted-with-ansible-vault in public git history;
+treat all of it as compromised-if-the-vault-password-was-guessable.
+
+| Secret | Where to rotate |
+| --- | --- |
+| SSH `id_ed25519` (active!) | GitHub personal (after new keys registered); Bitbucket AlertMedia account (work profile auths bitbucket.org with it — upload the work machine's new key); old servers `66.179.243.39` / `74.208.197.109` root authorized_keys if still alive; audit anywhere else the pubkey was pasted |
+| SSH `id_rsa` (legacy) | Azure DevOps (`ssh.dev.azure.com` — personal profile still points `id_rsa` at it; replace key or delete the host entry if dead) |
+| GPG `615B67D406A71EC5` | GitHub GPG keys → delete. Verified: the work `pass` store encrypts to a DIFFERENT key (`F450...93C5`) and is NOT affected; if the personal machine has its own `~/.password-store`, check its `.gpg-id` too |
+| Unsplash API key | unsplash.com developer dashboard → regenerate |
+| WakaTime API key | wakatime.com/settings → regenerate |
+| The vault password itself | if `ansible_password.txt`'s password was ever reused as a real account password, rotate those accounts — it was the master secret for all of the above |
+
 ### Reviewing the migration (draft PR)
 
 Create the draft PR from the personal machine (the work gh account is EMU
@@ -91,6 +134,12 @@ packages; `profiles/<name>/` overlays machine-specific files on top:
 `~/.dotfiles-profile` marker > `personal`, and unstows the previous profile
 before stowing a new one. First run on a work machine: `script/setup work`
 (sticky afterwards).
+
+SSH keys are per machine and never enter the repo: setup generates
+`~/.ssh/id_ed25519` on first run and registers it with GitHub (auth +
+signing) when `gh` is authenticated as the personal account — otherwise it
+prints the commands to do it. Commits are signed with that same key via
+SSH signing (`gpg.format = ssh`); GPG is no longer involved in git.
 
 ## Updating the Brewfiles
 

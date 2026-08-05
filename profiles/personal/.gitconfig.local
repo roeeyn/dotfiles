@@ -1,5 +1,7 @@
 [user]
 	email = rodrigo.medina.neri@gmail.com
-	signingkey = 615B67D406A71EC5
+	signingkey = ~/.ssh/id_ed25519.pub
 [commit]
 	gpgsign = true
+[gpg]
+	format = ssh

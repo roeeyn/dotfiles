@@ -59,7 +59,9 @@ fi
 
 while IFS= read -r key; do
   # Carry the dump's full line (args and all) plus its --describe comment.
-  grep -F -B1 -- "$key" "$dump" | grep -v '^--$' >>"$LOCAL"
+  # Only take the preceding line when it actually IS a comment — entries
+  # without one (mas, taps) would otherwise drag in their neighbor entry.
+  awk -v k="$key" 'index($0, k) == 1 { if (prev ~ /^#/) print prev; print } { prev = $0 }' "$dump" >>"$LOCAL"
 done <<<"$new_keys"
 echo "Appended $(wc -l <<<"$new_keys" | tr -d ' ') entrie(s) to $LOCAL."
 echo "Review the diff; move anything both machines want into dot/.Brewfile."

@@ -15,15 +15,6 @@
       "type": "local",
       "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--isolated"]
     },
-    "bitbucket": {
-      "type": "local",
-      "command": ["npx", "-y", "@aashari/mcp-server-atlassian-bitbucket"],
-      "environment": {
-        "ATLASSIAN_SITE_NAME": "bitbucket",
-        "ATLASSIAN_USER_EMAIL": "{env:ATLASSIAN_USERNAME}",
-        "ATLASSIAN_API_TOKEN": "{env:BITBUCKET_API_KEY}"
-      }
-    },
     "mcp-atlassian": {
       "type": "local",
       "command": ["uvx", "mcp-atlassian"],

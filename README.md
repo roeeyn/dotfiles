@@ -145,19 +145,37 @@ SSH signing (`gpg.format = ssh`); GPG is no longer involved in git.
 
 ## Updating the Brewfiles
 
-`dot/.Brewfile` declares the shared packages and includes `~/.Brewfile.local`,
-which the stowed profile provides. **Do not run `brew bundle dump --global
---force`** — it would overwrite the shared file with this machine's flat
-package list. Instead:
+Two files declare what a machine installs: `dot/.Brewfile` (shared by every
+machine) plus `~/.Brewfile.local` (stowed by the profile: work extras or
+personal extras). Strap's `brew bundle --global` reads both through the
+`~/.Brewfile` symlink.
 
-```sh
-script/brew-sync           # report drift between installed and declared
-script/brew-sync --apply   # append new packages to this machine's .Brewfile.local
-```
+**Never run `brew bundle dump --global --force`** — it rewrites `~/.Brewfile`
+with this machine's flat package list, destroying the shared/profile split.
 
-New packages land in the profile's `.Brewfile.local`; move a line into
-`dot/.Brewfile` when both machines should have it. To remove a package,
-delete its line and run `brew bundle cleanup --global` to uninstall strays.
+Two tools with two distinct jobs:
+
+- **`script/brew-sync` edits the ledger.** It compares what is *installed*
+  against what is *declared* (shared + local) and reports the drift in both
+  directions. It NEVER installs or uninstalls anything.
+- **`brew bundle cleanup --global` enforces the ledger.** It uninstalls
+  packages that are installed but declared nowhere. (`brew bundle --global`
+  is the other half of enforcement: it installs what is declared but
+  missing.)
+
+Day-to-day recipes:
+
+| You did / want | Run |
+| --- | --- |
+| `brew install`ed something new and want to keep it | `script/brew-sync --apply` — appends it to this machine's `.Brewfile.local` |
+| Want that new package on BOTH machines | after `--apply`, move its line from `.Brewfile.local` into `dot/.Brewfile` |
+| Stop wanting a package | delete its line from whichever file declares it, then `brew bundle cleanup --global` (review, then `--force`) |
+| Fresh machine / after a pull | `brew bundle --global` installs anything newly declared |
+| Just checking for drift | `script/brew-sync` (dry-run is the default; changes nothing) |
+
+Why new packages default into the *profile* local: only the machine you ran
+it on is known to want them — promotion to everyone is a deliberate one-line
+move, never automatic.
 
 ## Lazygit configuration
 

@@ -6,3 +6,10 @@ set -e
 # free second convergence pass: anything that could not happen before the
 # dependencies existed (e.g. the private work-overlay clone) is retried.
 "$(dirname "$0")/setup"
+
+# If that setup pass stowed ~/.Brewfile.local for the first time (the work
+# overlay clone can only succeed once SSH tooling exists), Strap's own
+# `brew bundle` already ran WITHOUT it — converge the profile packages now.
+if [ -f "$HOME/.Brewfile" ]; then
+  brew bundle check --global >/dev/null 2>&1 || brew bundle --global
+fi

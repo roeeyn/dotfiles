@@ -31,7 +31,7 @@ trap 'rm -f "$dump"' EXIT
 brew bundle dump --file="$dump" --force
 
 entry_keys() {
-  grep -hoE '^(tap|brew|cask|vscode|mas|whalebrew|go|uv|npm) "[^"]+"' "$@" | sort -u
+  grep -hoE '^(tap|brew|cask|vscode|mas|whalebrew|go|uv|npm|cargo) "[^"]+"' "$@" | sort -u
 }
 
 declared="$(entry_keys dot/.Brewfile "$LOCAL")"

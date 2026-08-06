@@ -59,7 +59,9 @@ fi
 echo "$PROFILE" >"$PROFILE_FILE"
 
 # Adopt pre-existing real files once; never touch our own symlinks.
-for f in "$HOME/.zshrc" "$HOME/.ssh/config"; do
+# ~/.gitconfig matters on fresh machines: Strap writes one (git config
+# --global) BEFORE running this script, and stow refuses to link over it.
+for f in "$HOME/.zshrc" "$HOME/.ssh/config" "$HOME/.gitconfig"; do
   if [ -f "$f" ] && [ ! -L "$f" ]; then
     mv "$f" "$f.pre-dotfiles"
   fi
@@ -71,7 +73,18 @@ mkdir -p "$HOME/Library/Application Support/lazygit"
 # Real dirs so stow never folds ~/.ssh or ~/.gnupg into the repo
 # (ssh-keygen and gpg must not write private keys, keyrings, or sockets
 # into the repo tree) and both the dot/ and profile packages can
-# coexist inside them.
+# coexist inside them. mkdir -p FOLLOWS an existing symlink, so a legacy
+# machine where stow already folded these must unfold first — fail loudly
+# rather than silently generate keys inside the git checkout.
+for d in "$HOME/.ssh" "$HOME/.gnupg"; do
+  if [ -L "$d" ]; then
+    echo "ERROR: $d is a symlink into the repo (legacy stow folding)."
+    echo "Unfold it first: back it up, replace the symlink with a real"
+    echo "chmod-700 directory, and move the machine-local files (keys,"
+    echo "known_hosts, keyrings) back into it. Then re-run script/setup."
+    exit 1
+  fi
+done
 mkdir -p "$HOME/.ssh/config.d" "$HOME/.gnupg"
 chmod 700 "$HOME/.ssh" "$HOME/.gnupg"
 
@@ -86,10 +99,22 @@ stow --restow files/ --target="$HOME"
 if [ "$PROFILE" = "work" ] && [ ! -d "profiles/work/.git" ]; then
   git clone "$WORK_OVERLAY_REPO" profiles/work ||
     echo "WARN: work overlay clone failed (SSH keys?); re-run script/setup later."
+elif [ "$PROFILE" = "work" ]; then
+  # Keep an existing overlay current — Strap re-runs pull the public repo
+  # but nothing else updates the private one.
+  git -C profiles/work pull --ff-only ||
+    echo "WARN: work overlay pull failed; continuing with the local copy."
 fi
 
 if [ -d "profiles/$PROFILE" ]; then
   stow --restow -d profiles "$PROFILE" --target="$HOME"
+fi
+
+# Profile-owned provisioning hook (e.g. the work overlay generates and
+# registers the EMU key it requires — logic that must not live in this
+# public script).
+if [ -x "profiles/$PROFILE/hooks/setup" ]; then
+  "profiles/$PROFILE/hooks/setup"
 fi
 
 # Machine-local secrets: dot/env/.env is sourced by .zshrc and gitignored
@@ -114,19 +139,26 @@ if [ ! -f "$KEY" ]; then
   ssh-keygen -t ed25519 -N "" -C "roeeyn@$(hostname -s)" -f "$KEY"
 fi
 if command -v gh >/dev/null && [ "$(gh api user --jq .login 2>/dev/null)" = "roeeyn" ]; then
-  if ! gh ssh-key list 2>/dev/null | grep -qF "$(awk '{print $2}' "$KEY.pub")"; then
-    echo "Registering this machine's key with GitHub (auth + signing)..."
+  # Auth and signing keys live in separate GitHub registries — check each
+  # independently so a partial success (e.g. missing signing scope on the
+  # first run) still converges on later runs.
+  PUB_MATERIAL="$(awk '{print $2}' "$KEY.pub")"
+  if ! gh api user/keys --jq '.[].key' 2>/dev/null | grep -qF "$PUB_MATERIAL"; then
     gh ssh-key add "$KEY.pub" --title "roeeyn@$(hostname -s)" ||
       echo "WARN: auth-key registration failed; add $KEY.pub manually."
+  fi
+  if ! gh api user/ssh_signing_keys --jq '.[].key' 2>/dev/null | grep -qF "$PUB_MATERIAL"; then
     gh ssh-key add "$KEY.pub" --type signing --title "roeeyn@$(hostname -s)" ||
       echo "WARN: signing-key registration failed; add $KEY.pub manually."
   fi
 else
   # Work machines run gh as the EMU account — NEVER auto-register there:
-  # the key would land on the wrong GitHub account.
-  echo "gh is missing or not the personal account. To register this key:"
-  echo "  gh ssh-key add ~/.ssh/id_ed25519.pub --title roeeyn@$(hostname -s)"
-  echo "  gh ssh-key add ~/.ssh/id_ed25519.pub --type signing --title roeeyn@$(hostname -s)"
-  echo "  (or paste it at https://github.com/settings/keys)"
+  # the key would land on the wrong GitHub account. The commands below
+  # must run where gh is authenticated as the PERSONAL account.
+  echo "gh is missing or not the personal account."
+  echo "Register this key FROM THE PERSONAL account (do NOT run these with a work gh):"
+  echo "  gh ssh-key add <file> --title roeeyn@$(hostname -s)"
+  echo "  gh ssh-key add <file> --type signing --title roeeyn@$(hostname -s)"
+  echo "  (or paste it at https://github.com/settings/keys — auth AND signing)"
   cat "$KEY.pub"
 fi

@@ -5,8 +5,60 @@ For setting up your computer:
 1. You need to save the files in the same folder structure as this project, and name the repo `dotfiles`.
 2. Access the page of [Strap](https://strap.mikemcquaid.com/) and download the `strap.sh` file, which is customized with the GitHub Token.
 3. Execute that file, and see the magic happens, you may add the `--debug` flag in case something goes wrong.
+4. On a work machine, pick the profile once: `./script/setup work`
+   (personal is the default; the choice sticks via `~/.dotfiles-profile`).
+5. To register the machine's SSH key with GitHub (setup generates it):
+   `gh auth login`, then
+   `gh auth refresh -h github.com -s admin:public_key,admin:ssh_signing_key`,
+   then re-run `./script/setup` — it registers the key (auth + signing) and
+   converges anything a fresh run couldn't do yet. It's idempotent; re-run
+   it whenever in doubt.
 
 Happy coding!
+
+## Repository layout
+
+```
+dot/        shared Stow package, stowed to ~ on every machine.
+            ~/.config and ~/.local are FOLDED symlinks into it, so edits
+            here are live immediately — and profile packages can never
+            ship files under those two paths.
+files/      second shared package (plain top-level files).
+profiles/
+  personal/ personal-only overlay (lives in this repo).
+  work/     work-only overlay — a PRIVATE repo (roeeyn/dotfiles-work)
+            cloned here by script/setup and gitignored, so work config
+            never touches this public repo. Commit/push work changes
+            inside that folder, not here.
+script/
+  setup             the only install entrypoint: stows shared + one
+                    profile, scaffolds ~/.ssh + dot/env/.env, generates
+                    and registers the machine SSH key, runs the profile's
+                    hooks/setup. Idempotent.
+  strap-after-setup Strap's post-dependencies hook: re-runs setup and
+                    converges brew.
+  brew-sync         Brewfile ledger reconciliation (see below).
+```
+
+Where does a change go?
+
+| You want to add… | Put it in |
+| --- | --- |
+| a tool/config for both machines | `dot/` — commit here; other machine runs `git pull && ./script/setup` |
+| personal-only config | `profiles/personal/` (this repo) — **root-level paths only** |
+| work-only config | `profiles/work/` (the private repo — commit + push there) — root-level only |
+| a secret / API key | `dot/env/.env` (gitignored, per machine); add the key *name* to `.example.env` |
+| a Homebrew package | install it, then `script/brew-sync --apply` (see Brewfiles) |
+| an MCP server | see "MCP servers" below |
+
+## Never do this
+
+- `brew bundle dump --global --force` — flattens the shared/profile
+  Brewfile split (use `script/brew-sync`).
+- Commit secrets or work-identifying content here — **this repo is public**
+  (work config → private overlay; secrets → `.env`).
+- Ship profile files under `.config/` or `.local/` — those are folded
+  symlinks owned by `dot/`; setup will abort on the stow conflict.
 
 ## Profiles
 

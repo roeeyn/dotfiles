@@ -8,10 +8,15 @@ This file guides agentic coding in this repo.
 - Formatting enforced by pre-commit and Stylua.
 
 ## Repo Layout
-- `dot/.config/nvim/`: Neovim configuration (Lua).
-- `dot/.local/bin/`: user scripts (bash).
-- `dot/.config/opencode/`: opencode plugin setup (package.json).
-- `dot/.Brewfile`: Homebrew bundle definitions.
+- `dot/`: shared Stow package (every machine). Notable: `dot/.config/nvim/`
+  (Neovim, Lua), `dot/.local/bin/` (bash scripts), `dot/.config/opencode/`,
+  `dot/.Brewfile` (shared Homebrew ledger).
+- `profiles/personal/`, `profiles/work/`: per-machine overlays — see
+  README "Repository layout" and CLAUDE.md "Profile system" for the rules
+  (`profiles/work/` is a separate PRIVATE repo; never put work content in
+  this public one).
+- `script/setup`: the idempotent installer; `script/brew-sync`: Brewfile
+  reconciliation.
 - `.pre-commit-config.yaml`: formatting hooks.
 
 ## Tooling Rules
@@ -36,9 +41,10 @@ This file guides agentic coding in this repo.
 - If you add build steps, document them here.
 
 ### Tests
-- No test suite is defined in this repository.
-- Single-test execution: not applicable.
-- If you introduce tests, add the command and a single-test example.
+- bujo-nvim has a plenary spec suite: run it FROM `dot/.config/bujo-nvim/`
+  (its `CLAUDE.md` documents the exact headless-nvim command and gotchas).
+- Single spec file: same command with `PlenaryBustedFile tests/<name>.lua`.
+- Elsewhere: no test suite; if you introduce one, document it here.
 
 ## Pre-commit Hooks
 - `check-yaml` for YAML sanity.

@@ -119,3 +119,6 @@ profiles/work/
 # codex rewrites its config constantly (project trusts, app-managed MCP
 # blocks) — machine-local runtime state, not shared config
 dot/.codex/config.toml
+
+# opencode writes machine-local MCP/state here (like ~/.claude.json for claude)
+dot/.config/opencode/opencode.json

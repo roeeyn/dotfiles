@@ -11,6 +11,10 @@ local M = {}
 -- The org's conventions. Edit here (or pass overrides via
 -- require('bujo').setup { links = { ... } }).
 M.config = {
+    -- Vault root, so `[[wikilinks]]` can resolve to files. bujo.setup()
+    -- overrides this with its own M.root; the default only matters when
+    -- links.lua is required directly (specs).
+    root = vim.fs.normalize(vim.env.BUJO_NOTES_DIR or '~/notes'),
     jira = 'https://alertmedia.atlassian.net/browse/', -- <TICKET> appended
     github = 'https://github.com/alertmediainc/', -- <repo>/issues/<n> appended
     bitbucket = 'https://bitbucket.org/alertmediaadmin/', -- <repo>/pull-requests/<n>
@@ -61,12 +65,37 @@ local function trim_url(url)
 end
 
 --- All link references in a line, as { ref, kind, from, to } with 1-based
---- inclusive byte columns. kind is 'jira' | 'github' | 'bitbucket' | 'url'.
+--- inclusive byte columns. kind is 'jira' | 'github' | 'bitbucket' | 'url' |
+--- 'note'.
+---
+--- For 'note' refs `ref` is the resolved destination (the `[[dest|alias]]`
+--- left half), while from/to span the whole `[[...]]` including the brackets —
+--- so gx fires anywhere on the link, concealed brackets included. Every other
+--- kind has ref == line:sub(from, to).
 function M.refs(line)
     -- Inline markdown links and <autolinks> already carry their own URL and
     -- their own render-markdown decoration; blank them before any scanning.
     line = line:gsub('%[[^%]]-%]%([^%)]-%)', blank):gsub('<https?://[^%s>]*>', blank)
     local out = {}
+
+    -- [[wikilinks]] → notes in the vault. Scanned before URLs and tickets so
+    -- a note titled `MSG-3111 postmortem` isn't also read as a Jira ref.
+    for from, inner, after in line:gmatch '()%[%[([^%[%]]-)%]%]()' do
+        -- Bash test expressions (`[[ -n "$x" ]]`, `[[ $# -gt 0 ]]`) are the one
+        -- false positive that matters — the vault's how-to notes are full of
+        -- them. `[[` is a shell *keyword*, so it always has a space after it;
+        -- requiring no padding inside the brackets rejects every one of them
+        -- and matches the Obsidian convention we actually write.
+        if inner ~= '' and not inner:match '^%s' and not inner:match '%s$' then
+            local dest = vim.trim(inner:match '^([^|]*)') -- [[dest|alias]]
+            if dest ~= '' then
+                out[#out + 1] = { ref = dest, kind = 'note', from = from, to = after - 1 }
+            end
+        end
+    end
+    -- Blanked whether or not it became a ref, so bash `[[ "$x" == "MSG-1" ]]`
+    -- inside a fenced block doesn't leak a ticket ref either.
+    line = line:gsub('%[%[[^%[%]]-%]%]', blank)
 
     -- Bare URLs, opened verbatim. Scanned first, then blanked, so a URL's
     -- path can't be misread as a ticket ref by the passes below.
@@ -123,13 +152,73 @@ function M.resolve(ref)
     return M.config.github .. name .. '/issues/' .. num
 end
 
---- URL for the reference under 1-based byte column `col`, or nil.
-function M.find(line, col)
-    for _, r in ipairs(M.refs(line)) do
-        if col >= r.from and col <= r.to then
-            return M.resolve(r.ref)
+--- Filename stem bujo uses for a note title:
+--- `Broadway 101 Elixir Pipelines` → `broadway-101-elixir-pipelines`.
+--- Shared with bujo.open_named_note (`:BujoNote`), which creates the files this
+--- resolves — a second copy of this rule would silently strand links.
+function M.slug(name)
+    return (name:lower():gsub('%s+', '-'):gsub('[^%w%-]', ''):gsub('%-%-+', '-'):gsub('^%-+', ''):gsub('%-+$', ''))
+end
+
+--- Absolute path for a `[[wikilink]]` destination, or nil when nothing matches.
+---
+--- The vault names notes two ways — verbatim titles (`Load Testing Guide.md`)
+--- and kebab stems (`elixir-broadway-tips.md`) — and links are written in
+--- both, so resolution walks a ladder from most to least literal. Nothing is
+--- created here: a dangling link stays dangling (the vault already has one),
+--- and gx warns rather than guessing which naming style a new file should use.
+function M.note_path(name)
+    local stat = (vim.uv or vim.loop).fs_stat
+    local root = M.config.root
+
+    -- [[2026-08-05]] → a daily note, which lives under YYYY/MM/ not notes/.
+    local y, m = name:match '^(%d%d%d%d)%-(%d%d)%-%d%d$'
+    if y then
+        local daily = string.format('%s/%s/%s/%s.md', root, y, m, name)
+        if stat(daily) then
+            return daily
         end
     end
+
+    -- Matching is done against a directory listing rather than by stat-ing a
+    -- built path: APFS is case-insensitive, so a stat on `broadway 101 elixir pipelines.md`
+    -- happily succeeds for `Broadway 101 Elixir Pipelines.md` and we'd hand back a path that
+    -- isn't the file's real name (wrong buffer name here, outright miss on a
+    -- case-sensitive volume). The listing gives us the on-disk spelling.
+    local exact, folded = {}, {}
+    for _, f in ipairs(vim.fn.glob(root .. '/notes/*.md', true, true)) do
+        local stem = vim.fn.fnamemodify(f, ':t:r')
+        exact[stem] = f
+        folded[stem:lower()] = f
+    end
+
+    -- Verbatim title, then the kebab stem `:BujoNote` would have written, then
+    -- case-folded — so `[[Broadway 101 Elixir Pipelines]]`, `[[broadway-101-elixir-pipelines]]` and
+    -- `[[broadway 101 elixir pipelines]]` all land on the same note.
+    return exact[name] or exact[M.slug(name)] or folded[name:lower()]
+end
+
+--- The reference record under 1-based byte column `col`, or nil.
+function M.ref_at(line, col)
+    for _, r in ipairs(M.refs(line)) do
+        if col >= r.from and col <= r.to then
+            return r
+        end
+    end
+end
+
+--- Target for the reference under 1-based byte column `col`, plus its kind:
+--- a file path for 'note' refs, a URL for every other kind. nil when the
+--- column isn't on a reference (or a note ref that resolves to no file).
+function M.find(line, col)
+    local r = M.ref_at(line, col)
+    if not r then
+        return nil
+    end
+    if r.kind == 'note' then
+        return M.note_path(r.ref), 'note'
+    end
+    return M.resolve(r.ref), r.kind
 end
 
 local function pattern_escape(s)
@@ -203,8 +292,26 @@ end
 
 --- gx replacement: open the ref under the cursor; otherwise fall back to
 --- builtin gx behavior (treesitter-aware URL extraction, then <cfile>).
+---
+--- Note refs open in this window rather than the browser — that's the whole
+--- point of `[[wikilinks]]`, and it's why the fallback chain below is skipped
+--- for them: an unresolved note must warn, not quietly hand a note title to
+--- <cfile> and open some unrelated path.
 function M.open()
-    local url = M.find(vim.api.nvim_get_current_line(), vim.api.nvim_win_get_cursor(0)[2] + 1)
+    local line, col = vim.api.nvim_get_current_line(), vim.api.nvim_win_get_cursor(0)[2] + 1
+
+    local ref = M.ref_at(line, col)
+    if ref and ref.kind == 'note' then
+        local path = M.note_path(ref.ref)
+        if not path then
+            vim.notify(string.format('bujo: no note matching %q', ref.ref), vim.log.levels.WARN)
+            return
+        end
+        vim.cmd.edit(vim.fn.fnameescape(path))
+        return
+    end
+
+    local url = ref and M.resolve(ref.ref)
     if not url then
         local ok, urls = pcall(function()
             return require('vim.ui')._get_urls()
@@ -230,7 +337,10 @@ end
 local ns = vim.api.nvim_create_namespace 'bujo-links'
 
 -- url reuses render-markdown's default hyperlink icon (link.hyperlink),
--- so bare URLs and <autolink>s look the same.
+-- so bare URLs and <autolink>s look the same. There is deliberately no 'note'
+-- entry: `[[wikilinks]]` are a real tree-sitter node, so render-markdown
+-- already draws them (link.wiki — 󱗖 icon, brackets concealed) exactly as it
+-- does <autolinks>. We only take over gx for them, never the look.
 local ICONS = { jira = '󰖟 ', github = '󰊤 ', bitbucket = '󰂨 ', url = '󰌹 ' }
 
 --- Re-scan `buf` and decorate every bare ref with an icon + link styling.
@@ -238,12 +348,14 @@ function M.decorate(buf)
     vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
     for row, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
         for _, r in ipairs(M.refs(line)) do
-            vim.api.nvim_buf_set_extmark(buf, ns, row - 1, r.from - 1, {
-                end_col = r.to,
-                hl_group = 'BujoRef',
-                virt_text = { { ICONS[r.kind], 'BujoRefIcon' } },
-                virt_text_pos = 'inline',
-            })
+            if ICONS[r.kind] then
+                vim.api.nvim_buf_set_extmark(buf, ns, row - 1, r.from - 1, {
+                    end_col = r.to,
+                    hl_group = 'BujoRef',
+                    virt_text = { { ICONS[r.kind], 'BujoRefIcon' } },
+                    virt_text_pos = 'inline',
+                })
+            end
         end
     end
 end
@@ -255,8 +367,8 @@ function M.setup(opts)
     vim.api.nvim_set_hl(0, 'BujoRef', { default = true, link = '@markup.link.label.markdown_inline' })
     vim.api.nvim_set_hl(0, 'BujoRefIcon', { default = true, link = 'RenderMarkdownLink' })
 
-    vim.keymap.set('n', 'gx', M.open, { desc = 'Open ticket/PR ref or link under cursor' })
-    vim.keymap.set('n', '<leader>o', M.open, { desc = 'Open ticket/PR ref or link under cursor' })
+    vim.keymap.set('n', 'gx', M.open, { desc = 'Open note, ticket/PR ref, or link under cursor' })
+    vim.keymap.set('n', '<leader>o', M.open, { desc = 'Open note, ticket/PR ref, or link under cursor' })
 
     vim.api.nvim_create_user_command('BujoShortenLinks', M.shorten_buffer, { desc = 'Rewrite [ref](url) links into bare ticket/PR refs' })
 

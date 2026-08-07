@@ -74,6 +74,123 @@ describe('bujo.links', function()
         end)
     end)
 
+    describe('wikilinks', function()
+        it('spans the brackets so gx fires anywhere on the link', function()
+            local line = '    - research done → [[elixir-broadway-tips]] (backpressure notes)'
+            local from = line:find('[[', 1, true)
+            assert.same({
+                { ref = 'elixir-broadway-tips', kind = 'note', from = from, to = from + #'[[elixir-broadway-tips]]' - 1 },
+            }, links.refs(line))
+        end)
+
+        it('takes the destination half of [[dest|alias]]', function()
+            assert.equal('Load Testing Guide', links.refs('see [[Load Testing Guide|the guide]] first')[1].ref)
+        end)
+
+        it('keeps titles with spaces and parens intact', function()
+            assert.equal('Remote Envs (Manual in ECS)', links.refs('look [[Remote Envs (Manual in ECS)]]')[1].ref)
+        end)
+
+        -- The vault's how-to notes embed shell scripts; `[[` is a bash keyword
+        -- and so always carries a space after it. Padding is the discriminator.
+        it('ignores bash test expressions', function()
+            assert.same({}, links.refs 'if [[ -n "$prefix" ]]; then')
+            assert.same({}, links.refs 'while [[ $# -gt 0 ]]; do')
+            assert.same({}, links.refs '[[ -z "$bearer_token" && -n "${TOKEN:-}" ]] && exit 1')
+        end)
+
+        it('does not leak refs out of a bash test into ticket parsing', function()
+            assert.same({}, links.refs 'if [[ "$x" == "MSG-1" ]]; then')
+        end)
+
+        it('shields a wikilinked title from the ticket passes', function()
+            local refs = links.refs 'see [[MSG-3111 postmortem]] and MSG-3226'
+            assert.same({ 'note', 'jira' }, { refs[1].kind, refs[2].kind })
+            assert.equal('MSG-3111 postmortem', refs[1].ref)
+            assert.equal('MSG-3226', refs[2].ref)
+        end)
+    end)
+
+    describe('slug', function()
+        it('matches the filenames :BujoNote creates', function()
+            assert.equal('broadway-101-elixir-pipelines', links.slug 'Broadway 101 Elixir Pipelines')
+            assert.equal('remote-envs-manual-in-ecs', links.slug 'Remote Envs (Manual in ECS)')
+            assert.equal('', links.slug '(!!)')
+        end)
+    end)
+
+    describe('note_path', function()
+        local root, saved
+
+        local function write(rel)
+            local path = root .. '/' .. rel
+            vim.fn.mkdir(vim.fn.fnamemodify(path, ':h'), 'p')
+            vim.fn.writefile({ '# note' }, path)
+            return path
+        end
+
+        before_each(function()
+            root = vim.fn.tempname()
+            saved = links.config.root
+            links.config.root = root
+        end)
+
+        after_each(function()
+            links.config.root = saved
+            vim.fn.delete(root, 'rf')
+        end)
+
+        it('prefers the verbatim title', function()
+            local path = write 'notes/Load Testing Guide.md'
+            assert.equal(path, links.note_path 'Load Testing Guide')
+        end)
+
+        it('falls back to the kebab stem', function()
+            local path = write 'notes/elixir-broadway-tips.md'
+            assert.equal(path, links.note_path 'elixir-broadway-tips')
+            assert.equal(path, links.note_path 'Elixir Broadway Tips')
+        end)
+
+        it('matches case-insensitively as a last resort', function()
+            local path = write 'notes/Broadway 101 Elixir Pipelines.md'
+            assert.equal(path, links.note_path 'broadway 101 elixir pipelines')
+        end)
+
+        it('resolves a date to its daily note, not notes/', function()
+            local path = write '2026/08/2026-08-05.md'
+            assert.equal(path, links.note_path '2026-08-05')
+        end)
+
+        it('returns nil for a dangling link instead of inventing a file', function()
+            write 'notes/Load Testing Guide.md'
+            assert.is_nil(links.note_path 'Remote Envs (Manual in ECS)')
+            assert.equal(0, vim.fn.filereadable(root .. '/notes/Remote Envs (Manual in ECS).md'))
+        end)
+    end)
+
+    describe('find', function()
+        it('returns a path and the note kind for wikilinks', function()
+            local root = vim.fn.tempname()
+            local saved = links.config.root
+            links.config.root = root
+            vim.fn.mkdir(root .. '/notes', 'p')
+            vim.fn.writefile({ '# g' }, root .. '/notes/Load Testing Guide.md')
+
+            local line = 'batch first, see [[Load Testing Guide]] before running'
+            local target, kind = links.find(line, line:find('Load Testing', 1, true))
+            assert.equal(root .. '/notes/Load Testing Guide.md', target)
+            assert.equal('note', kind)
+
+            links.config.root = saved
+            vim.fn.delete(root, 'rf')
+        end)
+
+        it('still reports the kind alongside URLs', function()
+            local _, kind = links.find('- [ ] Review nr#52', 14)
+            assert.equal('github', kind)
+        end)
+    end)
+
     describe('url_to_ref', function()
         it('prefers aliases and tolerates URL tails', function()
             assert.equal('nr#52', links.url_to_ref 'https://github.com/alertmediainc/notification_router/pull/52')

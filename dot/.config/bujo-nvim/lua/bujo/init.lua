@@ -163,7 +163,8 @@ end
 
 --- :BujoNote <name> — named free-form note in ~/notes/notes/.
 function M.open_named_note(name)
-    local kebab = name:lower():gsub('%s+', '-'):gsub('[^%w%-]', ''):gsub('%-%-+', '-'):gsub('^%-+', ''):gsub('%-+$', '')
+    -- Same slug rule bujo.links uses to resolve [[wikilinks]] back to files.
+    local kebab = require('bujo.links').slug(name)
     if kebab == '' then
         vim.notify('bujo: cannot derive a filename from ' .. vim.inspect(name), vim.log.levels.ERROR)
         return
@@ -297,7 +298,8 @@ end
 
 function M.setup(opts)
     M.root = vim.fs.normalize((opts and opts.root) or vim.env.BUJO_NOTES_DIR or '~/notes')
-    require('bujo.links').setup(opts and opts.links)
+    -- links needs the root to resolve [[wikilinks]] to files; explicit opts win.
+    require('bujo.links').setup(vim.tbl_extend('keep', opts and opts.links or {}, { root = M.root }))
     require('bujo.strike').setup(opts and opts.strike)
     require('bujo.priority').setup(opts and opts.priority)
 

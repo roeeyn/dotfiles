@@ -21,11 +21,33 @@ NVIM_APPNAME=bujo-nvim nvim --headless -u tests/minimal_init.lua \
 Daily notes carry bare refs (`MSG-1234`, `repo#56`), never full markdown
 links: Neovim computes soft-wrap from raw buffer columns even under conceal
 (neovim/neovim#14409, open), so concealed URLs make lines wrap weirdly.
-`gx`/`<leader>o` reconstructs the URL; `:BujoShortenLinks` converts old links;
+`gx`/`<leader>o` reconstructs the URL (and opens `[[wikilinks]]`, see below);
+`:BujoShortenLinks` converts old links;
 extmarks give refs the render-markdown link look. Bare `https://` URLs are a
 fourth ref kind (`url`, 󰌹 icon, opened verbatim) — bare because tree-sitter
 only parses `<url>` autolinks (render-markdown owns those, so links.lua masks
 them), never naked URLs.
+
+`[[wikilinks]]` are a fifth kind (`note`) and the one that opens **inside**
+nvim (`vim.cmd.edit`) instead of the browser. They are deliberately **not
+decorated** here: unlike bare refs, `[[...]]` is a real tree-sitter node, so
+render-markdown already draws it (`link.wiki` — 󱗖 icon, brackets concealed),
+exactly like `<autolinks>`. `decorate()` skips any kind missing from `ICONS`;
+adding a `note` entry would double the icon.
+
+`note_path()` resolves against a **directory listing, never a stat on a built
+path** — APFS is case-insensitive, so stat-ing `load testing guide.md` succeeds
+for `Load Testing Guide.md` and returns a name no file actually has. The ladder
+is verbatim title → `slug()` stem → case-folded, plus `[[YYYY-MM-DD]]` → the
+daily note under `YYYY/MM/`. `slug()` is shared with `open_named_note`
+(`:BujoNote`), which creates the files it resolves — do not fork it. A
+dangling link **warns and creates nothing** (the vault already has one, and
+guessing a naming style from a navigation keystroke is the surprising branch).
+
+Bash test expressions (`[[ -n "$x" ]]`) are the false positive that matters —
+the vault's how-to notes are full of them. `[[` is a shell keyword, so it
+always has a space after it; `refs()` rejects any `[[...]]` padded with
+whitespace. Pinned in `tests/links_spec.lua` with real lines from the vault.
 
 **Adding a repo alias** (label ≠ GitHub repo name): add it to `aliases` in
 `M.config` at the top of `links.lua`, and pin it in `tests/links_spec.lua`

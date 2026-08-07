@@ -21,6 +21,14 @@ known_hosts.old
 dot/.ssh/*
 !dot/.ssh/config
 
+# dot/.claude/ — only the statusline script is shared. Everything else Claude
+# Code keeps in ~/.claude is machine-local and large (plugins/, projects/,
+# security/, session state), and settings.json must stay unstowed: the
+# statusline-watcher installer rewrites it with `> tmp && mv`, which would
+# replace a stow symlink with a real file on every skill update.
+dot/.claude/*
+!dot/.claude/statusline-command.sh
+
 # Ansible password
 ansible_password.txt
 

@@ -61,7 +61,11 @@ echo "$PROFILE" >"$PROFILE_FILE"
 # Adopt pre-existing real files once; never touch our own symlinks.
 # ~/.gitconfig matters on fresh machines: Strap writes one (git config
 # --global) BEFORE running this script, and stow refuses to link over it.
-for f in "$HOME/.zshrc" "$HOME/.ssh/config" "$HOME/.gitconfig"; do
+# ~/.claude/statusline-command.sh is the same story: the statusline-watcher
+# skill's installer creates one if none exists, so a machine that ran the
+# skill before this repo has a real file where our symlink needs to go.
+for f in "$HOME/.zshrc" "$HOME/.ssh/config" "$HOME/.gitconfig" \
+  "$HOME/.claude/statusline-command.sh"; do
   if [ -f "$f" ] && [ ! -L "$f" ]; then
     mv "$f" "$f.pre-dotfiles"
   fi
@@ -70,22 +74,23 @@ done
 # Keep lazygit's mutable state outside the stowed config directory.
 mkdir -p "$HOME/Library/Application Support/lazygit"
 
-# Real dirs so stow never folds ~/.ssh or ~/.gnupg into the repo
-# (ssh-keygen and gpg must not write private keys, keyrings, or sockets
-# into the repo tree) and both the dot/ and profile packages can
-# coexist inside them. mkdir -p FOLLOWS an existing symlink, so a legacy
-# machine where stow already folded these must unfold first — fail loudly
-# rather than silently generate keys inside the git checkout.
-for d in "$HOME/.ssh" "$HOME/.gnupg"; do
+# Real dirs so stow never folds ~/.ssh, ~/.gnupg or ~/.claude into the repo
+# (ssh-keygen and gpg must not write private keys, keyrings, or sockets into
+# the repo tree; Claude Code puts hundreds of MB of plugins/, projects/ and
+# security/ state under ~/.claude, none of which belongs in git) and both the
+# dot/ and profile packages can coexist inside them. mkdir -p FOLLOWS an
+# existing symlink, so a legacy machine where stow already folded these must
+# unfold first — fail loudly rather than silently write into the checkout.
+for d in "$HOME/.ssh" "$HOME/.gnupg" "$HOME/.claude"; do
   if [ -L "$d" ]; then
     echo "ERROR: $d is a symlink into the repo (legacy stow folding)."
     echo "Unfold it first: back it up, replace the symlink with a real"
-    echo "chmod-700 directory, and move the machine-local files (keys,"
-    echo "known_hosts, keyrings) back into it. Then re-run script/setup."
+    echo "directory, and move the machine-local files (keys, known_hosts,"
+    echo "keyrings, session state) back into it. Then re-run script/setup."
     exit 1
   fi
 done
-mkdir -p "$HOME/.ssh/config.d" "$HOME/.gnupg"
+mkdir -p "$HOME/.ssh/config.d" "$HOME/.gnupg" "$HOME/.claude"
 chmod 700 "$HOME/.ssh" "$HOME/.gnupg"
 
 stow --restow dot/ --target="$HOME"

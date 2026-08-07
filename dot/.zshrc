@@ -67,6 +67,16 @@ bindkey -M vicmd 'j' history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+# Option+Left/Right jump by word. Ghostty used to fake this by writing a bare
+# `ESC b`/`ESC f`, but that collides with zellij's Alt+f (floating pane), so
+# both are unbound there and the real Alt+Arrow now arrives here instead.
+# Two encodings are bound because zellij re-emits the key in whichever form
+# the pane negotiated; `cat -v` then Option+Right shows which one you get.
+bindkey '^[[1;3C' forward-word   # Alt+Right, xterm modifyOtherKeys
+bindkey '^[[1;3D' backward-word  # Alt+Left
+bindkey '^[[1;9C' forward-word   # Alt+Right, meta-flavored variant
+bindkey '^[[1;9D' backward-word  # Alt+Left
+
 # Great history tool
 eval "$(mcfly init zsh)"
 

@@ -1,6 +1,18 @@
 theme = tokyonight
 keybind = shift+enter=text:\x1b\r
 
+# CUSTOM: drop Ghostty's built-in readline word-motion aliases, which are
+#   keybind = alt+arrow_left=esc:b
+#   keybind = alt+arrow_right=esc:f
+# (see `ghostty +list-keybinds --default`). Writing a literal `ESC f` makes
+# Option+Right byte-identical to Alt+f, which zellij binds to
+# ToggleFloatingPanes — so Option+Right popped the floating pane open and
+# zellij's own "Alt Right" binding could never fire. Unbinding lets the key
+# through as a real Alt+Right (CSI 1;3C); zellij passes it to the shell,
+# where .zshrc binds it to forward-word.
+keybind = alt+arrow_left=unbind
+keybind = alt+arrow_right=unbind
+
 # Hide mouse cursor when typing
 mouse-hide-while-typing = true
 

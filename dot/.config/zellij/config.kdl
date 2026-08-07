@@ -218,8 +218,16 @@ keybinds clear-defaults=true {
         // because Alt o is now a layout-switch key (see below).
         bind "Alt Shift h" { MoveTab "Left"; }
         bind "Alt Shift l" { MoveTab "Right"; }
-        bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
+        // CUSTOM: the "Alt Left" / "Alt Right" aliases the default config
+        // ships alongside Alt h / Alt l are dropped on purpose — Option+Arrow
+        // is reserved for shell word-motion (forward-word/backward-word, bound
+        // in .zshrc). Leaving them bound here would swallow the keys before the
+        // pane's shell ever saw them. Pane/tab movement stays on Alt h/l.
+        // Defaults were:
+        //   bind "Alt h" "Alt Left"  { MoveFocusOrTab "Left"; }
+        //   bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
+        bind "Alt h" { MoveFocusOrTab "Left"; }
+        bind "Alt l" { MoveFocusOrTab "Right"; }
         bind "Alt j" "Alt Down" { MoveFocus "Down"; }
         bind "Alt k" "Alt Up" { MoveFocus "Up"; }
         bind "Alt =" "Alt +" { Resize "Increase"; }

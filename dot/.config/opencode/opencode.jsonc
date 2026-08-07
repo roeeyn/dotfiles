@@ -15,17 +15,8 @@
       "type": "local",
       "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--isolated"]
     },
-    "mcp-atlassian": {
-      "type": "local",
-      "command": ["uvx", "mcp-atlassian"],
-      "environment": {
-        "JIRA_URL": "{env:ATLASSIAN_URL}",
-        "JIRA_USERNAME": "{env:ATLASSIAN_USERNAME}",
-        "JIRA_API_TOKEN": "{env:ATLASSIAN_API_KEY}",
-        "CONFLUENCE_URL": "{env:ATLASSIAN_URL}/wiki",
-        "CONFLUENCE_USERNAME": "{env:ATLASSIAN_USERNAME}",
-        "CONFLUENCE_API_TOKEN": "{env:ATLASSIAN_API_KEY}"
-      }
-    },
   }
+  // Machine-specific MCP servers live in the stowed profile's
+  // ~/.opencode-profile.jsonc, deep-merged on top of this file via the
+  // OPENCODE_CONFIG env var (.zshrc exports it when the file exists).
 }

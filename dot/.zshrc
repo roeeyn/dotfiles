@@ -82,6 +82,9 @@ eval "$(mise activate zsh)"
 
 # Profile overlay (stowed by profiles/work on work machines only)
 [[ -f "$HOME/.alert_media.zsh" ]] && source "$HOME/.alert_media.zsh"
+# Profile-specific opencode MCP servers: opencode deep-merges this file on
+# top of the shared ~/.config/opencode/opencode.jsonc.
+[[ -f "$HOME/.opencode-profile.jsonc" ]] && export OPENCODE_CONFIG="$HOME/.opencode-profile.jsonc"
 source "$HOME/.switch_env.zsh"
 
 # Initialize completion system

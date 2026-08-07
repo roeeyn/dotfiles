@@ -28,6 +28,36 @@ signing) when `gh` is authenticated as the personal account — otherwise it
 prints the commands to do it. Commits are signed with that same key via
 SSH signing (`gpg.format = ssh`); GPG is no longer involved in git.
 
+## MCP servers (Claude Code + opencode)
+
+Both AI tools follow the same rule as everything else here: **shared servers
+live in shared files, machine-specific servers live in the stowed profile.**
+The two tools read different files, so the profile ships one file per tool:
+
+| Tool | Shared servers | Profile servers (stowed to `~`) |
+| --- | --- | --- |
+| Claude Code | — (no shared file) | `profiles/<name>/.mcp.json` → `~/.mcp.json` (the complete list per profile) |
+| opencode | `dot/.config/opencode/opencode.jsonc` (`mcp` block) | `profiles/<name>/.opencode-profile.jsonc` → `~/.opencode-profile.jsonc` |
+
+How each tool picks the profile servers up:
+
+- **Claude Code** reads `~/.mcp.json` directly; whichever profile is stowed
+  owns that symlink. Because JSON has no include, each profile's file lists
+  its complete set (the two shared entries are duplicated by design).
+- **opencode** deep-merges config sources: the shared
+  `~/.config/opencode/opencode.jsonc` loads first, then the file pointed to
+  by `OPENCODE_CONFIG` merges on top. `.zshrc` exports
+  `OPENCODE_CONFIG=~/.opencode-profile.jsonc` only when that file exists, so
+  the profile fragment only needs the *additions*, never a copy of the
+  shared config.
+
+To add a server: for everyone → opencode's shared `mcp` block, plus BOTH
+profiles' `.mcp.json`; for one profile → that profile's two files
+(`.mcp.json` and `.opencode-profile.jsonc`). Machine-local one-offs for
+Claude can also use `claude mcp add -s user` (lives in `~/.claude.json`,
+never versioned). Profile switching needs no extra care: `script/setup`
+unstows the old profile's files before stowing the new ones.
+
 ## Updating the Brewfiles
 
 Two files declare what a machine installs: `dot/.Brewfile` (shared by every

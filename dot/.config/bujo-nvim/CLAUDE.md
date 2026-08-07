@@ -100,3 +100,7 @@ mode is `i`/`R`, so the raw `!` is editable while typing.
   `nvim_feedkeys('i', 'x!', false)` kills the runner mid-file (the spec's
   output just stops, no failure, no summary). Stub `nvim_get_mode` instead
   (see the Insert-mode spec in `tests/strike_spec.lua`).
+- `migrate.lua` is pure, so durability is the **caller's** job: `open_today`
+  must commit today's note to disk *before* rewriting the source with `[>]`
+  marks — reversed order turns any interruption into silent task loss.
+  `tests/open_today_spec.lua` pins the write order.

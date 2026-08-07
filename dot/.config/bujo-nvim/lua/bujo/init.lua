@@ -74,16 +74,24 @@ function M.open_today()
         end
     end
 
+    vim.fn.mkdir(vim.fn.fnamemodify(path, ':h'), 'p')
+
+    -- Migration is a two-file transaction: today's note must be durable on
+    -- disk BEFORE the source is rewritten with [>] marks. An interruption
+    -- between the writes then duplicates tasks (visible, fixable) instead of
+    -- losing them (silent: nothing lists [>], and the destination that never
+    -- got written was the only other copy).
+    local moved, rewritten
     if previous then
-        local moved, rewritten = migrate.migrate(vim.fn.readfile(previous))
-        if #moved > 0 then
-            vim.fn.writefile(rewritten, previous)
-            vim.list_extend(lines, moved)
-        end
+        moved, rewritten = migrate.migrate(vim.fn.readfile(previous))
+        vim.list_extend(lines, moved)
     end
 
-    vim.fn.mkdir(vim.fn.fnamemodify(path, ':h'), 'p')
     vim.fn.writefile(lines, path)
+    if moved and #moved > 0 then
+        vim.fn.writefile(rewritten, previous)
+    end
+
     edit(path, #lines)
 end
 

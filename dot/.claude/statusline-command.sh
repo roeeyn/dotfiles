@@ -84,16 +84,30 @@ limit_seg() {
     color=32
   fi
   local text
-  text=$(printf '%s: %s%%' "$label" "$int")
+  text=$(printf '%s:%s%%' "$label" "$int")
   if [ "$int" -ge 80 ] 2>/dev/null && [ -n "$reset" ]; then
     local at
     at=$(date -r "$reset" +%H:%M 2>/dev/null) && text+="→$at"
   fi
-  printf ' \033[%sm%s\033[0m' "$color" "$text"
+  printf '\033[%sm%s\033[0m' "$color" "$text"
 }
 
-quota="$(limit_seg 5h "$five_h" "$five_h_reset")$(limit_seg 7d "$seven_d" "$seven_d_reset")"
-add_group "${quota# }"
+# The two windows are divided by a · rather than the group │, so the split
+# between them stays subordinate to the split between groups — one glyph per
+# level of nesting. Same empty-safe join as add_group: with only one window
+# present (each can be absent independently) no divider is emitted at all.
+subsep=$(printf ' \033[90m·\033[0m ')
+
+add_quota() {
+  [ -z "$1" ] && return
+  [ -n "$quota" ] && quota+="$subsep"
+  quota+="$1"
+}
+
+quota=""
+add_quota "$(limit_seg 5h "$five_h" "$five_h_reset")"
+add_quota "$(limit_seg 7d "$seven_d" "$seven_d_reset")"
+add_group "$quota"
 
 printf '%s' "$line"
 

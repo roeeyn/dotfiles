@@ -49,7 +49,6 @@ alias lg=lazygit
 alias ldo=lazydocker
 alias cl=claude
 alias cls="claude --dangerously-skip-permissions --add-dir $HOME/src"
-alias clp='CLAUDE_CONFIG_DIR="$HOME/.claude-personal" claude --dangerously-skip-permissions'
 alias ca=cursor-agent
 alias oc=opencode
 # gwa is now a script in ~/.local/bin/gwa

@@ -227,6 +227,8 @@ alias gams='git am --skip'
 alias gama='git am --abort'
 alias gamscp='git am --show-current-patch'
 
+alias zj='zellij'
+
 # Helper functions for git aliases
 function git_current_branch() {
   local ref

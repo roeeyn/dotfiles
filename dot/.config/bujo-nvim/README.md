@@ -107,6 +107,34 @@ re-runs migration.
 | `<leader>?` | which-key: buffer-local keymaps (pressing `<leader>` and waiting shows all) |
 | `<leader>q1` / `<leader>qq` | force quit / soft quit (mirrors main nvim) |
 | `gx` / `<leader>o` | **o**pen ticket/PR ref or URL under cursor in the browser |
+| `za` | collapse / expand the subtasks of the task under the cursor (see below) |
+
+## Folding (`lua/bujo/fold.lua`)
+
+`za` on a task collapses its subtasks — the natural gesture when a parent is
+finished and its children are just history:
+
+```
+▾ - [ ] plan the offsite
+      - [ ] send invites
+      - [ ] book the room
+
+▸ - [ ] plan the offsite·······································
+```
+
+A collapsed task is marked three ways at once: the `▸` in the gutter (`▾`
+when it is open, blank on tasks with nothing to collapse), the `Folded`
+background, and the `·` run trailing the text. `foldtext` is empty on
+purpose, so the folded line keeps its checkbox icon, its strikethrough and
+its `!` marker instead of turning into `+--  3 lines: - [ ] …`.
+
+The folds themselves come from tree-sitter's markdown queries, so a "task
+with subtasks" is a list item containing a nested list. `za` only ever
+toggles a fold that *starts on the cursor line*: pressed on a task with no
+subtasks it does nothing, rather than collapsing the whole day (which is
+what the built-in `za` does there). Everything else is stock Vim — `zc`
+closes the fold you are inside, `zR` / `zM` open / close all, and notes
+always open fully expanded.
 
 ## Ticket/PR references (`lua/bujo/links.lua`)
 

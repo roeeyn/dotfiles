@@ -109,6 +109,36 @@ the raw `!` untouched until decided. Pin any change in
 Same Insert-mode rule as strike.lua: `decorate()` clears then bails when the
 mode is `i`/`R`, so the raw `!` is editable while typing.
 
+## Folding (`lua/bujo/fold.lua`)
+
+Folds come from **tree-sitter's markdown `folds.scm`**, not from a bujo rule:
+`(list_item (list))` is already "a task with subtasks". Neovim bundles that
+query with the markdown parser and it is byte-identical to nvim-treesitter's,
+so the specs fold exactly what the app folds without putting the plugin on
+the test rtp.
+
+This is the one module that deliberately **does not share migrate.lua's block
+rule**. A tree-sitter `list_item` can swallow a blank line (loose lists), so a
+fold may cover a line migration would leave behind. Do not "fix" that: folding
+decides what is hidden on screen, migration decides what moves between days.
+The repo's usual "change both" instinct does not apply here.
+
+`za` is remapped to `M.toggle`, which only touches a fold **starting on the
+cursor line** (`M.starts_fold`, pinned by `tests/fold_spec.lua`). Native `za`
+on a task with *no* subtasks closes the innermost fold containing the cursor —
+the enclosing `(section (list))` — i.e. the entire day's note. `starts_fold`
+asks `vim.treesitter.foldexpr(lnum)` for its `>N` form instead of comparing
+`foldlevel()` across neighbouring lines, because two sibling tasks that both
+have subtasks sit at the same level and the comparison misses the second one.
+
+The gutter arrow is drawn by `M.gutter()` through **`statuscolumn`, never
+`foldcolumn`**: at `auto:1` Neovim prints the fold *level digit* on any line
+deeper than the column is wide, so every child line and every one-liner task
+grows a stray `2`/`3`; `auto:3` trades that for three mostly-blank columns and
+a doubled `▾▾` where two folds start on one line. Because the statuscolumn is
+window-local and set on `FileType markdown`, `gutter()` keeps a filetype guard
+— a window that switches to oil would otherwise run tree-sitter per line.
+
 ## Gotchas learned the hard way
 
 - Ephemeral extmarks with `virt_text_pos = 'inline'` inside a decoration
@@ -122,6 +152,15 @@ mode is `i`/`R`, so the raw `!` is editable while typing.
   `nvim_feedkeys('i', 'x!', false)` kills the runner mid-file (the spec's
   output just stops, no failure, no summary). Stub `nvim_get_mode` instead
   (see the Insert-mode spec in `tests/strike_spec.lua`).
+- On a **closed fold** with `foldtext = ''`, only *overlay* extmarks are
+  painted — end-of-line virtual text is not (the fold fill takes the rest of
+  the line). So render-markdown's icons and priority.lua's `!` survive a
+  collapse, but a "N lines hidden" suffix via `virt_text` cannot be built
+  that way; the trailing `fillchars` `fold:·` run is the tail signal instead.
+- Headless Neovim still keeps a **screen grid**: `vim.fn.screenstring(row,
+  col)` after `vim.cmd 'redraw'` returns what a line actually renders as.
+  That is how the fold-gutter and extmark questions above were settled, and
+  it beats reasoning about drawing order.
 - `migrate.lua` is pure, so durability is the **caller's** job: `open_today`
   must commit today's note to disk *before* rewriting the source with `[>]`
   marks — reversed order turns any interruption into silent task loss.

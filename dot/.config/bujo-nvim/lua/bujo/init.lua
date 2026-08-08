@@ -302,6 +302,7 @@ function M.setup(opts)
     require('bujo.links').setup(vim.tbl_extend('keep', opts and opts.links or {}, { root = M.root }))
     require('bujo.strike').setup(opts and opts.strike)
     require('bujo.priority').setup(opts and opts.priority)
+    require('bujo.fold').setup(opts and opts.fold)
 
     local command = vim.api.nvim_create_user_command
     command('BujoToday', M.open_today, { desc = "Open (or create + migrate) today's daily note" })

@@ -82,6 +82,25 @@ local bujo_nvim = vim.api.nvim_create_augroup('bujo-nvim', { clear = true })
 -- mirrors main nvim / slim-nvim. kanagawa-wave springGreen on sumiInk.
 vim.api.nvim_set_hl(0, 'YankClipboard', { bg = '#98bb6c', fg = '#1f1f28', bold = true })
 
+-- Insert-mode column guide. The terminal cursor is easy to lose on the pale
+-- lotus background and its color can't be fixed per-mode from here (zellij
+-- swallows OSC 12, so `guicursor` colors never reach the terminal). So don't
+-- chase the cursor: light up its column instead. `cursorline` already marks
+-- the row all the time; while typing, the vertical band crossing it marks
+-- the character. Normal mode keeps it off — the band is noise while reading.
+--
+-- The color is kanagawa lotus's own CursorColumn (bg_p2), deliberately not
+-- overridden: to make the band louder, set a CursorColumn highlight in
+-- lua/plugins/kanagawa.lua next to BujoPriority (post-colorscheme, so it
+-- wins). InsertEnter/InsertLeave also cover Replace mode, matching the
+-- `[iR]` rule strike.lua and priority.lua use.
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'InsertLeave' }, {
+    group = bujo_nvim,
+    callback = function(args)
+        vim.wo.cursorcolumn = args.event == 'InsertEnter'
+    end,
+})
+
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = bujo_nvim,
     callback = function()

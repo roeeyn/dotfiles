@@ -136,6 +136,16 @@ what the built-in `za` does there). Everything else is stock Vim — `zc`
 closes the fold you are inside, `zR` / `zM` open / close all, and notes
 always open fully expanded.
 
+## Insert-mode column
+
+While typing, the cursor's **column** lights up (`cursorcolumn`, on for
+Insert and Replace only). The terminal cursor is easy to lose on the pale
+lotus background and its color can't be set per-mode from here — zellij
+swallows the OSC 12 escape — so the position is signalled by the row
+(`cursorline`, always on) crossing the column band. The band uses kanagawa
+lotus's own `CursorColumn`; to make it louder, set a `CursorColumn`
+highlight in `lua/plugins/kanagawa.lua` next to `BujoPriority`.
+
 ## Ticket/PR references (`lua/bujo/links.lua`)
 
 Neovim wraps on raw buffer columns even when text is concealed

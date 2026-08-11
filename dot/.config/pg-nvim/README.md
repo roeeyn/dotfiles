@@ -170,6 +170,7 @@ The launcher script lives at `~/.local/bin/pg-nvim`, on `PATH` via `dot/.zshrc`.
 - plugins for this app install under `~/.local/share/pg-nvim`
 - history is global on purpose (queries are reusable across services); only
   per-service concerns (e.g. schema completion) are isolated by `PG_NVIM_SERVICE`
-- `nvim-treesitter` is pinned to `branch = 'master'`: its `main` rewrite dropped
-  the `.configs` setup API (`ensure_installed`/`highlight`), and `sql` is not a
-  Neovim-bundled parser, so the classic API is needed to install + highlight it
+- `nvim-treesitter` follows the `main` rewrite (the frozen `master` branch
+  crashes on Neovim 0.12): `sql` is installed via `require('nvim-treesitter').install`
+  and highlighting is started by a `FileType` autocmd (`vim.treesitter.start()`),
+  since the rewrite has no `.configs` API

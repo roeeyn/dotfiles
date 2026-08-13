@@ -130,3 +130,7 @@ dot/.codex/config.toml
 
 # opencode writes machine-local MCP/state here (like ~/.claude.json for claude)
 dot/.config/opencode/opencode.json
+
+# karabiner drops timestamped backups next to its config on every GUI save —
+# machine-local churn; only karabiner.json is shared
+dot/.config/karabiner/automatic_backups/

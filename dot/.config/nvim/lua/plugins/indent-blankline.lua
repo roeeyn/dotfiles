@@ -29,6 +29,12 @@ return {
             indent = {
                 highlight = highlight,
             },
+            -- render-markdown.nvim draws code-block backgrounds and quote bars;
+            -- indent guides cut through them. ibl appends this to its own
+            -- default excludes (help, checkhealth, ...) rather than replacing.
+            exclude = {
+                filetypes = { 'markdown' },
+            },
         }
     end,
 }

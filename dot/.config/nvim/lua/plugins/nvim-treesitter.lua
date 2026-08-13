@@ -9,6 +9,7 @@ local filetypes = {
     'json',
     'lua',
     'markdown',
+    'markdown_inline',
     'python',
     'sql',
     'typescript',

@@ -38,6 +38,8 @@ script/
   strap-after-setup Strap's post-dependencies hook: re-runs setup and
                     converges brew.
   brew-sync         Brewfile ledger reconciliation (see below).
+  git-hooks/        tracked git hooks; setup symlinks them into
+                    .git/hooks (post-merge: Brewfile-change reminder).
 ```
 
 Where does a change go?
@@ -139,6 +141,12 @@ Day-to-day recipes:
 | Stop wanting a package | delete its line from whichever file declares it, then `brew bundle cleanup --global` (review, then `--force`) |
 | Fresh machine / after a pull | `brew bundle --global` installs anything newly declared |
 | Just checking for drift | `script/brew-sync` (dry-run is the default; changes nothing) |
+
+A `post-merge` git hook (tracked in `script/git-hooks/`, symlinked into
+`.git/hooks` by `script/setup`) prints a `brew bundle --global` reminder
+whenever a pull changes any Brewfile. Reminder only — it never runs brew.
+Since `.git/hooks` is never synced by git, a machine picks the hook up on
+its next `script/setup` run, not on pull.
 
 Why new packages default into the *profile* local: only the machine you ran
 it on is known to want them — promotion to everyone is a deliberate one-line

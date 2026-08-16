@@ -17,7 +17,9 @@ file, so both names resolve to the same instructions — edit this one.
   below for the rules (`profiles/work/` is a separate PRIVATE repo; never put
   work content in this public one).
 - `script/setup`: the idempotent installer; `script/brew-sync`: Brewfile
-  reconciliation.
+  reconciliation; `script/git-hooks/`: tracked git hooks, symlinked into
+  `.git/hooks` by setup (never set `core.hooksPath` — pre-commit owns
+  `.git/hooks/pre-commit`).
 - `.pre-commit-config.yaml`: formatting hooks.
 
 ## Profile system — invariants for agents

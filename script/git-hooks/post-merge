@@ -1,0 +1,27 @@
+#!/bin/bash
+# post-merge: after a pull, react when any Brewfile changed.
+#
+# Not auto-installed by git — script/setup symlinks this into
+# .git/hooks/post-merge (pre-commit owns .git/hooks/pre-commit, so we
+# install individual hooks instead of overriding core.hooksPath).
+#
+# ORIG_HEAD is where HEAD was before the merge; diffing it against HEAD
+# yields exactly the files this pull brought in.
+
+changed="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD -- \
+  'dot/.Brewfile' 'profiles/*/.Brewfile.local' 2>/dev/null)"
+
+if [ -z "$changed" ]; then
+  exit 0
+fi
+
+echo "Brewfile change pulled:"
+awk '{print "  " $0}' <<<"$changed"
+
+# Reminder only — never run brew here: a pull should stay fast and must
+# not surprise with multi-minute cask installs or sudo prompts.
+echo ""
+echo ">>> Brewfiles changed — reconcile packages with:"
+echo ">>>   brew bundle --global"
+echo ""
+exit 0

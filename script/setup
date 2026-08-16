@@ -95,6 +95,14 @@ chmod 700 "$HOME/.ssh" "$HOME/.gnupg"
 
 stow --restow dot/ --target="$HOME"
 
+# Tracked git hooks: .git/hooks is never cloned, so converge symlinks here.
+# pre-commit owns .git/hooks/pre-commit — link individual hooks instead of
+# overriding core.hooksPath, which would bypass it.
+for hook in script/git-hooks/*; do
+  ln -sf "../../$hook" ".git/hooks/$(basename "$hook")"
+done
+chmod +x script/git-hooks/*
+
 # Symlink files/* into home directory as regular files
 stow --restow files/ --target="$HOME"
 

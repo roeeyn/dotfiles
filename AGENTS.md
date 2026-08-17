@@ -1,7 +1,9 @@
 # AGENTS.md
 
 This file guides agentic coding in this repo. `CLAUDE.md` is a symlink to this
-file, so both names resolve to the same instructions — edit this one.
+file, so both names resolve to the same instructions — edit this one. Always
+target `AGENTS.md` with Write/Edit tools: writing through the `CLAUDE.md` path
+fails with "Refusing to write through symlink".
 
 ## Scope
 - Repository: dotfiles (macOS setup + editor configs).
@@ -112,6 +114,15 @@ Do not move the Neovim editor settings into the standalone config without confir
 - Max line width is 160 columns (Stylua).
 - Use Unix line endings.
 - Favor `no_call_parentheses = true` in Lua (Stylua).
+
+## Multiple Neovim configs — fan-out rule
+
+There are five parallel nvim app configs under `dot/.config/`: `nvim`,
+`bujo-nvim`, `pg-nvim`, `nvim-eyeliner`, `slim-nvim`. After any plugin
+add/fix/upgrade in one of them, ALWAYS ask whether to apply the same change
+to the sibling configs — never fan out automatically (some plugins belong in
+every config, others are deliberately config-specific). When fanning out,
+commit one config per commit.
 
 ## Lua Style (Neovim)
 - Keep plugin configs small and focused per file.

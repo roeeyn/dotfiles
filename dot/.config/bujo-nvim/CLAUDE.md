@@ -59,6 +59,28 @@ to GitHub, delete its `bitbucket_repos` entry — that's the whole migration.
 The `/morning` skill (`~/notes/.claude/skills/morning/SKILL.md`) writes bare
 refs into daily notes and cites the alias table — keep the two in sync.
 
+## @-mention note picker (`lua/bujo/mention.lua`)
+
+Typing `@` in insert mode (markdown buffers) opens a Telescope picker over
+vault notes and inserts `[[stem]]` at the cursor — the `@` itself is never
+written; it's only the trigger key. The inserted stem is always the **on-disk
+filename stem**, which `links.note_path` resolves on its first ladder rung —
+never slug it (a slugged link resolves via rung 2 and diverges from what the
+buffer shows). Quick-capture filenames (`YYYY-MM-DD Note N`) are opaque, so
+the picker display leads with the note's H1 title; named notes sort by mtime
+(newest first — the just-captured idea is the likeliest target), then dailies
+newest first.
+
+Mechanics pinned by hard-won constraints: the `@` mapping is `expr = true`
+and therefore runs under **textlock** — it captures `(buf, row, col)`,
+schedules the picker, and returns `''`/`'@'`; never re-read the cursor after
+Telescope closes (leaving insert mode shifts it). Insertion resumes typing
+via "park on last inserted byte + feedkeys `a`", not `startinsert`, which
+lands one column short at EOL — the common case. Cancelling inserts nothing;
+`should_trigger` owns the literal-`@` policy — fire only at line start or
+after whitespace/`(` — so emails never open the picker (pinned in
+`tests/mention_spec.lua`).
+
 ## Strikethrough (`lua/bujo/strike.lua`)
 
 Done `[x]` and irrelevant `[-]` blocks are struck by this module, **not** by

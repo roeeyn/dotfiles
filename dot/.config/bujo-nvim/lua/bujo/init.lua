@@ -303,6 +303,8 @@ function M.setup(opts)
     require('bujo.strike').setup(opts and opts.strike)
     require('bujo.priority').setup(opts and opts.priority)
     require('bujo.fold').setup(opts and opts.fold)
+    -- mention needs the root to list picker candidates; explicit opts win.
+    require('bujo.mention').setup(vim.tbl_extend('keep', opts and opts.mention or {}, { root = M.root }))
 
     local command = vim.api.nvim_create_user_command
     command('BujoToday', M.open_today, { desc = "Open (or create + migrate) today's daily note" })

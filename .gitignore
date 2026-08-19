@@ -128,6 +128,12 @@ profiles/work/
 # blocks) — machine-local runtime state, not shared config
 dot/.codex/config.toml
 
+# zellij wasm plugins are per-version artifacts, not config — each machine
+# fetches them (`zj-radar setup zellij --download`); only config.kdl and
+# layouts are shared. *.zj-radar.bak is the setup tool's restore point.
+dot/.config/zellij/plugins/
+*.zj-radar.bak
+
 # opencode writes machine-local MCP/state here (like ~/.claude.json for claude)
 dot/.config/opencode/opencode.json
 

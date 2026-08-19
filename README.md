@@ -152,6 +152,26 @@ Why new packages default into the *profile* local: only the machine you ran
 it on is known to want them — promotion to everyone is a deliberate one-line
 move, never automatic.
 
+## zj-radar (Zellij agent sidebar)
+
+The shared Zellij config expects [zj-radar](https://github.com/marktoda/zj-radar):
+`config.kdl` carries the managed `radar` alias and `layouts/default.kdl` pins the
+rail. The CLI binary and the wasm are per-machine artifacts (gitignored), so a
+new machine bootstraps them by hand:
+
+```sh
+# CLI — ZJ_RADAR_BIN_DIR keeps the binary out of the stowed ~/.local/bin
+curl --proto '=https' --tlsv1.2 -LsSf \
+  https://github.com/marktoda/zj-radar/releases/latest/download/install.sh \
+  | ZJ_RADAR_BIN_DIR="$HOME/bin" sh
+zj-radar setup zellij --download --yes   # wasm + permission grant (config/layout already stowed)
+zj-radar setup claude --yes              # Claude Code producer (marketplace plugin)
+zj-radar setup --check zellij claude     # doctor — everything should be ok
+```
+
+Pin a release with `ZJ_RADAR_VERSION=vX.Y.Z` on the first two commands if the
+machines should match versions.
+
 ## Lazygit configuration
 
 Lazygit uses separate configurations depending on how it is launched:

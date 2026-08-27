@@ -164,13 +164,36 @@ new machine bootstraps them by hand:
 curl --proto '=https' --tlsv1.2 -LsSf \
   https://github.com/marktoda/zj-radar/releases/latest/download/install.sh \
   | ZJ_RADAR_BIN_DIR="$HOME/bin" sh
-zj-radar setup zellij --download --yes   # wasm + permission grant (config/layout already stowed)
+zj-radar setup zellij --download --yes   # permission grant (see the wasm caveat below)
 zj-radar setup claude --yes              # Claude Code producer (marketplace plugin)
+
+# The wasm must be placed by hand — `setup zellij` will NOT do it here (why: below)
+wasm="$HOME/.config/zellij/plugins/zj_radar.wasm"
+ver="$(zj-radar --version | awk '{print $2}')"
+base="https://github.com/marktoda/zj-radar/releases/download/v$ver"
+mkdir -p "$(dirname "$wasm")"
+curl --proto '=https' --tlsv1.2 -Ls -o "$wasm" "$base/zj_radar.wasm"
+curl --proto '=https' --tlsv1.2 -Ls "$base/zj_radar.wasm.sha256" \
+  | awk -v f="$wasm" '{print $1"  "f}' | shasum -a 256 -c -
+
 zj-radar setup --check zellij claude     # doctor — everything should be ok
 ```
 
-Pin a release with `ZJ_RADAR_VERSION=vX.Y.Z` on the first two commands if the
-machines should match versions.
+**Why the wasm is manual.** `zj-radar setup zellij` only copies the wasm as part
+of *writing* the managed `radar` alias into `config.kdl`. This repo already ships
+that alias, so the tool reports `config already up to date` and skips the copy —
+silently, exiting 0. `--download`, `--wasm <path>` and `--force` all short-circuit
+the same way; the only tell is `setup --check` reporting `missing wasm`. The
+`--download` run is still worth doing: it writes the sidebar's permission grant
+into `~/Library/Caches/org.Zellij-Contributors.Zellij/permissions.kdl`.
+
+Pin a release with `ZJ_RADAR_VERSION=vX.Y.Z` on the install script if the
+machines should match versions; the wasm URL above already follows the installed
+CLI's version.
+
+The rail is live on the next `zellij` launch — running sessions pick it up on a
+new tab or a restart. The Claude producer only attaches to *new* Claude Code
+sessions.
 
 ## Lazygit configuration
 

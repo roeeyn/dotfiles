@@ -19,8 +19,9 @@ fails with "Refusing to write through symlink".
   below for the rules (`profiles/work/` is a separate PRIVATE repo; never put
   work content in this public one).
 - `script/setup`: the idempotent installer; `script/brew-sync`: Brewfile
-  reconciliation; `script/git-hooks/`: tracked git hooks, symlinked into
-  `.git/hooks` by setup (never set `core.hooksPath` — pre-commit owns
+  reconciliation; `script/brave-sync`: Brave shortcut extract/apply;
+  `script/git-hooks/`: tracked git hooks, symlinked into `.git/hooks` by
+  setup (never set `core.hooksPath` — pre-commit owns
   `.git/hooks/pre-commit`).
 - `.pre-commit-config.yaml`: formatting hooks.
 

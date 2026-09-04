@@ -38,6 +38,8 @@ script/
   strap-after-setup Strap's post-dependencies hook: re-runs setup and
                     converges brew.
   brew-sync         Brewfile ledger reconciliation (see below).
+  brave-sync        extract/apply Brave's keyboard shortcuts (Brave
+                    cannot be stowed — it rewrites its own prefs file).
   git-hooks/        tracked git hooks; setup symlinks them into
                     .git/hooks (post-merge: Brewfile-change reminder).
 ```
@@ -51,6 +53,7 @@ Where does a change go?
 | work-only config | `profiles/work/` (the private repo — commit + push there) — root-level only |
 | a secret / API key | `dot/env/.env` (gitignored, per machine); add the key *name* to `.example.env` |
 | a Homebrew package | install it, then `script/brew-sync --apply` (see Brewfiles) |
+| a Brave keyboard shortcut | set it in Brave, then `script/brave-sync` and commit the dump |
 | an MCP server | see "MCP servers" below |
 
 ## Never do this

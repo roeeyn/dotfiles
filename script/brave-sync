@@ -18,8 +18,23 @@
 #     defaults along instead of being pinned to whatever the other machine
 #     shipped. `[]` is meaningful — it is a shortcut deliberately removed.
 #   - the default engine by short_name + keyword, never its GUID. The
-#     `485bf7d3-…` prefix on prepopulated engines is per-install, so the GUID is
-#     resolved against the target machine's own `Web Data` at apply time.
+#     `485bf7d3-…` prefix on prepopulated engines is per-install, so the GUID
+#     would not survive the trip anyway.
+#   - the theme: `extensions.theme.id`, the accent colour and its Material
+#     variant. Brave stores the colour as a signed 32-bit ARGB int
+#     (`-14244198`), which is unreadable in a diff, so it is tracked as
+#     `#RRGGBB` and converted back on apply. Alpha is always opaque.
+#     `brave.dark_mode` is deliberately NOT tracked: absent means "follow the
+#     OS", which is what each machine should decide for itself.
+#   - the layout/chrome prefs listed in UI_PREFS below, carried verbatim.
+#
+# UI_PREFS is an explicit ALLOWLIST, and it has to be. The accelerators can be
+# diffed because Brave ships a `default_accelerators` baseline next to them;
+# for everything else there is no baseline in the file at all — Chromium simply
+# omits prefs left at their default. "Everything under brave.*" would therefore
+# look tempting and be wrong: that subtree is also where the p3a_* telemetry
+# counters, bandwidth_saved_bytes and last_used_* state live. Naming the keys is
+# what keeps this a settings file instead of a state file.
 #
 # What is deliberately NOT tracked: the custom search engines in `Web Data`.
 # That table holds work site-searches (a Jenkins host) and this repo is PUBLIC.
@@ -42,6 +57,23 @@
 # Changing the engine stays a one-time manual step (Settings > Search engine).
 set -euo pipefail
 cd "$(dirname "$0")/.."
+
+# Layout and toolbar chrome. Deliberately excluded as transient UI state, not
+# settings: brave.tabs.vertical_tabs_collapsed (you collapse it during the day)
+# and brave.sidebar.last_used_built_in_item_type.
+UI_PREFS=(
+  brave.sidebar.sidebar_show_option        # 3 = never show the right sidebar
+  brave.sidebar.hidden_built_in_items
+  brave.sidebar.sidebar_items              # which items, and their order
+  brave.tabs.vertical_tabs_enabled
+  brave.tabs.vertical_tabs_expanded_width
+  brave.wallet.show_wallet_icon_on_toolbar
+  brave.show_side_panel_button
+  brave.brave_vpn.show_button
+  brave.ai_chat.show_toolbar_button        # Leo
+  browser.show_forward_button
+  browser.pin_split_tab_button
+)
 
 BRAVE="$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default"
 PREFS="$BRAVE/Preferences"
@@ -68,6 +100,50 @@ accel_diff() {
   ' "$1"
 }
 
+# Brave keeps the accent colour as a signed 32-bit ARGB int. Bash arithmetic
+# does the whole conversion, so this needs no interpreter beyond jq.
+theme_dump() {
+  local id variant raw
+  id="$(jq -r '.extensions.theme.id // empty' "$PREFS")"
+  variant="$(jq -r '.browser.theme.color_variant2 // empty' "$PREFS")"
+  raw="$(jq -r '.browser.theme.user_color2 // empty' "$PREFS")"
+  if [ -z "$raw" ] || [ -z "$id" ]; then
+    echo 'null'   # stock theme, or a downloaded theme extension — nothing to carry
+    return
+  fi
+  jq -n --arg id "$id" \
+        --arg color "$(printf '#%06X' $(( raw & 0xFFFFFF )))" \
+        --argjson variant "${variant:-null}" \
+        '{id: $id, color: $color, color_variant: $variant}'
+}
+
+# The tracked theme in the shape Preferences wants (hex -> signed ARGB int),
+# or {} when nothing is tracked.
+theme_to_prefs() {
+  local color id variant u
+  color="$(jq -r '.theme.color // empty' "$TRACKED")"
+  if [ -z "$color" ]; then echo '{}'; return; fi
+  id="$(jq -r '.theme.id' "$TRACKED")"
+  variant="$(jq -r '.theme.color_variant' "$TRACKED")"
+  u=$(( 0xFF000000 | (0x${color#\#} & 0xFFFFFF) ))
+  if [ "$u" -gt 2147483647 ]; then u=$(( u - 4294967296 )); fi
+  jq -n --arg id "$id" --argjson color "$u" --argjson variant "$variant" \
+    '{id: $id, color: $color, variant: $variant}'
+}
+
+# {"dotted.path": value} for every allowlisted pref this machine actually sets.
+# A pref left at its default is absent from Preferences and stays absent here.
+ui_dump() {
+  # `.` inside a reduce body is the ACCUMULATOR, not the input document, so the
+  # document has to be bound before the reduce or every getpath reads {}.
+  jq -S '
+    . as $doc
+    | reduce $ARGS.positional[] as $k ({};
+        ($doc | getpath($k | split("."))) as $v
+        | if $v == null then . else .[$k] = $v end)
+  ' "$PREFS" --args "${UI_PREFS[@]}"
+}
+
 case "${1:-}" in
   --apply) ;;
   "")
@@ -77,10 +153,14 @@ case "${1:-}" in
       --argjson accelerators "$(accel_diff "$PREFS")" \
       --argjson engine "$(jq '.default_search_provider_data.template_url_data
                               | {short_name, keyword}' "$SECURE")" \
+      --argjson theme "$(theme_dump)" \
+      --argjson ui "$(ui_dump)" \
       '{
          _comment: "Written by script/brave-sync. accelerators is a DIFF against Brave stock defaults, keyed by Brave command id; [] means the shortcut was removed.",
          accelerators: $accelerators,
-         default_search_engine: $engine
+         default_search_engine: $engine,
+         theme: $theme,
+         ui: $ui
        }' > "$tmp/dump.json"
 
     if [ -f "$TRACKED" ] && diff -q "$TRACKED" "$tmp/dump.json" >/dev/null; then
@@ -161,12 +241,27 @@ want_name="$(jq -r '.default_search_engine.short_name' "$TRACKED")"
 have_kw="$(jq -r '.default_search_provider_data.template_url_data.keyword' "$SECURE")"
 have_name="$(jq -r '.default_search_provider_data.template_url_data.short_name' "$SECURE")"
 
+# The theme prefs are absent from protection.macs (checked: neither
+# extensions.theme nor browser.theme appears there), so unlike the engine
+# these actually stick.
+theme_prefs="$(theme_to_prefs)"
+ui_prefs="$(jq -c '.ui // {}' "$TRACKED")"
+
 # Temp + mv so a crash mid-write cannot leave Brave a truncated Preferences.
-jq -c --argjson accel "$merged" '.brave.accelerators = $accel' "$PREFS" > "$tmp/Preferences"
+jq -c --argjson accel "$merged" --argjson theme "$theme_prefs" --argjson ui "$ui_prefs" '
+  .brave.accelerators = $accel
+  | reduce ($ui | to_entries[]) as $e (.; setpath($e.key | split("."); $e.value))
+  | if ($theme | length) > 0 then
+      .extensions.theme.id = $theme.id
+      | .browser.theme.user_color2 = $theme.color
+      | .browser.theme.color_variant2 = $theme.variant
+    else . end
+' "$PREFS" > "$tmp/Preferences"
 chmod 600 "$tmp/Preferences"
 mv "$tmp/Preferences" "$PREFS"
 
-echo "Applied $(jq 'length' <<<"$merged") accelerator bindings. Backup: $backup"
+applied_theme="$(jq -r 'if length > 0 then " + theme" else "" end' <<<"$theme_prefs")"
+echo "Applied $(jq 'length' <<<"$merged") accelerator bindings, $(jq 'length' <<<"$ui_prefs") layout pref(s)${applied_theme}. Backup: $backup"
 if [ "$want_kw" != "$have_kw" ]; then
   echo
   echo "Default engine is $have_name ($have_kw) here, but $TRACKED says $want_name ($want_kw)."

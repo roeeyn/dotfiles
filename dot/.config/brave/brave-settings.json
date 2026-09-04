@@ -20,5 +20,42 @@
   "default_search_engine": {
     "keyword": ":g",
     "short_name": "Google"
+  },
+  "theme": {
+    "color": "#26A69A",
+    "color_variant": 1,
+    "id": "user_color_theme_id"
+  },
+  "ui": {
+    "brave.ai_chat.show_toolbar_button": false,
+    "brave.brave_vpn.show_button": false,
+    "brave.show_side_panel_button": false,
+    "brave.sidebar.hidden_built_in_items": [
+      7
+    ],
+    "brave.sidebar.sidebar_items": [
+      {
+        "built_in_item_type": 1,
+        "type": 0
+      },
+      {
+        "built_in_item_type": 2,
+        "type": 0
+      },
+      {
+        "built_in_item_type": 3,
+        "type": 0
+      },
+      {
+        "built_in_item_type": 4,
+        "type": 0
+      }
+    ],
+    "brave.sidebar.sidebar_show_option": 3,
+    "brave.tabs.vertical_tabs_enabled": true,
+    "brave.tabs.vertical_tabs_expanded_width": 217,
+    "brave.wallet.show_wallet_icon_on_toolbar": false,
+    "browser.pin_split_tab_button": true,
+    "browser.show_forward_button": true
   }
 }

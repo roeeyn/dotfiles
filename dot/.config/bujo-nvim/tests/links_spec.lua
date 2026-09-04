@@ -15,6 +15,16 @@ describe('bujo.links', function()
             assert.equal('https://github.com/alertmediainc/src-root/issues/32', links.resolve 'src-root#32')
         end)
 
+        -- These four were written in daily notes for weeks before they were
+        -- registered; unregistered names pass through verbatim, so they
+        -- resolved to 404s like /alertmediainc/am/issues/70 instead of failing.
+        it('expands the aliases the daily notes actually use', function()
+            assert.equal('https://github.com/alertmediainc/automate_me/issues/70', links.resolve 'am#70')
+            assert.equal('https://github.com/alertmediainc/alertmedia_web/issues/364', links.resolve 'aw#364')
+            assert.equal('https://github.com/alertmediainc/notify_me/issues/245', links.resolve 'nm#245')
+            assert.equal('https://github.com/alertmediainc/phone_provider_tester/issues/8', links.resolve 'ppt#8')
+        end)
+
         it('routes notify_me to GitHub since the 2026-07-27 migration', function()
             assert.equal('https://github.com/alertmediainc/notify_me/issues/6366', links.resolve 'notify_me#6366')
         end)
@@ -194,7 +204,7 @@ describe('bujo.links', function()
     describe('url_to_ref', function()
         it('prefers aliases and tolerates URL tails', function()
             assert.equal('nr#52', links.url_to_ref 'https://github.com/alertmediainc/notification_router/pull/52')
-            assert.equal('notify_me#6366', links.url_to_ref 'https://bitbucket.org/alertmediaadmin/notify_me/pull-requests/6366/overview')
+            assert.equal('nm#6366', links.url_to_ref 'https://bitbucket.org/alertmediaadmin/notify_me/pull-requests/6366/overview')
             assert.equal('MSG-3111', links.url_to_ref 'https://alertmedia.atlassian.net/browse/MSG-3111')
         end)
 

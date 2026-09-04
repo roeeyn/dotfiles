@@ -22,10 +22,17 @@ M.config = {
     -- notify_me migrated the week of 2026-07-27: refs from before then are
     -- Bitbucket PR numbers and no longer resolve (accepted breakage).
     bitbucket_repos = {},
-    -- Short names for long repos; anything not listed is used verbatim.
+    -- Short names for long repos. Anything not listed is used verbatim, which
+    -- turns an unregistered alias into a plausible but wrong URL rather than
+    -- an error (`am#70` -> /alertmediainc/am/issues/70, a 404), so every short
+    -- name the notes actually use has to be listed here.
     aliases = {
+        am = 'automate_me',
+        aw = 'alertmedia_web',
+        nm = 'notify_me',
         nr = 'notification_router',
         mss = 'messaging_stats_service',
+        ppt = 'phone_provider_tester',
         ['tf-modules'] = 'terraform-modules',
     },
 }

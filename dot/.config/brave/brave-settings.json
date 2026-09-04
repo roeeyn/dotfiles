@@ -1,0 +1,24 @@
+{
+  "_comment": "Written by script/brave-sync. accelerators is a DIFF against Brave stock defaults, keyed by Brave command id; [] means the shortcut was removed.",
+  "accelerators": {
+    "34055": [],
+    "40023": [
+      "Command+Shift+KeyC",
+      "Command+Alt+KeyC"
+    ],
+    "56003": [
+      "Command+Alt+KeyN"
+    ],
+    "56041": [
+      "Control+KeyM"
+    ],
+    "56044": [],
+    "56215": [
+      "Command+KeyB"
+    ]
+  },
+  "default_search_engine": {
+    "keyword": ":g",
+    "short_name": "Google"
+  }
+}

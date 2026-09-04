@@ -1,0 +1,175 @@
+#!/bin/bash
+# brave-sync: track Brave's keyboard shortcuts and default search engine.
+#
+# Brave cannot be stowed. Chromium-family browsers write `Preferences` as
+# write-temp-then-rename(), so a symlink is REPLACED by a real file on the
+# first write — and the file is ~150 KB of volatile state (engagement scores,
+# per-site counters) that has no business in git. So: extract and apply,
+# modeled on script/brew-sync.
+#
+#   script/brave-sync           # dump the tracked settings out of Brave
+#   script/brave-sync --apply   # write the tracked settings back into Brave
+#
+# What is tracked (dot/.config/brave/brave-settings.json):
+#
+#   - the accelerator DIFF against this Brave's own `default_accelerators`,
+#     not a snapshot of the whole map. Brave ships ~82 stock bindings and adds
+#     more each release; recording the diff means a Brave update brings its new
+#     defaults along instead of being pinned to whatever the other machine
+#     shipped. `[]` is meaningful — it is a shortcut deliberately removed.
+#   - the default engine by short_name + keyword, never its GUID. The
+#     `485bf7d3-…` prefix on prepopulated engines is per-install, so the GUID is
+#     resolved against the target machine's own `Web Data` at apply time.
+#
+# What is deliberately NOT tracked: the custom search engines in `Web Data`.
+# That table holds work site-searches (a Jenkins host) and this repo is PUBLIC.
+# Those belong in the private profiles/work/ overlay — see Stage 2 in the note
+# ~/notes/notes/brave-settings-dotfiles-sync.md.
+#
+# `Secure Preferences` is never written. Its protection.macs tree carries an
+# HMAC per protected pref keyed off a per-install seed, and
+# `default_search_provider_data.template_url_data` is in that list.
+#
+# So `brave.accelerators` is the only thing this script WRITES. The default
+# engine is tracked but only CHECKED, because writing it does not work:
+# `default_search_provider.guid` in plain `Preferences` is just a pointer, and
+# Brave rebuilds it from the protected `template_url_data` on launch. Verified
+# 2026-09-04 — pointed the guid at DuckDuckGo with Brave quit, relaunched, and
+# the guid was back to Google with `reset_occurred` still false and the MAC
+# unchanged. Nothing rejected the edit; the protected payload is simply the
+# source of truth. That also rules out deleting `template_url_data` to force a
+# fallback: a MISSING protected pref is what trips the real tamper reset.
+# Changing the engine stays a one-time manual step (Settings > Search engine).
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+BRAVE="$HOME/Library/Application Support/BraveSoftware/Brave-Browser/Default"
+PREFS="$BRAVE/Preferences"
+SECURE="$BRAVE/Secure Preferences"
+TRACKED="dot/.config/brave/brave-settings.json"
+
+[ -f "$PREFS" ] || { echo "No Brave profile at $BRAVE"; exit 1; }
+
+tmp="$(mktemp -d)"
+trap 'rm -rf "$tmp"' EXIT
+
+# The customization is the diff against this machine's own stock map. A key
+# present in the defaults but missing from the live map is NOT a customization
+# (Brave falls back to the default), so it is skipped rather than recorded as
+# a removal — `[]` has to keep meaning "the user cleared this one".
+accel_diff() {
+  jq -S '
+    .brave as $b
+    | ($b.accelerators // {}) as $cur
+    | ($b.default_accelerators // {}) as $def
+    | [($cur | keys), ($def | keys)] | add | unique
+    | map(select($cur[.] != null and $cur[.] != $def[.]))
+    | map({ (.): $cur[.] }) | add // {}
+  ' "$1"
+}
+
+case "${1:-}" in
+  --apply) ;;
+  "")
+    # The engine's display name and keyword live in Secure Preferences; reading
+    # it is fine, only writing it is off limits.
+    jq -S -n \
+      --argjson accelerators "$(accel_diff "$PREFS")" \
+      --argjson engine "$(jq '.default_search_provider_data.template_url_data
+                              | {short_name, keyword}' "$SECURE")" \
+      '{
+         _comment: "Written by script/brave-sync. accelerators is a DIFF against Brave stock defaults, keyed by Brave command id; [] means the shortcut was removed.",
+         accelerators: $accelerators,
+         default_search_engine: $engine
+       }' > "$tmp/dump.json"
+
+    if [ -f "$TRACKED" ] && diff -q "$TRACKED" "$tmp/dump.json" >/dev/null; then
+      echo "No drift — $TRACKED already matches Brave."
+      exit 0
+    fi
+    [ -f "$TRACKED" ] && diff -u "$TRACKED" "$tmp/dump.json" || true
+    mv "$tmp/dump.json" "$TRACKED"
+    echo "Wrote $TRACKED ($(jq '.accelerators | length' "$TRACKED") accelerator override(s)). Review the diff, then commit."
+    exit 0
+    ;;
+  *) echo "usage: script/brave-sync [--apply]"; exit 1 ;;
+esac
+
+# ── --apply ──────────────────────────────────────────────────────────────
+[ -f "$TRACKED" ] || { echo "No $TRACKED to apply — run script/brave-sync first."; exit 1; }
+
+# Brave rewrites Preferences wholesale on exit and holds Web Data open, so any
+# edit made underneath a running Brave is overwritten seconds later.
+if pgrep -x "Brave Browser" >/dev/null; then
+  echo "Brave is running — quit it first (it rewrites Preferences on exit)."
+  exit 1
+fi
+
+backup="$PREFS.brave-sync-$(date +%Y%m%d%H%M%S).bak"
+cp -p "$PREFS" "$backup"
+
+live="$(accel_diff "$PREFS")"
+tracked="$(jq -S '.accelerators' "$TRACKED")"
+
+# brew-sync's "declared but not installed" idiom: name the drift before acting
+# on it. These are shortcuts customized on THIS machine that were never dumped,
+# and they are exactly what a converging merge would silently discard.
+undumped="$(jq -r -n --argjson live "$live" --argjson tracked "$tracked" '
+  $live | to_entries | map(select($tracked[.key] != .value))
+        | map("  \(.key): \(.value | tojson)") | join("\n")')"
+if [ -n "$undumped" ]; then
+  echo "Customized here but not in $TRACKED:"
+  echo "$undumped"
+  echo
+fi
+
+# ── Merge policy — decided: reconstruct ──────────────────────────────────
+#
+# Both machines run this. The tracked file is a DIFF, so there are two honest
+# ways to turn it back into a live accelerator map, and they differ only in
+# what they use as the base:
+#
+#   overlay      jq -n --argjson base "$(jq '.brave.accelerators' "$PREFS")" ...
+#                Tracked entries land on top of whatever this machine has.
+#                Local-only tweaks survive — and so drift silently, forever.
+#                The two machines never have to agree.
+#
+#   reconstruct  jq -n --argjson base "$(jq '.brave.default_accelerators' "$PREFS")" ...
+#                Rebuild from THIS Brave's stock defaults, then apply the diff.
+#                Machines converge exactly, and it still tracks Brave's own
+#                default changes (that is why the tracked file is a diff and
+#                not a snapshot). Cost: an undumped local tweak is wiped —
+#                which is what the drift report above exists to warn about.
+#
+# CHOSEN: reconstruct. Convergence is the point of tracking this at all, and
+# reconstruct's one cost — wiping an undumped local tweak — is what the drift
+# report above prints a warning for before this ever runs.
+merged_accelerators() {
+  jq -n \
+    --argjson base "$(jq '.brave.default_accelerators // {}' "$PREFS")" \
+    --argjson diff "$tracked" \
+    '$base + $diff'
+}
+
+merged="$(merged_accelerators)"
+
+# The engine is a CHECK, not a write (see the header). Read the live value out
+# of Secure Preferences and report the mismatch instead of silently doing
+# nothing — same "name the drift, then act" idiom as the accelerators above.
+want_kw="$(jq -r '.default_search_engine.keyword' "$TRACKED")"
+want_name="$(jq -r '.default_search_engine.short_name' "$TRACKED")"
+have_kw="$(jq -r '.default_search_provider_data.template_url_data.keyword' "$SECURE")"
+have_name="$(jq -r '.default_search_provider_data.template_url_data.short_name' "$SECURE")"
+
+# Temp + mv so a crash mid-write cannot leave Brave a truncated Preferences.
+jq -c --argjson accel "$merged" '.brave.accelerators = $accel' "$PREFS" > "$tmp/Preferences"
+chmod 600 "$tmp/Preferences"
+mv "$tmp/Preferences" "$PREFS"
+
+echo "Applied $(jq 'length' <<<"$merged") accelerator bindings. Backup: $backup"
+if [ "$want_kw" != "$have_kw" ]; then
+  echo
+  echo "Default engine is $have_name ($have_kw) here, but $TRACKED says $want_name ($want_kw)."
+  echo "Set it by hand: Brave > Settings > Search engine. This script cannot do it —"
+  echo "Brave rebuilds the pointer from its HMAC-protected copy on launch."
+fi

@@ -19,7 +19,7 @@ fails with "Refusing to write through symlink".
   below for the rules (`profiles/work/` is a separate PRIVATE repo; never put
   work content in this public one).
 - `script/setup`: the idempotent installer; `script/brew-sync`: Brewfile
-  reconciliation; `script/brave-sync`: Brave shortcut extract/apply;
+  reconciliation; `script/brave-sync`: Brave prefs extract/apply;
   `script/git-hooks/`: tracked git hooks, symlinked into `.git/hooks` by
   setup (never set `core.hooksPath` — pre-commit owns
   `.git/hooks/pre-commit`).
@@ -75,6 +75,35 @@ Keep the two lazygit configurations separate:
 - `dot/.config/lazygit/config.yml` is passed explicitly by `lazygit.nvim` and may contain Neovim-specific behavior such as `editPreset: nvim-remote`.
 
 Do not move the Neovim editor settings into the standalone config without confirming that nested editor behavior is desired. Do not symlink the entire `~/Library/Application Support/lazygit` directory because lazygit writes machine-local state to `state.yml`; only `config.yml` should be managed by Stow.
+
+## Brave settings — invariants for agents
+
+`script/brave-sync` extracts/applies Brave prefs into
+`dot/.config/brave/brave-settings.json`; README "Brave settings" has the
+human-level version. The rules an agent must not violate:
+
+- **Never stow anything inside a Brave profile directory.** Chromium writes
+  `Preferences` as write-temp-then-`rename()`, so the symlink is replaced by a
+  real file on the first write. Extract/apply is the only workable shape.
+- **Never dump `Web Data`** (the custom search-engine table) into this repo —
+  it holds work site-search domains and this repo is PUBLIC. That split is
+  deferred work: personal engines to `dot/`, work ones to `profiles/work/`.
+- **`UI_PREFS` stays an explicit allowlist.** Do not "simplify" it into a
+  subtree dump: only the accelerators have a `default_*` baseline to diff
+  against, and `brave.*` also contains `p3a_*` telemetry and
+  `bandwidth_saved_bytes`. Adding a pref means adding its dotted path.
+- **The default search engine is check-only — do not make it writable.**
+  `default_search_provider.guid` is a pointer Brave rebuilds on launch from
+  the HMAC-protected `template_url_data` in `Secure Preferences` (verified
+  2026-09-04). Never write `Secure Preferences`, and do not work around this by
+  forging a MAC or deleting the protected value — that is anti-hijacking
+  machinery. Changing the engine stays a manual step.
+- **Check `protection.macs` before adding any new pref.** Membership in that
+  tree has correctly predicted every outcome so far: accelerators, theme and
+  layout are absent from it and apply cleanly; the engine is in it and does not.
+- **`--apply` reconstructs, it does not overlay** (deliberate: machines
+  converge). It therefore wipes undumped local tweaks, so keep the drift
+  report that prints them, and keep the `pgrep` refusal while Brave is running.
 
 ## Tooling Rules
 - Pre-commit hooks are the primary lint/format entrypoint.
@@ -218,4 +247,4 @@ commit one config per commit.
 ## Keep This Updated
 - If you add tooling, update this file.
 - If a command changes, adjust the examples.
-- Keep this doc around ~210 lines.
+- Keep this doc around ~250 lines.

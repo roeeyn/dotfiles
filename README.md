@@ -38,8 +38,8 @@ script/
   strap-after-setup Strap's post-dependencies hook: re-runs setup and
                     converges brew.
   brew-sync         Brewfile ledger reconciliation (see below).
-  brave-sync        extract/apply Brave's keyboard shortcuts (Brave
-                    cannot be stowed — it rewrites its own prefs file).
+  brave-sync        extract/apply Brave's shortcuts, theme and layout
+                    (Brave cannot be stowed — it rewrites its own prefs).
   git-hooks/        tracked git hooks; setup symlinks them into
                     .git/hooks (post-merge: Brewfile-change reminder).
 ```
@@ -53,7 +53,7 @@ Where does a change go?
 | work-only config | `profiles/work/` (the private repo — commit + push there) — root-level only |
 | a secret / API key | `dot/env/.env` (gitignored, per machine); add the key *name* to `.example.env` |
 | a Homebrew package | install it, then `script/brew-sync --apply` (see Brewfiles) |
-| a Brave keyboard shortcut | set it in Brave, then `script/brave-sync` and commit the dump |
+| a Brave shortcut, theme or layout tweak | set it in Brave, then `script/brave-sync` and commit the dump |
 | an MCP server | see "MCP servers" below |
 
 ## Never do this
@@ -64,6 +64,8 @@ Where does a change go?
   (work config → private overlay; secrets → `.env`).
 - Ship profile files under `.config/` or `.local/` — those are folded
   symlinks owned by `dot/`; setup will abort on the stow conflict.
+- Stow anything inside a Brave profile directory, or dump Brave's `Web Data`
+  into this repo — see Brave settings below.
 
 ## Profiles
 
@@ -154,6 +156,76 @@ its next `script/setup` run, not on pull.
 Why new packages default into the *profile* local: only the machine you ran
 it on is known to want them — promotion to everyone is a deliberate one-line
 move, never automatic.
+
+## Brave settings (`script/brave-sync`)
+
+Brave cannot be stowed. Chromium writes `Preferences` as
+write-temp-then-`rename()`, so a symlink is *replaced* by a real file on the
+first write — and that file is ~150 KB of volatile state (engagement scores,
+per-site counters, telemetry). So it is extract/apply instead, same idiom as
+`brew-sync`: dump by default, `--apply` to write back.
+
+Tracked in `dot/.config/brave/brave-settings.json` (shared — these are personal
+browser preferences, and the file carries nothing work-identifying):
+
+| | how it is stored | applies? |
+| --- | --- | --- |
+| Keyboard shortcuts | a **diff** against Brave's own `default_accelerators` | yes |
+| Theme | `#RRGGBB` accent + Material variant + theme id | yes |
+| Layout / toolbar | the explicit `UI_PREFS` allowlist in the script | yes |
+| Default search engine | `short_name` + `keyword` | **no — checked only** |
+
+Shortcuts are stored as a diff, not a snapshot, because Brave adds command IDs
+every release: each machine keeps its own stock map and only the handful of
+real overrides travel. `--apply` **reconstructs** — this machine's own
+`default_accelerators` plus the tracked diff — so the machines converge instead
+of drifting.
+
+The **default engine cannot be written**. `default_search_provider.guid` in
+plain `Preferences` is only a pointer; Brave rebuilds it on launch from the
+HMAC-protected `template_url_data` in `Secure Preferences` (verified
+2026-09-04 — pointing it at DuckDuckGo and relaunching put it straight back to
+Google, with `reset_occurred` still false). `--apply` reports the mismatch and
+you change it by hand in Settings → Search engine. Do not try to work around
+this by writing or deleting the protected value — that is anti-hijacking
+machinery, and the one-time manual step is the accepted trade.
+
+Custom search engines (`Web Data`) are deliberately **not** tracked — that
+SQLite table holds work site-searches and this repo is public. Splitting them
+between `dot/` and `profiles/work/` is a separate, still-unbuilt stage.
+
+Day-to-day recipes:
+
+| You did / want | Run |
+| --- | --- |
+| Changed a shortcut, theme or layout pref in Brave | `script/brave-sync`, then commit the artifact |
+| Push those settings to the other machine | commit + push here; on the other machine `git pull`, quit Brave, `script/brave-sync --apply` |
+| See what a machine would lose before applying | `script/brave-sync` (dumps *its* values), read `git diff`, then `git checkout dot/.config/brave/` to restore the incoming ones |
+| Track one more UI pref | add its dotted path to `UI_PREFS` at the top of the script, re-dump |
+| Just checking for drift | `script/brave-sync` — it only ever writes the repo file, never Brave |
+
+**The first `--apply` on a machine is the destructive one.** Reconstruct wipes
+any shortcut that machine customized but never dumped. `--apply` prints those
+before writing and keeps a timestamped `Preferences` backup, but the real guard
+is the preview row above — the dump is harmless to Brave, so run it, read the
+diff, then `git checkout` it away. `--apply` also refuses to run while Brave is
+up, because Brave rewrites `Preferences` on exit and would undo the whole thing.
+
+There is no merge: a dump overwrites the artifact wholesale, so whichever
+machine you dump on wins. Change settings in one place, dump there, apply on
+the other.
+
+Three things stay per-machine: `brave.dark_mode` is deliberately untracked, so
+each machine follows its own OS appearance; `vertical_tabs_expanded_width` is
+in pixels, so drop it from `UI_PREFS` if the screens differ; and the script
+targets Brave's `Default` profile only.
+
+Why `UI_PREFS` is an explicit allowlist rather than "everything under
+`brave.*`": only the accelerators ship a `default_*` baseline to diff against.
+Chromium omits any pref left at its default, so there is nothing to compare the
+rest to — and that same subtree holds the `p3a_*` telemetry counters and
+`bandwidth_saved_bytes`. Naming the keys is what keeps this a settings file
+instead of a state file.
 
 ## zj-radar (Zellij agent sidebar)
 

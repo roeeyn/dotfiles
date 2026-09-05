@@ -1,5 +1,5 @@
 #!/bin/bash
-# brave-sync: track Brave's keyboard shortcuts and default search engine.
+# brave-sync: track Brave's shortcuts, theme, layout and default engine.
 #
 # Brave cannot be stowed. Chromium-family browsers write `Preferences` as
 # write-temp-then-rename(), so a symlink is REPLACED by a real file on the
@@ -52,9 +52,10 @@
 # 2026-09-04 — pointed the guid at DuckDuckGo with Brave quit, relaunched, and
 # the guid was back to Google with `reset_occurred` still false and the MAC
 # unchanged. Nothing rejected the edit; the protected payload is simply the
-# source of truth. That also rules out deleting `template_url_data` to force a
-# fallback: a MISSING protected pref is what trips the real tamper reset.
-# Changing the engine stays a one-time manual step (Settings > Search engine).
+# source of truth.
+# Do not work around this by writing or deleting the protected value either —
+# it is anti-hijacking machinery. Changing the engine stays a one-time manual
+# step (Settings > Search engine).
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

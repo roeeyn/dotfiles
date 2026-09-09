@@ -24,6 +24,7 @@ local parsers = {
     'sql',
     'terraform',
     'toml',
+    'tsx',
     'typescript',
     'yaml',
 }

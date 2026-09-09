@@ -12,6 +12,7 @@ local parsers = {
     'markdown_inline',
     'python',
     'sql',
+    'tsx',
     'typescript',
     'vim',
     'vimdoc',

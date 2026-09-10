@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# draft — jot a throwaway markdown note in slim-nvim and land it on the
+# clipboard when the editor closes.
+#
+# Every run mints a fresh, sortable file under $DRAFTS_DIR (default
+# ~/.local/share/drafts, gitignored in the dotfiles tree), so a draft can be
+# revisited later with `ls -t ~/.local/share/drafts`. The editor is slim-nvim
+# because it is already the $EDITOR tuned for quick markdown: unknown files
+# default to markdown, render-markdown is on, startup is fast. This script only
+# owns the bookends — mint the file before the editor, copy after it exits —
+# which is why it is a shell script and not a third NVIM_APPNAME or a plugin
+# (a VimLeave autocmd is skipped by `:q!` or a crash; the shell always runs).
+#
+# Extra args go straight to slim-nvim ahead of the filename, e.g.
+# `draft -c 'norm i# Standup'`. Quit with `:cq` to abandon the draft:
+# nothing is copied, but whatever was written stays on disk.
+
+set -uo pipefail
+
+DRAFTS_DIR="${DRAFTS_DIR:-$HOME/.local/share/drafts}"
+mkdir -p "$DRAFTS_DIR"
+
+# Sortable timestamp + random tail. The basename must never be purely numeric
+# nor start with `claude-prompt-`: slim-nvim's prompt-history autocmds key on
+# those shapes and would inject a scissors block into the note.
+stamp=$(date +%Y-%m-%dT%H-%M-%S)
+rand=$(LC_ALL=C tr -dc 'a-z0-9' </dev/urandom | head -c 6)
+file="$DRAFTS_DIR/draft-${stamp}-${rand}.md"
+
+# finish_draft — decide what happens once the editor has exited.
+#
+# `status` is nvim's exit code (non-zero on `:cq`); `file` may not exist if
+# the buffer was never written. This is the policy spot: the default below
+# skips the clipboard on a non-zero exit (`:cq`, or a crash) but never deletes
+# a written file, drops empty stubs, and copies everything else.
+# Reshape it if you'd rather keep empty stubs, or copy even on `:cq`.
+finish_draft() {
+    local status="$1"
+
+    if [ "$status" -ne 0 ]; then
+        echo "editor exited $status — nothing copied" >&2
+        [ -s "$file" ] && echo "draft kept at $file" >&2
+        return "$status"
+    fi
+
+    if [ ! -s "$file" ] || ! grep -q '[^[:space:]]' "$file"; then
+        rm -f "$file"
+        echo "empty draft — nothing copied" >&2
+        return 0
+    fi
+
+    # $(...) drops trailing newlines so a paste doesn't end with a blank line.
+    printf '%s' "$(cat "$file")" | pbcopy
+    echo "copied to clipboard — saved at $file"
+}
+
+slim-nvim "$@" "$file"
+finish_draft "$?"

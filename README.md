@@ -231,23 +231,24 @@ instead of a state file.
 
 The shared Zellij config expects [zj-radar](https://github.com/marktoda/zj-radar):
 `config.kdl` carries the managed `radar` alias and `layouts/default.kdl` pins the
-rail. The CLI binary and the wasm are per-machine artifacts (gitignored), so a
-new machine bootstraps them by hand. The same steps upgrade an existing machine.
+rail. The CLI binary, the wasm and the opencode bridge are per-machine artifacts
+(gitignored), so a new machine bootstraps them by hand. The same steps upgrade an
+existing machine. Pick the release tag once and use it throughout:
 
 ```sh
-# 1. CLI — ZJ_RADAR_BIN_DIR keeps the binary out of the stowed ~/.local/bin
-curl --proto '=https' --tlsv1.2 -LsSf \
-  https://github.com/marktoda/zj-radar/releases/latest/download/install.sh \
-  | ZJ_RADAR_BIN_DIR="$HOME/bin" sh
+V=v0.7.0   # the release both machines should land on
 
-# 2. wasm — BY HAND. `setup zellij` will NOT install it here; see below.
-V="v$(zj-radar --version | awk '{print $2}')"
-mkdir -p ~/.config/zellij/plugins
-cd "$(mktemp -d)"
-curl -sSLO "https://github.com/marktoda/zj-radar/releases/download/$V/zj_radar.wasm"
-curl -sSLO "https://github.com/marktoda/zj-radar/releases/download/$V/zj_radar.wasm.sha256"
-shasum -a 256 -c zj_radar.wasm.sha256   # must print "zj_radar.wasm: OK"
-install -m 644 zj_radar.wasm ~/.config/zellij/plugins/zj_radar.wasm
+# 1. CLI — ZJ_RADAR_BIN_DIR keeps the binary out of the stowed ~/.local/bin.
+#    Always install/upgrade the CLI this way: `zj-radar update` has no bin-dir
+#    flag and would fall back to ~/.local/bin, i.e. write into the tracked repo.
+curl --proto '=https' --tlsv1.2 -LsSf \
+  "https://github.com/marktoda/zj-radar/releases/download/$V/install.sh" \
+  | ZJ_RADAR_VERSION="$V" ZJ_RADAR_BIN_DIR="$HOME/bin" sh
+
+# 2. wasm — run step 1 FIRST. With the CLI already at $V this has no CLI
+#    work to do and only refreshes the sidebar; if the CLI is behind $V,
+#    update reinstalls it and falls back to the stowed ~/.local/bin.
+ZJ_RADAR_VERSION="$V" zj-radar update
 
 # 3. permission grant + layout rail (config/layout already stowed) — writes
 #    ~/Library/Caches/org.Zellij-Contributors.Zellij/permissions.kdl
@@ -258,34 +259,37 @@ zj-radar setup zellij --yes
 zj-radar setup claude --yes
 claude plugin marketplace update zj-radar && claude plugin update zj-radar-claude
 
-# 5. doctor — everything should be ok
-zj-radar setup --check zellij claude
+# 5. opencode producer — vendors a self-contained bridge into
+#    ~/.config/opencode/plugins/zj-radar.js (no opencode.json edit)
+zj-radar setup opencode --yes
+
+# 6. doctor — everything should be ok
+zj-radar setup --check
 ```
 
-Pin a release with `ZJ_RADAR_VERSION=vX.Y.Z` on step 1 (and the matching tag in
-step 2) if the machines should match versions.
-
-**Why step 2 is manual** (upstream bug, confirmed against v0.4.1): in
-`crates/cli/src/setup/zellij.rs` the wasm copy is a side effect of the
-`config.kdl` write, so it only runs when that file actually changes. Our
-`config.kdl` ships the managed alias already, so setup always takes the "config
-already up to date" path — it downloads the wasm, prints `checksum verified`,
-exits 0, and never installs it. `--download`, `--wasm <path>` and `--force` all
-short-circuit the same way.
-
-What the doctor reports depends on what is already on disk: a fresh machine gets
-a truthful `missing wasm`, but on an upgrade `setup --check` only checks that *a*
-wasm exists, not which version — so a stale sidebar still reports `ok`. After any
-upgrade, confirm the file really moved:
+**Verifying an upgrade really took.** `setup --check` only checks that *a* wasm
+exists, not which version, so confirm the digest at the alias path matches the
+release:
 
 ```sh
-shasum -a 256 ~/.config/zellij/plugins/zj_radar.wasm   # must match the release's .sha256
+zj-radar update --check                                 # exits 0 when both match
+shasum -a 256 ~/.config/zellij/plugins/zj_radar.wasm    # vs the release .sha256
 ```
+
+`update --check` is the reliable one: it diffs the installed wasm digest against
+the release. That closed a real upstream bug — through v0.5.x the wasm copy was a
+side effect of the `config.kdl` write, so because our `config.kdl` ships the
+managed alias already, `setup zellij --download` always took the "config already
+up to date" path, printed `checksum verified`, exited 0 and never installed the
+wasm. v0.6.0's `zj-radar update` replaced that path. If a digest ever refuses to
+move, the manual fallback still works: download `zj_radar.wasm` and its
+`.sha256` for the tag, `shasum -a 256 -c zj_radar.wasm.sha256`, then
+`install -m 644 zj_radar.wasm ~/.config/zellij/plugins/zj_radar.wasm`.
 
 Restart Zellij afterwards — running sessions keep the old wasm in memory. The
 rail is live on the next `zellij` launch (existing sessions pick it up on a new
 tab or a restart); the Claude producer only attaches to *new* Claude Code
-sessions.
+sessions, and the opencode bridge needs an opencode restart.
 
 ## Lazygit configuration
 

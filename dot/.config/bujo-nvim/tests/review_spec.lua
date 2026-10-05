@@ -48,7 +48,7 @@ describe('bujo.review', function()
             it('puts the prompt before the variadic --add-dir', function()
                 local p = assert(review.plan '- [ ] Review am#70 (MSG-3416)')
                 assert.matches('claude$', p.argv[1])
-                assert.matches('^Help me to draft an am pr review for this PR: https', p.argv[2])
+                assert.matches('^/am%-code%-review %-%-pr https', p.argv[2])
                 assert.equal('--dangerously-skip-permissions', p.argv[3])
                 assert.equal('--add-dir', p.argv[4])
             end)
@@ -58,6 +58,37 @@ describe('bujo.review', function()
             it('keeps the prompt as a single argument', function()
                 local p = assert(review.plan '- [ ] Review am#70 (MSG-3416)')
                 assert.equal(1, select(2, p.argv[2]:gsub('https://', '')))
+            end)
+        end)
+
+        describe('kinds', function()
+            -- The official skill is the default: invoked by its slash name so
+            -- it can't be confused with draft-am-pr-review, which also claims
+            -- "review this PR" in its description.
+            it('defaults to the official /am-code-review --pr skill with a CR: tab', function()
+                local p = assert(review.plan '- [ ] Review am#70 (MSG-3416)')
+                assert.equal('/am-code-review --pr https://github.com/alertmediainc/automate_me/pull/70', p.argv[2])
+                assert.equal('CR: MSG-3416', p.tab_name)
+            end)
+
+            it('launches the Codex draft flavor under a CR!: tab', function()
+                local p = assert(review.plan('- [ ] Review am#70 (MSG-3416)', 'draft'))
+                assert.matches('^Help me to draft an am pr review for this PR: https', p.argv[2])
+                assert.equal('CR!: MSG-3416', p.tab_name)
+            end)
+
+            it('keeps the prompt-first argv order for every kind', function()
+                for kind in pairs(review.config.kinds) do
+                    local p = assert(review.plan('- [ ] Review am#70 (MSG-3416)', kind))
+                    assert.equal('--dangerously-skip-permissions', p.argv[3])
+                    assert.equal('--add-dir', p.argv[4])
+                end
+            end)
+
+            it('refuses an unknown kind', function()
+                local p, err = review.plan('- [ ] Review am#70 (MSG-3416)', 'tribunal')
+                assert.is_nil(p)
+                assert.matches('unknown review kind', err)
             end)
         end)
     end)

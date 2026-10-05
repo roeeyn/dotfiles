@@ -8,8 +8,12 @@
 --
 -- so `:BujoReview` reads the cursor line, reconstructs the PR URL through
 -- bujo.links, and opens a zellij tab running an interactive agent already
--- prompted to draft the review. Same three steps done by hand — new tab, cd
+-- prompted to run the review. Same three steps done by hand — new tab, cd
 -- to src, prompt the agent — minus the retyping.
+--
+-- Two review kinds (M.config.kinds), one key each:
+--   <leader>tr  `am`     /am-code-review --pr, the team's skill    → `CR: `
+--   <leader>tR  `draft`  draft-am-pr-review, Codex findings in /tmp → `CR!: `
 
 local links = require 'bujo.links'
 
@@ -25,8 +29,16 @@ M.config = {
     -- `cls` in .zshrc. NOT reused as an alias: aliases only exist in an
     -- interactive zsh, and the tab is spawned without a shell at all.
     args = { '--dangerously-skip-permissions', '--add-dir', vim.fs.normalize '~/src' },
-    prompt = 'Help me to draft an am pr review for this PR: %s',
-    tab_prefix = 'CR: ',
+    -- Two review flavors share everything but the prompt and the tab label.
+    -- `am` is the team's official skill, invoked by its literal slash name:
+    -- both skills claim "review this PR" in their descriptions, so prose would
+    -- be a coin flip. `--pr` is required: a bare argument is read as a local
+    -- git base, not a PR. `draft` stays prose because it is tuned to its skill.
+    default_kind = 'am',
+    kinds = {
+        am = { prompt = '/am-code-review --pr %s', tab_prefix = 'CR: ' },
+        draft = { prompt = 'Help me to draft an am pr review for this PR: %s', tab_prefix = 'CR!: ' },
+    },
 }
 
 --- Everything needed to launch a review for `line`, or nil + reason.
@@ -34,8 +46,15 @@ M.config = {
 --- Pure: no buffers, no processes, no config reads beyond M.config. The
 --- launch side effects live in M.launch, so this half can be spec'd.
 ---
+--- `kind` picks an entry of M.config.kinds (default M.config.default_kind).
 --- Returns { url, ticket, ref, tab_name, argv }.
-function M.plan(line)
+function M.plan(line, kind)
+    kind = kind or M.config.default_kind
+    local flavor = M.config.kinds[kind]
+    if not flavor then
+        return nil, string.format('unknown review kind %q', kind)
+    end
+
     local pr, ticket
     for _, r in ipairs(links.refs(line)) do
         if not pr and (r.kind == 'github' or r.kind == 'bitbucket') then
@@ -60,14 +79,14 @@ function M.plan(line)
 
     -- The ticket is the useful tab label (`CR: MSG-3416`); the PR ref is the
     -- fallback, so a line with a PR but no ticket still names its tab.
-    local argv = { M.config.cmd, string.format(M.config.prompt, url) }
+    local argv = { M.config.cmd, string.format(flavor.prompt, url) }
     vim.list_extend(argv, M.config.args)
 
     return {
         url = url,
         ticket = ticket,
         ref = pr.ref,
-        tab_name = M.config.tab_prefix .. (ticket or pr.ref),
+        tab_name = flavor.tab_prefix .. (ticket or pr.ref),
         argv = argv,
     }
 end
@@ -80,13 +99,13 @@ end
 --- creating a tab is the one operation here that cannot hit the wrong target.
 --- The note is never written to either: launching an agent is not a BuJo state
 --- change, and `[<]` means scheduled, not delegated.
-function M.launch()
+function M.launch(kind)
     if vim.env.ZELLIJ == nil then
         vim.notify('bujo: not inside a zellij session', vim.log.levels.WARN)
         return
     end
 
-    local plan, err = M.plan(vim.api.nvim_get_current_line())
+    local plan, err = M.plan(vim.api.nvim_get_current_line(), kind)
     if not plan then
         vim.notify('bujo: ' .. err, vim.log.levels.WARN)
         return
@@ -108,12 +127,25 @@ end
 
 function M.setup(opts)
     M.config = vim.tbl_deep_extend('force', M.config, opts or {})
-    vim.api.nvim_create_user_command('BujoReview', M.launch, { desc = 'Draft a PR review for the ref on this line in a new zellij tab' })
+    vim.api.nvim_create_user_command('BujoReview', function(o)
+        M.launch(o.args ~= '' and o.args or nil)
+    end, {
+        nargs = '?',
+        complete = function()
+            return vim.tbl_keys(M.config.kinds)
+        end,
+        desc = 'Review the PR ref on this line in a new zellij tab ([kind]: am, draft)',
+    })
 
     -- Two keys on purpose: this spawns a real agent that spends real tokens,
     -- so it should not sit one fat-fingered keypress away from the single-key
     -- maps next door (<leader>a adds a task, <leader>x toggles a checkbox).
-    vim.keymap.set('n', '<leader>tr', M.launch, { desc = '[Trigger] Review the PR on this line (new zellij tab)' })
+    vim.keymap.set('n', '<leader>tr', function()
+        M.launch 'am'
+    end, { desc = '[Trigger] Review the PR on this line with /am-code-review --pr (new zellij tab)' })
+    vim.keymap.set('n', '<leader>tR', function()
+        M.launch 'draft'
+    end, { desc = '[Trigger] Draft Codex review findings for the PR on this line (new zellij tab)' })
 end
 
 return M

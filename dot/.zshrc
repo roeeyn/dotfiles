@@ -104,3 +104,6 @@ if [[ -f ${ZDOTDIR:-$HOME}/.zcompdump && -n $(find ${ZDOTDIR:-$HOME}/.zcompdump 
 else
   compinit -C
 fi
+
+# bun completions
+[ -s "/Users/roeeyn/.bun/_bun" ] && source "/Users/roeeyn/.bun/_bun"

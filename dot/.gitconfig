@@ -30,6 +30,8 @@
     conflictStyle = zdiff3
 [fetch]
 	prune = true
+[http]
+	sslCAInfo = /opt/homebrew/etc/ca-certificates/cert.pem
 # Profile-provided identity and signing (stowed by profiles/personal or the
 # private work overlay). Last include wins, so profile values override.
 [include]

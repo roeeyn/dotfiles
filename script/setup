@@ -64,7 +64,7 @@ echo "$PROFILE" >"$PROFILE_FILE"
 # ~/.claude/statusline-command.sh is the same story: the statusline-watcher
 # skill's installer creates one if none exists, so a machine that ran the
 # skill before this repo has a real file where our symlink needs to go.
-for f in "$HOME/.zshrc" "$HOME/.ssh/config" "$HOME/.gitconfig" \
+for f in "$HOME/.zshrc" "$HOME/.zprofile" "$HOME/.ssh/config" "$HOME/.gitconfig" \
   "$HOME/.claude/statusline-command.sh"; do
   if [ -f "$f" ] && [ ! -L "$f" ]; then
     mv "$f" "$f.pre-dotfiles"

@@ -1,16 +1,7 @@
-# For loading local binaries
-export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-
-export LANG=en_US.UTF-8
-
-export EDITOR=slim-nvim
-export VISUAL=slim-nvim
+# PATH, LANG, EDITOR and other environment live in .zprofile.
 
 # Vim keybindings in shell
 set -o vi
-
-# Set PATH, MANPATH, etc., for Homebrew.
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 ## Files & sizes (matches OMZ defaults)
 HISTFILE=${HISTFILE:-$HOME/.zsh_history}
@@ -91,9 +82,6 @@ eval "$(mise activate zsh)"
 
 # Profile overlay (stowed by profiles/work on work machines only)
 [[ -f "$HOME/.alert_media.zsh" ]] && source "$HOME/.alert_media.zsh"
-# Profile-specific opencode MCP servers: opencode deep-merges this file on
-# top of the shared ~/.config/opencode/opencode.jsonc.
-[[ -f "$HOME/.opencode-profile.jsonc" ]] && export OPENCODE_CONFIG="$HOME/.opencode-profile.jsonc"
 source "$HOME/.switch_env.zsh"
 
 # Initialize completion system

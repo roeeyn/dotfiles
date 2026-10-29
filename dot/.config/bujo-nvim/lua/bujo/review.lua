@@ -7,7 +7,7 @@
 --                                        PR ref  ticket
 --
 -- so `:BujoReview` reads the cursor line, reconstructs the PR URL through
--- bujo.links, and opens a zellij tab running an interactive agent already
+-- bujo.links, and opens a Rex tab running an interactive agent already
 -- prompted to run the review. Same three steps done by hand — new tab, cd
 -- to src, prompt the agent — minus the retyping.
 --
@@ -23,8 +23,8 @@ M.config = {
     -- Where the agent runs. The review skill fans out across repos, so it
     -- wants the src root, not a single checkout.
     cwd = vim.fs.normalize '~/src',
-    -- Absolute, because the zellij server does not inherit an interactive
-    -- shell's PATH.
+    -- Absolute, so the launch doesn't depend on which PATH the tab's login
+    -- environment ends up with.
     cmd = '/opt/homebrew/bin/claude',
     -- `cls` in .zshrc. NOT reused as an alias: aliases only exist in an
     -- interactive zsh, and the tab is spawned without a shell at all.
@@ -93,15 +93,13 @@ end
 
 --- Launch the review for the line under the cursor.
 ---
---- Only ever runs `zellij action new-tab`. Every other zellij action verb
---- (close-tab, go-to-tab, ...) targets the *focused* tab rather than one you
---- name, so a stray cleanup call kills whatever the user is looking at —
---- creating a tab is the one operation here that cannot hit the wrong target.
---- The note is never written to either: launching an agent is not a BuJo state
---- change, and `[<]` means scheduled, not delegated.
+--- Opens a new tab in the Rex session nvim runs in ($REX_SESSION). The note
+--- is never written to: launching an agent is not a BuJo state change, and `[<]`
+--- means scheduled, not delegated.
 function M.launch(kind)
-    if vim.env.ZELLIJ == nil then
-        vim.notify('bujo: not inside a zellij session', vim.log.levels.WARN)
+    local session = vim.env.REX_SESSION
+    if session == nil or session == '' then
+        vim.notify('bujo: not inside a Rex session', vim.log.levels.WARN)
         return
     end
 
@@ -111,7 +109,7 @@ function M.launch(kind)
         return
     end
 
-    local cmd = { 'zellij', 'action', 'new-tab', '--name', plan.tab_name, '--cwd', M.config.cwd, '--' }
+    local cmd = { 'rex', 'window', 'new', '-s', session, plan.tab_name, '-c', M.config.cwd, '--' }
     vim.list_extend(cmd, plan.argv)
 
     vim.system(cmd, { text = true }, function(out)
@@ -119,7 +117,7 @@ function M.launch(kind)
             if out.code == 0 then
                 vim.notify('bujo: launched ' .. plan.tab_name, vim.log.levels.INFO)
             else
-                vim.notify('bujo: zellij failed — ' .. vim.trim(out.stderr or ''), vim.log.levels.ERROR)
+                vim.notify('bujo: rex failed — ' .. vim.trim(out.stderr or ''), vim.log.levels.ERROR)
             end
         end)
     end)
@@ -134,7 +132,7 @@ function M.setup(opts)
         complete = function()
             return vim.tbl_keys(M.config.kinds)
         end,
-        desc = 'Review the PR ref on this line in a new zellij tab ([kind]: am, draft)',
+        desc = 'Review the PR ref on this line in a new Rex tab ([kind]: am, draft)',
     })
 
     -- Two keys on purpose: this spawns a real agent that spends real tokens,
@@ -142,10 +140,10 @@ function M.setup(opts)
     -- maps next door (<leader>a adds a task, <leader>x toggles a checkbox).
     vim.keymap.set('n', '<leader>tr', function()
         M.launch 'am'
-    end, { desc = '[Trigger] Review the PR on this line with /am-code-review --pr (new zellij tab)' })
+    end, { desc = '[Trigger] Review the PR on this line with /am-code-review --pr (new Rex tab)' })
     vim.keymap.set('n', '<leader>tR', function()
         M.launch 'draft'
-    end, { desc = '[Trigger] Draft Codex review findings for the PR on this line (new zellij tab)' })
+    end, { desc = '[Trigger] Draft Codex review findings for the PR on this line (new Rex tab)' })
 end
 
 return M

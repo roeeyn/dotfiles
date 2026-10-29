@@ -113,7 +113,6 @@ brew "wget"
 # JavaScript package manager
 brew "yarn"
 # Pluggable terminal workspace, with terminal multiplexer as the base feature
-brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Fish-like fast/unobtrusive autosuggestions for zsh
@@ -145,7 +144,6 @@ cask "font-hack-nerd-font"
 cask "font-jetbrains-mono"
 cask "font-symbols-only-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
-cask "ghostty"
 # Web browser
 cask "google-chrome"
 # Keyboard customiser

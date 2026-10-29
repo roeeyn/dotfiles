@@ -128,19 +128,8 @@ profiles/work/
 # blocks) — machine-local runtime state, not shared config
 dot/.codex/config.toml
 
-# zellij wasm plugins are per-version artifacts, not config — each machine
-# fetches them (see README "zj-radar"); only config.kdl and layouts are
-# shared. *.zj-radar.bak is the setup tool's restore point.
-dot/.config/zellij/plugins/
-*.zj-radar.bak
-
 # opencode writes machine-local MCP/state here (like ~/.claude.json for claude)
 dot/.config/opencode/opencode.json
-
-# zj-radar vendors its opencode bridge here, version-coupled to the installed
-# CLI — a per-machine artifact like the zellij wasm above, not shared config.
-# New machine: `zj-radar setup opencode`, then restart opencode.
-dot/.config/opencode/plugins/
 
 # karabiner drops timestamped backups next to its config on every GUI save —
 # machine-local churn; only karabiner.json is shared

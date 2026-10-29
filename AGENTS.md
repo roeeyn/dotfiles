@@ -48,11 +48,8 @@ rules below are the ones an agent must not violate:
   profile first. Per-profile provisioning hooks: `profiles/<name>/hooks/setup`.
 - **Machine-local mutable state stays gitignored — never track it**:
   `dot/.codex/config.toml`, `dot/.config/opencode/opencode.json`,
-  `~/.claude.json` (user-scope MCPs), raycast/copilot state dirs, and the
-  zj-radar per-machine artifacts (`dot/.config/zellij/plugins/` wasm,
-  `dot/.config/opencode/plugins/` bridge — both re-created by `zj-radar`,
-  see README "zj-radar"). Their drift is by design; do not "fix" it by
-  committing.
+  `~/.claude.json` (user-scope MCPs), and raycast/copilot state dirs.
+  Their drift is by design; do not "fix" it by committing.
 - **Secrets live only in `dot/env/.env`** (gitignored; `.example.env` is the
   key-name contract). History is public and once carried encrypted private
   keys — everything in it was rotated in 2026-08. Never commit a secret.

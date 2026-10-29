@@ -6,6 +6,8 @@ rex.bind('cmd+alt+j', 'pane.focus.down')
 rex.bind('cmd+alt+k', 'pane.focus.up')
 rex.bind('cmd+alt+l', 'pane.focus.right')
 
+rex.bind('cmd+r', 'client.tab.rename')
+
 -- Cmd+W closes one pane; Cmd+Shift+W closes the whole tab and every pane in it
 rex.action {
     name = 'close_tab',

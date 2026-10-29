@@ -140,8 +140,9 @@ always open fully expanded.
 
 While typing, the cursor's **column** lights up (`cursorcolumn`, on for
 Insert and Replace only). The terminal cursor is easy to lose on the pale
-lotus background and its color can't be set per-mode from here — zellij
-swallows the OSC 12 escape — so the position is signalled by the row
+lotus background and its color can't be set per-mode from here — Rex
+accepts the OSC 12 escape (a query reports the new color) but keeps drawing
+the theme's cursor — so the position is signalled by the row
 (`cursorline`, always on) crossing the column band. The band uses kanagawa
 lotus's own `CursorColumn`; to make it louder, set a `CursorColumn`
 highlight in `lua/plugins/kanagawa.lua` next to `BujoPriority`.

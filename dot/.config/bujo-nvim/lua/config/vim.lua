@@ -83,8 +83,9 @@ local bujo_nvim = vim.api.nvim_create_augroup('bujo-nvim', { clear = true })
 vim.api.nvim_set_hl(0, 'YankClipboard', { bg = '#98bb6c', fg = '#1f1f28', bold = true })
 
 -- Insert-mode column guide. The terminal cursor is easy to lose on the pale
--- lotus background and its color can't be fixed per-mode from here (zellij
--- swallows OSC 12, so `guicursor` colors never reach the terminal). So don't
+-- lotus background and its color can't be fixed per-mode from here (Rex
+-- accepts OSC 12 but never draws the color, so `guicursor` colors have no
+-- visible effect — verified 2026-10-28). So don't
 -- chase the cursor: light up its column instead. `cursorline` already marks
 -- the row all the time; while typing, the vertical band crossing it marks
 -- the character. Normal mode keeps it off — the band is noise while reading.

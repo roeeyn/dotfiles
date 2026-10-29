@@ -6,6 +6,20 @@ rex.bind('cmd+alt+j', 'pane.focus.down')
 rex.bind('cmd+alt+k', 'pane.focus.up')
 rex.bind('cmd+alt+l', 'pane.focus.right')
 
+-- Cmd+W closes one pane; Cmd+Shift+W closes the whole tab and every pane in it
+rex.action {
+    name = 'close_tab',
+    title = 'Close Tab',
+    keywords = 'close window tab panes all',
+    run = function(ctx, args)
+        local _, err = rex.session.close_window {}
+        if err ~= nil then
+            error(err, 0)
+        end
+    end,
+}
+rex.bind('cmd+shift+w', 'close_tab')
+
 -- BuJo tab: daily note on the left, Claude on the right, pinned as the first tab.
 -- Commands go through initial_input so zsh aliases resolve and the shell survives quitting.
 rex.action {

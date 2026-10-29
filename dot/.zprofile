@@ -4,7 +4,7 @@
 # (prompt, plugins, keybindings, completion) stays in .zshrc.
 
 # Drop duplicate PATH entries; .zshrc may prepend again in login shells.
-typeset -U path
+typeset -U PATH path
 
 # For loading local binaries
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"

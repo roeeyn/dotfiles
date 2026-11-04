@@ -336,6 +336,10 @@ function M.setup(opts)
     map('n', '<leader>fd', M.pick_daily, { desc = 'Find daily note' })
     map('n', '<leader>fg', M.grep_notes, { desc = 'Grep all notes' })
     map('n', '<leader>ft', M.pick_tasks, { desc = 'Find pending tasks (30 days)' })
+    -- Insert today's date (YYYY-MM-DD) after the cursor, like `p`.
+    map('n', '<leader>id', function()
+        vim.api.nvim_put({ os.date '%Y-%m-%d' }, 'c', true, true)
+    end, { desc = "Insert today's date" })
 
     -- Prefill: entering an *empty* buffer whose path looks like a daily note
     -- (YYYY/MM/YYYY-MM-DD.md) inserts the template for that file's date —

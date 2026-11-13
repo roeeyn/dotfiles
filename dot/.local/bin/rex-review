@@ -14,13 +14,15 @@
 #   -m REASON  "Why:" line in the banner (new block only); -M FILE reads it from FILE
 #   -f FILE    read the command from FILE; backslash-newline continuations are joined
 #   -b BLOCK   type into an existing review block instead of opening one
-#   -e FILE    events file: the block's shell appends "ran <base64 cmd>", "exit <code>",
-#              "discarded" (Ctrl+C on the prefilled line) and "closed"; this script
-#              appends "prefilled <base64 cmd>" before typing. Pass the same FILE with -b.
+#   -e FILE    events file: the block's shell appends "ready" (first prompt), "ran
+#              <base64 cmd>", "exit <code>", "discarded" (Ctrl+C on the prefilled
+#              line) and "closed"; this script appends "prefilled <base64 cmd>" before
+#              typing. Pass the same FILE with -b.
 #
 # Prints the block id on stdout. Exits 3 if the prompt doesn't show the exact
-# command after typing (the line is cleared, nothing runs), and 4 if -b names a
-# block whose events file shows it isn't idle.
+# command after typing (the line is cleared, nothing runs), 4 if -b names a
+# block whose events file shows it isn't idle, and 5 if a new block's shell
+# never logs "ready" (nothing typed; the block stays open).
 # Themes come from rex-theme (rex-theme -l); hooks come from rex-review.zsh.
 set -euo pipefail
 
@@ -77,8 +79,13 @@ if [[ -n "$events" ]]; then
   else
     # Typing into a block that is still running something, or still holds an
     # unanswered prefill, would feed the program or extend the pending line.
-    last=$(tail -n 1 "$events" 2>/dev/null)
-    if [[ "$last" != exit* && "$last" != discarded ]]; then
+    # "ready" can land after an early prefill, so it says nothing about idleness.
+    if [[ ! -f "$events" ]]; then
+      echo "rex-review: no events file at $events; pass the one the block was opened with" >&2
+      exit 4
+    fi
+    last=$({ grep -vx ready "$events" || true; } | tail -n 1)
+    if [[ -n "$last" && "$last" != exit* && "$last" != discarded ]]; then
       echo "rex-review: block is not idle (last event: '${last%% *}'); wait for exit or discarded" >&2
       exit 4
     fi
@@ -131,16 +138,35 @@ ${b}╰────────────────────────�
 
   rex block rename "$block" "$label" >/dev/null
 
-  # Wait for the prompt (anything below the banner) before typing; text sent
-  # earlier is echoed by the tty before zsh's line editor owns the input.
-  banner_lines=$(printf %s "$banner" | grep -c .)
-  for _ in {1..50}; do
-    if (($(rex block capture -b "$block" | grep -c '[^[:space:]]') > banner_lines)); then
-      break
+  # Wait for the line editor before typing; text sent earlier is echoed by the
+  # tty above the prompt, and the screen check below could match that echo.
+  if [[ -n "$events" ]]; then
+    # The block's shell logs "ready" at its first prompt. Counting screen rows
+    # can't tell: a long banner line wraps into extra rows, and an interactive
+    # zsh can take several seconds to load.
+    ready=0
+    for _ in {1..300}; do
+      if grep -qx ready "$events" 2>/dev/null; then
+        ready=1
+        break
+      fi
+      sleep 0.1
+    done
+    if ((!ready)); then
+      echo "rex-review: the block's shell never reached a prompt; nothing typed" >&2
+      echo "$block"
+      exit 5
     fi
-    sleep 0.1
-  done
-  sleep 0.2
+  else
+    banner_lines=$(printf %s "$banner" | grep -c .)
+    for _ in {1..50}; do
+      if (($(rex block capture -b "$block" | grep -c '[^[:space:]]') > banner_lines)); then
+        break
+      fi
+      sleep 0.1
+    done
+    sleep 0.2
+  fi
 fi
 
 if [[ -n "$events" ]]; then

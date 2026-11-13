@@ -1,18 +1,30 @@
 #!/bin/bash
-# Open a light-themed Rex block next to the caller, explain that an AI agent
-# opened it, and type a command into it WITHOUT pressing Enter, so a human
-# reviews and runs it.
+# Type a command into a light-themed Rex "review" block WITHOUT pressing Enter,
+# so a human reviews and runs it. By default it opens a new block next to the
+# caller with a banner saying an AI agent opened it; -b reuses an open one.
 #
 #   rex-review 'terraform apply plan.out'
 #   rex-review -m 'Applies the plan we reviewed together' 'terraform apply plan.out'
-#   rex-review -l 'PROD migrate' 'make migrate ENV=prod'
+#   rex-review -f cmd.sh -M reason.txt -e review.events     # inputs from files
+#   rex-review -b <block> -e review.events -f next-cmd.sh   # next command, same block
 #   REVIEW_THEME=porcelain-morning rex-review '...'
 #
-# Prints the new block id on stdout. Themes come from rex-theme (rex-theme -l).
+# Options:
+#   -l LABEL   block label (new block only)
+#   -m REASON  "Why:" line in the banner (new block only); -M FILE reads it from FILE
+#   -f FILE    read the command from FILE; backslash-newline continuations are joined
+#   -b BLOCK   type into an existing review block instead of opening one
+#   -e FILE    events file: the block's shell appends "ran <base64 cmd>", "exit <code>",
+#              "discarded" (Ctrl+C on the prefilled line) and "closed"; this script
+#              appends "prefilled <base64 cmd>" before typing. Pass the same FILE with -b.
+#
+# Prints the block id on stdout. Exits 3 if the prompt doesn't show the exact
+# command after typing (the line is cleared, nothing runs).
+# Themes come from rex-theme (rex-theme -l); hooks come from rex-review.zsh.
 set -euo pipefail
 
 usage() {
-  echo "usage: rex-review [-l LABEL] [-m REASON] 'COMMAND'" >&2
+  echo "usage: rex-review [-l LABEL] [-m REASON | -M FILE] [-b BLOCK] [-e EVENTS] (-f FILE | 'COMMAND')" >&2
   exit 2
 }
 
@@ -20,78 +32,122 @@ theme_module="$HOME/.config/zsh/rex-theme.zsh"
 theme="${REVIEW_THEME:-ivory-gallery}"
 label="👀 Needs your review"
 reason=""
+cmd_file=""
+block=""
+events=""
 
-while getopts ":l:m:" opt; do
+while getopts ":l:m:M:f:b:e:" opt; do
   case "$opt" in
     l) label="$OPTARG" ;;
     m) reason="$OPTARG" ;;
+    M) reason=$(<"$OPTARG") ;;
+    f) cmd_file="$OPTARG" ;;
+    b) block="$OPTARG" ;;
+    e) events="$OPTARG" ;;
     *) usage ;;
   esac
 done
 shift $((OPTIND - 1))
-cmd="${1:-}"
+
+if [[ -n "$cmd_file" ]]; then
+  cmd=$(<"$cmd_file")
+else
+  cmd="${1:-}"
+fi
+# Join "\<newline>" continuations, then trim surrounding whitespace.
+cmd=$(printf '%s' "$cmd" | perl -0pe 's/[ \t]*\\\r?\n[ \t]*/ /g; s/^\s+|\s+$//g')
 
 if [[ -z "$cmd" ]]; then
   usage
 fi
 # A newline would make the shell run the command on arrival.
 if [[ "$cmd" == *$'\n'* || "$cmd" == *$'\r'* ]]; then
-  echo "rex-review: command must be a single line" >&2
+  echo "rex-review: command must be a single line (backslash continuations are fine)" >&2
   exit 2
 fi
-if ! zsh -c 'source "$1" && rex-theme -l' _ "$theme_module" | awk '{print $1}' | grep -qx "$theme"; then
-  echo "rex-review: unknown theme '$theme' (rex-theme -l lists them)" >&2
-  exit 2
+if [[ -n "$events" ]]; then
+  touch "$events"
+  events=$(cd "$(dirname "$events")" && echo "$PWD/$(basename "$events")")
 fi
-# The reason is printed raw, so drop control characters (escapes, newlines).
-reason=$(printf %s "$reason" | tr '\000-\037\177' ' ')
 
-# Palette colors 4 and 8 come from the pane's theme, so the banner matches it.
-b=$'\e[38;5;4m' t=$'\e[1;38;5;4m' d=$'\e[38;5;8m' r=$'\e[0m'
-banner="${b}╭─${r} ${t}🤖 Opened by an AI agent${r}
+if [[ -z "$block" ]]; then
+  if ! zsh -c 'source "$1" && rex-theme -l' _ "$theme_module" | awk '{print $1}' | grep -qx "$theme"; then
+    echo "rex-review: unknown theme '$theme' (rex-theme -l lists them)" >&2
+    exit 2
+  fi
+  # The reason is printed raw, so control characters (escapes, newlines) become spaces.
+  reason=$(printf %s "$reason" | tr '\000-\037\177' ' ')
+
+  # Palette colors 4 and 8 come from the pane's theme, so the banner matches it.
+  b=$'\e[38;5;4m' t=$'\e[1;38;5;4m' d=$'\e[38;5;8m' r=$'\e[0m'
+  banner="${b}╭─${r} ${t}🤖 Opened by an AI agent${r}
 "
-if [[ -n "$reason" ]]; then
-  banner+="${b}│${r} ${t}Why:${r} ${reason}
+  if [[ -n "$reason" ]]; then
+    banner+="${b}│${r} ${t}Why:${r} ${reason}
 ${b}│${r}
 "
-fi
-banner+="${b}│${r} The command below is ${t}prefilled, not run${r}.
+  fi
+  banner+="${b}│${r} The command below is ${t}prefilled, not run${r}.
 ${b}│${r} Review it, then press ${t}Enter${r} to run it ${d}— or Ctrl+C to discard it.${r}
 ${b}╰────────────────────────────────────────────────${r}
 "
 
-# Theme and banner first, then hand over to an interactive shell, so the pane
-# shows no setup noise and is already colored when the prompt appears.
-target=()
-if [[ -n "${REX_SESSION:-}" ]]; then
-  target+=(-s "$REX_SESSION")
-fi
-if [[ -n "${REX_BLOCK:-}" ]]; then
-  target+=(-b "$REX_BLOCK")
-fi
-# base64 keeps the emoji and box drawing intact through the extra quoting layer.
-banner_b64=$(printf %s "$banner" | base64 | tr -d '\n')
-printf -v boot 'source %q && _rex_theme_osc %q && print -r -- "$(base64 -d <<< %q)" && exec zsh -i' \
-  "$theme_module" "$theme" "$banner_b64"
-block=$(rex split ${target[@]+"${target[@]}"} --split right --focus=false --json -- zsh -c "$boot" |
-  jq -r '.block_ids[0]')
-if [[ -z "$block" || "$block" == "null" ]]; then
-  echo "rex-review: split failed" >&2
-  exit 1
+  # Theme, banner and events path first, then hand over to an interactive shell,
+  # so the pane shows no setup noise and is already colored at the first prompt.
+  target=()
+  if [[ -n "${REX_SESSION:-}" ]]; then
+    target+=(-s "$REX_SESSION")
+  fi
+  if [[ -n "${REX_BLOCK:-}" ]]; then
+    target+=(-b "$REX_BLOCK")
+  fi
+  # base64 keeps the emoji and box drawing intact through the extra quoting layer.
+  banner_b64=$(printf %s "$banner" | base64 | tr -d '\n')
+  printf -v boot 'source %q && _rex_theme_osc %q && print -r -- "$(base64 -d <<< %q)" && export REX_REVIEW_EVENTS=%q && exec zsh -i' \
+    "$theme_module" "$theme" "$banner_b64" "$events"
+  block=$(rex split ${target[@]+"${target[@]}"} --split right --focus=false --json -- zsh -c "$boot" |
+    jq -r '.block_ids[0]')
+  if [[ -z "$block" || "$block" == "null" ]]; then
+    echo "rex-review: split failed" >&2
+    exit 1
+  fi
+
+  rex block rename "$block" "$label" >/dev/null
+
+  # Wait for the prompt (anything below the banner) before typing; text sent
+  # earlier is echoed by the tty before zsh's line editor owns the input.
+  banner_lines=$(printf %s "$banner" | grep -c .)
+  for _ in {1..50}; do
+    if (($(rex block capture -b "$block" | grep -c '[^[:space:]]') > banner_lines)); then
+      break
+    fi
+    sleep 0.1
+  done
+  sleep 0.2
 fi
 
-rex block rename "$block" "$label" >/dev/null
+if [[ -n "$events" ]]; then
+  echo "prefilled $(printf %s "$cmd" | base64 | tr -d '\n')" >>"$events"
+fi
+rex block send -b "$block" "$cmd"
 
-# Wait for the prompt (anything below the banner) before typing; text sent
-# earlier is echoed by the tty before zsh's line editor owns the input.
-banner_lines=$(printf %s "$banner" | grep -c .)
-for _ in {1..50}; do
-  if (($(rex block capture -b "$block" | grep -c '[^[:space:]]') > banner_lines)); then
-    break
+# Long input can be cropped on the way in, and a cropped command is often still
+# valid. Compare whitespace-free text: the command must appear at the end of the
+# screen (a little slack allows for an autosuggestion after the cursor).
+want=$(printf %s "$cmd" | tr -d '[:space:]')
+for _ in {1..30}; do
+  screen=$(rex block capture -b "$block" | tr -d '[:space:]')
+  if [[ "$screen" == *"$want"* ]]; then
+    tail_after=${screen##*"$want"}
+    if ((${#tail_after} <= 200)); then
+      echo "$block"
+      exit 0
+    fi
   fi
   sleep 0.1
 done
-sleep 0.2
 
-rex block send -b "$block" "$cmd"
+rex block send -b "$block" $'\x15'
+echo "rex-review: the prompt doesn't show the exact command; cleared it, nothing ran" >&2
 echo "$block"
+exit 3

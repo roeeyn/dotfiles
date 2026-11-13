@@ -98,3 +98,8 @@ fi
 if [ -f "$HOME/.config/zsh/rex-theme.zsh" ]; then
   source "$HOME/.config/zsh/rex-theme.zsh"
 fi
+
+# Event hooks for rex-review blocks (inert elsewhere)
+if [ -f "$HOME/.config/zsh/rex-review.zsh" ]; then
+  source "$HOME/.config/zsh/rex-review.zsh"
+fi

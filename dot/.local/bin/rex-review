@@ -52,6 +52,7 @@ banner="${b}╭─${r} ${t}🤖 Opened by an AI agent${r}
 "
 if [[ -n "$reason" ]]; then
   banner+="${b}│${r} ${t}Why:${r} ${reason}
+${b}│${r}
 "
 fi
 banner+="${b}│${r} The command below is ${t}prefilled, not run${r}.

@@ -19,7 +19,8 @@
 #              appends "prefilled <base64 cmd>" before typing. Pass the same FILE with -b.
 #
 # Prints the block id on stdout. Exits 3 if the prompt doesn't show the exact
-# command after typing (the line is cleared, nothing runs).
+# command after typing (the line is cleared, nothing runs), and 4 if -b names a
+# block whose events file shows it isn't idle.
 # Themes come from rex-theme (rex-theme -l); hooks come from rex-review.zsh.
 set -euo pipefail
 
@@ -60,13 +61,28 @@ cmd=$(printf '%s' "$cmd" | perl -0pe 's/[ \t]*\\\r?\n[ \t]*/ /g; s/^\s+|\s+$//g'
 if [[ -z "$cmd" ]]; then
   usage
 fi
-# A newline would make the shell run the command on arrival.
+# A newline would run the command on arrival; a tab or escape would trigger
+# completion or switch the line editor's mode.
 if [[ "$cmd" == *$'\n'* || "$cmd" == *$'\r'* ]]; then
   echo "rex-review: command must be a single line (backslash continuations are fine)" >&2
   exit 2
 fi
+if [[ "$cmd" =~ [[:cntrl:]] ]]; then
+  echo "rex-review: command contains control characters" >&2
+  exit 2
+fi
 if [[ -n "$events" ]]; then
-  touch "$events"
+  if [[ -z "$block" ]]; then
+    : >"$events"
+  else
+    # Typing into a block that is still running something, or still holds an
+    # unanswered prefill, would feed the program or extend the pending line.
+    last=$(tail -n 1 "$events" 2>/dev/null)
+    if [[ "$last" != exit* && "$last" != discarded ]]; then
+      echo "rex-review: block is not idle (last event: '${last%% *}'); wait for exit or discarded" >&2
+      exit 4
+    fi
+  fi
   events=$(cd "$(dirname "$events")" && echo "$PWD/$(basename "$events")")
 fi
 
@@ -94,6 +110,7 @@ ${b}╰────────────────────────�
 
   # Theme, banner and events path first, then hand over to an interactive shell,
   # so the pane shows no setup noise and is already colored at the first prompt.
+  # No CLI pager: output parked in a pager would keep the command from finishing.
   target=()
   if [[ -n "${REX_SESSION:-}" ]]; then
     target+=(-s "$REX_SESSION")
@@ -103,7 +120,7 @@ ${b}╰────────────────────────�
   fi
   # base64 keeps the emoji and box drawing intact through the extra quoting layer.
   banner_b64=$(printf %s "$banner" | base64 | tr -d '\n')
-  printf -v boot 'source %q && _rex_theme_osc %q && print -r -- "$(base64 -d <<< %q)" && export REX_REVIEW_EVENTS=%q && exec zsh -i' \
+  printf -v boot 'source %q && _rex_theme_osc %q && print -r -- "$(base64 -d <<< %q)" && export REX_REVIEW_EVENTS=%q AWS_PAGER= && exec zsh -i' \
     "$theme_module" "$theme" "$banner_b64" "$events"
   block=$(rex split ${target[@]+"${target[@]}"} --split right --focus=false --json -- zsh -c "$boot" |
     jq -r '.block_ids[0]')
@@ -148,6 +165,9 @@ for _ in {1..30}; do
 done
 
 rex block send -b "$block" $'\x15'
+if [[ -n "$events" ]]; then
+  echo "discarded" >>"$events"
+fi
 echo "rex-review: the prompt doesn't show the exact command; cleared it, nothing ran" >&2
 echo "$block"
 exit 3

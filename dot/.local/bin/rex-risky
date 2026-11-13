@@ -1,0 +1,64 @@
+#!/bin/bash
+# Open a light-themed "risky" Rex block next to the caller and type a command
+# into it WITHOUT pressing Enter, so a human must review and run it.
+#
+#   rex-risky 'terraform apply plan.out'
+#   rex-risky -l 'PROD migrate' 'make migrate ENV=prod'
+#   RISKY_THEME=porcelain-morning rex-risky '...'
+#
+# Prints the new block id on stdout. Themes come from rex-theme (rex-theme -l).
+set -euo pipefail
+
+theme_module="$HOME/.config/zsh/rex-theme.zsh"
+theme="${RISKY_THEME:-ivory-gallery}"
+label="⚠ RISKY"
+
+if [[ "${1:-}" == "-l" ]]; then
+  label="${2:?label missing}"
+  shift 2
+fi
+cmd="${1:-}"
+
+if [[ -z "$cmd" ]]; then
+  echo "usage: rex-risky [-l LABEL] 'COMMAND'" >&2
+  exit 2
+fi
+# A newline would make the shell run the command on arrival.
+if [[ "$cmd" == *$'\n'* || "$cmd" == *$'\r'* ]]; then
+  echo "rex-risky: command must be a single line" >&2
+  exit 2
+fi
+if ! zsh -c 'source "$1" && rex-theme -l' _ "$theme_module" | awk '{print $1}' | grep -qx "$theme"; then
+  echo "rex-risky: unknown theme '$theme' (rex-theme -l lists them)" >&2
+  exit 2
+fi
+
+# Theme first, then hand over to an interactive shell, so the pane shows
+# no setup noise and is already colored when the prompt appears.
+target=()
+if [[ -n "${REX_SESSION:-}" ]]; then
+  target+=(-s "$REX_SESSION")
+fi
+if [[ -n "${REX_BLOCK:-}" ]]; then
+  target+=(-b "$REX_BLOCK")
+fi
+printf -v boot 'source %q && _rex_theme_osc %q && exec zsh -i' "$theme_module" "$theme"
+block=$(rex split ${target[@]+"${target[@]}"} --split right --focus=false --json -- zsh -c "$boot" |
+  jq -r '.block_ids[0]')
+if [[ -z "$block" || "$block" == "null" ]]; then
+  echo "rex-risky: split failed" >&2
+  exit 1
+fi
+
+rex block rename "$block" "$label" >/dev/null
+
+# Wait for the prompt before typing, or the text lands before zsh reads input.
+for _ in {1..50}; do
+  if [[ -n "$(rex block capture -b "$block" | tr -d '[:space:]')" ]]; then
+    break
+  fi
+  sleep 0.1
+done
+
+rex block send -b "$block" "$cmd"
+echo "$block"

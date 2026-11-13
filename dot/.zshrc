@@ -93,3 +93,8 @@ fi
 
 # bun completions
 [ -s "/Users/roeeyn/.bun/_bun" ] && source "/Users/roeeyn/.bun/_bun"
+
+# Per-pane Rex themes (rex-theme)
+if [ -f "$HOME/.config/zsh/rex-theme.zsh" ]; then
+  source "$HOME/.config/zsh/rex-theme.zsh"
+fi
